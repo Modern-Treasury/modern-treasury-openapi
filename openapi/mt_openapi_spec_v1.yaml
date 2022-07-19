@@ -385,6 +385,7 @@ paths:
           - au_becs
           - bacs
           - book
+          - card
           - check
           - eft
           - interac
@@ -979,6 +980,7 @@ paths:
           - au_becs
           - bacs
           - book
+          - card
           - check
           - eft
           - interac
@@ -1042,6 +1044,12 @@ paths:
             application/json:
               schema:
                 "$ref": "#/components/schemas/internal_account"
+        '404':
+          description: not found
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/error_message"
         '422':
           description: unsuccessful
           content:
@@ -1231,6 +1239,12 @@ paths:
         description: The ID of the line item.
         required: true
       responses:
+        '422':
+          description: unsuccessful
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/error_message"
         '200':
           description: successful
           content:
@@ -1406,6 +1420,7 @@ paths:
           - au_becs
           - bacs
           - book
+          - card
           - check
           - eft
           - interac
@@ -1807,11 +1822,11 @@ paths:
       security:
       - basic_auth: []
       parameters:
-      - name: page
+      - name: after_cursor
         in: query
         required: false
         schema:
-          type: integer
+          type: string
       - name: per_page
         in: query
         required: false
@@ -1885,6 +1900,18 @@ paths:
       responses:
         '200':
           description: successful
+          headers:
+            X-After-Cursor:
+              schema:
+                type: string
+                nullable: true
+              description: The cursor for the next page. Including this in a call
+                as `after_cursor` will return the next page.
+            X-Per-Page:
+              schema:
+                type: integer
+                nullable: true
+              description: The current `per_page`.
           content:
             application/json:
               schema:
@@ -2055,6 +2082,7 @@ components:
           - iban
           - clabe
           - wallet_address
+          - pan
           - other
           description: Supports iban and clabe, otherwise other if the bank account
             number is in a generic format.
@@ -2453,6 +2481,7 @@ components:
                       - iban
                       - clabe
                       - wallet_address
+                      - pan
                       - other
                   required:
                   - account_number
@@ -2482,6 +2511,7 @@ components:
                       - au_becs
                       - bacs
                       - book
+                      - card
                       - check
                       - eft
                       - interac
@@ -2800,7 +2830,7 @@ components:
         documentable_type:
           type: string
           enum:
-          - compliance/case
+          - case
           - counterparty
           - expected_payment
           - external_account
@@ -2945,6 +2975,7 @@ components:
           - au_becs
           - bacs
           - book
+          - card
           - check
           - eft
           - interac
@@ -3064,6 +3095,7 @@ components:
           - au_becs
           - bacs
           - book
+          - card
           - check
           - eft
           - interac
@@ -3162,6 +3194,7 @@ components:
           - au_becs
           - bacs
           - book
+          - card
           - check
           - eft
           - interac
@@ -3359,6 +3392,7 @@ components:
                 - iban
                 - clabe
                 - wallet_address
+                - pan
                 - other
             required:
             - account_number
@@ -3388,6 +3422,7 @@ components:
                 - au_becs
                 - bacs
                 - book
+                - card
                 - check
                 - eft
                 - interac
@@ -3479,6 +3514,7 @@ components:
           - au_becs
           - bacs
           - book
+          - card
           - check
           - eft
           - interac
@@ -3992,6 +4028,7 @@ components:
           - au_becs
           - bacs
           - book
+          - card
           - check
           - eft
           - interac
@@ -4257,7 +4294,9 @@ components:
             additionalProperties: false
             minProperties: 16
           - "$ref": "#/components/schemas/internal_account"
+          - type: 'null'
           description: The receiving account. Can be an `external_account` or `internal_account`.
+          nullable: true
           deprecated: true
         receiving_account_type:
           type: string
@@ -4320,6 +4359,7 @@ components:
           - au_becs
           - bacs
           - book
+          - card
           - check
           - eft
           - interac
@@ -4540,6 +4580,7 @@ components:
                     - iban
                     - clabe
                     - wallet_address
+                    - pan
                     - other
                 required:
                 - account_number
@@ -4569,6 +4610,7 @@ components:
                     - au_becs
                     - bacs
                     - book
+                    - card
                     - check
                     - eft
                     - interac
@@ -4624,6 +4666,13 @@ components:
           type: boolean
           description: A flag that determines whether a payment order should go through
             transaction monitoring.
+        documents:
+          type: array
+          items:
+            "$ref": "#/components/schemas/document_create_request"
+          description: An array of documents to be attached to the payment order.
+            Note that if you attach documents, the request's content type must be
+            `multipart/form-data`.
       required:
       - type
       - amount
@@ -4639,6 +4688,7 @@ components:
           - au_becs
           - bacs
           - book
+          - card
           - check
           - eft
           - interac
@@ -4894,6 +4944,7 @@ components:
                     - iban
                     - clabe
                     - wallet_address
+                    - pan
                     - other
                 required:
                 - account_number
@@ -4923,6 +4974,7 @@ components:
                     - au_becs
                     - bacs
                     - book
+                    - card
                     - check
                     - eft
                     - interac
@@ -5016,7 +5068,9 @@ components:
           - goldman_sachs_unique_payment_id
           - jpmc_ccn
           - jpmc_end_to_end_id
+          - jpmc_firm_root_id
           - jpmc_p3_id
+          - jpmc_payment_information_id
           - lob_check_id
           - other
           - partial_swift_mir
@@ -5043,6 +5097,7 @@ components:
       properties:
         ping:
           type: string
+          example: pong
       required:
       - ping
     return:
@@ -5325,6 +5380,7 @@ components:
           - au_becs
           - bacs
           - book
+          - card
           - check
           - eft
           - interac
@@ -5370,6 +5426,7 @@ components:
             - au_becs
             - bacs
             - book
+            - card
             - check
             - eft
             - interac
@@ -5379,12 +5436,13 @@ components:
             - sepa
             - signet
             - wire
-          maxItems: 13
+          maxItems: 14
           example:
           - ach
           - au_becs
           - bacs
           - book
+          - card
           - check
           - eft
           - interac
@@ -5529,6 +5587,7 @@ components:
           - au_becs
           - bacs
           - book
+          - card
           - check
           - eft
           - interac
