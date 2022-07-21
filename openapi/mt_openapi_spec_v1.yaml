@@ -4294,7 +4294,6 @@ components:
             additionalProperties: false
             minProperties: 16
           - "$ref": "#/components/schemas/internal_account"
-          - type: 'null'
           description: The receiving account. Can be an `external_account` or `internal_account`.
           nullable: true
           deprecated: true
@@ -5514,6 +5513,7 @@ components:
           - cleartouch
           - cross_river
           - currencycloud
+          - dc_bank
           - dwolla
           - goldman_sachs
           - iso20022
