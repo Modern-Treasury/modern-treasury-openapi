@@ -234,6 +234,70 @@ paths:
       responses:
         '204':
           description: successful
+  "/api/{documentable_type}/{documentable_id}/documents":
+    get:
+      summary: list documents
+      tags:
+      - Document
+      operationId: listDocuments
+      security:
+      - basic_auth: []
+      parameters:
+      - name: documentable_id
+        in: path
+        schema:
+          type: string
+        description: The unique identifier for the associated object.
+        required: true
+      - name: documentable_type
+        in: path
+        schema:
+          type: string
+          enum:
+          - cases
+          - counterparties
+          - expected_payments
+          - external_accounts
+          - internal_accounts
+          - organizations
+          - paper_items
+          - payment_orders
+          - transactions
+        description: The type of the associated object. Currently can be one of `payment_order`,
+          `transaction`, `paper_item`, `expected_payment`, `counterparty`, `organization`,
+          `case`, `internal_account` or `external_account`.
+        required: true
+      - name: after_cursor
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: per_page
+        in: query
+        required: false
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: successful
+          headers:
+            X-After-Cursor:
+              schema:
+                type: string
+                nullable: true
+              description: The cursor for the next page. Including this in a call
+                as `after_cursor` will return the next page.
+            X-Per-Page:
+              schema:
+                type: integer
+                nullable: true
+              description: The current `per_page`.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  "$ref": "#/components/schemas/document"
   "/api/events":
     get:
       summary: list events
@@ -1812,6 +1876,52 @@ paths:
             application/json:
               schema:
                 "$ref": "#/components/schemas/error_message"
+  "/api/payment_orders/{payment_order_id}/reversals":
+    get:
+      summary: list reversals
+      tags:
+      - Reversal
+      operationId: listReversals
+      security:
+      - basic_auth: []
+      parameters:
+      - name: payment_order_id
+        in: path
+        schema:
+          type: string
+        description: The ID of the relevant Payment Order.
+        required: true
+      - name: after_cursor
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: per_page
+        in: query
+        required: false
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: successful
+          headers:
+            X-After-Cursor:
+              schema:
+                type: string
+                nullable: true
+              description: The cursor for the next page. Including this in a call
+                as `after_cursor` will return the next page.
+            X-Per-Page:
+              schema:
+                type: integer
+                nullable: true
+              description: The current `per_page`.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  "$ref": "#/components/schemas/reversal"
   "/api/transactions":
     get:
       summary: list transactions
@@ -5335,6 +5445,60 @@ components:
       required:
       - returnable_id
       - returnable_type
+    reversal:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        object:
+          type: string
+        live_mode:
+          type: boolean
+          description: This field will be true if this object exists in the live environment
+            or false if it exists in the test environment.
+        created_at:
+          type: string
+          format: date-time
+        updated_at:
+          type: string
+          format: date-time
+        status:
+          type: string
+          enum:
+          - completed
+          - failed
+          - pending
+          - processing
+          - returned
+          - sent
+          description: The current status of the reversal.
+        payment_order_id:
+          type: string
+          format: uuid
+          nullable: true
+          description: The ID of the relevant Payment Order.
+        metadata:
+          type: object
+          additionalProperties:
+            type: string
+          example:
+            key: value
+            foo: bar
+            modern: treasury
+          description: Additional data represented as key-value pairs. Both the key
+            and value must be strings.
+        reason:
+          type: string
+          enum:
+          - duplicate
+          - incorrect_amount
+          - incorrect_receiving_account
+          - date_earlier_than_intended
+          - date_later_than_intended
+          description: The reason for the reversal.
+      additionalProperties: false
+      minProperties: 9
     routing_detail:
       type: object
       properties:
