@@ -2206,6 +2206,15 @@ components:
             number is in a generic format.
       additionalProperties: false
       minProperties: 8
+      required:
+      - id
+      - object
+      - live_mode
+      - created_at
+      - updated_at
+      - discarded_at
+      - account_number
+      - account_number_type
     address:
       type: object
       properties:
@@ -2249,6 +2258,18 @@ components:
       nullable: true
       additionalProperties: false
       minProperties: 11
+      required:
+      - id
+      - object
+      - live_mode
+      - created_at
+      - updated_at
+      - line1
+      - line2
+      - locality
+      - region
+      - postal_code
+      - country
     address_request:
       type: object
       properties:
@@ -2285,6 +2306,9 @@ components:
           type: string
       additionalProperties: false
       minProperties: 2
+      required:
+      - id
+      - object
     connection:
       type: object
       properties:
@@ -2321,6 +2345,16 @@ components:
           description: The name of the vendor bank.
       additionalProperties: false
       minProperties: 9
+      required:
+      - id
+      - object
+      - live_mode
+      - created_at
+      - updated_at
+      - discarded_at
+      - vendor_id
+      - vendor_customer_id
+      - vendor_name
     contact_detail:
       type: object
       properties:
@@ -2352,6 +2386,15 @@ components:
           - phone_number
       additionalProperties: false
       minProperties: 8
+      required:
+      - id
+      - object
+      - live_mode
+      - created_at
+      - updated_at
+      - discarded_at
+      - contact_identifier
+      - contact_identifier_type
     contact_detail_create_request:
       type: object
       properties:
@@ -2490,6 +2533,18 @@ components:
             order is sent to the bank.
       additionalProperties: false
       minProperties: 11
+      required:
+      - id
+      - object
+      - live_mode
+      - created_at
+      - updated_at
+      - discarded_at
+      - name
+      - accounts
+      - email
+      - metadata
+      - send_remittance_advice
     counterparty_collect_account_request:
       type: object
       properties:
@@ -2553,6 +2608,12 @@ components:
             a link to this form. However, if `send_email` is passed as `false` in
             the body then Modern Treasury will not send the email and you can send
             it to the counterparty directly.
+      additionalProperties: false
+      minProperties: 3
+      required:
+      - id
+      - is_resend
+      - form_link
     counterparty_create_request:
       type: object
       properties:
@@ -2976,6 +3037,17 @@ components:
           minProperties: 3
       additionalProperties: false
       minProperties: 10
+      required:
+      - id
+      - object
+      - live_mode
+      - created_at
+      - updated_at
+      - discarded_at
+      - document_type
+      - documentable_id
+      - documentable_type
+      - file
     document_create_request:
       type: object
       properties:
@@ -3047,6 +3119,17 @@ components:
           description: The ID of the entity for the event.
       additionalProperties: false
       minProperties: 10
+      required:
+      - id
+      - object
+      - live_mode
+      - created_at
+      - updated_at
+      - resource
+      - event_name
+      - event_time
+      - data
+      - entity_id
     expected_payment:
       type: object
       properties:
@@ -3182,6 +3265,29 @@ components:
             Treasury, or null if it is unreconciled.
       additionalProperties: false
       minProperties: 22
+      required:
+      - id
+      - object
+      - live_mode
+      - created_at
+      - updated_at
+      - amount_upper_bound
+      - amount_lower_bound
+      - direction
+      - internal_account_id
+      - type
+      - currency
+      - date_upper_bound
+      - date_lower_bound
+      - description
+      - statement_descriptor
+      - metadata
+      - counterparty_id
+      - remittance_information
+      - transaction_id
+      - transaction_line_item_id
+      - status
+      - reconciliation_method
     expected_payment_create_request:
       type: object
       properties:
@@ -3452,6 +3558,24 @@ components:
           - verified
       additionalProperties: false
       minProperties: 17
+      required:
+      - id
+      - object
+      - live_mode
+      - created_at
+      - updated_at
+      - discarded_at
+      - account_type
+      - party_type
+      - party_address
+      - name
+      - counterparty_id
+      - account_details
+      - routing_details
+      - metadata
+      - party_name
+      - contact_details
+      - verification_status
     external_account_complete_verification_request:
       type: object
       properties:
@@ -3756,6 +3880,26 @@ components:
           description: The identifier of the vendor bank.
       additionalProperties: false
       minProperties: 19
+      required:
+      - id
+      - object
+      - live_mode
+      - created_at
+      - updated_at
+      - internal_account_id
+      - virtual_account_id
+      - virtual_account
+      - transaction_line_item_id
+      - transaction_id
+      - type
+      - data
+      - amount
+      - currency
+      - direction
+      - status
+      - metadata
+      - as_of_date
+      - vendor_id
     internal_account:
       type: object
       properties:
@@ -3830,7 +3974,24 @@ components:
           format: uuid
           nullable: true
       additionalProperties: false
-      minProperties: 15
+      minProperties: 16
+      required:
+      - id
+      - object
+      - live_mode
+      - created_at
+      - updated_at
+      - account_type
+      - party_name
+      - party_type
+      - party_address
+      - name
+      - account_details
+      - routing_details
+      - connection
+      - currency
+      - metadata
+      - parent_account_id
     internal_account_create_request:
       type: object
       properties:
@@ -4015,6 +4176,19 @@ components:
           nullable: true
       additionalProperties: false
       minProperties: 12
+      required:
+      - id
+      - object
+      - live_mode
+      - created_at
+      - updated_at
+      - itemizable_id
+      - itemizable_type
+      - amount
+      - description
+      - metadata
+      - accounting_category_id
+      - accounting_ledger_class_id
     line_item_request:
       type: object
       properties:
@@ -4128,6 +4302,24 @@ components:
           nullable: true
       additionalProperties: false
       minProperties: 17
+      required:
+      - id
+      - object
+      - live_mode
+      - created_at
+      - updated_at
+      - transaction_line_item_id
+      - transaction_id
+      - status
+      - lockbox_number
+      - deposit_date
+      - amount
+      - currency
+      - account_number
+      - routing_number
+      - check_number
+      - remitter_name
+      - memo_field
     payment_order:
       type: object
       properties:
@@ -4473,6 +4665,49 @@ components:
             transaction monitoring is enabled.
       additionalProperties: false
       minProperties: 42
+      required:
+      - id
+      - object
+      - live_mode
+      - created_at
+      - updated_at
+      - type
+      - subtype
+      - amount
+      - direction
+      - priority
+      - originating_account_id
+      - receiving_account_id
+      - accounting_category_id
+      - accounting_ledger_class_id
+      - currency
+      - effective_date
+      - description
+      - statement_descriptor
+      - remittance_information
+      - purpose
+      - metadata
+      - charge_bearer
+      - foreign_exchange_indicator
+      - foreign_exchange_contract
+      - nsf_protected
+      - originating_party_name
+      - ultimate_originating_party_name
+      - ultimate_originating_party_identifier
+      - ultimate_receiving_party_name
+      - ultimate_receiving_party_identifier
+      - send_remittance_advice
+      - status
+      - receiving_account
+      - receiving_account_type
+      - counterparty_id
+      - transaction_ids
+      - ledger_transaction_id
+      - current_return
+      - transaction_monitoring_enabled
+      - reference_numbers
+      - vendor_failure_reason
+      - decision_id
     payment_order_create_request:
       type: object
       properties:
@@ -5541,12 +5776,22 @@ components:
             id.
       additionalProperties: false
       minProperties: 7
+      required:
+      - id
+      - object
+      - live_mode
+      - created_at
+      - updated_at
+      - reference_number
+      - reference_number_type
     ping_response:
       type: object
       properties:
         ping:
           type: string
           example: pong
+      additionalProperties: false
+      minProperties: 1
       required:
       - ping
     return:
@@ -5704,6 +5949,27 @@ components:
             "$ref": "#/components/schemas/payment_reference"
       additionalProperties: false
       minProperties: 20
+      required:
+      - id
+      - object
+      - live_mode
+      - created_at
+      - updated_at
+      - returnable_id
+      - returnable_type
+      - code
+      - reason
+      - date_of_death
+      - additional_information
+      - status
+      - transaction_line_item_id
+      - transaction_id
+      - internal_account_id
+      - type
+      - amount
+      - currency
+      - role
+      - reference_numbers
     return_create_request:
       type: object
       properties:
@@ -5840,6 +6106,16 @@ components:
           description: The reason for the reversal.
       additionalProperties: false
       minProperties: 9
+      required:
+      - id
+      - object
+      - live_mode
+      - created_at
+      - updated_at
+      - status
+      - payment_order_id
+      - metadata
+      - reason
     routing_detail:
       type: object
       properties:
@@ -5903,6 +6179,18 @@ components:
           "$ref": "#/components/schemas/address"
       additionalProperties: false
       minProperties: 11
+      required:
+      - id
+      - object
+      - live_mode
+      - created_at
+      - updated_at
+      - discarded_at
+      - routing_number
+      - routing_number_type
+      - payment_type
+      - bank_name
+      - bank_address
     routing_number_lookup_request:
       type: object
       properties:
@@ -6107,6 +6395,29 @@ components:
             `rtp`, `book`, or `sen`.
       additionalProperties: false
       minProperties: 22
+      required:
+      - id
+      - object
+      - live_mode
+      - created_at
+      - updated_at
+      - discarded_at
+      - amount
+      - currency
+      - direction
+      - vendor_description
+      - vendor_code
+      - vendor_code_type
+      - vendor_id
+      - as_of_date
+      - as_of_time
+      - internal_account_id
+      - metadata
+      - posted
+      - vendor_customer_id
+      - reconciled
+      - details
+      - type
     transaction_update_request:
       type: object
       properties:
@@ -6193,3 +6504,19 @@ components:
             modern: treasury
       additionalProperties: false
       minProperties: 15
+      required:
+      - id
+      - object
+      - live_mode
+      - created_at
+      - updated_at
+      - discarded_at
+      - name
+      - description
+      - counterparty_id
+      - internal_account_id
+      - account_details
+      - routing_details
+      - debit_ledger_account_id
+      - credit_ledger_account_id
+      - metadata
