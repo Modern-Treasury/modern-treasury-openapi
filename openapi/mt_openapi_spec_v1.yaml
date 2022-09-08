@@ -62,9 +62,10 @@ paths:
       parameters:
       - name: after_cursor
         in: query
-        required: false
         schema:
           type: string
+          nullable: true
+        required: false
       - name: per_page
         in: query
         required: false
@@ -269,9 +270,10 @@ paths:
         required: true
       - name: after_cursor
         in: query
-        required: false
         schema:
           type: string
+          nullable: true
+        required: false
       - name: per_page
         in: query
         required: false
@@ -309,9 +311,10 @@ paths:
       parameters:
       - name: after_cursor
         in: query
-        required: false
         schema:
           type: string
+          nullable: true
+        required: false
       - name: per_page
         in: query
         required: false
@@ -406,9 +409,10 @@ paths:
       parameters:
       - name: after_cursor
         in: query
-        required: false
         schema:
           type: string
+          nullable: true
+        required: false
       - name: per_page
         in: query
         required: false
@@ -703,9 +707,10 @@ paths:
       parameters:
       - name: after_cursor
         in: query
-        required: false
         schema:
           type: string
+          nullable: true
+        required: false
       - name: per_page
         in: query
         required: false
@@ -860,9 +865,10 @@ paths:
       parameters:
       - name: after_cursor
         in: query
-        required: false
         schema:
           type: string
+          nullable: true
+        required: false
       - name: per_page
         in: query
         required: false
@@ -1022,9 +1028,10 @@ paths:
       parameters:
       - name: after_cursor
         in: query
-        required: false
         schema:
           type: string
+          nullable: true
+        required: false
       - name: per_page
         in: query
         required: false
@@ -2349,6 +2356,7 @@ paths:
         in: query
         schema:
           type: string
+          nullable: true
         required: false
       - name: per_page
         in: query
@@ -2496,9 +2504,10 @@ paths:
           deposit_date
       - name: after_cursor
         in: query
-        required: false
         schema:
           type: string
+          nullable: true
+        required: false
       - name: per_page
         in: query
         required: false
@@ -2887,9 +2896,10 @@ paths:
       parameters:
       - name: after_cursor
         in: query
-        required: false
         schema:
           type: string
+          nullable: true
+        required: false
       - name: per_page
         in: query
         required: false
@@ -3040,9 +3050,10 @@ paths:
         required: true
       - name: after_cursor
         in: query
-        required: false
         schema:
           type: string
+          nullable: true
+        required: false
       - name: per_page
         in: query
         required: false
@@ -3081,9 +3092,10 @@ paths:
       parameters:
       - name: after_cursor
         in: query
-        required: false
         schema:
           type: string
+          nullable: true
+        required: false
       - name: per_page
         in: query
         required: false
