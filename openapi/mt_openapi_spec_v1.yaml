@@ -3446,7 +3446,6 @@ components:
           type: string
           description: Country code conforms to [ISO 3166-1 alpha-2]
           nullable: true
-      minProperties: 6
     async_response:
       type: object
       properties:
@@ -3556,8 +3555,6 @@ components:
           enum:
           - email
           - phone_number
-      additionalProperties: false
-      minProperties: 2
     counterparty:
       type: object
       properties:
@@ -5262,9 +5259,6 @@ components:
             key: value
             foo: bar
             modern: treasury
-      additionalProperties: true
-      minProperties: 3
-      maxProperties: 5
       required:
       - name
     ledger_update_request:
@@ -5288,8 +5282,6 @@ components:
             key: value
             foo: bar
             modern: treasury
-      additionalProperties: false
-      minProperties: 3
     ledger_account:
       type: object
       properties:
@@ -5402,8 +5394,6 @@ components:
             key: value
             foo: bar
             modern: treasury
-      additionalProperties: false
-      minProperties: 7
       required:
       - name
       - normal_balance
@@ -5437,8 +5427,6 @@ components:
             key: value
             foo: bar
             modern: treasury
-      additionalProperties: false
-      minProperties: 4
     ledger_account_category:
       type: object
       properties:
@@ -5547,8 +5535,6 @@ components:
           - credit
           - debit
           description: The normal balance of the ledger account category.
-      additionalProperties: false
-      minProperties: 7
       required:
       - name
       - normal_balance
@@ -5574,8 +5560,6 @@ components:
             key: value
             foo: bar
             modern: treasury
-      additionalProperties: false
-      minProperties: 3
     ledger_balance:
       type: object
       properties:
@@ -5748,8 +5732,6 @@ components:
             would be false after the transaction is created, the entire call will
             fail with error code 422.
           nullable: true
-      additionalProperties: false
-      minProperties: 7
       required:
       - amount
       - direction
@@ -5951,8 +5933,6 @@ components:
           items:
             "$ref": "#/components/schemas/ledger_entry_create_request"
           description: An array of ledger entry objects.
-      additionalProperties: false
-      minProperties: 4
     line_item:
       type: object
       properties:
