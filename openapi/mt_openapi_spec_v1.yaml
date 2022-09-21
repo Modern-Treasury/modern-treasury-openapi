@@ -9,6 +9,67 @@ info:
   description: The Modern Treasury REST API. Please see https://docs.moderntreasury.com
     for more details.
 paths:
+  "/api/connections":
+    get:
+      summary: list connections
+      tags:
+      - Connection
+      operationId: listConnections
+      description: Get a list of all connections.
+      security:
+      - basic_auth: []
+      parameters:
+      - name: after_cursor
+        in: query
+        schema:
+          type: string
+          nullable: true
+        required: false
+      - name: per_page
+        in: query
+        required: false
+        schema:
+          type: integer
+      - name: vendor_customer_id
+        in: query
+        schema:
+          type: string
+          format: uuid
+        required: false
+        description: An identifier assigned by the vendor to your organization.
+      - name: entity
+        in: query
+        schema:
+          type: string
+        required: false
+        description: A string code representing the vendor (i.e. bank).
+      responses:
+        '200':
+          description: successful
+          headers:
+            X-After-Cursor:
+              schema:
+                type: string
+                nullable: true
+              description: The cursor for the next page. Including this in a call
+                as `after_cursor` will return the next page.
+            X-Per-Page:
+              schema:
+                type: integer
+                nullable: true
+              description: The current `per_page`.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  "$ref": "#/components/schemas/connection"
+        '403':
+          description: forbidden
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/error_message"
   "/api/counterparties/{id}/collect_account":
     post:
       summary: collect account details
@@ -240,6 +301,7 @@ paths:
       summary: list documents
       tags:
       - Document
+      description: Get a list of documents.
       operationId: listDocuments
       security:
       - basic_auth: []
@@ -300,6 +362,168 @@ paths:
                 type: array
                 items:
                   "$ref": "#/components/schemas/document"
+    post:
+      summary: create document
+      tags:
+      - Document
+      description: Create a document.
+      operationId: createDocument
+      security:
+      - basic_auth: []
+      parameters:
+      - name: documentable_id
+        in: path
+        schema:
+          type: string
+        description: The unique identifier for the associated object.
+        required: true
+      - name: documentable_type
+        in: path
+        schema:
+          type: string
+          enum:
+          - cases
+          - counterparties
+          - expected_payments
+          - external_accounts
+          - internal_accounts
+          - organizations
+          - paper_items
+          - payment_orders
+          - transactions
+        description: The type of the associated object. Currently can be one of `payment_order`,
+          `transaction`, `paper_item`, `expected_payment`, `counterparty`, `organization`,
+          `case`, `internal_account` or `external_account`.
+        required: true
+      - name: Idempotency-Key
+        in: header
+        required: false
+        description: This key should be something unique, preferably something like
+          an UUID.
+        schema:
+          type: string
+      responses:
+        '201':
+          description: successful
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/document"
+        '404':
+          description: unsuccessful
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/error_message"
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              "$ref": "#/components/schemas/document_create_request"
+  "/api/{documentable_type}/{documentable_id}/documents/{id}":
+    parameters:
+    - name: documentable_id
+      in: path
+      schema:
+        type: string
+      description: The unique identifier for the associated object.
+      required: true
+    - name: documentable_type
+      in: path
+      schema:
+        type: string
+        enum:
+        - cases
+        - counterparties
+        - expected_payments
+        - external_accounts
+        - internal_accounts
+        - organizations
+        - paper_items
+        - payment_orders
+        - transactions
+      description: The type of the associated object. Currently can be one of `payment_order`,
+        `transaction`, `paper_item`, `expected_payment`, `counterparty`, `organization`,
+        `case`, `internal_account` or `external_account`.
+      required: true
+    - name: id
+      in: path
+      schema:
+        type: string
+        format: uuid
+      description: The ID of the document.
+      required: true
+    get:
+      summary: get document
+      tags:
+      - Document
+      description: Get an existing document.
+      operationId: getDocument
+      security:
+      - basic_auth: []
+      responses:
+        '200':
+          description: successful
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/document"
+        '404':
+          description: not found
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/error_message"
+  "/api/{documentable_type}/{documentable_id}/documents/{id}/download":
+    parameters:
+    - name: documentable_id
+      in: path
+      schema:
+        type: string
+      description: The unique identifier for the associated object.
+      required: true
+    - name: documentable_type
+      in: path
+      schema:
+        type: string
+        enum:
+        - cases
+        - counterparties
+        - expected_payments
+        - external_accounts
+        - internal_accounts
+        - organizations
+        - paper_items
+        - payment_orders
+        - transactions
+      description: The type of the associated object. Currently can be one of `payment_order`,
+        `transaction`, `paper_item`, `expected_payment`, `counterparty`, `organization`,
+        `case`, `internal_account` or `external_account`.
+      required: true
+    - name: id
+      in: path
+      schema:
+        type: string
+        format: uuid
+      description: The ID of the document.
+      required: true
+    get:
+      summary: download document
+      tags:
+      - Document
+      description: Download an existing document.
+      operationId: downloadDocument
+      security:
+      - basic_auth: []
+      responses:
+        '302':
+          description: redirect
+        '404':
+          description: not found
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/error_message"
   "/api/events":
     get:
       summary: list events
@@ -1248,6 +1472,12 @@ paths:
                 type: array
                 items:
                   "$ref": "#/components/schemas/ledger_account_category"
+        '403':
+          description: forbidden
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/error_message"
     post:
       summary: create ledger_account_category
       tags:
@@ -1311,6 +1541,12 @@ paths:
             application/json:
               schema:
                 "$ref": "#/components/schemas/ledger_account_category"
+        '403':
+          description: forbidden
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/error_message"
         '404':
           description: not found
           content:
@@ -1616,6 +1852,12 @@ paths:
                 type: array
                 items:
                   "$ref": "#/components/schemas/ledger_account"
+        '422':
+          description: unsuccessful
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/error_message"
     post:
       summary: create ledger_account
       tags:
@@ -1761,6 +2003,12 @@ paths:
                 "$ref": "#/components/schemas/error_message"
         '404':
           description: not found
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/error_message"
+        '422':
+          description: unsuccessful
           content:
             application/json:
               schema:
@@ -2113,6 +2361,12 @@ paths:
             application/json:
               schema:
                 "$ref": "#/components/schemas/ledger_transaction"
+        '400':
+          description: parameter_invalid
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/error_message"
         '403':
           description: forbidden
           content:
@@ -3038,6 +3292,7 @@ paths:
       summary: list reversals
       tags:
       - Reversal
+      description: Get a list of all reversals of a payment order.
       operationId: listReversals
       security:
       - basic_auth: []
@@ -3080,6 +3335,91 @@ paths:
                 type: array
                 items:
                   "$ref": "#/components/schemas/reversal"
+    post:
+      summary: create reversal
+      tags:
+      - Reversal
+      description: Create a reversal for a payment order.
+      operationId: createReversal
+      security:
+      - basic_auth: []
+      parameters:
+      - name: Idempotency-Key
+        in: header
+        required: false
+        description: This key should be something unique, preferably something like
+          an UUID.
+        schema:
+          type: string
+      - name: payment_order_id
+        in: path
+        schema:
+          type: string
+          format: uuid
+          description: The id of the payment order being reversed.
+        description: The ID of the relevant Payment Order.
+        required: true
+      responses:
+        '201':
+          description: successful
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/reversal"
+        '404':
+          description: unsuccessful
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/error_message"
+        '422':
+          description: unsuccessful
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/error_message"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              "$ref": "#/components/schemas/reversal_create_request"
+  "/api/payment_orders/{payment_order_id}/reversals/{reversal_id}":
+    parameters:
+    - name: payment_order_id
+      in: path
+      schema:
+        type: string
+        format: uuid
+      description: The id of the payment order being reversed.
+      required: true
+    - name: reversal_id
+      in: path
+      schema:
+        type: string
+        format: uuid
+      description: The ID of the reversal.
+      required: true
+    get:
+      summary: show reversal
+      tags:
+      - Reversal
+      description: Get details on a single reversal of a payment order.
+      operationId: getReversal
+      security:
+      - basic_auth: []
+      responses:
+        '200':
+          description: successful
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/reversal"
+        '404':
+          description: not found
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/error_message"
   "/api/transactions":
     get:
       summary: list transactions
@@ -3484,15 +3824,15 @@ components:
         vendor_id:
           type: string
           format: uuid
-          description: The identifier of the vendor bank.
+          description: Unique identifier for the bank or vendor.
         vendor_customer_id:
           type: string
           format: uuid
+          description: An identifier given to this connection by the bank.
           nullable: true
-          description: The identifier of the vendor bank.
         vendor_name:
           type: string
-          description: The name of the vendor bank.
+          description: A human-friendly name for the bank or vendor.
       additionalProperties: false
       minProperties: 9
       required:
@@ -3721,10 +4061,21 @@ components:
             - taxpayerIdentifier
             - accountType
             - accountNumber
-            - routingNumber
-            - address
             - ibanNumber
+            - clabeNumber
+            - walletAddress
+            - panNumber
+            - routingNumber
             - swiftCode
+            - auBsb
+            - caCpa
+            - cnaps
+            - gbSortCode
+            - inIfsc
+            - myBranchCode
+            - brCodigo
+            - routingNumberType
+            - address
           description: The list of fields you want on the form. This field is optional
             and if it is not set, will default to [\"nameOnAccount\", \"accountType\",
             \"accountNumber\", \"routingNumber\", \"address\"]. The full list of options
@@ -7766,8 +8117,13 @@ components:
           description: An array of Payment Reference objects.
           items:
             "$ref": "#/components/schemas/payment_reference"
+        ledger_transaction_id:
+          type: string
+          format: uuid
+          nullable: true
+          description: The ID of the ledger transaction linked to the return.
       additionalProperties: false
-      minProperties: 20
+      minProperties: 21
       required:
       - id
       - object
@@ -7789,6 +8145,7 @@ components:
       - currency
       - role
       - reference_numbers
+      - ledger_transaction_id
     return_create_request:
       type: object
       properties:
@@ -7934,6 +8291,37 @@ components:
       - status
       - payment_order_id
       - metadata
+      - reason
+    reversal_create_request:
+      type: object
+      properties:
+        reason:
+          type: string
+          enum:
+          - duplicate
+          - incorrect_amount
+          - incorrect_receiving_account
+          - date_earlier_than_intended
+          - date_later_than_intended
+          description: The reason for the reversal. Must be one of `duplicate`, `incorrect_amount`,
+            `incorrect_receiving_account`, `date_earlier_than_intended`, `date_later_than_intended`.
+        metadata:
+          type: object
+          additionalProperties:
+            type: string
+          example:
+            key: value
+            foo: bar
+            modern: treasury
+          description: Additional data represented as key-value pairs. Both the key
+            and value must be strings.
+        ledger_transaction:
+          "$ref": "#/components/schemas/ledger_transaction_create_request"
+          description: Specifies a ledger transaction object that will be created
+            with the reversal. If the ledger transaction cannot be created, then the
+            reversal creation will fail. The resulting ledger transaction will mirror
+            the status of the reversal.
+      required:
       - reason
     routing_detail:
       type: object
