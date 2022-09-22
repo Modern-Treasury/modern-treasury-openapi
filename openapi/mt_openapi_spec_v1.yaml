@@ -3420,6 +3420,141 @@ paths:
             application/json:
               schema:
                 "$ref": "#/components/schemas/error_message"
+  "/api/external_accounts/{external_account_id}/routing_details":
+    parameters:
+    - name: external_account_id
+      in: path
+      description: The ID of the external account.
+      required: true
+      schema:
+        type: string
+    get:
+      summary: list routing_details
+      tags:
+      - RoutingDetail
+      description: Get a list of routing details for a single external account.
+      operationId: listRoutingDetails
+      security:
+      - basic_auth: []
+      parameters:
+      - name: after_cursor
+        in: query
+        schema:
+          type: string
+          nullable: true
+        required: false
+      - name: per_page
+        in: query
+        required: false
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: successful
+          headers:
+            X-After-Cursor:
+              schema:
+                type: string
+                nullable: true
+              description: The cursor for the next page. Including this in a call
+                as `after_cursor` will return the next page.
+            X-Per-Page:
+              schema:
+                type: integer
+                nullable: true
+              description: The current `per_page`.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  "$ref": "#/components/schemas/routing_detail"
+    post:
+      summary: create routing_detail
+      tags:
+      - RoutingDetail
+      description: Create a routing detail for a single external account.
+      operationId: createRoutingDetail
+      security:
+      - basic_auth: []
+      parameters:
+      - name: Idempotency-Key
+        in: header
+        required: false
+        description: This key should be something unique, preferably something like
+          an UUID.
+        schema:
+          type: string
+      responses:
+        '201':
+          description: successful
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/routing_detail"
+        '404':
+          description: unsuccessful
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/error_message"
+        '422':
+          description: unsuccessful
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/error_message"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              "$ref": "#/components/schemas/routing_detail_create_request"
+  "/api/external_accounts/{external_account_id}/routing_details/{id}":
+    parameters:
+    - name: external_account_id
+      in: path
+      description: The ID of the external account.
+      required: true
+      schema:
+        type: string
+    - name: id
+      in: path
+      description: The ID of the routing detail.
+      required: true
+      schema:
+        type: string
+    get:
+      summary: get routing_detail
+      tags:
+      - RoutingDetail
+      description: Get a single routing detail.
+      operationId: getRoutingDetail
+      security:
+      - basic_auth: []
+      responses:
+        '200':
+          description: successful
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/routing_detail"
+        '404':
+          description: not found
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/error_message"
+    delete:
+      summary: delete routing_detail
+      tags:
+      - RoutingDetail
+      description: Delete a routing detail for a single external account.
+      operationId: deleteRoutingDetail
+      security:
+      - basic_auth: []
+      responses:
+        '204':
+          description: successful
   "/api/transactions":
     get:
       summary: list transactions
@@ -5618,7 +5753,6 @@ components:
         name:
           type: string
           description: The name of the ledger.
-          nullable: true
         description:
           type: string
           description: An optional free-form description for internal use.
@@ -5756,7 +5890,6 @@ components:
         name:
           type: string
           description: The name of the ledger account.
-          nullable: true
         description:
           type: string
           description: The description of the ledger account.
@@ -5767,7 +5900,6 @@ components:
           - credit
           - debit
           description: The normal balance of the ledger account.
-          nullable: true
         metadata:
           type: object
           description: Additional data represented as key-value pairs. Both the key
@@ -6011,7 +6143,7 @@ components:
           type: string
           description: The ledger transaction that this ledger entry is associated
             with.
-      additionalProperties: true
+      additionalProperties: false
       minProperties: 13
       required:
       - id
@@ -6199,6 +6331,7 @@ components:
         description:
           type: string
           description: An optional description for internal use.
+          nullable: true
         status:
           type: string
           enum:
@@ -8352,14 +8485,16 @@ components:
           type: string
           enum:
           - aba
-          - swift
           - au_bsb
+          - br_codigo
           - ca_cpa
           - cnaps
           - gb_sort_code
           - in_ifsc
           - my_branch_code
-          - br_codigo
+          - swift
+          description: One of `aba`, `swift`, `ca_cpa`, `au_bsb`, `gb_sort_code`,
+            `in_ifsc`, `cnaps`.
         payment_type:
           type: string
           enum:
@@ -8382,6 +8517,7 @@ components:
             type this field will be populated, otherwise null.
         bank_name:
           type: string
+          description: The name of the bank.
         bank_address:
           "$ref": "#/components/schemas/address"
       additionalProperties: false
@@ -8398,6 +8534,49 @@ components:
       - payment_type
       - bank_name
       - bank_address
+    routing_detail_create_request:
+      type: object
+      properties:
+        routing_number:
+          type: string
+          description: The routing number of the bank.
+        routing_number_type:
+          type: string
+          enum:
+          - aba
+          - au_bsb
+          - br_codigo
+          - ca_cpa
+          - cnaps
+          - gb_sort_code
+          - in_ifsc
+          - my_branch_code
+          - swift
+          description: One of `aba`, `swift`, `ca_cpa`, `au_bsb`, `gb_sort_code`,
+            `in_ifsc`, `cnaps`.
+        payment_type:
+          type: string
+          enum:
+          - ach
+          - au_becs
+          - bacs
+          - book
+          - card
+          - check
+          - eft
+          - interac
+          - provxchange
+          - rtp
+          - sen
+          - sepa
+          - signet
+          - wire
+          nullable: true
+          description: If the routing detail is to be used for a specific payment
+            type this field will be populated, otherwise null.
+      required:
+      - routing_number
+      - routing_number_type
     routing_number_lookup_request:
       type: object
       properties:
