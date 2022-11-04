@@ -4607,7 +4607,7 @@ components:
           type: array
           description: An array of `Balance` objects.
           items:
-            "$ref": "#/components/schemas/balances"
+            "$ref": "#/components/schemas/balance"
         internal_account_id:
           type: string
           format: uuid
