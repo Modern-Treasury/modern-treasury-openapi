@@ -3357,6 +3357,18 @@ paths:
               - signet
               - wire
           required: false
+        - name: priority
+          in: query
+          schema:
+            type: string
+            enum:
+              - high
+              - normal
+          required: false
+          description:
+            Either `normal` or `high`. For ACH and EFT payments, `high` represents
+            a same-day ACH or EFT transfer, respectively. For check payments, `high`
+            can mean an overnight check rather than standard mail.
         - name: counterparty_id
           in: query
           schema:
