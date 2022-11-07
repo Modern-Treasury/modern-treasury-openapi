@@ -9435,6 +9435,7 @@ components:
             - interac
             - manual
             - paper_item
+            - sepa
             - wire
           description:
             "The type of return. Can be one of: `ach`, `ach_noc`, `au_becs`,
