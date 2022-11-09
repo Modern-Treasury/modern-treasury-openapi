@@ -5718,8 +5718,13 @@ components:
             One of manual if this expected payment was manually reconciled
             in the dashboard, automatic if it was automatically reconciled by Modern
             Treasury, or null if it is unreconciled.
+        ledger_transaction_id:
+          type: string
+          format: uuid
+          nullable: true
+          description: The ID of the ledger transaction linked to the expected payment.
       additionalProperties: false
-      minProperties: 22
+      minProperties: 23
       required:
         - id
         - object
@@ -5743,6 +5748,7 @@ components:
         - transaction_line_item_id
         - status
         - reconciliation_method
+        - ledger_transaction_id
     expected_payment_create_request:
       type: object
       properties:
@@ -9435,6 +9441,7 @@ components:
             - interac
             - manual
             - paper_item
+            - sepa
             - wire
           description:
             "The type of return. Can be one of: `ach`, `ach_noc`, `au_becs`,
