@@ -4826,6 +4826,7 @@ components:
         name:
           type: string
           description: A human friendly name for this counterparty.
+          nullable: true
         accounts:
           type: array
           items:
@@ -5037,6 +5038,7 @@ components:
         name:
           type: string
           description: A human friendly name for this counterparty.
+          nullable: true
         accounts:
           type: array
           items:
@@ -5718,8 +5720,13 @@ components:
             One of manual if this expected payment was manually reconciled
             in the dashboard, automatic if it was automatically reconciled by Modern
             Treasury, or null if it is unreconciled.
+        ledger_transaction_id:
+          type: string
+          format: uuid
+          nullable: true
+          description: The ID of the ledger transaction linked to the expected payment.
       additionalProperties: false
-      minProperties: 22
+      minProperties: 23
       required:
         - id
         - object
@@ -5743,6 +5750,7 @@ components:
         - transaction_line_item_id
         - status
         - reconciliation_method
+        - ledger_transaction_id
     expected_payment_create_request:
       type: object
       properties:
@@ -7902,6 +7910,13 @@ components:
             Send an email to the counterparty when the payment order is
             sent to the bank. If `null`, `send_remittance_advice` on the Counterparty
             is used.
+        expires_at:
+          type: string
+          format: date-time
+          nullable: true
+          description:
+            RFP payments require an expires_at. This value must be past
+            the effective_date.
         status:
           type: string
           enum:
@@ -8058,7 +8073,7 @@ components:
             The ID of the compliance decision for the payment order, if
             transaction monitoring is enabled.
       additionalProperties: false
-      minProperties: 43
+      minProperties: 44
       required:
         - id
         - object
@@ -8092,6 +8107,7 @@ components:
         - ultimate_receiving_party_name
         - ultimate_receiving_party_identifier
         - send_remittance_advice
+        - expires_at
         - status
         - receiving_account
         - receiving_account_type
@@ -8313,6 +8329,13 @@ components:
             Send an email to the counterparty when the payment order is
             sent to the bank. If `null`, `send_remittance_advice` on the Counterparty
             is used.
+        expires_at:
+          type: string
+          format: date-time
+          nullable: true
+          description:
+            RFP payments require an expires_at. This value must be past
+            the effective_date.
         fallback_type:
           type: string
           enum:
@@ -8677,6 +8700,13 @@ components:
             Send an email to the counterparty when the payment order is
             sent to the bank. If `null`, `send_remittance_advice` on the Counterparty
             is used.
+        expires_at:
+          type: string
+          format: date-time
+          nullable: true
+          description:
+            RFP payments require an expires_at. This value must be past
+            the effective_date.
         fallback_type:
           type: string
           enum:
@@ -9049,6 +9079,13 @@ components:
             Send an email to the counterparty when the payment order is
             sent to the bank. If `null`, `send_remittance_advice` on the Counterparty
             is used.
+        expires_at:
+          type: string
+          format: date-time
+          nullable: true
+          description:
+            RFP payments require an expires_at. This value must be past
+            the effective_date.
         status:
           type: string
           enum:
@@ -9435,6 +9472,7 @@ components:
             - interac
             - manual
             - paper_item
+            - sepa
             - wire
           description:
             "The type of return. Can be one of: `ach`, `ach_noc`, `au_becs`,
