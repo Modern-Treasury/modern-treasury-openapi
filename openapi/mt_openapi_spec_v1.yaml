@@ -1003,8 +1003,8 @@ paths:
               - book
               - card
               - check
+              - cross_border
               - eft
-              - global_pay
               - interac
               - provxchange
               - rtp
@@ -1618,8 +1618,8 @@ paths:
               - book
               - card
               - check
+              - cross_border
               - eft
-              - global_pay
               - interac
               - provxchange
               - rtp
@@ -3347,8 +3347,8 @@ paths:
               - book
               - card
               - check
+              - cross_border
               - eft
-              - global_pay
               - interac
               - provxchange
               - rtp
@@ -5113,7 +5113,7 @@ components:
                         - card
                         - check
                         - eft
-                        - global_pay
+                        - cross_border
                         - interac
                         - provxchange
                         - rtp
@@ -5626,8 +5626,8 @@ components:
             - book
             - card
             - check
+            - cross_border
             - eft
-            - global_pay
             - interac
             - provxchange
             - rtp
@@ -5787,8 +5787,8 @@ components:
             - book
             - card
             - check
+            - cross_border
             - eft
-            - global_pay
             - interac
             - provxchange
             - rtp
@@ -5895,8 +5895,8 @@ components:
             - book
             - card
             - check
+            - cross_border
             - eft
-            - global_pay
             - interac
             - provxchange
             - rtp
@@ -6147,7 +6147,7 @@ components:
                   - card
                   - check
                   - eft
-                  - global_pay
+                  - cross_border
                   - interac
                   - provxchange
                   - rtp
@@ -6246,8 +6246,8 @@ components:
             - book
             - card
             - check
+            - cross_border
             - eft
-            - global_pay
             - interac
             - provxchange
             - rtp
@@ -7717,8 +7717,8 @@ components:
             - book
             - card
             - check
+            - cross_border
             - eft
-            - global_pay
             - interac
             - provxchange
             - rtp
@@ -8131,8 +8131,8 @@ components:
             - book
             - card
             - check
+            - cross_border
             - eft
-            - global_pay
             - interac
             - provxchange
             - rtp
@@ -8416,7 +8416,7 @@ components:
                       - card
                       - check
                       - eft
-                      - global_pay
+                      - cross_border
                       - interac
                       - provxchange
                       - rtp
@@ -8502,8 +8502,8 @@ components:
             - book
             - card
             - check
+            - cross_border
             - eft
-            - global_pay
             - interac
             - provxchange
             - rtp
@@ -8787,7 +8787,7 @@ components:
                       - card
                       - check
                       - eft
-                      - global_pay
+                      - cross_border
                       - interac
                       - provxchange
                       - rtp
@@ -8865,8 +8865,8 @@ components:
             - book
             - card
             - check
+            - cross_border
             - eft
-            - global_pay
             - interac
             - provxchange
             - rtp
@@ -9191,7 +9191,7 @@ components:
                       - card
                       - check
                       - eft
-                      - global_pay
+                      - cross_border
                       - interac
                       - provxchange
                       - rtp
@@ -9762,8 +9762,8 @@ components:
             - book
             - card
             - check
+            - cross_border
             - eft
-            - global_pay
             - interac
             - provxchange
             - rtp
@@ -9824,8 +9824,8 @@ components:
             - book
             - card
             - check
+            - cross_border
             - eft
-            - global_pay
             - interac
             - provxchange
             - rtp
@@ -9870,8 +9870,8 @@ components:
               - book
               - card
               - check
+              - cross_border
               - eft
-              - global_pay
               - interac
               - provxchange
               - rtp
@@ -9887,8 +9887,8 @@ components:
             - book
             - card
             - check
+            - cross_border
             - eft
-            - global_pay
             - interac
             - provxchange
             - rtp
@@ -10101,8 +10101,8 @@ components:
             - book
             - card
             - check
+            - cross_border
             - eft
-            - global_pay
             - interac
             - provxchange
             - rtp
