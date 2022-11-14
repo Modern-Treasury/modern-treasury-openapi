@@ -7763,6 +7763,7 @@ components:
             - PPD
             - TEL
             - WEB
+            - neft
           nullable: true
           description:
             An additional layer of classification for the type of payment
@@ -8181,6 +8182,7 @@ components:
             - PPD
             - TEL
             - WEB
+            - neft
           nullable: true
           description:
             An additional layer of classification for the type of payment
@@ -8556,6 +8558,7 @@ components:
             - PPD
             - TEL
             - WEB
+            - neft
           nullable: true
           description:
             An additional layer of classification for the type of payment
@@ -8923,6 +8926,7 @@ components:
             - PPD
             - TEL
             - WEB
+            - neft
           nullable: true
           description:
             An additional layer of classification for the type of payment
