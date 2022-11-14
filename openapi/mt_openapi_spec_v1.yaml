@@ -4855,8 +4855,12 @@ components:
               account_type:
                 type: string
                 enum:
+                  - cash
                   - checking
+                  - loan
+                  - non_resident
                   - other
+                  - overdraft
                   - savings
                 description: Can be `checking`, `savings` or `other`.
               party_type:
@@ -5047,8 +5051,12 @@ components:
               account_type:
                 type: string
                 enum:
+                  - cash
                   - checking
+                  - loan
+                  - non_resident
                   - other
+                  - overdraft
                   - savings
                 description: Can be `checking`, `savings` or `other`.
               party_type:
@@ -5984,8 +5992,12 @@ components:
         account_type:
           type: string
           enum:
+            - cash
             - checking
+            - loan
+            - non_resident
             - other
+            - overdraft
             - savings
           description: Can be `checking`, `savings` or `other`.
         party_type:
@@ -6077,8 +6089,12 @@ components:
         account_type:
           type: string
           enum:
+            - cash
             - checking
+            - loan
+            - non_resident
             - other
+            - overdraft
             - savings
           description: Can be `checking`, `savings` or `other`.
         party_type:
@@ -6200,8 +6216,12 @@ components:
         account_type:
           type: string
           enum:
+            - cash
             - checking
+            - loan
+            - non_resident
             - other
+            - overdraft
             - savings
           description: Can be `checking`, `savings` or `other`.
         counterparty_id:
@@ -6425,8 +6445,12 @@ components:
         account_type:
           type: string
           enum:
+            - cash
             - checking
+            - loan
+            - non_resident
             - other
+            - overdraft
             - savings
           nullable: true
           description: Can be checking, savings or other.
@@ -7959,8 +7983,12 @@ components:
                 account_type:
                   type: string
                   enum:
+                    - cash
                     - checking
+                    - loan
+                    - non_resident
                     - other
+                    - overdraft
                     - savings
                   description: Can be `checking`, `savings` or `other`.
                 party_type:
@@ -8350,8 +8378,12 @@ components:
             account_type:
               type: string
               enum:
+                - cash
                 - checking
+                - loan
+                - non_resident
                 - other
+                - overdraft
                 - savings
               description: Can be `checking`, `savings` or `other`.
             party_type:
@@ -8721,8 +8753,12 @@ components:
             account_type:
               type: string
               enum:
+                - cash
                 - checking
+                - loan
+                - non_resident
                 - other
+                - overdraft
                 - savings
               description: Can be `checking`, `savings` or `other`.
             party_type:
@@ -9125,8 +9161,12 @@ components:
             account_type:
               type: string
               enum:
+                - cash
                 - checking
+                - loan
+                - non_resident
                 - other
+                - overdraft
                 - savings
               description: Can be `checking`, `savings` or `other`.
             party_type:
