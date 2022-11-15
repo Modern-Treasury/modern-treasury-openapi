@@ -2153,6 +2153,7 @@ paths:
                 type: string
                 format: date
             additionalProperties: false
+          style: deepObject
           required: false
           description:
             For example, if you want the balances as of a particular effective
@@ -2272,6 +2273,7 @@ paths:
                 type: string
                 format: date
             additionalProperties: false
+          style: deepObject
           required: false
           description:
             For example, if you want the balances as of a particular effective
@@ -7763,6 +7765,7 @@ components:
             - PPD
             - TEL
             - WEB
+            - neft
           nullable: true
           description:
             An additional layer of classification for the type of payment
@@ -8181,6 +8184,7 @@ components:
             - PPD
             - TEL
             - WEB
+            - neft
           nullable: true
           description:
             An additional layer of classification for the type of payment
@@ -8556,6 +8560,7 @@ components:
             - PPD
             - TEL
             - WEB
+            - neft
           nullable: true
           description:
             An additional layer of classification for the type of payment
@@ -8923,6 +8928,7 @@ components:
             - PPD
             - TEL
             - WEB
+            - neft
           nullable: true
           description:
             An additional layer of classification for the type of payment
