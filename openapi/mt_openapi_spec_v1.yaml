@@ -2153,6 +2153,7 @@ paths:
                 type: string
                 format: date
             additionalProperties: false
+          style: deepObject
           required: false
           description:
             For example, if you want the balances as of a particular effective
@@ -2168,7 +2169,7 @@ paths:
           style: deepObject
           required: false
           description:
-            Use "gt" (>), "gte" (>=), "lt" (<), "lte" (<=), or "eq" (=) to
+            Use `gt` (>), `gte` (>=), `lt` (<), `lte` (<=), or `eq` (=) to
             filter by the posted at timestamp. For example, for all times after Jan
             1 2000 12:00 UTC, use updated_at%5Bgt%5D=2000-01-01T12:00:00Z.
         - name: ledger_account_category_id
@@ -2272,6 +2273,7 @@ paths:
                 type: string
                 format: date
             additionalProperties: false
+          style: deepObject
           required: false
           description:
             For example, if you want the balances as of a particular effective
@@ -2403,8 +2405,20 @@ paths:
           style: deepObject
           required: false
           description:
-            Use "gt" (>), "gte" (>=), "lt" (<), "lte" (<=), or "eq" (=) to
+            Use `gt` (>), `gte` (>=), `lt` (<), `lte` (<=), or `eq` (=) to
             filter by the transaction's effective date. Format YYYY-MM-DD
+        - name: effective_at
+          in: query
+          schema:
+            type: object
+            additionalProperties:
+              type: string
+              format: time
+          style: deepObject
+          required: false
+          description:
+            Use "gt" (>), "gte" (>=), "lt" (<), "lte" (<=), or "eq" (=) to
+            filter by the transaction's effective time. Format ISO8601
         - name: updated_at
           in: query
           schema:
@@ -2415,7 +2429,7 @@ paths:
           style: deepObject
           required: false
           description:
-            Use "gt" (>), "gte" (>=), "lt" (<), "lte" (<=), or "eq" (=) to
+            Use `gt` (>), `gte` (>=), `lt` (<), `lte` (<=), or `eq` (=) to
             filter by the posted at timestamp. For example, for all times after Jan
             1 2000 12:00 UTC, use updated_at%5Bgt%5D=2000-01-01T12:00:00Z.
         - name: ledger_account_lock_version
@@ -2427,7 +2441,7 @@ paths:
           style: deepObject
           required: false
           description:
-            Use "gt" (>), "gte" (>=), "lt" (<), "lte" (<=), or "eq" (=) to
+            Use `gt` (>), `gte` (>=), `lt` (<), `lte` (<=), or `eq` (=) to
             filter by the lock_version of a ledger account. For example, for all entries
             created at or before before lock_version 1000 of a ledger account, use ledger_account_lock_version%5Blte%5D=1000
         - name: ledger_account_category_id
@@ -2549,6 +2563,19 @@ paths:
           required: false
           schema:
             type: string
+        - name: effective_at
+          in: query
+          schema:
+            type: object
+            additionalProperties:
+              type: string
+              format: time
+          style: deepObject
+          required: false
+          description:
+            Use "gt" (>), "gte" (>=), "lt" (<), "lte" (<=), or "eq" (=) to
+            filter by effective at. For example, for all transactions after Jan 1 2000,
+            use effective_at%5Bgt%5D=2000-01-01T00:00:00:00.000Z.
         - name: effective_date
           in: query
           schema:
@@ -2559,7 +2586,7 @@ paths:
           style: deepObject
           required: false
           description:
-            Use "gt" (>), "gte" (>=), "lt" (<), "lte" (<=), or "eq" (=) to
+            Use `gt` (>), `gte` (>=), `lt` (<), `lte` (<=), or `eq` (=) to
             filter by effective date. For example, for all dates after Jan 1 2000, use
             effective_date%5Bgt%5D=2000-01-01.
         - name: posted_at
@@ -2572,7 +2599,7 @@ paths:
           style: deepObject
           required: false
           description:
-            Use "gt" (>), "gte" (>=), "lt" (<), "lte" (<=), or "eq" (=) to
+            Use `gt` (>), `gte` (>=), `lt` (<), `lte` (<=), or `eq` (=) to
             filter by the posted at timestamp. For example, for all times after Jan
             1 2000 12:00 UTC, use posted_at%5Bgt%5D=2000-01-01T12:00:00Z.
         - name: updated_at
@@ -2585,7 +2612,7 @@ paths:
           style: deepObject
           required: false
           description:
-            Use "gt" (>), "gte" (>=), "lt" (<), "lte" (<=), or "eq" (=) to
+            Use `gt` (>), `gte` (>=), `lt` (<), `lte` (<=), or `eq` (=) to
             filter by the posted at timestamp. For example, for all times after Jan
             1 2000 12:00 UTC, use updated_at%5Bgt%5D=2000-01-01T12:00:00Z.
         - name: status
@@ -2789,7 +2816,7 @@ paths:
           style: deepObject
           required: false
           description:
-            Use "gt" (>), "gte" (>=), "lt" (<), "lte" (<=), or "eq" (=) to
+            Use `gt` (>), `gte` (>=), `lt` (<), `lte` (<=), or `eq` (=) to
             filter by the created_at timestamp. For example, for all dates after Jan
             1 2000 12:00 UTC, use created_at%5Bgt%5D=2000-01-01T12:00:00Z.
         - name: version
@@ -2801,7 +2828,7 @@ paths:
           style: deepObject
           required: false
           description:
-            Use "gt" (>), "gte" (>=), "lt" (<), "lte" (<=), or "eq" (=) to
+            Use `gt` (>), `gte` (>=), `lt` (<), `lte` (<=), or `eq` (=) to
             filter by the version. For example, for all versions after 2, use version%5Bgt%5D=2.
       responses:
         "200":
@@ -2870,7 +2897,7 @@ paths:
           style: deepObject
           required: false
           description:
-            Use "gt" (>), "gte" (>=), "lt" (<), "lte" (<=), or "eq" (=) to
+            Use `gt` (>), `gte` (>=), `lt` (<), `lte` (<=), or `eq` (=) to
             filter by the posted at timestamp. For example, for all times after Jan
             1 2000 12:00 UTC, use updated_at%5Bgt%5D=2000-01-01T12:00:00Z.
       responses:
@@ -4361,6 +4388,165 @@ paths:
             application/json:
               schema:
                 "$ref": "#/components/schemas/error_message"
+  "/api/virtual_accounts":
+    get:
+      summary: list virtual_accounts
+      tags:
+        - VirtualAccount
+      operationId: listVirtualAccounts
+      security:
+        - basic_auth: []
+      description: Get a list of virtual accounts.
+      parameters:
+        - name: after_cursor
+          in: query
+          schema:
+            type: string
+            nullable: true
+          required: false
+        - name: per_page
+          in: query
+          required: false
+          schema:
+            type: integer
+        - name: internal_account_id
+          in: query
+          schema:
+            type: string
+            format: uuid
+          required: false
+        - name: counterparty_id
+          in: query
+          schema:
+            type: string
+            format: uuid
+          required: false
+        - "$ref": "#/components/parameters/metadata_query"
+      responses:
+        "200":
+          description: successful
+          headers:
+            X-After-Cursor:
+              schema:
+                type: string
+                nullable: true
+              description:
+                The cursor for the next page. Including this in a call
+                as `after_cursor` will return the next page.
+            X-Per-Page:
+              schema:
+                type: integer
+                nullable: true
+              description: The current `per_page`.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  "$ref": "#/components/schemas/virtual_account"
+        "401":
+          description: unsuccessful
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/error_message"
+    post:
+      summary: create virtual_account
+      tags:
+        - VirtualAccount
+      operationId: createVirtualAccount
+      security:
+        - basic_auth: []
+      parameters:
+        - name: Idempotency-Key
+          in: header
+          required: false
+          description:
+            This key should be something unique, preferably something like
+            an UUID.
+          schema:
+            type: string
+      responses:
+        "401":
+          description: unauthorized
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/error_message"
+        "422":
+          description: unsuccessful
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/error_message"
+        "201":
+          description: successful
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/virtual_account"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              "$ref": "#/components/schemas/virtual_account_create_request"
+  "/api/virtual_accounts/{id}":
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+    get:
+      summary: get virtual_account
+      tags:
+        - VirtualAccount
+      operationId: getVirtualAccount
+      security:
+        - basic_auth: []
+      responses:
+        "200":
+          description: successful
+        "404":
+          description: not found
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/error_message"
+    patch:
+      summary: update virtual_account
+      tags:
+        - VirtualAccount
+      operationId: updateVirtualAccount
+      security:
+        - basic_auth: []
+      parameters: []
+      responses:
+        "200":
+          description: successful
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/virtual_account"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              "$ref": "#/components/schemas/virtual_account_update_request"
+    delete:
+      summary: delete virtual_account
+      tags:
+        - VirtualAccount
+      operationId: deleteVirtualAccount
+      security:
+        - basic_auth: []
+      responses:
+        "200":
+          description: successful
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/virtual_account"
 servers:
   - url: http://localhost:3000
   - url: app.moderntreasury.com
@@ -7127,7 +7313,7 @@ components:
           additionalProperties:
             type: integer
           description:
-            Use "gt" (>), "gte" (>=), "lt" (<), "lte" (<=), or "eq" (=)
+            Use `gt` (>), `gte` (>=), `lt` (<), `lte` (<=), or `eq` (=)
             to lock on the account’s pending balance. If any of these conditions would
             be false after the transaction is created, the entire call will fail with
             error code 422.
@@ -7137,7 +7323,7 @@ components:
           additionalProperties:
             type: integer
           description:
-            Use "gt" (>), "gte" (>=), "lt" (<), "lte" (<=), or "eq" (=)
+            Use `gt` (>), `gte` (>=), `lt` (<), `lte` (<=), or `eq` (=)
             to lock on the account’s posted balance. If any of these conditions would
             be false after the transaction is created, the entire call will fail with
             error code 422.
@@ -7147,7 +7333,7 @@ components:
           additionalProperties:
             type: integer
           description:
-            Use "gt" (>), "gte" (>=), "lt" (<), "lte" (<=), or "eq" (=)
+            Use `gt` (>), `gte` (>=), `lt` (<), `lte` (<=), or `eq` (=)
             to lock on the account’s available balance. If any of these conditions
             would be false after the transaction is created, the entire call will
             fail with error code 422.
@@ -7763,6 +7949,7 @@ components:
             - PPD
             - TEL
             - WEB
+            - neft
           nullable: true
           description:
             An additional layer of classification for the type of payment
@@ -8181,6 +8368,7 @@ components:
             - PPD
             - TEL
             - WEB
+            - neft
           nullable: true
           description:
             An additional layer of classification for the type of payment
@@ -8556,6 +8744,7 @@ components:
             - PPD
             - TEL
             - WEB
+            - neft
           nullable: true
           description:
             An additional layer of classification for the type of payment
@@ -8923,6 +9112,7 @@ components:
             - PPD
             - TEL
             - WEB
+            - neft
           nullable: true
           description:
             An additional layer of classification for the type of payment
@@ -10288,3 +10478,71 @@ components:
         - debit_ledger_account_id
         - credit_ledger_account_id
         - metadata
+    virtual_account_create_request:
+      type: object
+      properties:
+        name:
+          type: string
+          description: The name of the virtual account.
+        description:
+          type: string
+          description: An optional description for internal use.
+        counterparty_id:
+          type: string
+          format: uuid
+          description:
+            The ID of the counterparty that the virtual account belongs
+            to.
+        internal_account_id:
+          type: string
+          format: uuid
+          description:
+            The ID of the internal account that this virtual account is
+            associated with.
+        account_details:
+          type: array
+          items:
+            "$ref": "#/components/schemas/account_detail"
+          description: An array of account detail objects.
+        routing_details:
+          type: array
+          items:
+            "$ref": "#/components/schemas/routing_detail"
+          description: An array of routing detail objects.
+        debit_ledger_account_id:
+          type: string
+          format: uuid
+          description:
+            The ID of a debit normal ledger account. When money enters
+            the virtual account, this ledger account will be debited. Must be accompanied
+            by a credit_ledger_account_id if present.
+        credit_ledger_account_id:
+          type: string
+          format: uuid
+          description:
+            The ID of a credit normal ledger account. When money leaves
+            the virtual account, this ledger account will be credited. Must be accompanied
+            by a debit_ledger_account_id if present.
+        metadata:
+          type: object
+          description:
+            Additional data represented as key-value pairs. Both the key
+            and value must be strings.
+          additionalProperties:
+            type: string
+      required:
+        - name
+        - internal_account_id
+    virtual_account_update_request:
+      type: object
+      properties:
+        name:
+          type: string
+          nullable: true
+        counterparty_id:
+          type: string
+          format: uuid
+        metadata:
+          type: object
+          additionalProperties:
+            type: string
