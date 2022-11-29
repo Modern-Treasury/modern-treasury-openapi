@@ -4627,8 +4627,11 @@ components:
           description:
             One of `iban`, `clabe`, `wallet_address`, or `other`. Use `other`
             if the bank account number is in a generic format.
+        account_number_safe:
+          type: string
+          description: The last 4 digits of the account_number.
       additionalProperties: false
-      minProperties: 8
+      minProperties: 9
       required:
         - id
         - object
@@ -4638,6 +4641,7 @@ components:
         - discarded_at
         - account_number
         - account_number_type
+        - account_number_safe
     account_detail_create_request:
       type: object
       properties:
@@ -6728,6 +6732,32 @@ components:
         party_name:
           type: string
           description: The legal name of the entity which owns the account.
+        party_address:
+          type: object
+          description: The address associated with the owner or null.
+          properties:
+            line1:
+              type: string
+            line2:
+              type: string
+            locality:
+              type: string
+              description: Locality or City.
+            region:
+              type: string
+              description: Region or State.
+            postal_code:
+              type: string
+              description: The postal code of the address.
+            country:
+              type: string
+              description: Country code conforms to [ISO 3166-1 alpha-2]
+          required:
+            - line1
+            - locality
+            - region
+            - postal_code
+            - country
         currency:
           type: string
           enum:
@@ -7863,6 +7893,10 @@ components:
           type: string
           description: The account number on the paper item.
           nullable: true
+        account_number_safe:
+          type: string
+          description: The last 4 digits of the account_number.
+          nullable: true
         routing_number:
           type: string
           description: The routing number on the paper item.
@@ -7880,7 +7914,7 @@ components:
           description: The memo field on the paper item.
           nullable: true
       additionalProperties: false
-      minProperties: 17
+      minProperties: 18
       required:
         - id
         - object
@@ -7895,6 +7929,7 @@ components:
         - amount
         - currency
         - account_number
+        - account_number_safe
         - routing_number
         - check_number
         - remitter_name
