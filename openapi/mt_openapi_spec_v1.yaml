@@ -4627,8 +4627,11 @@ components:
           description:
             One of `iban`, `clabe`, `wallet_address`, or `other`. Use `other`
             if the bank account number is in a generic format.
+        account_number_safe:
+          type: string
+          description: The last 4 digits of the account_number.
       additionalProperties: false
-      minProperties: 8
+      minProperties: 9
       required:
         - id
         - object
@@ -4638,6 +4641,7 @@ components:
         - discarded_at
         - account_number
         - account_number_type
+        - account_number_safe
     account_detail_create_request:
       type: object
       properties:
@@ -6728,6 +6732,32 @@ components:
         party_name:
           type: string
           description: The legal name of the entity which owns the account.
+        party_address:
+          type: object
+          description: The address associated with the owner or null.
+          properties:
+            line1:
+              type: string
+            line2:
+              type: string
+            locality:
+              type: string
+              description: Locality or City.
+            region:
+              type: string
+              description: Region or State.
+            postal_code:
+              type: string
+              description: The postal code of the address.
+            country:
+              type: string
+              description: Country code conforms to [ISO 3166-1 alpha-2]
+          required:
+            - line1
+            - locality
+            - region
+            - postal_code
+            - country
         currency:
           type: string
           enum:
@@ -7260,8 +7290,18 @@ components:
           description:
             The ledger transaction that this ledger entry is associated
             with.
+        resulting_ledger_account_balances:
+          "$ref": "#/components/schemas/ledger_balances"
+          description:
+            The pending, posted, and available balances for this ledger
+            entry's ledger account. The posted balance is the sum of all posted entries
+            on the account. The pending balance is the sum of all pending and posted
+            entries on the account. The available balance is the posted incoming entries
+            minus the sum of the pending and posted outgoing amounts. Please see https://docs.moderntreasury.com/docs/transaction-status-and-balances
+            for more details.
+          nullable: true
       additionalProperties: false
-      minProperties: 13
+      minProperties: 14
       required:
         - id
         - object
@@ -7276,6 +7316,7 @@ components:
         - ledger_account_currency
         - ledger_account_currency_exponent
         - ledger_transaction_id
+        - resulting_ledger_account_balances
     ledger_entry_create_request:
       type: object
       properties:
@@ -7337,6 +7378,12 @@ components:
             to lock on the account’s available balance. If any of these conditions
             would be false after the transaction is created, the entire call will
             fail with error code 422.
+          nullable: true
+        show_resulting_ledger_account_balances:
+          type: boolean
+          description:
+            If true, response will include the balance of the associated
+            ledger account for the entry.
           nullable: true
       required:
         - amount
@@ -7863,6 +7910,10 @@ components:
           type: string
           description: The account number on the paper item.
           nullable: true
+        account_number_safe:
+          type: string
+          description: The last 4 digits of the account_number.
+          nullable: true
         routing_number:
           type: string
           description: The routing number on the paper item.
@@ -7880,7 +7931,7 @@ components:
           description: The memo field on the paper item.
           nullable: true
       additionalProperties: false
-      minProperties: 17
+      minProperties: 18
       required:
         - id
         - object
@@ -7895,6 +7946,7 @@ components:
         - amount
         - currency
         - account_number
+        - account_number_safe
         - routing_number
         - check_number
         - remitter_name
