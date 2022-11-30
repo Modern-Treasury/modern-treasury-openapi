@@ -7290,8 +7290,18 @@ components:
           description:
             The ledger transaction that this ledger entry is associated
             with.
+        resulting_ledger_account_balances:
+          "$ref": "#/components/schemas/ledger_balances"
+          description:
+            The pending, posted, and available balances for this ledger
+            entry's ledger account. The posted balance is the sum of all posted entries
+            on the account. The pending balance is the sum of all pending and posted
+            entries on the account. The available balance is the posted incoming entries
+            minus the sum of the pending and posted outgoing amounts. Please see https://docs.moderntreasury.com/docs/transaction-status-and-balances
+            for more details.
+          nullable: true
       additionalProperties: false
-      minProperties: 13
+      minProperties: 14
       required:
         - id
         - object
@@ -7306,6 +7316,7 @@ components:
         - ledger_account_currency
         - ledger_account_currency_exponent
         - ledger_transaction_id
+        - resulting_ledger_account_balances
     ledger_entry_create_request:
       type: object
       properties:
@@ -7367,6 +7378,12 @@ components:
             to lock on the account’s available balance. If any of these conditions
             would be false after the transaction is created, the entire call will
             fail with error code 422.
+          nullable: true
+        show_resulting_ledger_account_balances:
+          type: boolean
+          description:
+            If true, response will include the balance of the associated
+            ledger account for the entry.
           nullable: true
       required:
         - amount
