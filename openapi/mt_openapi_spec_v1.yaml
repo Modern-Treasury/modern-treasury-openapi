@@ -6728,6 +6728,32 @@ components:
         party_name:
           type: string
           description: The legal name of the entity which owns the account.
+        party_address:
+          type: object
+          description: The address associated with the owner or null.
+          properties:
+            line1:
+              type: string
+            line2:
+              type: string
+            locality:
+              type: string
+              description: Locality or City.
+            region:
+              type: string
+              description: Region or State.
+            postal_code:
+              type: string
+              description: The postal code of the address.
+            country:
+              type: string
+              description: Country code conforms to [ISO 3166-1 alpha-2]
+          required:
+            - line1
+            - locality
+            - region
+            - postal_code
+            - country
         currency:
           type: string
           enum:
