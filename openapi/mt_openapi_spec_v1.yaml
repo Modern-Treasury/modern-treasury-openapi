@@ -1781,12 +1781,6 @@ paths:
                 type: array
                 items:
                   "$ref": "#/components/schemas/ledger_account_category"
-        '403':
-          description: forbidden
-          content:
-            application/json:
-              schema:
-                "$ref": "#/components/schemas/error_message"
     post:
       summary: create ledger_account_category
       tags:
@@ -1850,12 +1844,6 @@ paths:
             application/json:
               schema:
                 "$ref": "#/components/schemas/ledger_account_category"
-        '403':
-          description: forbidden
-          content:
-            application/json:
-              schema:
-                "$ref": "#/components/schemas/error_message"
         '404':
           description: not found
           content:
