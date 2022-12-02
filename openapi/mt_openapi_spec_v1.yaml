@@ -1844,6 +1844,7 @@ paths:
             application/json:
               schema:
                 "$ref": "#/components/schemas/ledger_account_category"
+
         '404':
           description: not found
           content:
