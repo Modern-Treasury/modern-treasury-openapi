@@ -2414,6 +2414,17 @@ paths:
         description: If true, response will include ledger entries that were deleted.
           When you update a ledger transaction to specify a new set of entries, the
           previous entries are deleted.
+      - name: status
+        in: query
+        schema:
+          type: string
+          enum:
+          - pending
+          - posted
+          - archived
+        required: false
+        description: Get all ledger entries that match the status specified. One of
+          `pending`, `posted`, or `archived`.
       responses:
         '200':
           description: successful
@@ -7059,7 +7070,7 @@ components:
         amount:
           type: integer
           description: Value in specified currency's smallest unit. e.g. $10 would
-            be represented as 1000. Can be any integer up to 30 digits.
+            be represented as 1000. Can be any integer up to 36 digits.
         direction:
           type: string
           enum:
@@ -7069,6 +7080,14 @@ components:
             flowing in the transaction. A `credit` moves money from your account to
             someone else's. A `debit` pulls money from someone else's account to your
             own. Note that wire, rtp, and check payments will always be `credit`.
+        status:
+          type: string
+          enum:
+          - archived
+          - pending
+          - posted
+          description: Equal to the state of the ledger transaction when the ledger
+            entry was created. One of `pending`, `posted`, or `archived`.
         ledger_account_id:
           type: string
           format: uuid
@@ -7100,7 +7119,7 @@ components:
             for more details.
           nullable: true
       additionalProperties: false
-      minProperties: 14
+      minProperties: 15
       required:
       - id
       - object
@@ -7110,6 +7129,7 @@ components:
       - discarded_at
       - amount
       - direction
+      - status
       - ledger_account_id
       - ledger_account_lock_version
       - ledger_account_currency
@@ -7121,10 +7141,8 @@ components:
       properties:
         amount:
           type: integer
-          description: One of `credit`, `debit`. Describes the direction money is
-            flowing in the transaction. A `credit` moves money from your account to
-            someone else's. A `debit` pulls money from someone else's account to your
-            own. Note that wire, rtp, and check payments will always be `credit`.
+          description: Value in specified currency's smallest unit. e.g. $10 would
+            be represented as 1000. Can be any integer up to 36 digits.
         direction:
           type: string
           enum:
