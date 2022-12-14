@@ -474,6 +474,8 @@ paths:
                 type: array
                 items:
                   "$ref": "#/components/schemas/counterparty"
+        '400':
+          description: bad_request
         '401':
           description: unsuccessful
           content:
@@ -1607,6 +1609,7 @@ paths:
           - debit
         required: false
         description: The direction of payments that can be made by internal account.
+      - "$ref": "#/components/parameters/metadata_query"
       responses:
         '200':
           description: successful
@@ -2105,6 +2108,9 @@ paths:
             as_of_date:
               type: string
               format: date
+            effective_at:
+              type: string
+              format: date-time
           additionalProperties: false
         style: deepObject
         required: false
