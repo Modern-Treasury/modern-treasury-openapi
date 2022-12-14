@@ -2105,6 +2105,9 @@ paths:
             as_of_date:
               type: string
               format: date
+            effective_at:
+              type: string
+              format: date-time
           additionalProperties: false
         style: deepObject
         required: false
