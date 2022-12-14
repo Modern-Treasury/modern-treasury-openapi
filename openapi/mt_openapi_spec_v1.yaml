@@ -474,6 +474,8 @@ paths:
                 type: array
                 items:
                   "$ref": "#/components/schemas/counterparty"
+        '400':
+          description: bad_request
         '401':
           description: unsuccessful
           content:
@@ -2105,6 +2107,9 @@ paths:
             as_of_date:
               type: string
               format: date
+            effective_at:
+              type: string
+              format: date-time
           additionalProperties: false
         style: deepObject
         required: false
