@@ -7206,6 +7206,88 @@ components:
       - amount
       - direction
       - ledger_account_id
+    ledger_entry_of_transaction_version:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        object:
+          type: string
+        live_mode:
+          type: boolean
+          description: This field will be true if this object exists in the live environment
+            or false if it exists in the test environment.
+        created_at:
+          type: string
+          format: date-time
+        amount:
+          type: integer
+          description: Value in specified currency's smallest unit. e.g. $10 would
+            be represented as 1000. Can be any integer up to 36 digits.
+        direction:
+          type: string
+          enum:
+          - credit
+          - debit
+          description: One of `credit`, `debit`. Describes the direction money is
+            flowing in the transaction. A `credit` moves money from your account to
+            someone else's. A `debit` pulls money from someone else's account to your
+            own. Note that wire, rtp, and check payments will always be `credit`.
+        status:
+          type: string
+          enum:
+          - archived
+          - pending
+          - posted
+          description: Equal to the state of the ledger transaction when the ledger
+            entry was created. One of `pending`, `posted`, or `archived`.
+        ledger_account_id:
+          type: string
+          format: uuid
+          description: The ledger account that this ledger entry is associated with.
+        ledger_account_lock_version:
+          type: integer
+          description: Lock version of the ledger account. This can be passed when
+            creating a ledger transaction to only succeed if no ledger transactions
+            have posted since the given version. See our post about Designing the
+            Ledgers API with Optimistic Locking for more details.
+          nullable: true
+        ledger_account_currency:
+          type: string
+          description: The currency of the ledger account.
+        ledger_account_currency_exponent:
+          type: integer
+          description: The currency exponent of the ledger account.
+        ledger_transaction_id:
+          type: string
+          description: The ledger transaction that this ledger entry is associated
+            with.
+        resulting_ledger_account_balances:
+          "$ref": "#/components/schemas/ledger_balances"
+          description: The pending, posted, and available balances for this ledger
+            entry's ledger account. The posted balance is the sum of all posted entries
+            on the account. The pending balance is the sum of all pending and posted
+            entries on the account. The available balance is the posted incoming entries
+            minus the sum of the pending and posted outgoing amounts. Please see https://docs.moderntreasury.com/docs/transaction-status-and-balances
+            for more details.
+          nullable: true
+      additionalProperties: false
+      minProperties: 13
+      required:
+      - id
+      - object
+      - live_mode
+      - created_at
+      - amount
+      - direction
+      - status
+      - ledger_account_id
+      - ledger_account_lock_version
+      - ledger_account_currency
+      - ledger_account_currency_exponent
+      - ledger_transaction_id
+      - resulting_ledger_account_balances
     ledger_transaction:
       type: object
       properties:
@@ -7366,7 +7448,7 @@ components:
         ledger_entries:
           type: array
           items:
-            "$ref": "#/components/schemas/ledger_entry"
+            "$ref": "#/components/schemas/ledger_entry_of_transaction_version"
           description: An array of ledger entry objects.
         posted_at:
           type: string
