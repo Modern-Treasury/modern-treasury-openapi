@@ -9474,6 +9474,7 @@ components:
           - failed
           - pending
           - processing
+          - returned
           - sent
           description: The current status of the return.
         transaction_line_item_id:
