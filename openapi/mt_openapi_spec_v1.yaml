@@ -1832,6 +1832,23 @@ paths:
       required: true
       schema:
         type: string
+    - name: balances
+      in: query
+      schema:
+        type: object
+        properties:
+          as_of_date:
+            type: string
+            format: date
+          effective_at:
+            type: string
+            format: date-time
+        additionalProperties: false
+      style: deepObject
+      required: false
+      description: For example, if you want the balances as of a particular effective
+        date (YYYY-MM-DD), the encoded query string would be balances%5Bas_of_date%5D=2000-12-31.
+        The balances as of a date are inclusive of entries with that exact date.
     get:
       summary: get ledger_account_category
       tags:
@@ -1847,6 +1864,12 @@ paths:
             application/json:
               schema:
                 "$ref": "#/components/schemas/ledger_account_category"
+        '422':
+          description: unsuccessful
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/error_message"
         '404':
           description: not found
           content:
@@ -4873,6 +4896,7 @@ components:
           enum:
           - email
           - phone_number
+          - website
       additionalProperties: false
       minProperties: 8
       required:
@@ -4894,6 +4918,7 @@ components:
           enum:
           - email
           - phone_number
+          - website
     counterparty:
       type: object
       properties:
