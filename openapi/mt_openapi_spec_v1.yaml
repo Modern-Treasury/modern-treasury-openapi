@@ -4873,6 +4873,7 @@ components:
           enum:
           - email
           - phone_number
+          - website
       additionalProperties: false
       minProperties: 8
       required:
@@ -4894,6 +4895,7 @@ components:
           enum:
           - email
           - phone_number
+          - website
     counterparty:
       type: object
       properties:
