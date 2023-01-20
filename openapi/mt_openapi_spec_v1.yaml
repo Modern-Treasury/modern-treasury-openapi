@@ -1441,7 +1441,8 @@ paths:
           - signet
           - wire
         required: false
-        description: 'One of: `ach`, `wire`, `check`, `rtp`, `sepa`, `signet`.'
+        description: 'One of: `ach`, `book`, `check`, `eft`, `interac`, `rtp`, `sepa`,
+          `signet`, or `wire`.'
       - name: as_of_date_start
         in: query
         schema:
@@ -6414,7 +6415,8 @@ components:
           - sepa
           - signet
           - wire
-          description: 'One of: `ach`, `wire`, `check`, `rtp`, `sepa`, `signet`.'
+          description: 'One of: `ach`, `book`, `check`, `eft`, `interac`, `rtp`, `sepa`,
+            `signet`, or `wire`.'
         data:
           type: object
           description: The raw data from the payment pre-notification file that we
