@@ -9527,6 +9527,7 @@ components:
           - ach_noc
           - au_becs
           - bacs
+          - book
           - eft
           - interac
           - manual
