@@ -4654,7 +4654,8 @@ components:
           type: string
           description: The last 4 digits of the account_number.
       additionalProperties: false
-      minProperties: 9
+      minProperties: 8
+      maxProperties: 9
       required:
       - id
       - object
@@ -4662,7 +4663,6 @@ components:
       - created_at
       - updated_at
       - discarded_at
-      - account_number
       - account_number_type
       - account_number_safe
     account_detail_create_request:
