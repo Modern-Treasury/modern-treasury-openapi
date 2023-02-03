@@ -355,12 +355,6 @@ paths:
                 type: array
                 items:
                   "$ref": "#/components/schemas/connection"
-        '403':
-          description: forbidden
-          content:
-            application/json:
-              schema:
-                "$ref": "#/components/schemas/error_message"
   "/api/counterparties/{id}/collect_account":
     post:
       summary: collect account details
@@ -2087,6 +2081,162 @@ paths:
             application/json:
               schema:
                 "$ref": "#/components/schemas/error_message"
+  "/api/ledger_account_payouts":
+    post:
+      summary: create ledger_account_payout
+      tags:
+      - LedgerAccountPayout
+      operationId: createLedgerAccountPayout
+      description: Create a ledger account payout.
+      security:
+      - basic_auth: []
+      parameters:
+      - name: Idempotency-Key
+        in: header
+        required: false
+        description: This key should be something unique, preferably something like
+          an UUID.
+        schema:
+          type: string
+      responses:
+        '201':
+          description: successful
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/ledger_account_payout"
+        '403':
+          description: forbidden
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/error_message"
+        '422':
+          description: unsuccessful
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/error_message"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              "$ref": "#/components/schemas/ledger_account_payout_create_request"
+    get:
+      summary: list ledger_account_payouts
+      tags:
+      - LedgerAccountPayout
+      operationId: listLedgerAccountPayouts
+      description: Get a list of ledger account payouts.
+      security:
+      - basic_auth: []
+      parameters:
+      - name: after_cursor
+        in: query
+        schema:
+          type: string
+          nullable: true
+        required: false
+      - name: per_page
+        in: query
+        schema:
+          type: integer
+        required: false
+      - name: payout_ledger_account_id
+        in: query
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: successful
+          headers:
+            X-After-Cursor:
+              schema:
+                type: string
+                nullable: true
+              required: false
+              description: The cursor for the next page. Including this in a call
+                as `after_cursor` will return the next page.
+            X-Per-Page:
+              schema:
+                type: integer
+                nullable: true
+              description: The current `per_page`.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  "$ref": "#/components/schemas/ledger_account_payout"
+  "/api/ledger_account_payouts/{id}":
+    parameters:
+    - name: id
+      in: path
+      description: id
+      required: true
+      schema:
+        type: string
+    get:
+      summary: get ledger_account_payout
+      tags:
+      - LedgerAccountPayout
+      operationId: getLedgerAccountPayout
+      description: Get details on a single ledger account payout.
+      security:
+      - basic_auth: []
+      responses:
+        '200':
+          description: successful
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/ledger_account_payout"
+        '404':
+          description: not found
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/error_message"
+    patch:
+      summary: update ledger_account_payout
+      tags:
+      - LedgerAccountPayout
+      operationId: updateLedgerAccountPayout
+      description: Update the details of a ledger account payout.
+      security:
+      - basic_auth: []
+      parameters: []
+      responses:
+        '200':
+          description: successful
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/ledger_account_payout"
+        '403':
+          description: forbidden
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/error_message"
+        '404':
+          description: not found
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/error_message"
+        '422':
+          description: unsuccessful
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/error_message"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              "$ref": "#/components/schemas/ledger_account_payout_update_request"
   "/api/ledger_accounts":
     get:
       summary: list ledger_accounts
@@ -7113,6 +7263,167 @@ components:
           type: string
           description: The description of the ledger account category.
           nullable: true
+        metadata:
+          type: object
+          description: Additional data represented as key-value pairs. Both the key
+            and value must be strings.
+          additionalProperties:
+            type: string
+          example:
+            key: value
+            foo: bar
+            modern: treasury
+    ledger_account_payout:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        object:
+          type: string
+        live_mode:
+          type: boolean
+          description: This field will be true if this object exists in the live environment
+            or false if it exists in the test environment.
+        created_at:
+          type: string
+          format: date-time
+        updated_at:
+          type: string
+          format: date-time
+        description:
+          type: string
+          description: The description of the ledger account payout.
+          nullable: true
+        status:
+          type: string
+          enum:
+          - archived
+          - archiving
+          - pending
+          - posted
+          - processing
+          description: The status of the ledger account payout. One of `processing`,
+            `pending`, `posted`, `archiving` or `archived`.
+        payout_ledger_account_id:
+          type: string
+          format: uuid
+          description: The id of the payout ledger account whose ledger entries are
+            queried against, and its balance is reduced as a result.
+        funding_ledger_account_id:
+          type: string
+          format: uuid
+          description: The id of the funding ledger account that sends to or receives
+            funds from the payout ledger account.
+        effective_at_upper_bound:
+          type: string
+          format: time
+          description: The maximum effective_at timestamp of the ledger entries to
+            be included in the ledger account payout. The default value is the created_at
+            timestamp of the ledger account payout.
+        ledger_transaction_id:
+          type: string
+          format: uuid
+          description: 'translation missing: en.openapi.descriptions.ledger_account_payout.schema.ledger_transaction_id'
+          nullable: true
+        amount:
+          type: integer
+          description: 'translation missing: en.openapi.descriptions.ledger_account_payout.schema.amount'
+          nullable: true
+        currency:
+          type: string
+          description: 'translation missing: en.openapi.descriptions.ledger_account_payout.schema.currency'
+        currency_exponent:
+          type: integer
+          description: 'translation missing: en.openapi.descriptions.ledger_account_payout.schema.currency_exponent'
+          nullable: true
+        metadata:
+          type: object
+          description: Additional data represented as key-value pairs. Both the key
+            and value must be strings.
+          additionalProperties:
+            type: string
+          example:
+            key: value
+            foo: bar
+            modern: treasury
+      additionalProperties: false
+      minProperties: 15
+      required:
+      - id
+      - object
+      - live_mode
+      - created_at
+      - updated_at
+      - description
+      - status
+      - payout_ledger_account_id
+      - funding_ledger_account_id
+      - effective_at_upper_bound
+      - ledger_transaction_id
+      - amount
+      - currency
+      - currency_exponent
+      - metadata
+    ledger_account_payout_create_request:
+      type: object
+      properties:
+        description:
+          type: string
+          description: The description of the ledger account payout.
+          nullable: true
+        status:
+          type: string
+          enum:
+          - pending
+          - posted
+          description: The status of the ledger account payout. It is set to `pending`
+            by default. To post a ledger account payout at creation, use `posted`.
+          nullable: true
+        payout_ledger_account_id:
+          type: string
+          format: uuid
+          description: The id of the payout ledger account whose ledger entries are
+            queried against, and its balance is reduced as a result.
+        funding_ledger_account_id:
+          type: string
+          format: uuid
+          description: The id of the funding ledger account that sends to or receives
+            funds from the payout ledger account.
+        effective_at_upper_bound:
+          type: string
+          format: time
+          description: The maximum effective_at timestamp of the ledger entries to
+            be included in the ledger account payout. The default value is the created_at
+            timestamp of the ledger account payout.
+          nullable: true
+        metadata:
+          type: object
+          description: Additional data represented as key-value pairs. Both the key
+            and value must be strings.
+          additionalProperties:
+            type: string
+          example:
+            key: value
+            foo: bar
+            modern: treasury
+      required:
+      - payout_ledger_account_id
+      - funding_ledger_account_id
+    ledger_account_payout_update_request:
+      type: object
+      properties:
+        description:
+          type: string
+          description: The description of the ledger account payout.
+          nullable: true
+        status:
+          type: string
+          enum:
+          - posted
+          - archived
+          description: To post a pending ledger account payout, use `posted`. To archive
+            a pending ledger transaction, use `archived`.
         metadata:
           type: object
           description: Additional data represented as key-value pairs. Both the key
