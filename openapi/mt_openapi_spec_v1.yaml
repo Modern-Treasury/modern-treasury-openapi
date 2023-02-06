@@ -3886,6 +3886,7 @@ paths:
           - incoming_payment_detail
           - paper_item
           - payment_order
+          - return
           - reversal
         required: false
         description: One of `payment_order`, `paper_item`, `reversal`, or `incoming_payment_detail`.
@@ -9923,6 +9924,7 @@ components:
           - incoming_payment_detail
           - paper_item
           - payment_order
+          - return
           - reversal
           description: The type of object being returned or `null`.
           nullable: true
