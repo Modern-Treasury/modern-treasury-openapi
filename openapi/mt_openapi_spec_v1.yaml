@@ -10078,7 +10078,6 @@ components:
           - book
           - eft
           - interac
-          - manual
           - paper_item
           - sepa
           - wire
