@@ -4728,7 +4728,7 @@ paths:
                 "$ref": "#/components/schemas/virtual_account"
 servers:
 - url: http://localhost:3000
-- url: https://app.moderntreasury.com
+- url: app.moderntreasury.com
 components:
   securitySchemes:
     basic_auth:
@@ -5033,6 +5033,7 @@ components:
           - bankprov
           - bnk_dev
           - cleartouch
+          - column
           - cross_river
           - currencycloud
           - dc_bank
@@ -10610,6 +10611,7 @@ components:
           - bankprov
           - bnk_dev
           - cleartouch
+          - column
           - cross_river
           - currencycloud
           - dc_bank
