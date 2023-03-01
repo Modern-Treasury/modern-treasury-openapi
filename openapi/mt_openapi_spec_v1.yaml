@@ -4728,7 +4728,7 @@ paths:
                 "$ref": "#/components/schemas/virtual_account"
 servers:
 - url: http://localhost:3000
-- url: app.moderntreasury.com
+- url: https://app.moderntreasury.com
 components:
   securitySchemes:
     basic_auth:
