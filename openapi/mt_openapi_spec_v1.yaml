@@ -4726,6 +4726,320 @@ paths:
             application/json:
               schema:
                 "$ref": "#/components/schemas/virtual_account"
+  "/api/account_collection_flows":
+    get:
+      summary: list account_collection_flows
+      tags:
+      - AccountCollectionFlow
+      operationId: listAccountCollectionFlows
+      security:
+      - basic_auth: []
+      parameters:
+      - name: client_token
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: status
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: counterparty_id
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: external_account_id
+        in: query
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: successful
+          headers:
+            X-After-Cursor:
+              schema:
+                type: string
+                nullable: true
+              description: The cursor for the next page. Including this in a call
+                as `after_cursor` will return the next page.
+            X-Per-Page:
+              schema:
+                type: integer
+                nullable: true
+              description: The current `per_page`.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  "$ref": "#/components/schemas/account_collection_flow"
+    post:
+      summary: create account_collection_flow
+      tags:
+      - AccountCollectionFlow
+      operationId: createAccountCollectionFlow
+      security:
+      - basic_auth: []
+      parameters:
+      - name: Idempotency-Key
+        in: header
+        required: false
+        description: This key should be something unique, preferably something like
+          an UUID.
+        schema:
+          type: string
+      responses:
+        '201':
+          description: successful
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/account_collection_flow"
+        '422':
+          description: unsuccessful
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/error_message"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              "$ref": "#/components/schemas/account_collection_flow_create_request"
+  "/api/account_collection_flows/{id}":
+    parameters:
+    - name: id
+      in: path
+      description: id
+      required: true
+      schema:
+        type: string
+    get:
+      summary: get account_collection_flow
+      tags:
+      - AccountCollectionFlow
+      operationId: getAccountCollectionFlow
+      security:
+      - basic_auth: []
+      parameters:
+      - name: Idempotency-Key
+        in: header
+        required: false
+        description: This key should be something unique, preferably something like
+          an UUID.
+        schema:
+          type: string
+      responses:
+        '200':
+          description: successful
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/account_collection_flow"
+    patch:
+      summary: update account_collection_flow
+      tags:
+      - AccountCollectionFlow
+      operationId: updateAccountCollectionFlow
+      security:
+      - basic_auth: []
+      parameters:
+      - name: Idempotency-Key
+        in: header
+        required: false
+        description: This key should be something unique, preferably something like
+          an UUID.
+        schema:
+          type: string
+      responses:
+        '200':
+          description: successful
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/account_collection_flow"
+        '404':
+          description: not found
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/error_message"
+        '422':
+          description: unsuccessful
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/error_message"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              "$ref": "#/components/schemas/account_collection_flow_update_request"
+  "/api/payment_flows":
+    get:
+      summary: list payment_flows
+      tags:
+      - PaymentFlow
+      operationId: listPaymentFlows
+      security:
+      - basic_auth: []
+      parameters:
+      - name: client_token
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: status
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: counterparty_id
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: receiving_account_id
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: originating_account_id
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: payment_order_id
+        in: query
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: successful
+          headers:
+            X-After-Cursor:
+              schema:
+                type: string
+                nullable: true
+              description: The cursor for the next page. Including this in a call
+                as `after_cursor` will return the next page.
+            X-Per-Page:
+              schema:
+                type: integer
+                nullable: true
+              description: The current `per_page`.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  "$ref": "#/components/schemas/payment_flow"
+    post:
+      summary: create payment_flow
+      tags:
+      - PaymentFlow
+      operationId: createPaymentFlow
+      security:
+      - basic_auth: []
+      parameters:
+      - name: Idempotency-Key
+        in: header
+        required: false
+        description: This key should be something unique, preferably something like
+          an UUID.
+        schema:
+          type: string
+      responses:
+        '201':
+          description: successful
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/payment_flow"
+        '422':
+          description: unsuccessful
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/error_message"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              "$ref": "#/components/schemas/payment_flow_create_request"
+  "/api/payment_flows/{id}":
+    parameters:
+    - name: id
+      in: path
+      description: id
+      required: true
+      schema:
+        type: string
+    get:
+      summary: get payment_flow
+      tags:
+      - PaymentFlow
+      operationId: getPaymentFlow
+      security:
+      - basic_auth: []
+      parameters:
+      - name: Idempotency-Key
+        in: header
+        required: false
+        description: This key should be something unique, preferably something like
+          an UUID.
+        schema:
+          type: string
+      responses:
+        '200':
+          description: successful
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/payment_flow"
+    patch:
+      summary: update payment_flow
+      tags:
+      - PaymentFlow
+      operationId: updatePaymentFlow
+      security:
+      - basic_auth: []
+      parameters:
+      - name: Idempotency-Key
+        in: header
+        required: false
+        description: This key should be something unique, preferably something like
+          an UUID.
+        schema:
+          type: string
+      responses:
+        '200':
+          description: successful
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/payment_flow"
+        '404':
+          description: not found
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/error_message"
+        '422':
+          description: unsuccessful
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/error_message"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              "$ref": "#/components/schemas/payment_flow_update_request"
 servers:
 - url: http://localhost:3000
 - url: https://app.moderntreasury.com
@@ -4766,6 +5080,88 @@ components:
             Class objects track segments of your business independent of client or
             project. Note that these will only be accessible if your accounting system
             has been connected.
+    account_collection_flow:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        object:
+          type: string
+        live_mode:
+          type: boolean
+          description: This field will be true if this object exists in the live environment
+            or false if it exists in the test environment.
+        created_at:
+          type: string
+          format: date-time
+        updated_at:
+          type: string
+          format: date-time
+        client_token:
+          type: string
+          description: The client token of the account collection flow.  This token
+            can be used to embed account collection in your client-side application.
+        status:
+          type: string
+          enum:
+          - cancelled
+          - completed
+          - expired
+          - pending
+          description: The current status of the account collection flow. One of `pending`,
+            `completed`, `expired`, or `cancelled`.
+        counterparty_id:
+          type: string
+          format: uuid
+          description: The ID of a counterparty. An external account created with
+            this flow will be associated with this counterparty.
+        external_account_id:
+          type: string
+          format: uuid
+          nullable: true
+          description: If present, the ID of the external account created using this
+            flow.
+        payment_types:
+          type: array
+          items:
+            type: string
+            enum:
+            - ach
+            - wire
+            description: An account created with this flow will support payments of
+              one of these types.
+      additionalProperties: false
+      minProperties: 9
+      required:
+      - payment_types
+      - counterparty_id
+    account_collection_flow_create_request:
+      type: object
+      properties:
+        counterparty_id:
+          type: string
+          format: uuid
+          description: Required.
+        payment_types:
+          type: array
+          items:
+            type: string
+            description: Required. At least one of `ach`, `wire` or `check`.
+      required:
+      - payment_types
+      - counterparty_id
+    account_collection_flow_update_request:
+      type: object
+      properties:
+        status:
+          type: string
+          enum:
+          - cancelled
+          description: Required. The updated status of the account collection flow.
+            Can only be used to mark a flow as `cancelled`.
+      required:
+      - status
     account_detail:
       type: object
       properties:
@@ -8287,6 +8683,124 @@ components:
       - check_number
       - remitter_name
       - memo_field
+    payment_flow:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        object:
+          type: string
+        live_mode:
+          type: boolean
+          description: This field will be true if this object exists in the live environment
+            or false if it exists in the test environment.
+        created_at:
+          type: string
+          format: date-time
+        updated_at:
+          type: string
+          format: date-time
+        client_token:
+          type: string
+          description: The client token of the payment flow. This token can be used
+            to embed a payment workflow in your client-side application.
+        status:
+          type: string
+          enum:
+          - cancelled
+          - completed
+          - expired
+          - pending
+          description: The current status of the payment flow. One of `pending`, `completed`,
+            `expired`, or `cancelled`.
+        amount:
+          type: integer
+          description: Value in specified currency's smallest unit. e.g. $10 would
+            be represented as 1000. Can be any integer up to 36 digits.
+        currency:
+          type: string
+          description: The currency of the payment.
+        direction:
+          type: string
+          enum:
+          - credit
+          - debit
+          description: Describes the direction money is flowing in the transaction.
+            Can only be `debit`. A `debit` pulls money from someone else's account
+            to your own.
+        counterparty_id:
+          type: string
+          format: uuid
+          nullable: true
+          description: The ID of a counterparty associated with the payment. As part
+            of the payment workflow an external account will be associated with this
+            counterparty.
+        receiving_account_id:
+          type: string
+          format: uuid
+          nullable: true
+          description: If present, the ID of the external account created using this
+            flow.
+        originating_account_id:
+          type: string
+          format: uuid
+          nullable: true
+          description: The ID of one of your organization's internal accounts.
+        payment_order_id:
+          type: string
+          format: uuid
+          nullable: true
+          description: If present, the ID of the payment order created using this
+            flow.
+      additionalProperties: false
+      minProperties: 12
+      maxProperties: 14
+    payment_flow_create_request:
+      type: object
+      properties:
+        amount:
+          type: integer
+          description: Required. Value in specified currency's smallest unit. e.g.
+            $10 would be represented as 1000. Can be any integer up to 36 digits.
+        currency:
+          type: string
+          description: Required. The currency of the payment.
+        direction:
+          type: string
+          enum:
+          - credit
+          - debit
+          description: Required. Describes the direction money is flowing in the transaction.
+            Can only be `debit`. A `debit` pulls money from someone else's account
+            to your own.
+        counterparty_id:
+          type: string
+          format: uuid
+          description: Required. The ID of a counterparty associated with the payment.
+            As part of the payment workflow an external account will be associated
+            with this model.
+        originating_account_id:
+          type: string
+          format: uuid
+          description: Required. The ID of one of your organization's internal accounts.
+      required:
+      - amount
+      - currency
+      - direction
+      - counterparty_id
+      - originating_account_id
+    payment_flow_update_request:
+      type: object
+      properties:
+        status:
+          type: string
+          enum:
+          - cancelled
+          description: Required. The updated status of the payment flow. Can only
+            be used to mark a flow as `cancelled`.
+      required:
+      - status
     payment_order:
       type: object
       properties:
