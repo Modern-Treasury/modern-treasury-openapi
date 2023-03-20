@@ -2742,6 +2742,27 @@ paths:
         description: Use `gt` (>), `gte` (>=), `lt` (<), `lte` (<=), or `eq` (=) to
           filter by the posted at timestamp. For example, for all times after Jan
           1 2000 12:00 UTC, use updated_at%5Bgt%5D=2000-01-01T12:00:00Z.
+      - name: order_by
+        in: query
+        schema:
+          type: object
+          properties:
+            created_at:
+              type: string
+              enum:
+              - asc
+              - desc
+            effective_at:
+              type: string
+              enum:
+              - asc
+              - desc
+          additionalProperties: false
+        style: deepObject
+        required: false
+        description: Order by `created_at` and/or `effective_at` in `asc` or `desc`
+          order. For example, to order by `effective_at asc`, use `order_by%5Beffective_at%5D=asc`.
+          Ordering by only one field at a time is supported.
       - name: status
         in: query
         schema:
@@ -7564,12 +7585,6 @@ components:
           type: string
           description: The description of the ledger account.
           nullable: true
-        normal_balance:
-          type: string
-          enum:
-          - credit
-          - debit
-          description: The normal balance of the ledger account.
         metadata:
           type: object
           description: Additional data represented as key-value pairs. Both the key
@@ -10300,6 +10315,7 @@ components:
           - bofa_end_to_end_id
           - bofa_transaction_id
           - check_number
+          - column_fx_quote_id
           - column_transfer_id
           - cross_river_payment_id
           - cross_river_transaction_id
@@ -10398,6 +10414,7 @@ components:
           - bofa_end_to_end_id
           - bofa_transaction_id
           - check_number
+          - column_fx_quote_id
           - column_transfer_id
           - cross_river_payment_id
           - cross_river_transaction_id
@@ -10595,6 +10612,7 @@ components:
           - book
           - eft
           - interac
+          - manual
           - paper_item
           - sepa
           - wire
