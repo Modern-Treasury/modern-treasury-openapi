@@ -4756,6 +4756,17 @@ paths:
       security:
       - basic_auth: []
       parameters:
+      - name: after_cursor
+        in: query
+        schema:
+          type: string
+          nullable: true
+        required: false
+      - name: per_page
+        in: query
+        required: false
+        schema:
+          type: integer
       - name: client_token
         in: query
         required: false
@@ -4908,6 +4919,17 @@ paths:
       security:
       - basic_auth: []
       parameters:
+      - name: after_cursor
+        in: query
+        schema:
+          type: string
+          nullable: true
+        required: false
+      - name: per_page
+        in: query
+        required: false
+        schema:
+          type: integer
       - name: client_token
         in: query
         required: false
