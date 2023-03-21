@@ -2567,7 +2567,7 @@ paths:
         required: false
         description: Use `gt` (>), `gte` (>=), `lt` (<), `lte` (<=), or `eq` (=) to
           filter by the lock_version of a ledger account. For example, for all entries
-          created at or before before lock_version 1000 of a ledger account, use ledger_account_lock_version%5Blte%5D=1000
+          created at or before before lock_version 1000 of a ledger account, use `ledger_account_lock_version%5Blte%5D=1000`.
       - name: ledger_account_category_id
         in: query
         required: false
@@ -2605,6 +2605,27 @@ paths:
         required: false
         description: Get all ledger entries that match the status specified. One of
           `pending`, `posted`, or `archived`.
+      - name: order_by
+        in: query
+        schema:
+          type: object
+          properties:
+            created_at:
+              type: string
+              enum:
+              - asc
+              - desc
+            effective_at:
+              type: string
+              enum:
+              - asc
+              - desc
+          additionalProperties: false
+        style: deepObject
+        required: false
+        description: Order by `created_at` or `effective_at` in `asc` or `desc` order.
+          For example, to order by `effective_at asc`, use `order_by%5Beffective_at%5D=asc`.
+          Ordering by only one field at a time is supported.
       responses:
         '200':
           description: successful
@@ -2628,7 +2649,7 @@ paths:
                 items:
                   "$ref": "#/components/schemas/ledger_entry"
         '422':
-          description: unsucessful
+          description: unsuccessful
           content:
             application/json:
               schema:
@@ -2760,8 +2781,8 @@ paths:
           additionalProperties: false
         style: deepObject
         required: false
-        description: Order by `created_at` and/or `effective_at` in `asc` or `desc`
-          order. For example, to order by `effective_at asc`, use `order_by%5Beffective_at%5D=asc`.
+        description: Order by `created_at` or `effective_at` in `asc` or `desc` order.
+          For example, to order by `effective_at asc`, use `order_by%5Beffective_at%5D=asc`.
           Ordering by only one field at a time is supported.
       - name: status
         in: query
