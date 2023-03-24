@@ -4589,6 +4589,7 @@ paths:
           - au_bsb
           - br_codigo
           - ca_cpa
+          - chips
           - cnaps
           - gb_sort_code
           - in_ifsc
@@ -5917,14 +5918,15 @@ components:
                       type: string
                       enum:
                       - aba
-                      - swift
                       - au_bsb
+                      - br_codigo
                       - ca_cpa
+                      - chips
                       - cnaps
                       - gb_sort_code
                       - in_ifsc
                       - my_branch_code
-                      - br_codigo
+                      - swift
                     payment_type:
                       type: string
                       enum:
@@ -6965,14 +6967,15 @@ components:
                 type: string
                 enum:
                 - aba
-                - swift
                 - au_bsb
+                - br_codigo
                 - ca_cpa
+                - chips
                 - cnaps
                 - gb_sort_code
                 - in_ifsc
                 - my_branch_code
-                - br_codigo
+                - swift
               payment_type:
                 type: string
                 enum:
@@ -9542,14 +9545,15 @@ components:
                     type: string
                     enum:
                     - aba
-                    - swift
                     - au_bsb
+                    - br_codigo
                     - ca_cpa
+                    - chips
                     - cnaps
                     - gb_sort_code
                     - in_ifsc
                     - my_branch_code
-                    - br_codigo
+                    - swift
                   payment_type:
                     type: string
                     enum:
@@ -9891,14 +9895,15 @@ components:
                     type: string
                     enum:
                     - aba
-                    - swift
                     - au_bsb
+                    - br_codigo
                     - ca_cpa
+                    - chips
                     - cnaps
                     - gb_sort_code
                     - in_ifsc
                     - my_branch_code
-                    - br_codigo
+                    - swift
                   payment_type:
                     type: string
                     enum:
@@ -10268,14 +10273,15 @@ components:
                     type: string
                     enum:
                     - aba
-                    - swift
                     - au_bsb
+                    - br_codigo
                     - ca_cpa
+                    - chips
                     - cnaps
                     - gb_sort_code
                     - in_ifsc
                     - my_branch_code
-                    - br_codigo
+                    - swift
                   payment_type:
                     type: string
                     enum:
@@ -10930,6 +10936,7 @@ components:
           - au_bsb
           - br_codigo
           - ca_cpa
+          - chips
           - cnaps
           - gb_sort_code
           - in_ifsc
@@ -10992,6 +10999,7 @@ components:
           - au_bsb
           - br_codigo
           - ca_cpa
+          - chips
           - cnaps
           - gb_sort_code
           - in_ifsc
