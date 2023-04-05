@@ -2719,6 +2719,14 @@ paths:
         schema:
           type: integer
         required: false
+      - name: id
+        in: query
+        required: false
+        style: deepObject
+        schema:
+          type: object
+          additionalProperties:
+            type: string
       - "$ref": "#/components/parameters/metadata_query"
       - name: ledger_id
         in: query
@@ -5525,6 +5533,7 @@ components:
           - iso20022
           - jpmc
           - mx
+          - rspec_vendor
           - signet
           - silvergate
           - swift
@@ -11228,6 +11237,7 @@ components:
           - iso20022
           - jpmc
           - mx
+          - rspec_vendor
           - signet
           - silvergate
           - swift
