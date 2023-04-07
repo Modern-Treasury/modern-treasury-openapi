@@ -1719,6 +1719,253 @@ paths:
           application/json:
             schema:
               "$ref": "#/components/schemas/internal_account_update_request"
+  "/api/invoices/{invoice_id}/invoice_line_items":
+    parameters:
+    - name: invoice_id
+      in: path
+      description: invoice_id
+      required: true
+      schema:
+        type: string
+    get:
+      summary: list invoice_line_items
+      tags:
+      - InvoiceLineItem
+      operationId: listInvoiceLineItems
+      security:
+      - basic_auth: []
+      parameters:
+      - name: after_cursor
+        in: query
+        schema:
+          type: string
+          nullable: true
+        required: false
+      - name: per_page
+        in: query
+        required: false
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: successful
+          headers:
+            X-After-Cursor:
+              schema:
+                type: string
+                nullable: true
+              description: The cursor for the next page. Including this in a call
+                as `after_cursor` will return the next page.
+            X-Per-Page:
+              schema:
+                type: integer
+                nullable: true
+              description: The current `per_page`.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  "$ref": "#/components/schemas/invoice_line_item"
+    post:
+      summary: create invoice_line_item
+      tags:
+      - InvoiceLineItem
+      operationId: createInvoiceLineItem
+      security:
+      - basic_auth: []
+      parameters:
+      - name: Idempotency-Key
+        in: header
+        required: false
+        description: This key should be something unique, preferably something like
+          an UUID.
+        schema:
+          type: string
+      responses:
+        '200':
+          description: successful
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/invoice_line_item"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              "$ref": "#/components/schemas/invoice_line_item_create_request"
+  "/api/invoices/{invoice_id}/invoice_line_items/{id}":
+    parameters:
+    - name: invoice_id
+      in: path
+      description: invoice_id
+      required: true
+      schema:
+        type: string
+    - name: id
+      in: path
+      description: id
+      required: true
+      schema:
+        type: string
+    get:
+      summary: get invoice_line_item
+      tags:
+      - InvoiceLineItem
+      operationId: getInvoiceLineItem
+      security:
+      - basic_auth: []
+      responses:
+        '200':
+          description: successful
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/invoice_line_item"
+    patch:
+      summary: update invoice_line_item
+      tags:
+      - InvoiceLineItem
+      operationId: updateInvoiceLineItem
+      security:
+      - basic_auth: []
+      parameters: []
+      responses:
+        '200':
+          description: successful
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/invoice_line_item"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              "$ref": "#/components/schemas/invoice_line_item_update_request"
+    delete:
+      summary: delete invoice_line_item
+      tags:
+      - InvoiceLineItem
+      operationId: deleteInvoiceLineItem
+      security:
+      - basic_auth: []
+      responses:
+        '200':
+          description: successful
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/invoice_line_item"
+  "/api/invoices":
+    get:
+      summary: list invoices
+      tags:
+      - Invoice
+      operationId: listInvoices
+      security:
+      - basic_auth: []
+      parameters:
+      - name: after_cursor
+        in: query
+        schema:
+          type: string
+          nullable: true
+        required: false
+      - name: per_page
+        in: query
+        required: false
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: successful
+          headers:
+            X-After-Cursor:
+              schema:
+                type: string
+                nullable: true
+              description: The cursor for the next page. Including this in a call
+                as `after_cursor` will return the next page.
+            X-Per-Page:
+              schema:
+                type: integer
+                nullable: true
+              description: The current `per_page`.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  "$ref": "#/components/schemas/invoice"
+    post:
+      summary: create invoice
+      tags:
+      - Invoice
+      operationId: createInvoice
+      security:
+      - basic_auth: []
+      parameters:
+      - name: Idempotency-Key
+        in: header
+        required: false
+        description: This key should be something unique, preferably something like
+          an UUID.
+        schema:
+          type: string
+      responses:
+        '200':
+          description: successful
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/invoice"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              "$ref": "#/components/schemas/invoice_create_request"
+  "/api/invoices/{id}":
+    parameters:
+    - name: id
+      in: path
+      description: id
+      required: true
+      schema:
+        type: string
+    get:
+      summary: get invoice
+      tags:
+      - Invoice
+      operationId: getInvoice
+      security:
+      - basic_auth: []
+      responses:
+        '200':
+          description: successful
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/invoice"
+    patch:
+      summary: update invoice
+      tags:
+      - Invoice
+      operationId: updateInvoice
+      security:
+      - basic_auth: []
+      parameters: []
+      responses:
+        '200':
+          description: successful
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/invoice"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              "$ref": "#/components/schemas/invoice_update_request"
   "/api/ledger_account_categories":
     get:
       summary: list ledger_account_categories
@@ -7440,6 +7687,594 @@ components:
         counterparty_id:
           type: string
           description: The Counterparty associated to this account.
+    invoice:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        object:
+          type: string
+        live_mode:
+          type: boolean
+          description: This field will be true if this object exists in the live environment
+            or false if it exists in the test environment.
+        created_at:
+          type: string
+          format: date-time
+        updated_at:
+          type: string
+          format: date-time
+        contact_details:
+          type: array
+          items:
+            "$ref": "#/components/schemas/contact_detail"
+          description: The invoicer's contact details displayed at the top of the
+            invoice.
+        counterparty_id:
+          type: string
+          description: The ID of the counterparty receiving the invoice.
+        counterparty_billing_address:
+          type: object
+          nullable: true
+          description: The counterparty's billing address.
+          properties:
+            line1:
+              type: string
+            line2:
+              type: string
+            locality:
+              type: string
+              description: Locality or City.
+            region:
+              type: string
+              description: Region or State.
+            postal_code:
+              type: string
+              description: The postal code of the address.
+            country:
+              type: string
+              description: Country code conforms to [ISO 3166-1 alpha-2]
+          required:
+          - line1
+          - locality
+          - region
+          - postal_code
+          - country
+        counterparty_shipping_address:
+          type: object
+          nullable: true
+          description: The counterparty's shipping address where physical goods should
+            be delivered.
+          properties:
+            line1:
+              type: string
+            line2:
+              type: string
+            locality:
+              type: string
+              description: Locality or City.
+            region:
+              type: string
+              description: Region or State.
+            postal_code:
+              type: string
+              description: The postal code of the address.
+            country:
+              type: string
+              description: Country code conforms to [ISO 3166-1 alpha-2]
+          required:
+          - line1
+          - locality
+          - region
+          - postal_code
+          - country
+        currency:
+          "$ref": "#/components/schemas/currency"
+          description: Currency that the invoice is denominated in. Defaults to `USD`
+            if not provided.
+        description:
+          type: string
+          description: A free-form description of the invoice.
+        due_date:
+          type: string
+          format: date-time
+          description: A future date by when the invoice needs to be paid.
+        invoicer_address:
+          type: object
+          nullable: true
+          description: The invoice issuer's business address.
+          properties:
+            line1:
+              type: string
+            line2:
+              type: string
+            locality:
+              type: string
+              description: Locality or City.
+            region:
+              type: string
+              description: Region or State.
+            postal_code:
+              type: string
+              description: The postal code of the address.
+            country:
+              type: string
+              description: Country code conforms to [ISO 3166-1 alpha-2]
+          required:
+          - line1
+          - locality
+          - region
+          - postal_code
+          - country
+        originating_account_id:
+          type: string
+          description: The ID of the internal account the invoice should be paid to.
+        hosted_url:
+          type: string
+          description: The URL of the hosted web UI where the invoice can be viewed.
+        number:
+          type: string
+          description: A unique record number assigned to each invoice that is issued.
+        payment_orders:
+          type: array
+          items:
+            "$ref": "#/components/schemas/payment_order"
+          description: The payment orders created for paying the invoice through the
+            invoice payment UI.
+        pdf_url:
+          type: string
+          nullable: true
+          description: The URL where the invoice PDF can be downloaded.
+        status:
+          type: string
+          description: One of `draft`, `unpaid`, `payment_pending`, `paid`, `void`,
+            or `closed`.
+        total_amount:
+          type: integer
+          description: Total amount due in specified currency's smallest unit, e.g.,
+            $10 USD         would be represented as 1000.
+      additionalProperties: false
+      minProperties: 20
+      required:
+      - id
+      - object
+      - live_mode
+      - created_at
+      - updated_at
+      - contact_details
+      - counterparty_id
+      - counterparty_billing_address
+      - counterparty_shipping_address
+      - currency
+      - description
+      - due_date
+      - invoicer_address
+      - originating_account_id
+      - hosted_url
+      - number
+      - payment_orders
+      - pdf_url
+      - status
+      - total_amount
+    invoice_create_request:
+      type: object
+      properties:
+        contact_details:
+          type: array
+          items:
+            "$ref": "#/components/schemas/contact_detail"
+          description: The invoicer's contact details displayed at the top of the
+            invoice.
+        counterparty_id:
+          type: string
+          description: The ID of the counterparty receiving the invoice.
+        counterparty_billing_address:
+          type: object
+          nullable: true
+          description: The counterparty's billing address.
+          properties:
+            line1:
+              type: string
+            line2:
+              type: string
+            locality:
+              type: string
+              description: Locality or City.
+            region:
+              type: string
+              description: Region or State.
+            postal_code:
+              type: string
+              description: The postal code of the address.
+            country:
+              type: string
+              description: Country code conforms to [ISO 3166-1 alpha-2]
+          required:
+          - line1
+          - locality
+          - region
+          - postal_code
+          - country
+        counterparty_shipping_address:
+          type: object
+          nullable: true
+          description: The counterparty's shipping address where physical goods should
+            be delivered.
+          properties:
+            line1:
+              type: string
+            line2:
+              type: string
+            locality:
+              type: string
+              description: Locality or City.
+            region:
+              type: string
+              description: Region or State.
+            postal_code:
+              type: string
+              description: The postal code of the address.
+            country:
+              type: string
+              description: Country code conforms to [ISO 3166-1 alpha-2]
+          required:
+          - line1
+          - locality
+          - region
+          - postal_code
+          - country
+        currency:
+          "$ref": "#/components/schemas/currency"
+          description: Currency that the invoice is denominated in. Defaults to `USD`
+            if not provided.
+        description:
+          type: string
+          description: A free-form description of the invoice.
+        due_date:
+          type: string
+          format: date-time
+          description: A future date by when the invoice needs to be paid.
+        invoicer_address:
+          type: object
+          nullable: true
+          description: The invoice issuer's business address.
+          properties:
+            line1:
+              type: string
+            line2:
+              type: string
+            locality:
+              type: string
+              description: Locality or City.
+            region:
+              type: string
+              description: Region or State.
+            postal_code:
+              type: string
+              description: The postal code of the address.
+            country:
+              type: string
+              description: Country code conforms to [ISO 3166-1 alpha-2]
+          required:
+          - line1
+          - locality
+          - region
+          - postal_code
+          - country
+        originating_account_id:
+          type: string
+          description: The ID of the internal account the invoice should be paid to.
+      required:
+      - "\"counterparty_id"
+      - due_date
+      - originating_account_id"
+    invoice_update_request:
+      type: object
+      properties:
+        contact_details:
+          type: array
+          items:
+            "$ref": "#/components/schemas/contact_detail"
+          description: The invoicer's contact details displayed at the top of the
+            invoice.
+        counterparty_id:
+          type: string
+          description: The ID of the counterparty receiving the invoice.
+        counterparty_billing_address:
+          type: object
+          nullable: true
+          description: The counterparty's billing address.
+          properties:
+            line1:
+              type: string
+            line2:
+              type: string
+            locality:
+              type: string
+              description: Locality or City.
+            region:
+              type: string
+              description: Region or State.
+            postal_code:
+              type: string
+              description: The postal code of the address.
+            country:
+              type: string
+              description: Country code conforms to [ISO 3166-1 alpha-2]
+          required:
+          - line1
+          - locality
+          - region
+          - postal_code
+          - country
+        counterparty_shipping_address:
+          type: object
+          nullable: true
+          description: The counterparty's shipping address where physical goods should
+            be delivered.
+          properties:
+            line1:
+              type: string
+            line2:
+              type: string
+            locality:
+              type: string
+              description: Locality or City.
+            region:
+              type: string
+              description: Region or State.
+            postal_code:
+              type: string
+              description: The postal code of the address.
+            country:
+              type: string
+              description: Country code conforms to [ISO 3166-1 alpha-2]
+          required:
+          - line1
+          - locality
+          - region
+          - postal_code
+          - country
+        currency:
+          "$ref": "#/components/schemas/currency"
+          description: Currency that the invoice is denominated in. Defaults to `USD`
+            if not provided.
+        description:
+          type: string
+          description: A free-form description of the invoice.
+        due_date:
+          type: string
+          format: date-time
+          description: A future date by when the invoice needs to be paid.
+        invoicer_address:
+          type: object
+          nullable: true
+          description: The invoice issuer's business address.
+          properties:
+            line1:
+              type: string
+            line2:
+              type: string
+            locality:
+              type: string
+              description: Locality or City.
+            region:
+              type: string
+              description: Region or State.
+            postal_code:
+              type: string
+              description: The postal code of the address.
+            country:
+              type: string
+              description: Country code conforms to [ISO 3166-1 alpha-2]
+          required:
+          - line1
+          - locality
+          - region
+          - postal_code
+          - country
+        originating_account_id:
+          type: string
+          description: The ID of the internal account the invoice should be paid to.
+        include_payment_ui:
+          type: boolean
+          description: When opening an invoice, whether to show the embedded payment
+            UI with the invoice. Default true.
+        status:
+          type: string
+          description: Invoice status must be updated in a `PATCH` request that does
+            not modify any other invoice attributes.             Valid state transitions
+            are `draft` to `unpaid`, `draft` or `unpaid` to `void` and `unpaid` to
+            `closed`.
+    invoice_line_item:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        object:
+          type: string
+        live_mode:
+          type: boolean
+          description: This field will be true if this object exists in the live environment
+            or false if it exists in the test environment.
+        created_at:
+          type: string
+          format: date-time
+        updated_at:
+          type: string
+          format: date-time
+        name:
+          type: string
+          description: The name of the line item, typically a product or SKU name.
+        description:
+          type: string
+          description: An optional free-form description of the line item.
+        quantity:
+          type: integer
+          description: The number of units of a product or service that this line
+            item is for.           Must be a whole number. Defaults to 1 if not provided.
+        unit_amount:
+          type: integer
+          description: The cost per unit of the product or service that this line
+            item is for,           specified in the invoice currency's smallest unit.
+        direction:
+          type: string
+          description: Either `debit` or `credit`. `debit` indicates that a client
+            owes the business money           and increases the invoice's `total_amount`
+            due. `credit` has the opposite intention and effect.
+        amount:
+          type: integer
+          description: The total amount for this line item specified in the invoice
+            currency's smallest unit.
+      additionalProperties: false
+      minProperties: 11
+      required:
+      - id
+      - object
+      - live_mode
+      - created_at
+      - updated_at
+      - name
+      - description
+      - quantity
+      - unit_amount
+      - direction
+      - amount
+    invoice_line_item_create_request:
+      type: object
+      properties:
+        name:
+          type: string
+          description: The name of the line item, typically a product or SKU name.
+        description:
+          type: string
+          description: An optional free-form description of the line item.
+        quantity:
+          type: integer
+          description: The number of units of a product or service that this line
+            item is for.           Must be a whole number. Defaults to 1 if not provided.
+        unit_amount:
+          type: integer
+          description: The cost per unit of the product or service that this line
+            item is for,           specified in the invoice currency's smallest unit.
+        direction:
+          type: string
+          description: Either `debit` or `credit`. `debit` indicates that a client
+            owes the business money           and increases the invoice's `total_amount`
+            due. `credit` has the opposite intention and effect.
+      required:
+      - "\"name"
+      - unit_amount"
+    invoice_line_item_update_request:
+      type: object
+      properties:
+        contact_details:
+          type: array
+          items:
+            "$ref": "#/components/schemas/contact_detail"
+          description: The invoicer's contact details displayed at the top of the
+            invoice.
+        counterparty_id:
+          type: string
+          description: The ID of the counterparty receiving the invoice.
+        counterparty_billing_address:
+          type: object
+          nullable: true
+          description: The counterparty's billing address.
+          properties:
+            line1:
+              type: string
+            line2:
+              type: string
+            locality:
+              type: string
+              description: Locality or City.
+            region:
+              type: string
+              description: Region or State.
+            postal_code:
+              type: string
+              description: The postal code of the address.
+            country:
+              type: string
+              description: Country code conforms to [ISO 3166-1 alpha-2]
+          required:
+          - line1
+          - locality
+          - region
+          - postal_code
+          - country
+        counterparty_shipping_address:
+          type: object
+          nullable: true
+          description: The counterparty's shipping address where physical goods should
+            be delivered.
+          properties:
+            line1:
+              type: string
+            line2:
+              type: string
+            locality:
+              type: string
+              description: Locality or City.
+            region:
+              type: string
+              description: Region or State.
+            postal_code:
+              type: string
+              description: The postal code of the address.
+            country:
+              type: string
+              description: Country code conforms to [ISO 3166-1 alpha-2]
+          required:
+          - line1
+          - locality
+          - region
+          - postal_code
+          - country
+        currency:
+          "$ref": "#/components/schemas/currency"
+          description: Currency that the invoice is denominated in. Defaults to `USD`
+            if not provided.
+        description:
+          type: string
+          description: A free-form description of the invoice.
+        due_date:
+          type: string
+          format: date-time
+          description: A future date by when the invoice needs to be paid.
+        invoicer_address:
+          type: object
+          nullable: true
+          description: The invoice issuer's business address.
+          properties:
+            line1:
+              type: string
+            line2:
+              type: string
+            locality:
+              type: string
+              description: Locality or City.
+            region:
+              type: string
+              description: Region or State.
+            postal_code:
+              type: string
+              description: The postal code of the address.
+            country:
+              type: string
+              description: Country code conforms to [ISO 3166-1 alpha-2]
+          required:
+          - line1
+          - locality
+          - region
+          - postal_code
+          - country
+        originating_account_id:
+          type: string
+          description: The ID of the internal account the invoice should be paid to.
     ledger:
       type: object
       properties:
