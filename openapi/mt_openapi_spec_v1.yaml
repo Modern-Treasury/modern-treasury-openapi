@@ -7972,9 +7972,9 @@ components:
           type: string
           description: The ID of the internal account the invoice should be paid to.
       required:
-      - "\"counterparty_id"
+      - counterparty_id
       - due_date
-      - originating_account_id"
+      - originating_account_id
     invoice_update_request:
       type: object
       properties:
@@ -8171,8 +8171,8 @@ components:
             owes the business money           and increases the invoice's `total_amount`
             due. `credit` has the opposite intention and effect.
       required:
-      - "\"name"
-      - unit_amount"
+      - name
+      - unit_amount
     invoice_line_item_update_request:
       type: object
       properties:
@@ -8424,6 +8424,21 @@ components:
           type: string
           format: uuid
           description: The id of the ledger that this account belongs to.
+        ledgerable_id:
+          type: string
+          format: uuid
+          nullable: true
+          description: If the ledger account links to another object in Modern Treasury,
+            the id will be populated here, otherwise null.
+        ledgerable_type:
+          type: string
+          enum:
+          - external_account
+          - internal_account
+          nullable: true
+          description: If the ledger account links to another object in Modern Treasury,
+            the type will be populated here, otherwise null. The value is one of internal_account
+            or external_account.
         metadata:
           type: object
           description: Additional data represented as key-value pairs. Both the key
@@ -8435,7 +8450,7 @@ components:
             foo: bar
             modern: treasury
       additionalProperties: false
-      minProperties: 13
+      minProperties: 15
       required:
       - id
       - object
@@ -8449,6 +8464,8 @@ components:
       - balances
       - lock_version
       - ledger_id
+      - ledgerable_id
+      - ledgerable_type
       - metadata
     ledger_account_create_request:
       type: object
