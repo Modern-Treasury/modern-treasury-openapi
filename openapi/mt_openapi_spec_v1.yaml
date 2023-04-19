@@ -3148,6 +3148,12 @@ paths:
             application/json:
               schema:
                 "$ref": "#/components/schemas/error_message"
+        '429':
+          description: too many requests
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/error_message"
       requestBody:
         content:
           application/json:
@@ -6653,6 +6659,7 @@ components:
               - invalid_key
               - header_invalid
               - expired_key
+              - too_many_requests
             message:
               type: string
             parameter:
