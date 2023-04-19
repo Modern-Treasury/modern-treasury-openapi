@@ -3148,6 +3148,12 @@ paths:
             application/json:
               schema:
                 "$ref": "#/components/schemas/error_message"
+        '429':
+          description: too many requests
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/error_message"
       requestBody:
         content:
           application/json:
@@ -6653,6 +6659,7 @@ components:
               - invalid_key
               - header_invalid
               - expired_key
+              - too_many_requests
             message:
               type: string
             parameter:
@@ -11573,6 +11580,11 @@ components:
           - originating
           - receiving
           description: The role of the return, can be `originating` or `receiving`.
+        current_return:
+          "$ref": "#/components/schemas/return"
+          nullable: true
+          description: If the return's status is `returned`, this will include the
+            return object's data that is returning this return.
         reference_numbers:
           type: array
           description: An array of Payment Reference objects.
@@ -11584,7 +11596,7 @@ components:
           nullable: true
           description: The ID of the ledger transaction linked to the return.
       additionalProperties: false
-      minProperties: 22
+      minProperties: 23
       required:
       - id
       - object
@@ -11606,6 +11618,7 @@ components:
       - currency
       - failure_reason
       - role
+      - current_return
       - reference_numbers
       - ledger_transaction_id
     return_create_request:
