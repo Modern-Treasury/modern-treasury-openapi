@@ -3148,6 +3148,12 @@ paths:
             application/json:
               schema:
                 "$ref": "#/components/schemas/error_message"
+        '429':
+          description: too many requests
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/error_message"
       requestBody:
         content:
           application/json:
@@ -6005,6 +6011,13 @@ components:
                 type: array
                 items:
                   "$ref": "#/components/schemas/contact_detail"
+              ledger_account_id:
+                type: string
+                format: uuid
+                nullable: true
+                description: If the external account links to a ledger account in
+                  Modern Treasury, the id of the ledger account will be populated
+                  here.
               verification_status:
                 type: string
                 enum:
@@ -6012,7 +6025,7 @@ components:
                 - unverified
                 - verified
             additionalProperties: false
-            minProperties: 16
+            minProperties: 17
           description: The accounts for this counterparty.
         email:
           type: string
@@ -6653,6 +6666,7 @@ components:
               - invalid_key
               - header_invalid
               - expired_key
+              - too_many_requests
             message:
               type: string
             parameter:
@@ -7145,6 +7159,12 @@ components:
           type: array
           items:
             "$ref": "#/components/schemas/contact_detail"
+        ledger_account_id:
+          type: string
+          format: uuid
+          nullable: true
+          description: If the external account links to a ledger account in Modern
+            Treasury, the id of the ledger account will be populated here.
         verification_status:
           type: string
           enum:
@@ -7152,7 +7172,7 @@ components:
           - unverified
           - verified
       additionalProperties: false
-      minProperties: 17
+      minProperties: 18
       required:
       - id
       - object
@@ -7170,6 +7190,7 @@ components:
       - metadata
       - party_name
       - contact_details
+      - ledger_account_id
       - verification_status
     external_account_complete_verification_request:
       type: object
@@ -10049,6 +10070,13 @@ components:
                 type: array
                 items:
                   "$ref": "#/components/schemas/contact_detail"
+              ledger_account_id:
+                type: string
+                format: uuid
+                nullable: true
+                description: If the external account links to a ledger account in
+                  Modern Treasury, the id of the ledger account will be populated
+                  here.
               verification_status:
                 type: string
                 enum:
@@ -10056,7 +10084,7 @@ components:
                 - unverified
                 - verified
             additionalProperties: false
-            minProperties: 16
+            minProperties: 17
           - "$ref": "#/components/schemas/internal_account"
           description: The receiving account. Can be an `external_account` or `internal_account`.
           nullable: true
@@ -11573,6 +11601,11 @@ components:
           - originating
           - receiving
           description: The role of the return, can be `originating` or `receiving`.
+        current_return:
+          "$ref": "#/components/schemas/return"
+          nullable: true
+          description: If the return's status is `returned`, this will include the
+            return object's data that is returning this return.
         reference_numbers:
           type: array
           description: An array of Payment Reference objects.
@@ -11584,7 +11617,7 @@ components:
           nullable: true
           description: The ID of the ledger transaction linked to the return.
       additionalProperties: false
-      minProperties: 22
+      minProperties: 23
       required:
       - id
       - object
@@ -11606,6 +11639,7 @@ components:
       - currency
       - failure_reason
       - role
+      - current_return
       - reference_numbers
       - ledger_transaction_id
     return_create_request:
