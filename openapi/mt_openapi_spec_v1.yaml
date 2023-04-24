@@ -5792,6 +5792,7 @@ components:
           - iso20022
           - jpmc
           - mx
+          - plaid
           - rspec_vendor
           - signet
           - silvergate
@@ -7855,8 +7856,13 @@ components:
           description: The URL where the invoice PDF can be downloaded.
         status:
           type: string
-          description: One of `draft`, `unpaid`, `payment_pending`, `paid`, `void`,
-            or `closed`.
+          enum:
+          - draft
+          - paid
+          - payment_pending
+          - unpaid
+          - voided
+          description: The status of the invoice.
         total_amount:
           type: integer
           description: Total amount due in specified currency's smallest unit, e.g.,
@@ -12129,6 +12135,7 @@ components:
           - iso20022
           - jpmc
           - mx
+          - plaid
           - rspec_vendor
           - signet
           - silvergate
