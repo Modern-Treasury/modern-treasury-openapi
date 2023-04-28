@@ -8450,7 +8450,7 @@ components:
           - debit
           description: The normal balance of the ledger account.
         balances:
-          "$ref": "#/components/schemas/ledger_balances"
+          "$ref": "#/components/schemas/ledger_balances_with_effective_at"
           description: The pending, posted, and available balances for this ledger
             account. The posted balance is the sum of all posted entries on the account.
             The pending balance is the sum of all pending and posted entries on the
@@ -8903,6 +8903,41 @@ components:
       additionalProperties: false
       minProperties: 3
       required:
+      - pending_balance
+      - posted_balance
+      - available_balance
+    ledger_balances_with_effective_at:
+      type: object
+      properties:
+        effective_at_lower_bound:
+          type: string
+          format: time
+          description: The inclusive lower bound of the effective_at timestamp for
+            the returned balances.
+          nullable: true
+        effective_at_upper_bound:
+          type: string
+          format: time
+          description: The exclusive upper bound of the effective_at timestamp for
+            the returned balances.
+          nullable: true
+        pending_balance:
+          "$ref": "#/components/schemas/ledger_balance"
+          description: The pending_balance is the sum of all pending and posted entries.
+        posted_balance:
+          "$ref": "#/components/schemas/ledger_balance"
+          description: The posted_balance is the sum of all posted entries.
+        available_balance:
+          "$ref": "#/components/schemas/ledger_balance"
+          description: The available_balance is the sum of all posted inbound entries
+            and pending outbound entries. For credit normal, available_amount = posted_credits
+            - pending_debits; for debit normal, available_amount = posted_debits -
+            pending_credits.
+      additionalProperties: false
+      minProperties: 5
+      required:
+      - effective_at_lower_bound
+      - effective_at_upper_bound
       - pending_balance
       - posted_balance
       - available_balance
