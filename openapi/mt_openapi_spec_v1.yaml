@@ -613,9 +613,10 @@ paths:
           - paper_items
           - payment_orders
           - transactions
+          - decisions
         description: The type of the associated object. Currently can be one of `payment_order`,
           `transaction`, `paper_item`, `expected_payment`, `counterparty`, `organization`,
-          `case`, `internal_account` or `external_account`.
+          `case`, `internal_account`, `decision`, or `external_account`.
         required: true
       - name: after_cursor
         in: query
@@ -678,9 +679,10 @@ paths:
           - paper_items
           - payment_orders
           - transactions
+          - decisions
         description: The type of the associated object. Currently can be one of `payment_order`,
           `transaction`, `paper_item`, `expected_payment`, `counterparty`, `organization`,
-          `case`, `internal_account` or `external_account`.
+          `case`, `internal_account`, `decision`, or `external_account`.
         required: true
       - name: Idempotency-Key
         in: header
@@ -735,9 +737,10 @@ paths:
         - paper_items
         - payment_orders
         - transactions
+        - decisions
       description: The type of the associated object. Currently can be one of `payment_order`,
         `transaction`, `paper_item`, `expected_payment`, `counterparty`, `organization`,
-        `case`, `internal_account` or `external_account`.
+        `case`, `internal_account`, `decision`, or `external_account`.
       required: true
     - name: id
       in: path
@@ -789,9 +792,10 @@ paths:
         - paper_items
         - payment_orders
         - transactions
+        - decisions
       description: The type of the associated object. Currently can be one of `payment_order`,
         `transaction`, `paper_item`, `expected_payment`, `counterparty`, `organization`,
-        `case`, `internal_account` or `external_account`.
+        `case`, `internal_account`, `decision`, or `external_account`.
       required: true
     - name: id
       in: path
@@ -6566,9 +6570,10 @@ components:
           - paper_item
           - payment_order
           - transaction
+          - decision
           description: The type of the associated object. Currently can be one of
             `payment_order`, `transaction`, `paper_item`, `expected_payment`, `counterparty`,
-            `organization`, `case`, `internal_account` or `external_account`.
+            `organization`, `case`, `internal_account`, `decision`, or `external_account`.
         document_details:
           type: array
           items:
@@ -7616,8 +7621,14 @@ components:
           format: uuid
           nullable: true
           description: The Counterparty associated to this account.
+        ledger_account_id:
+          type: string
+          format: uuid
+          nullable: true
+          description: If the internal account links to a ledger account in Modern
+            Treasury, the id of the ledger account will be populated here.
       additionalProperties: false
-      minProperties: 17
+      minProperties: 18
       required:
       - id
       - object
@@ -7636,6 +7647,7 @@ components:
       - metadata
       - parent_account_id
       - counterparty_id
+      - ledger_account_id
     internal_account_create_request:
       type: object
       properties:
