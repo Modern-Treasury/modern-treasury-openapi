@@ -7483,6 +7483,12 @@ components:
           format: uuid
           nullable: true
           description: The ID of the reconciled Transaction or `null`.
+        ledger_transaction_id:
+          type: string
+          format: uuid
+          nullable: true
+          description: The ID of the ledger transaction linked to the incoming payment
+            detail or `null`.
         type:
           type: string
           enum:
@@ -7542,7 +7548,7 @@ components:
           nullable: true
           description: The identifier of the vendor bank.
       additionalProperties: false
-      minProperties: 19
+      minProperties: 20
       required:
       - id
       - object
@@ -7554,6 +7560,7 @@ components:
       - virtual_account
       - transaction_line_item_id
       - transaction_id
+      - ledger_transaction_id
       - type
       - data
       - amount
