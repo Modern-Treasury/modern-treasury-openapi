@@ -6285,6 +6285,13 @@ components:
                   the counterparty's name.
               party_identifier:
                 type: string
+              ledger_account:
+                "$ref": "#/components/schemas/ledger_account_create_request"
+                description: Specifies a ledger account object that will be created
+                  with the external account. The resulting ledger account is linked
+                  to the external account for auto-ledgering Payment objects. See
+                  https://dash.readme.com/project/modern-treasury/v1.1/docs/linking-to-other-modern-treasury-objects
+                  for more details.
               plaid_processor_token:
                 type: string
                 description: If you've enabled the Modern Treasury + Plaid integration
@@ -7343,6 +7350,12 @@ components:
             counterparty's name.
         party_identifier:
           type: string
+        ledger_account:
+          "$ref": "#/components/schemas/ledger_account_create_request"
+          description: Specifies a ledger account object that will be created with
+            the external account. The resulting ledger account is linked to the external
+            account for auto-ledgering Payment objects. See https://dash.readme.com/project/modern-treasury/v1.1/docs/linking-to-other-modern-treasury-objects
+            for more details.
         plaid_processor_token:
           type: string
           description: If you've enabled the Modern Treasury + Plaid integration in
@@ -7483,6 +7496,12 @@ components:
           format: uuid
           nullable: true
           description: The ID of the reconciled Transaction or `null`.
+        ledger_transaction_id:
+          type: string
+          format: uuid
+          nullable: true
+          description: The ID of the ledger transaction linked to the incoming payment
+            detail or `null`.
         type:
           type: string
           enum:
@@ -7542,7 +7561,7 @@ components:
           nullable: true
           description: The identifier of the vendor bank.
       additionalProperties: false
-      minProperties: 19
+      minProperties: 20
       required:
       - id
       - object
@@ -7554,6 +7573,7 @@ components:
       - virtual_account
       - transaction_line_item_id
       - transaction_id
+      - ledger_transaction_id
       - type
       - data
       - amount
@@ -10579,6 +10599,12 @@ components:
                 the counterparty's name.
             party_identifier:
               type: string
+            ledger_account:
+              "$ref": "#/components/schemas/ledger_account_create_request"
+              description: Specifies a ledger account object that will be created
+                with the external account. The resulting ledger account is linked
+                to the external account for auto-ledgering Payment objects. See https://dash.readme.com/project/modern-treasury/v1.1/docs/linking-to-other-modern-treasury-objects
+                for more details.
             plaid_processor_token:
               type: string
               description: If you've enabled the Modern Treasury + Plaid integration
@@ -10929,6 +10955,12 @@ components:
                 the counterparty's name.
             party_identifier:
               type: string
+            ledger_account:
+              "$ref": "#/components/schemas/ledger_account_create_request"
+              description: Specifies a ledger account object that will be created
+                with the external account. The resulting ledger account is linked
+                to the external account for auto-ledgering Payment objects. See https://dash.readme.com/project/modern-treasury/v1.1/docs/linking-to-other-modern-treasury-objects
+                for more details.
             plaid_processor_token:
               type: string
               description: If you've enabled the Modern Treasury + Plaid integration
@@ -11307,6 +11339,12 @@ components:
                 the counterparty's name.
             party_identifier:
               type: string
+            ledger_account:
+              "$ref": "#/components/schemas/ledger_account_create_request"
+              description: Specifies a ledger account object that will be created
+                with the external account. The resulting ledger account is linked
+                to the external account for auto-ledgering Payment objects. See https://dash.readme.com/project/modern-treasury/v1.1/docs/linking-to-other-modern-treasury-objects
+                for more details.
             plaid_processor_token:
               type: string
               description: If you've enabled the Modern Treasury + Plaid integration
