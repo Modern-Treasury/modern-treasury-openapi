@@ -9373,6 +9373,11 @@ components:
             key: value
             foo: bar
             modern: treasury
+        effective_at:
+          type: string
+          format: time
+          description: The timestamp (ISO8601 format) at which the ledger transaction
+            happened for reporting purposes.
         effective_date:
           type: string
           format: date
@@ -9426,7 +9431,7 @@ components:
           type: integer
           description: Version number of the ledger transaction.
       additionalProperties: false
-      minProperties: 16
+      minProperties: 17
       required:
       - id
       - object
@@ -9436,6 +9441,7 @@ components:
       - description
       - status
       - metadata
+      - effective_at
       - effective_date
       - ledger_entries
       - posted_at
@@ -11420,6 +11426,7 @@ components:
           - jpmc_p3_id
           - jpmc_payment_batch_id
           - jpmc_payment_information_id
+          - jpmc_payment_returned_datetime
           - lob_check_id
           - other
           - partial_swift_mir
@@ -11519,6 +11526,7 @@ components:
           - jpmc_p3_id
           - jpmc_payment_batch_id
           - jpmc_payment_information_id
+          - jpmc_payment_returned_datetime
           - lob_check_id
           - other
           - partial_swift_mir
