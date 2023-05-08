@@ -2556,6 +2556,18 @@ paths:
           inclusive while the upper bound is exclusive of the provided timestamps.
           If no value is supplied the balances will be retrieved not including that
           bound.
+      - name: created_at
+        in: query
+        schema:
+          type: object
+          additionalProperties:
+            type: string
+            format: date-time
+        style: deepObject
+        required: false
+        description: Use `gt` (>), `gte` (>=), `lt` (<), `lte` (<=), or `eq` (=) to
+          filter by the created at timestamp. For example, for all times after Jan
+          1 2000 12:00 UTC, use created_at%5Bgt%5D=2000-01-01T12:00:00Z.
       - name: updated_at
         in: query
         schema:
@@ -2566,7 +2578,7 @@ paths:
         style: deepObject
         required: false
         description: Use `gt` (>), `gte` (>=), `lt` (<), `lte` (<=), or `eq` (=) to
-          filter by the posted at timestamp. For example, for all times after Jan
+          filter by the updated at timestamp. For example, for all times after Jan
           1 2000 12:00 UTC, use updated_at%5Bgt%5D=2000-01-01T12:00:00Z.
       - name: ledger_account_category_id
         in: query
@@ -8516,8 +8528,8 @@ components:
         ledgerable_type:
           type: string
           enum:
-          - ExternalAccount
-          - InternalAccount
+          - external_account
+          - internal_account
           nullable: true
           description: If the ledger account links to another object in Modern Treasury,
             the type will be populated here, otherwise null. The value is one of internal_account
@@ -8577,6 +8589,19 @@ components:
           type: integer
           description: The currency exponent of the ledger account.
           nullable: true
+        ledgerable_id:
+          type: string
+          format: uuid
+          description: If the ledger account links to another object in Modern Treasury,
+            the id will be populated here, otherwise null.
+        ledgerable_type:
+          type: string
+          enum:
+          - external_account
+          - internal_account
+          description: If the ledger account links to another object in Modern Treasury,
+            the type will be populated here, otherwise null. The value is one of internal_account
+            or external_account.
         metadata:
           type: object
           description: Additional data represented as key-value pairs. Both the key
@@ -8763,6 +8788,11 @@ components:
         updated_at:
           type: string
           format: date-time
+        ledger_id:
+          type: string
+          format: uuid
+          description: The id of the ledger that this ledger account payout belongs
+            to.
         description:
           type: string
           description: The description of the ledger account payout.
@@ -8796,7 +8826,8 @@ components:
         ledger_transaction_id:
           type: string
           format: uuid
-          description: The ledger transaction that this payout is associated with.
+          description: The id of the ledger transaction that this payout is associated
+            with.
           nullable: true
         amount:
           type: integer
@@ -8820,13 +8851,14 @@ components:
             foo: bar
             modern: treasury
       additionalProperties: false
-      minProperties: 15
+      minProperties: 16
       required:
       - id
       - object
       - live_mode
       - created_at
       - updated_at
+      - ledger_id
       - description
       - status
       - payout_ledger_account_id
@@ -9373,6 +9405,11 @@ components:
             key: value
             foo: bar
             modern: treasury
+        effective_at:
+          type: string
+          format: time
+          description: The timestamp (ISO8601 format) at which the ledger transaction
+            happened for reporting purposes.
         effective_date:
           type: string
           format: date
@@ -9426,7 +9463,7 @@ components:
           type: integer
           description: Version number of the ledger transaction.
       additionalProperties: false
-      minProperties: 16
+      minProperties: 17
       required:
       - id
       - object
@@ -9436,6 +9473,7 @@ components:
       - description
       - status
       - metadata
+      - effective_at
       - effective_date
       - ledger_entries
       - posted_at
@@ -11420,6 +11458,7 @@ components:
           - jpmc_p3_id
           - jpmc_payment_batch_id
           - jpmc_payment_information_id
+          - jpmc_payment_returned_datetime
           - lob_check_id
           - other
           - partial_swift_mir
@@ -11519,6 +11558,7 @@ components:
           - jpmc_p3_id
           - jpmc_payment_batch_id
           - jpmc_payment_information_id
+          - jpmc_payment_returned_datetime
           - lob_check_id
           - other
           - partial_swift_mir
