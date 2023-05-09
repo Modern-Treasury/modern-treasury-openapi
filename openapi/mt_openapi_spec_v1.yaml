@@ -6302,7 +6302,7 @@ components:
                 description: Specifies a ledger account object that will be created
                   with the external account. The resulting ledger account is linked
                   to the external account for auto-ledgering Payment objects. See
-                  https://dash.readme.com/project/modern-treasury/v1.1/docs/linking-to-other-modern-treasury-objects
+                  https://docs.moderntreasury.com/docs/linking-to-other-modern-treasury-objects
                   for more details.
               plaid_processor_token:
                 type: string
@@ -7366,7 +7366,7 @@ components:
           "$ref": "#/components/schemas/ledger_account_create_request"
           description: Specifies a ledger account object that will be created with
             the external account. The resulting ledger account is linked to the external
-            account for auto-ledgering Payment objects. See https://dash.readme.com/project/modern-treasury/v1.1/docs/linking-to-other-modern-treasury-objects
+            account for auto-ledgering Payment objects. See https://docs.moderntreasury.com/docs/linking-to-other-modern-treasury-objects
             for more details.
         plaid_processor_token:
           type: string
@@ -9949,6 +9949,9 @@ components:
         subtype:
           type: string
           enum:
+          - 0C
+          - 0N
+          - 0S
           - CCD
           - CIE
           - CTX
@@ -10354,6 +10357,9 @@ components:
         subtype:
           type: string
           enum:
+          - 0C
+          - 0N
+          - 0S
           - CCD
           - CIE
           - CTX
@@ -10641,7 +10647,7 @@ components:
               "$ref": "#/components/schemas/ledger_account_create_request"
               description: Specifies a ledger account object that will be created
                 with the external account. The resulting ledger account is linked
-                to the external account for auto-ledgering Payment objects. See https://dash.readme.com/project/modern-treasury/v1.1/docs/linking-to-other-modern-treasury-objects
+                to the external account for auto-ledgering Payment objects. See https://docs.moderntreasury.com/docs/linking-to-other-modern-treasury-objects
                 for more details.
             plaid_processor_token:
               type: string
@@ -10710,6 +10716,9 @@ components:
         subtype:
           type: string
           enum:
+          - 0C
+          - 0N
+          - 0S
           - CCD
           - CIE
           - CTX
@@ -10997,7 +11006,7 @@ components:
               "$ref": "#/components/schemas/ledger_account_create_request"
               description: Specifies a ledger account object that will be created
                 with the external account. The resulting ledger account is linked
-                to the external account for auto-ledgering Payment objects. See https://dash.readme.com/project/modern-treasury/v1.1/docs/linking-to-other-modern-treasury-objects
+                to the external account for auto-ledgering Payment objects. See https://docs.moderntreasury.com/docs/linking-to-other-modern-treasury-objects
                 for more details.
             plaid_processor_token:
               type: string
@@ -11059,6 +11068,9 @@ components:
         subtype:
           type: string
           enum:
+          - 0C
+          - 0N
+          - 0S
           - CCD
           - CIE
           - CTX
@@ -11381,7 +11393,7 @@ components:
               "$ref": "#/components/schemas/ledger_account_create_request"
               description: Specifies a ledger account object that will be created
                 with the external account. The resulting ledger account is linked
-                to the external account for auto-ledgering Payment objects. See https://dash.readme.com/project/modern-treasury/v1.1/docs/linking-to-other-modern-treasury-objects
+                to the external account for auto-ledgering Payment objects. See https://docs.moderntreasury.com/docs/linking-to-other-modern-treasury-objects
                 for more details.
             plaid_processor_token:
               type: string
