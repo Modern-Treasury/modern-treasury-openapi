@@ -9090,8 +9090,18 @@ components:
             minus the sum of the pending and posted outgoing amounts. Please see https://docs.moderntreasury.com/docs/transaction-status-and-balances
             for more details.
           nullable: true
+        metadata:
+          type: object
+          description: Additional data represented as key-value pairs. Both the key
+            and value must be strings.
+          additionalProperties:
+            type: string
+          example:
+            key: value
+            foo: bar
+            modern: treasury
       additionalProperties: false
-      minProperties: 15
+      minProperties: 16
       required:
       - id
       - object
@@ -9108,6 +9118,7 @@ components:
       - ledger_account_currency_exponent
       - ledger_transaction_id
       - resulting_ledger_account_balances
+      - metadata
     ledger_entry_create_request:
       type: object
       properties:
@@ -9228,6 +9239,16 @@ components:
           type: string
           description: The ledger transaction that this ledger entry is associated
             with.
+        metadata:
+          type: object
+          description: Additional data represented as key-value pairs. Both the key
+            and value must be strings.
+          additionalProperties:
+            type: string
+          example:
+            key: value
+            foo: bar
+            modern: treasury
         resulting_ledger_account_balances:
           "$ref": "#/components/schemas/ledger_balances"
           description: The pending, posted, and available balances for this ledger
@@ -9238,7 +9259,7 @@ components:
             for more details.
           nullable: true
       additionalProperties: false
-      minProperties: 13
+      minProperties: 14
       required:
       - id
       - object
@@ -9252,6 +9273,7 @@ components:
       - ledger_account_currency
       - ledger_account_currency_exponent
       - ledger_transaction_id
+      - metadata
       - resulting_ledger_account_balances
     ledger_transaction:
       type: object
