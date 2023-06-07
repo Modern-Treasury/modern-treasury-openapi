@@ -10077,8 +10077,8 @@ components:
           type: string
           description: An optional description.
           nullable: true
-        ledger_transaction_translator:
-          "$ref": "#/components/schemas/ledger_event_handler_ledger_transaction_translator"
+        ledger_transaction_template:
+          "$ref": "#/components/schemas/ledger_event_handler_ledger_transaction_template"
         conditions:
           "$ref": "#/components/schemas/ledger_event_handler_conditions"
           nullable: true
@@ -10104,7 +10104,7 @@ components:
       - discarded_at
       - name
       - description
-      - ledger_transaction_translator
+      - ledger_transaction_template
       - conditions
       - metadata
     ledger_event_handler_conditions:
@@ -10136,8 +10136,8 @@ components:
           type: string
           description: An optional description.
           nullable: true
-        ledger_transaction_translator:
-          "$ref": "#/components/schemas/ledger_event_handler_ledger_transaction_translator"
+        ledger_transaction_template:
+          "$ref": "#/components/schemas/ledger_event_handler_ledger_transaction_template"
         conditions:
           "$ref": "#/components/schemas/ledger_event_handler_conditions"
           nullable: true
@@ -10154,7 +10154,7 @@ components:
           nullable: true
       required:
       - name
-      - ledger_transaction_translator
+      - ledger_transaction_template
     ledger_event_handler_ledger_entries:
       type: object
       properties:
@@ -10174,7 +10174,7 @@ components:
       - amount
       - direction
       - ledger_account_id
-    ledger_event_handler_ledger_transaction_translator:
+    ledger_event_handler_ledger_transaction_template:
       type: object
       properties:
         description:
