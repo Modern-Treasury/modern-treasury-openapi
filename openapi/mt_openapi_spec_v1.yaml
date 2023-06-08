@@ -3627,6 +3627,27 @@ paths:
         required: false
         schema:
           type: string
+      - name: ledgerable_id
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: ledgerable_type
+        in: query
+        schema:
+          type: string
+          enum:
+          - counterparty
+          - expected_payment
+          - incoming_payment_detail
+          - internal_account
+          - line_item
+          - paper_item
+          - payment_order
+          - payment_order_attempt
+          - return
+          - reversal
+        required: false
       responses:
         '200':
           description: successful
@@ -3871,6 +3892,53 @@ paths:
             application/json:
               schema:
                 "$ref": "#/components/schemas/error_message"
+  "/api/ledgerable_events":
+    post:
+      summary: create ledgerable event
+      tags:
+      - LedgerableEvent
+      operationId: createLedgerableEvent
+      description: 'Translation missing: en.openapi.descriptions.ledger.operations.create_ledgerable_event'
+      security:
+      - basic_auth: []
+      parameters:
+      - name: Idempotency-Key
+        in: header
+        required: false
+        description: This key should be something unique, preferably something like
+          an UUID.
+        schema:
+          type: string
+      responses:
+        '201':
+          description: successful
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/ledgerable_event"
+        '403':
+          description: forbidden
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/error_message"
+        '404':
+          description: not found
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/error_message"
+        '422':
+          description: unsuccessful
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/error_message"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              "$ref": "#/components/schemas/ledgerable_event_create_request"
   "/api/ledgerable_events/{id}":
     parameters:
     - name: id
@@ -10077,8 +10145,8 @@ components:
           type: string
           description: An optional description.
           nullable: true
-        ledger_transaction_translator:
-          "$ref": "#/components/schemas/ledger_event_handler_ledger_transaction_translator"
+        ledger_transaction_template:
+          "$ref": "#/components/schemas/ledger_event_handler_ledger_transaction_template"
         conditions:
           "$ref": "#/components/schemas/ledger_event_handler_conditions"
           nullable: true
@@ -10104,7 +10172,7 @@ components:
       - discarded_at
       - name
       - description
-      - ledger_transaction_translator
+      - ledger_transaction_template
       - conditions
       - metadata
     ledger_event_handler_conditions:
@@ -10136,8 +10204,8 @@ components:
           type: string
           description: An optional description.
           nullable: true
-        ledger_transaction_translator:
-          "$ref": "#/components/schemas/ledger_event_handler_ledger_transaction_translator"
+        ledger_transaction_template:
+          "$ref": "#/components/schemas/ledger_event_handler_ledger_transaction_template"
         conditions:
           "$ref": "#/components/schemas/ledger_event_handler_conditions"
           nullable: true
@@ -10154,7 +10222,7 @@ components:
           nullable: true
       required:
       - name
-      - ledger_transaction_translator
+      - ledger_transaction_template
     ledger_event_handler_ledger_entries:
       type: object
       properties:
@@ -10174,7 +10242,7 @@ components:
       - amount
       - direction
       - ledger_account_id
-    ledger_event_handler_ledger_transaction_translator:
+    ledger_event_handler_ledger_transaction_template:
       type: object
       properties:
         description:
@@ -10682,6 +10750,60 @@ components:
       - custom_data
       - ledger_event_handler_id
       - metadata
+    ledgerable_event_create_request:
+      type: object
+      properties:
+        name:
+          type: string
+          description: Name of the ledgerable event.
+        description:
+          type: string
+          description: Description of the ledgerable event.
+          nullable: true
+        direction:
+          type: string
+          description: One of `credit`, `debit`.
+          nullable: true
+        originating_ledger_account_id:
+          type: string
+          format: uuid
+          description: The ledger account that initiates the money movement.
+          nullable: true
+        receiving_ledger_account_id:
+          type: string
+          format: uuid
+          description: The ledger account that receives the money movement.
+          nullable: true
+        amount:
+          type: integer
+          description: Value in specified currency's smallest unit. e.g. $10 would
+            be represented as 1000.
+        currency:
+          type: string
+          description: An ISO 4217 conformed currency or a custom currency.
+          nullable: true
+        currency_exponent:
+          type: integer
+          description: Must be included if currency is a custom currency. The currency_exponent
+            cannot exceed 30.
+          nullable: true
+        custom_data:
+          type: object
+          description: Additionally data to be used by the Ledger Event Handler.
+          nullable: true
+        metadata:
+          type: object
+          description: Additional data represented as key-value pairs. Both the key
+            and value must be strings.
+          additionalProperties:
+            type: string
+          example:
+            key: value
+            foo: bar
+            modern: treasury
+      required:
+      - name
+      - amount
     line_item:
       type: object
       properties:
