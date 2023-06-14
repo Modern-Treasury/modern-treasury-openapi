@@ -5468,6 +5468,13 @@ paths:
           description.
         schema:
           type: string
+      - name: vendor_id
+        in: query
+        required: false
+        description: Filters for transactions including the queried vendor id (an
+          identifier given to transactions by the bank).
+        schema:
+          type: string
       - "$ref": "#/components/parameters/metadata_query"
       responses:
         '200':
