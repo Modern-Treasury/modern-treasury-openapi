@@ -5468,6 +5468,13 @@ paths:
           description.
         schema:
           type: string
+      - name: vendor_id
+        in: query
+        required: false
+        description: Filters for transactions including the queried vendor id (an
+          identifier given to transactions by the bank).
+        schema:
+          type: string
       - "$ref": "#/components/parameters/metadata_query"
       responses:
         '200':
@@ -7556,6 +7563,10 @@ components:
           description: For `ach`, this field will be passed through on an addenda
             record. For `wire` payments the field will be passed through as the "Originator
             to Beneficiary Information", also known as OBI or Fedwire tag 6000.
+        reconciliation_groups:
+          type: object
+          nullable: true
+          description: The reconciliation groups you have for this payment.
         transaction_id:
           type: string
           format: uuid
@@ -7590,7 +7601,7 @@ components:
           nullable: true
           description: The ID of the ledger transaction linked to the expected payment.
       additionalProperties: false
-      minProperties: 23
+      minProperties: 24
       required:
       - id
       - object
@@ -7610,6 +7621,7 @@ components:
       - metadata
       - counterparty_id
       - remittance_information
+      - reconciliation_groups
       - transaction_id
       - transaction_line_item_id
       - status
@@ -7708,6 +7720,10 @@ components:
           description: For `ach`, this field will be passed through on an addenda
             record. For `wire` payments the field will be passed through as the "Originator
             to Beneficiary Information", also known as OBI or Fedwire tag 6000.
+        reconciliation_groups:
+          type: object
+          nullable: true
+          description: The reconciliation groups you have for this payment.
         line_items:
           type: array
           items:
@@ -7810,6 +7826,10 @@ components:
           description: For `ach`, this field will be passed through on an addenda
             record. For `wire` payments the field will be passed through as the "Originator
             to Beneficiary Information", also known as OBI or Fedwire tag 6000.
+        reconciliation_groups:
+          type: object
+          nullable: true
+          description: The reconciliation groups you have for this payment.
     external_account:
       type: object
       properties:
