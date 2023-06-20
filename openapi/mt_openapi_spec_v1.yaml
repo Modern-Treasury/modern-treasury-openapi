@@ -614,6 +614,7 @@ paths:
           - payment_orders
           - transactions
           - decisions
+          - connections
         description: The type of the associated object. Currently can be one of `payment_order`,
           `transaction`, `paper_item`, `expected_payment`, `counterparty`, `organization`,
           `case`, `internal_account`, `decision`, or `external_account`.
@@ -686,6 +687,7 @@ paths:
           - payment_orders
           - transactions
           - decisions
+          - connections
         description: The type of the associated object. Currently can be one of `payment_order`,
           `transaction`, `paper_item`, `expected_payment`, `counterparty`, `organization`,
           `case`, `internal_account`, `decision`, or `external_account`.
@@ -758,6 +760,7 @@ paths:
           - payment_orders
           - transactions
           - decisions
+          - connections
         description: The type of the associated object. Currently can be one of `payment_order`,
           `transaction`, `paper_item`, `expected_payment`, `counterparty`, `organization`,
           `case`, `internal_account`, `decision`, or `external_account`.
@@ -823,6 +826,7 @@ paths:
         - payment_orders
         - transactions
         - decisions
+        - connections
       description: The type of the associated object. Currently can be one of `payment_order`,
         `transaction`, `paper_item`, `expected_payment`, `counterparty`, `organization`,
         `case`, `internal_account`, `decision`, or `external_account`.
@@ -908,6 +912,7 @@ paths:
         - payment_orders
         - transactions
         - decisions
+        - connections
       description: The type of the associated object. Currently can be one of `payment_order`,
         `transaction`, `paper_item`, `expected_payment`, `counterparty`, `organization`,
         `case`, `internal_account`, `decision`, or `external_account`.
@@ -5355,6 +5360,26 @@ paths:
       required: true
       schema:
         type: string
+    - name: after_cursor
+      in: query
+      schema:
+        type: string
+        nullable: true
+      required: false
+    - name: type
+      in: query
+      schema:
+        type: string
+        enum:
+        - originating
+        - receiving
+        nullable: true
+      required: false
+    - name: per_page
+      in: query
+      schema:
+        type: integer
+      required: false
     get:
       summary: list transaction_line_items
       tags:
@@ -5466,6 +5491,13 @@ paths:
         required: false
         description: Filters for transactions including the queried string in the
           description.
+        schema:
+          type: string
+      - name: vendor_id
+        in: query
+        required: false
+        description: Filters for transactions including the queried vendor id (an
+          identifier given to transactions by the bank).
         schema:
           type: string
       - "$ref": "#/components/parameters/metadata_query"
@@ -7276,6 +7308,10 @@ components:
           type: string
           description: A category given to the document, can be `null`.
           nullable: true
+        source:
+          type: string
+          description: The source of the document. Can be `vendor`, `customer`, or
+            `modern_treasury`.
         documentable_id:
           type: string
           format: uuid
@@ -7293,6 +7329,7 @@ components:
           - payment_order
           - transaction
           - decision
+          - connection
           description: The type of the associated object. Currently can be one of
             `payment_order`, `transaction`, `paper_item`, `expected_payment`, `counterparty`,
             `organization`, `case`, `internal_account`, `decision`, or `external_account`.
@@ -7315,7 +7352,7 @@ components:
           additionalProperties: false
           minProperties: 3
       additionalProperties: false
-      minProperties: 11
+      minProperties: 12
       required:
       - id
       - object
@@ -7324,6 +7361,7 @@ components:
       - updated_at
       - discarded_at
       - document_type
+      - source
       - documentable_id
       - documentable_type
       - document_details
@@ -7556,6 +7594,14 @@ components:
           description: For `ach`, this field will be passed through on an addenda
             record. For `wire` payments the field will be passed through as the "Originator
             to Beneficiary Information", also known as OBI or Fedwire tag 6000.
+        reconciliation_groups:
+          type: object
+          nullable: true
+          description: The reconciliation groups you have for this payment.
+        reconciliation_filters:
+          type: object
+          nullable: true
+          description: The reconciliation filters you have for this payment.
         transaction_id:
           type: string
           format: uuid
@@ -7590,7 +7636,7 @@ components:
           nullable: true
           description: The ID of the ledger transaction linked to the expected payment.
       additionalProperties: false
-      minProperties: 23
+      minProperties: 25
       required:
       - id
       - object
@@ -7610,6 +7656,8 @@ components:
       - metadata
       - counterparty_id
       - remittance_information
+      - reconciliation_groups
+      - reconciliation_filters
       - transaction_id
       - transaction_line_item_id
       - status
@@ -7708,6 +7756,14 @@ components:
           description: For `ach`, this field will be passed through on an addenda
             record. For `wire` payments the field will be passed through as the "Originator
             to Beneficiary Information", also known as OBI or Fedwire tag 6000.
+        reconciliation_groups:
+          type: object
+          nullable: true
+          description: The reconciliation groups you have for this payment.
+        reconciliation_filters:
+          type: object
+          nullable: true
+          description: The reconciliation filters you have for this payment.
         line_items:
           type: array
           items:
@@ -7810,6 +7866,14 @@ components:
           description: For `ach`, this field will be passed through on an addenda
             record. For `wire` payments the field will be passed through as the "Originator
             to Beneficiary Information", also known as OBI or Fedwire tag 6000.
+        reconciliation_groups:
+          type: object
+          nullable: true
+          description: The reconciliation groups you have for this payment.
+        reconciliation_filters:
+          type: object
+          nullable: true
+          description: The reconciliation filters you have for this payment.
     external_account:
       type: object
       properties:
