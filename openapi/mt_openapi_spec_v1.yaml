@@ -658,7 +658,7 @@ paths:
               schema:
                 "$ref": "#/components/schemas/error_message"
     post:
-      summary: create document - nested path (legacy)
+      summary: create document
       tags:
       - Document
       description: Create a document.
@@ -666,38 +666,6 @@ paths:
       security:
       - basic_auth: []
       parameters:
-      - name: documentable_id
-        in: path
-        schema:
-          type: string
-        description: The unique identifier for the associated object.
-        required: true
-      - name: documentable_type
-        in: path
-        schema:
-          type: string
-          enum:
-          - cases
-          - counterparties
-          - expected_payments
-          - external_accounts
-          - internal_accounts
-          - organizations
-          - paper_items
-          - payment_orders
-          - transactions
-          - decisions
-          - connections
-        description: The type of the associated object. Currently can be one of `payment_order`,
-          `transaction`, `paper_item`, `expected_payment`, `counterparty`, `organization`,
-          `case`, `internal_account`, `decision`, or `external_account`.
-        required: true
-      - name: document_type
-        in: query
-        schema:
-          type: string
-        required: false
-        description: A category given to the document, can be `null`.
       - name: Idempotency-Key
         in: header
         required: false
@@ -803,6 +771,72 @@ paths:
                 type: array
                 items:
                   "$ref": "#/components/schemas/document"
+    post:
+      summary: create document - nested path (legacy)
+      tags:
+      - Document
+      description: Create a document.
+      operationId: createDocument
+      security:
+      - basic_auth: []
+      parameters:
+      - name: documentable_id
+        in: path
+        schema:
+          type: string
+        description: The unique identifier for the associated object.
+        required: true
+      - name: documentable_type
+        in: path
+        schema:
+          type: string
+          enum:
+          - cases
+          - counterparties
+          - expected_payments
+          - external_accounts
+          - internal_accounts
+          - organizations
+          - paper_items
+          - payment_orders
+          - transactions
+          - decisions
+          - connections
+        description: The type of the associated object. Currently can be one of `payment_order`,
+          `transaction`, `paper_item`, `expected_payment`, `counterparty`, `organization`,
+          `case`, `internal_account`, `decision`, or `external_account`.
+        required: true
+      - name: Idempotency-Key
+        in: header
+        required: false
+        description: This key should be something unique, preferably something like
+          an UUID.
+        schema:
+          type: string
+      responses:
+        '201':
+          description: successful
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/document"
+        '403':
+          description: forbidden
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/error_message"
+        '404':
+          description: not found
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/error_message"
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              "$ref": "#/components/schemas/legacy_document_create_request"
   "/api/{documentable_type}/{documentable_id}/documents/{id}":
     parameters:
     - name: documentable_id
@@ -7369,6 +7403,36 @@ components:
     document_create_request:
       type: object
       properties:
+        documentable_id:
+          type: string
+          description: The unique identifier for the associated object.
+        documentable_type:
+          type: string
+          enum:
+          - cases
+          - counterparties
+          - expected_payments
+          - external_accounts
+          - internal_accounts
+          - organizations
+          - paper_items
+          - payment_orders
+          - transactions
+          - decisions
+          - connections
+        document_type:
+          type: string
+          description: A category given to the document, can be `null`.
+        file:
+          type: string
+          format: binary
+      required:
+      - file
+      - documentable_id
+      - documentable_type
+    legacy_document_create_request:
+      type: object
+      properties:
         document_type:
           type: string
           description: A category given to the document, can be `null`.
@@ -8540,9 +8604,16 @@ components:
           example: USD
           description: Either "USD" or "CAD". Internal accounts created at Increase
             only supports "USD".
-        entity_id:
-          type: string
-          description: The identifier of the entity at Increase which owns the account.
+        vendor_attributes:
+          type: object
+          additionalProperties:
+            type: string
+          example:
+            key: value
+            foo: bar
+            modern: treasury
+          description: A hash of vendor specific attributes that will be used when
+            creating the account at the vendor specified by the given connection.
         parent_account_id:
           type: string
           description: The parent internal account of this new account.
