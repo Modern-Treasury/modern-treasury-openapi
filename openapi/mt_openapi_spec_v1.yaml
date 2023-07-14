@@ -14008,12 +14008,12 @@ components:
         account_details:
           type: array
           items:
-            "$ref": "#/components/schemas/account_detail"
+            "$ref": "#/components/schemas/account_detail_create_request"
           description: An array of account detail objects.
         routing_details:
           type: array
           items:
-            "$ref": "#/components/schemas/routing_detail"
+            "$ref": "#/components/schemas/routing_detail_create_request"
           description: An array of routing detail objects.
         debit_ledger_account_id:
           type: string
