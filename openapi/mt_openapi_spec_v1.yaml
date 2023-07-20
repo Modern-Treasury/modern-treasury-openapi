@@ -8774,6 +8774,35 @@ components:
         originating_account_id:
           type: string
           description: The ID of the internal account the invoice should be paid to.
+        receiving_account_id:
+          type: string
+          nullable: true
+          format: uuid
+          description: The receiving account ID. Can be an `internal_account`.
+        payment_effective_date:
+          type: string
+          nullable: true
+          format: date
+          description: 'Date transactions are to be posted to the participants'' account.
+            Defaults to the current business day or the next business day if the current
+            day is a bank holiday or weekend. Format: yyyy-mm-dd.'
+        payment_type:
+          type: string
+          nullable: true
+          enum:
+          - eft
+          - ach
+          description: One of `ach` or `eft`
+        payment_method:
+          type: string
+          nullable: true
+          enum:
+          - ui
+          - manual
+          - automatic
+          description: When opening an invoice, whether to show the embedded payment
+            UI , automatically debit the recipient, or rely on manual payment from
+            the recipient.
         hosted_url:
           type: string
           description: The URL of the hosted web UI where the invoice can be viewed.
@@ -8802,24 +8831,10 @@ components:
         total_amount:
           type: integer
           description: Total amount due in specified currency's smallest unit, e.g.,
-            $10 USD         would be represented as 1000.
+            $10 USD would be represented as 1000.
       additionalProperties: false
-      minProperties: 20
+      minProperties: 24
       required:
-      - id
-      - object
-      - live_mode
-      - created_at
-      - updated_at
-      - contact_details
-      - counterparty_id
-      - counterparty_billing_address
-      - counterparty_shipping_address
-      - currency
-      - description
-      - due_date
-      - invoicer_address
-      - originating_account_id
       - hosted_url
       - number
       - payment_orders
@@ -8934,6 +8949,51 @@ components:
         originating_account_id:
           type: string
           description: The ID of the internal account the invoice should be paid to.
+        receiving_account_id:
+          type: string
+          format: uuid
+          description: The receiving account ID. Can be an `external_account`.
+        payment_effective_date:
+          type: string
+          format: date
+          description: 'Date transactions are to be posted to the participants'' account.
+            Defaults to the current business day or the next business day if the current
+            day is a bank holiday or weekend. Format: yyyy-mm-dd.'
+        payment_type:
+          type: string
+          enum:
+          - ach
+          - au_becs
+          - bacs
+          - book
+          - card
+          - check
+          - eft
+          - cross_border
+          - interac
+          - masav
+          - neft
+          - provxchange
+          - rtp
+          - sen
+          - sepa
+          - signet
+          - wire
+          description: One of `ach`, `eft`, `wire`, `check`, `sen`, `book`, `rtp`,
+            `sepa`, `bacs`, `au_becs`, `interac`, `signet`, `provexchange`.
+        payment_method:
+          type: string
+          enum:
+          - ui
+          - manual
+          - automatic
+          description: The method by which the invoice can be paid. `ui` will show
+            the embedded payment collection flow. `automatic` will automatically initiate
+            payment based upon the account details of the receiving_account id.\nIf
+            the invoice amount is positive, the automatically initiated payment order's
+            direction will be debit. If the invoice amount is negative, the automatically
+            initiated payment order's direction will be credit. One of `manual`, `ui`,
+            or `automatic`.
       required:
       - counterparty_id
       - due_date
@@ -9046,10 +9106,51 @@ components:
         originating_account_id:
           type: string
           description: The ID of the internal account the invoice should be paid to.
-        include_payment_ui:
-          type: boolean
-          description: When opening an invoice, whether to show the embedded payment
-            UI with the invoice. Default true.
+        receiving_account_id:
+          type: string
+          format: uuid
+          description: The receiving account ID. Can be an `external_account`.
+        payment_effective_date:
+          type: string
+          format: date
+          description: 'Date transactions are to be posted to the participants'' account.
+            Defaults to the current business day or the next business day if the current
+            day is a bank holiday or weekend. Format: yyyy-mm-dd.'
+        payment_type:
+          type: string
+          enum:
+          - ach
+          - au_becs
+          - bacs
+          - book
+          - card
+          - check
+          - eft
+          - cross_border
+          - interac
+          - masav
+          - neft
+          - provxchange
+          - rtp
+          - sen
+          - sepa
+          - signet
+          - wire
+          description: One of `ach`, `eft`, `wire`, `check`, `sen`, `book`, `rtp`,
+            `sepa`, `bacs`, `au_becs`, `interac`, `signet`, `provexchange`.
+        payment_method:
+          type: string
+          enum:
+          - ui
+          - manual
+          - automatic
+          description: The method by which the invoice can be paid. `ui` will show
+            the embedded payment collection flow. `automatic` will automatically initiate
+            payment based upon the account details of the receiving_account id.\nIf
+            the invoice amount is positive, the automatically initiated payment order's
+            direction will be debit. If the invoice amount is negative, the automatically
+            initiated payment order's direction will be credit. One of `manual`, `ui`,
+            or `automatic`.
         status:
           type: string
           description: Invoice status must be updated in a `PATCH` request that does
@@ -9243,6 +9344,51 @@ components:
         originating_account_id:
           type: string
           description: The ID of the internal account the invoice should be paid to.
+        receiving_account_id:
+          type: string
+          format: uuid
+          description: The receiving account ID. Can be an `external_account`.
+        payment_effective_date:
+          type: string
+          format: date
+          description: 'Date transactions are to be posted to the participants'' account.
+            Defaults to the current business day or the next business day if the current
+            day is a bank holiday or weekend. Format: yyyy-mm-dd.'
+        payment_type:
+          type: string
+          enum:
+          - ach
+          - au_becs
+          - bacs
+          - book
+          - card
+          - check
+          - eft
+          - cross_border
+          - interac
+          - masav
+          - neft
+          - provxchange
+          - rtp
+          - sen
+          - sepa
+          - signet
+          - wire
+          description: One of `ach`, `eft`, `wire`, `check`, `sen`, `book`, `rtp`,
+            `sepa`, `bacs`, `au_becs`, `interac`, `signet`, `provexchange`.
+        payment_method:
+          type: string
+          enum:
+          - ui
+          - manual
+          - automatic
+          description: The method by which the invoice can be paid. `ui` will show
+            the embedded payment collection flow. `automatic` will automatically initiate
+            payment based upon the account details of the receiving_account id.\nIf
+            the invoice amount is positive, the automatically initiated payment order's
+            direction will be debit. If the invoice amount is negative, the automatically
+            initiated payment order's direction will be credit. One of `manual`, `ui`,
+            or `automatic`.
     ledger:
       type: object
       properties:
