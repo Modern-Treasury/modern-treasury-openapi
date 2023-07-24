@@ -8835,6 +8835,24 @@ components:
       additionalProperties: false
       minProperties: 24
       required:
+      - id
+      - object
+      - live_mode
+      - created_at
+      - updated_at
+      - contact_details
+      - counterparty_id
+      - counterparty_billing_address
+      - counterparty_shipping_address
+      - currency
+      - description
+      - due_date
+      - invoicer_address
+      - originating_account_id
+      - receiving_account_id
+      - payment_effective_date
+      - payment_type
+      - payment_method
       - hosted_url
       - number
       - payment_orders
@@ -10508,6 +10526,10 @@ components:
           type: string
           description: An optional description.
           nullable: true
+        ledger_id:
+          type: string
+          format: uuid
+          description: The id of the ledger that this account belongs to.
         ledger_transaction_template:
           "$ref": "#/components/schemas/ledger_event_handler_ledger_transaction_template"
         conditions:
