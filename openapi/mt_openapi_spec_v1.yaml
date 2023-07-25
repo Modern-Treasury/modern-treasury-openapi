@@ -3979,12 +3979,6 @@ paths:
             application/json:
               schema:
                 "$ref": "#/components/schemas/error_message"
-        '404':
-          description: not found
-          content:
-            application/json:
-              schema:
-                "$ref": "#/components/schemas/error_message"
         '422':
           description: unsuccessful
           content:
@@ -11015,16 +11009,6 @@ components:
           type: string
           description: One of `credit`, `debit`.
           nullable: true
-        originating_ledger_account_id:
-          type: string
-          format: uuid
-          description: The ledger account that initiates the money movement.
-          nullable: true
-        receiving_ledger_account_id:
-          type: string
-          format: uuid
-          description: The ledger account that receives the money movement.
-          nullable: true
         amount:
           type: integer
           description: Value in specified currency's smallest unit. e.g. $10 would
@@ -11058,7 +11042,7 @@ components:
             modern: treasury
           nullable: true
       additionalProperties: false
-      minProperties: 16
+      minProperties: 14
       required:
       - id
       - object
@@ -11068,8 +11052,6 @@ components:
       - name
       - description
       - direction
-      - originating_ledger_account_id
-      - receiving_ledger_account_id
       - amount
       - currency
       - currency_exponent
@@ -11089,16 +11071,6 @@ components:
         direction:
           type: string
           description: One of `credit`, `debit`.
-          nullable: true
-        originating_ledger_account_id:
-          type: string
-          format: uuid
-          description: The ledger account that initiates the money movement.
-          nullable: true
-        receiving_ledger_account_id:
-          type: string
-          format: uuid
-          description: The ledger account that receives the money movement.
           nullable: true
         amount:
           type: integer
