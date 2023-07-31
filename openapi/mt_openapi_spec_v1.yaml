@@ -13777,6 +13777,10 @@ components:
           format: date
           nullable: true
           description: Defaults to today.
+        description:
+          type: string
+          nullable: true
+          description: Defaults to a random description.
     transaction:
       type: object
       properties:
