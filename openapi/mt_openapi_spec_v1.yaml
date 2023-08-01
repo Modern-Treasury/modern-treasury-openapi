@@ -3215,6 +3215,7 @@ paths:
           entry. If there is no balance available, null will be returned instead.
         schema:
           type: boolean
+      - "$ref": "#/components/parameters/metadata_query"
       responses:
         '200':
           description: successful
@@ -10335,6 +10336,16 @@ components:
           description: If true, response will include the balance of the associated
             ledger account for the entry.
           nullable: true
+        metadata:
+          type: object
+          description: Additional data represented as key-value pairs. Both the key
+            and value must be strings.
+          additionalProperties:
+            type: string
+          example:
+            key: value
+            foo: bar
+            modern: treasury
       required:
       - amount
       - direction
