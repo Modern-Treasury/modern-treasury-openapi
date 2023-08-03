@@ -3067,12 +3067,6 @@ paths:
             application/json:
               schema:
                 "$ref": "#/components/schemas/error_message"
-        '422':
-          description: unsuccessful
-          content:
-            application/json:
-              schema:
-                "$ref": "#/components/schemas/error_message"
   "/api/ledger_entries":
     get:
       summary: list ledger_entries
