@@ -2207,6 +2207,20 @@ paths:
           child categories.
         schema:
           type: string
+      - name: balances
+        in: query
+        schema:
+          type: object
+          properties:
+            effective_at:
+              type: string
+              format: date-time
+          additionalProperties: false
+        style: deepObject
+        required: false
+        description: For example, if you want the balances as of a particular time
+          (ISO8601), the encoded query string would be `balances%5Beffective_at%5D=2000-12-31T12:00:00Z`.
+          The balances as of a time are inclusive of entries with that exact time.
       responses:
         '200':
           description: successful
@@ -2277,23 +2291,6 @@ paths:
       required: true
       schema:
         type: string
-    - name: balances
-      in: query
-      schema:
-        type: object
-        properties:
-          as_of_date:
-            type: string
-            format: date
-          effective_at:
-            type: string
-            format: date-time
-        additionalProperties: false
-      style: deepObject
-      required: false
-      description: For example, if you want the balances as of a particular effective
-        date (YYYY-MM-DD), the encoded query string would be balances%5Bas_of_date%5D=2000-12-31.
-        The balances as of a date are exclusive of entries with that exact date.
     get:
       summary: get ledger_account_category
       tags:
@@ -2302,6 +2299,24 @@ paths:
       description: Get the details on a single ledger account category.
       security:
       - basic_auth: []
+      parameters:
+      - name: balances
+        in: query
+        schema:
+          type: object
+          properties:
+            as_of_date:
+              type: string
+              format: date
+            effective_at:
+              type: string
+              format: date-time
+          additionalProperties: false
+        style: deepObject
+        required: false
+        description: For example, if you want the balances as of a particular time
+          (ISO8601), the encoded query string would be `balances%5Beffective_at%5D=2000-12-31T12:00:00Z`.
+          The balances as of a time are inclusive of entries with that exact time.
       responses:
         '200':
           description: successful
@@ -2402,11 +2417,11 @@ paths:
       schema:
         type: string
     put:
-      summary: add ledger_account_category to ledger_account
+      summary: add ledger_account to ledger_account_category
       tags:
       - LedgerAccountCategory
-      operationId: addLedgerAccountCategoryToLedgerAccount
-      description: Add a ledger account category to an account.
+      operationId: addLedgerAccountToLedgerAccountCategory
+      description: Add a ledger account to a ledger account category.
       security:
       - basic_auth: []
       responses:
@@ -2431,11 +2446,11 @@ paths:
               schema:
                 "$ref": "#/components/schemas/error_message"
     delete:
-      summary: delete ledger_account_category from ledger_account
+      summary: remove ledger_account from ledger_account_category
       tags:
       - LedgerAccountCategory
-      operationId: deleteLedgerAccountCategoryFromLedgerAccount
-      description: Delete a ledger account category from an account.
+      operationId: removeLedgerAccountFromLedgerAccountCategory
+      description: Remove a ledger account from a ledger account category.
       security:
       - basic_auth: []
       responses:
@@ -2592,6 +2607,7 @@ paths:
         schema:
           type: integer
         required: false
+      - "$ref": "#/components/parameters/metadata_query"
       - name: payout_ledger_account_id
         in: query
         required: false
@@ -2790,6 +2806,11 @@ paths:
         schema:
           type: string
       - name: ledger_id
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: currency
         in: query
         required: false
         schema:
@@ -3091,6 +3112,11 @@ paths:
         required: false
         schema:
           type: string
+      - name: ledger_account_payout_id
+        in: query
+        required: false
+        schema:
+          type: string
       - name: effective_date
         in: query
         schema:
@@ -3111,7 +3137,7 @@ paths:
             format: time
         style: deepObject
         required: false
-        description: Use "gt" (>), "gte" (>=), "lt" (<), "lte" (<=), or "eq" (=) to
+        description: Use `gt` (>), `gte` (>=), `lt` (<), `lte` (<=), or `eq` (=) to
           filter by the transaction's effective time. Format ISO8601
       - name: updated_at
         in: query
@@ -3427,7 +3453,7 @@ paths:
             application/json:
               schema:
                 "$ref": "#/components/schemas/error_message"
-  "/api/ledger_transactions/{ledger_transaction_id}/reversal":
+  "/api/ledger_transactions/{id}/reversal":
     post:
       summary: create ledger_transaction reversal
       tags:
@@ -3437,7 +3463,7 @@ paths:
       security:
       - basic_auth: []
       parameters:
-      - name: ledger_transaction_id
+      - name: id
         in: path
         description: The id of ledger transaction to reverse.
         required: true
@@ -3676,6 +3702,11 @@ paths:
         schema:
           type: string
       - name: ledger_account_category_id
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: ledger_account_payout_id
         in: query
         required: false
         schema:
@@ -9937,6 +9968,11 @@ components:
             key: value
             foo: bar
             modern: treasury
+        skip_payout_ledger_transaction:
+          type: boolean
+          description: It is set to `false` by default. It should be set to `true`
+            when migrating existing payouts.
+          nullable: true
       required:
       - payout_ledger_account_id
       - funding_ledger_account_id
@@ -10910,7 +10946,6 @@ components:
           description: If the ledger transaction can be reconciled to another object
             in Modern Treasury, the id will be populated here, otherwise null.
       required:
-      - effective_at
       - ledger_entries
     ledger_transaction_update_request:
       type: object
@@ -10936,6 +10971,11 @@ components:
             key: value
             foo: bar
             modern: treasury
+        effective_at:
+          type: string
+          format: date
+          description: The timestamp (ISO8601 format) at which the ledger transaction
+            happened for reporting purposes.
         ledger_entries:
           type: array
           items:
