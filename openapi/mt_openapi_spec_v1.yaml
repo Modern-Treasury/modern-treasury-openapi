@@ -2184,6 +2184,7 @@ paths:
           type: integer
         required: false
       - "$ref": "#/components/parameters/metadata_query"
+      - "$ref": "#/components/parameters/bulk_id"
       - name: name
         in: query
         required: false
@@ -2608,6 +2609,7 @@ paths:
           type: integer
         required: false
       - "$ref": "#/components/parameters/metadata_query"
+      - "$ref": "#/components/parameters/bulk_id"
       - name: payout_ledger_account_id
         in: query
         required: false
@@ -2795,11 +2797,7 @@ paths:
           type: integer
         required: false
       - "$ref": "#/components/parameters/metadata_query"
-      - name: id
-        in: query
-        required: false
-        schema:
-          type: string
+      - "$ref": "#/components/parameters/bulk_id"
       - name: name
         in: query
         required: false
@@ -3067,12 +3065,6 @@ paths:
             application/json:
               schema:
                 "$ref": "#/components/schemas/error_message"
-        '422':
-          description: unsuccessful
-          content:
-            application/json:
-              schema:
-                "$ref": "#/components/schemas/error_message"
   "/api/ledger_entries":
     get:
       summary: list ledger_entries
@@ -3094,14 +3086,7 @@ paths:
         schema:
           type: integer
         required: false
-      - name: id
-        in: query
-        required: false
-        style: deepObject
-        schema:
-          type: object
-          additionalProperties:
-            type: string
+      - "$ref": "#/components/parameters/bulk_id"
       - name: ledger_account_id
         in: query
         required: false
@@ -3599,15 +3584,8 @@ paths:
         schema:
           type: integer
         required: false
-      - name: id
-        in: query
-        required: false
-        style: deepObject
-        schema:
-          type: object
-          additionalProperties:
-            type: string
       - "$ref": "#/components/parameters/metadata_query"
+      - "$ref": "#/components/parameters/bulk_id"
       - name: ledger_id
         in: query
         required: false
@@ -3925,6 +3903,7 @@ paths:
         schema:
           type: integer
         required: false
+      - "$ref": "#/components/parameters/bulk_id"
       - name: created_at
         in: query
         schema:
@@ -4073,6 +4052,7 @@ paths:
           type: integer
         required: false
       - "$ref": "#/components/parameters/metadata_query"
+      - "$ref": "#/components/parameters/bulk_id"
       - name: updated_at
         in: query
         schema:
@@ -6217,6 +6197,19 @@ components:
       description: For example, if you want to query for records with metadata key
         `Type` and value `Loan`, the query would be `metadata%5BType%5D=Loan`. This
         encodes the query parameters.
+    bulk_id:
+      name: id[]
+      in: query
+      style: form
+      explode: true
+      allowReserved: true
+      schema:
+        type: array
+        items:
+          type: string
+      required: false
+      description: If you have specific IDs to retrieve in bulk, you can pass them
+        as query parameters delimited with `id[]=`, for example `?id[]=123&id[]=abc`.
   schemas:
     accounting:
       type: object
@@ -8818,7 +8811,7 @@ components:
           enum:
           - eft
           - ach
-          description: One of `ach` or `eft`
+          description: One of `ach` or `eft`.
         payment_method:
           type: string
           nullable: true
@@ -8829,6 +8822,18 @@ components:
           description: When opening an invoice, whether to show the embedded payment
             UI , automatically debit the recipient, or rely on manual payment from
             the recipient.
+        notifications_enabled:
+          type: boolean
+          description: If true, the invoice will send email notifications to the invoice
+            recipients about invoice status changes.
+        notification_email_addresses:
+          type: array
+          nullable: true
+          items:
+            type: string
+          description: Emails in addition to the counterparty email to send invoice
+            status notifications to. At least one email is required if notifications
+            are enabled and the counterparty doesn't have an email.
         hosted_url:
           type: string
           description: The URL of the hosted web UI where the invoice can be viewed.
@@ -8859,7 +8864,7 @@ components:
           description: Total amount due in specified currency's smallest unit, e.g.,
             $10 USD would be represented as 1000.
       additionalProperties: false
-      minProperties: 24
+      minProperties: 26
       required:
       - id
       - object
@@ -8879,6 +8884,8 @@ components:
       - payment_effective_date
       - payment_type
       - payment_method
+      - notifications_enabled
+      - notification_email_addresses
       - hosted_url
       - number
       - payment_orders
@@ -9038,6 +9045,18 @@ components:
             direction will be debit. If the invoice amount is negative, the automatically
             initiated payment order's direction will be credit. One of `manual`, `ui`,
             or `automatic`.
+        notifications_enabled:
+          type: boolean
+          description: If true, the invoice will send email notifications to the invoice
+            recipients about invoice status changes.
+        notification_email_addresses:
+          type: array
+          nullable: true
+          items:
+            type: string
+          description: Emails in addition to the counterparty email to send invoice
+            status notifications to. At least one email is required if notifications
+            are enabled and the counterparty doesn't have an email.
       required:
       - counterparty_id
       - due_date
@@ -9195,11 +9214,24 @@ components:
             direction will be debit. If the invoice amount is negative, the automatically
             initiated payment order's direction will be credit. One of `manual`, `ui`,
             or `automatic`.
+        notifications_enabled:
+          type: boolean
+          description: If true, the invoice will send email notifications to the invoice
+            recipients about invoice status changes.
+        notification_email_addresses:
+          type: array
+          nullable: true
+          items:
+            type: string
+          description: Emails in addition to the counterparty email to send invoice
+            status notifications to. At least one email is required if notifications
+            are enabled and the counterparty doesn't have an email.
         status:
           type: string
           description: Invoice status must be updated in a `PATCH` request that does
             not modify any other invoice attributes.             Valid state transitions
-            are `draft` to `unpaid` and `draft` or `unpaid` to `voided`.
+            are `draft` to `unpaid`, `draft` or `unpaid` to `voided`, and `draft`
+            or `unpaid`             to `paid`.
     invoice_line_item:
       type: object
       properties:
@@ -9283,156 +9315,25 @@ components:
     invoice_line_item_update_request:
       type: object
       properties:
-        contact_details:
-          type: array
-          items:
-            "$ref": "#/components/schemas/contact_detail"
-          description: The invoicer's contact details displayed at the top of the
-            invoice.
-        counterparty_id:
+        name:
           type: string
-          description: The ID of the counterparty receiving the invoice.
-        counterparty_billing_address:
-          type: object
-          nullable: true
-          description: The counterparty's billing address.
-          properties:
-            line1:
-              type: string
-            line2:
-              type: string
-            locality:
-              type: string
-              description: Locality or City.
-            region:
-              type: string
-              description: Region or State.
-            postal_code:
-              type: string
-              description: The postal code of the address.
-            country:
-              type: string
-              description: Country code conforms to [ISO 3166-1 alpha-2]
-          required:
-          - line1
-          - locality
-          - region
-          - postal_code
-          - country
-        counterparty_shipping_address:
-          type: object
-          nullable: true
-          description: The counterparty's shipping address where physical goods should
-            be delivered.
-          properties:
-            line1:
-              type: string
-            line2:
-              type: string
-            locality:
-              type: string
-              description: Locality or City.
-            region:
-              type: string
-              description: Region or State.
-            postal_code:
-              type: string
-              description: The postal code of the address.
-            country:
-              type: string
-              description: Country code conforms to [ISO 3166-1 alpha-2]
-          required:
-          - line1
-          - locality
-          - region
-          - postal_code
-          - country
-        currency:
-          "$ref": "#/components/schemas/currency"
-          description: Currency that the invoice is denominated in. Defaults to `USD`
-            if not provided.
+          description: The name of the line item, typically a product or SKU name.
         description:
           type: string
-          description: A free-form description of the invoice.
-        due_date:
+          description: An optional free-form description of the line item.
+        quantity:
+          type: integer
+          description: The number of units of a product or service that this line
+            item is for.           Must be a whole number. Defaults to 1 if not provided.
+        unit_amount:
+          type: integer
+          description: The cost per unit of the product or service that this line
+            item is for,           specified in the invoice currency's smallest unit.
+        direction:
           type: string
-          format: date-time
-          description: A future date by when the invoice needs to be paid.
-        invoicer_address:
-          type: object
-          nullable: true
-          description: The invoice issuer's business address.
-          properties:
-            line1:
-              type: string
-            line2:
-              type: string
-            locality:
-              type: string
-              description: Locality or City.
-            region:
-              type: string
-              description: Region or State.
-            postal_code:
-              type: string
-              description: The postal code of the address.
-            country:
-              type: string
-              description: Country code conforms to [ISO 3166-1 alpha-2]
-          required:
-          - line1
-          - locality
-          - region
-          - postal_code
-          - country
-        originating_account_id:
-          type: string
-          description: The ID of the internal account the invoice should be paid to.
-        receiving_account_id:
-          type: string
-          format: uuid
-          description: The receiving account ID. Can be an `external_account`.
-        payment_effective_date:
-          type: string
-          format: date
-          description: 'Date transactions are to be posted to the participants'' account.
-            Defaults to the current business day or the next business day if the current
-            day is a bank holiday or weekend. Format: yyyy-mm-dd.'
-        payment_type:
-          type: string
-          enum:
-          - ach
-          - au_becs
-          - bacs
-          - book
-          - card
-          - check
-          - eft
-          - cross_border
-          - interac
-          - masav
-          - neft
-          - provxchange
-          - rtp
-          - sen
-          - sepa
-          - signet
-          - wire
-          description: One of `ach`, `eft`, `wire`, `check`, `sen`, `book`, `rtp`,
-            `sepa`, `bacs`, `au_becs`, `interac`, `signet`, `provexchange`.
-        payment_method:
-          type: string
-          enum:
-          - ui
-          - manual
-          - automatic
-          description: The method by which the invoice can be paid. `ui` will show
-            the embedded payment collection flow. `automatic` will automatically initiate
-            payment based upon the account details of the receiving_account id.\nIf
-            the invoice amount is positive, the automatically initiated payment order's
-            direction will be debit. If the invoice amount is negative, the automatically
-            initiated payment order's direction will be credit. One of `manual`, `ui`,
-            or `automatic`.
+          description: Either `debit` or `credit`. `debit` indicates that a client
+            owes the business money           and increases the invoice's `total_amount`
+            due. `credit` has the opposite intention and effect.
     ledger:
       type: object
       properties:
