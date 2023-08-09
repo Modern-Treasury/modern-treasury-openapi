@@ -8863,8 +8863,14 @@ components:
           type: integer
           description: Total amount due in specified currency's smallest unit, e.g.,
             $10 USD would be represented as 1000.
+        transaction_line_item_ids:
+          type: array
+          items:
+            type: string
+            format: uuid
+          description: IDs of transaction line items associated with an invoice.
       additionalProperties: false
-      minProperties: 26
+      minProperties: 27
       required:
       - id
       - object
@@ -8892,6 +8898,7 @@ components:
       - pdf_url
       - status
       - total_amount
+      - transaction_line_item_ids
     invoice_create_request:
       type: object
       properties:
