@@ -3086,6 +3086,14 @@ paths:
         schema:
           type: integer
         required: false
+      - name: id
+        in: query
+        required: false
+        style: deepObject
+        schema:
+          type: object
+          additionalProperties:
+            type: string
       - "$ref": "#/components/parameters/bulk_id"
       - name: ledger_account_id
         in: query
