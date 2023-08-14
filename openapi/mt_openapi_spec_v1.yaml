@@ -5395,7 +5395,7 @@ paths:
           application/json:
             schema:
               "$ref": "#/components/schemas/incoming_payment_detail_create_request"
-  "/api/transactions/{transaction_id}/line_items":
+  "/api/transactions/{transaction_id}/line_items (legacy)":
     parameters:
     - name: transaction_id
       in: path
@@ -5451,6 +5451,97 @@ paths:
                 type: array
                 items:
                   "$ref": "#/components/schemas/transaction_line_item"
+  "/api/transaction_line_items":
+    parameters:
+    - name: after_cursor
+      in: query
+      schema:
+        type: string
+        nullable: true
+      required: false
+    - name: id
+      in: query
+      required: false
+      style: deepObject
+      schema:
+        type: object
+        additionalProperties:
+          type: string
+    - name: type
+      in: query
+      schema:
+        type: string
+        enum:
+        - originating
+        - receiving
+        nullable: true
+      required: false
+    - name: per_page
+      in: query
+      schema:
+        type: integer
+      required: false
+    - name: transaction_id
+      in: query
+      schema:
+        type: string
+      required: false
+    get:
+      summary: list transaction_line_items
+      tags:
+      - TransactionLineItem
+      operationId: listTransactionLineItems
+      security:
+      - basic_auth: []
+      responses:
+        '200':
+          description: successful
+          headers:
+            X-After-Cursor:
+              schema:
+                type: string
+                nullable: true
+              description: The cursor for the next page. Including this in a call
+                as `after_cursor` will return the next page.
+            X-Per-Page:
+              schema:
+                type: integer
+                nullable: true
+              description: The current `per_page`.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  "$ref": "#/components/schemas/transaction_line_item"
+  "/api/transaction_line_items/{id}":
+    parameters:
+    - name: id
+      in: path
+      description: id
+      required: true
+      schema:
+        type: string
+    get:
+      summary: get transaction line item
+      tags:
+      - TransactionLineItem
+      operationId: listTransactionLineItems
+      security:
+      - basic_auth: []
+      responses:
+        '200':
+          description: successful
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/transaction_line_item"
+        '404':
+          description: not found
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/error_message"
   "/api/transactions":
     get:
       summary: list transactions
@@ -13981,12 +14072,17 @@ components:
             default. Learn more about changing your settings at https://docs.moderntreasury.com/reference/personally-identifiable-information.
         counterparty_id:
           type: string
+          nullable: true
           description: The ID for the counterparty for this transaction line item.
         expected_payment_id:
           type: string
+          nullable: true
           description: The ID of the reconciled Expected Payment, otherwise `null`.
+        transaction_id:
+          type: string
+          description: The ID of the parent transaction.
       additionalProperties: false
-      minProperties: 13
+      minProperties: 14
       required:
       - id
       - object
@@ -14001,6 +14097,7 @@ components:
       - description
       - counterparty_id
       - expected_payment_id
+      - transaction_id
     virtual_account:
       type: object
       properties:
