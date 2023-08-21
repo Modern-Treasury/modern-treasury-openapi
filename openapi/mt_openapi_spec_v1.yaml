@@ -2838,6 +2838,72 @@ paths:
           inclusive while the upper bound is exclusive of the provided timestamps.
           If no value is supplied the balances will be retrieved not including that
           bound.
+      - name: pending_balance_amount
+        in: query
+        schema:
+          type: object
+          properties:
+            gt:
+              type: integer
+            lt:
+              type: integer
+            gte:
+              type: integer
+            lte:
+              type: integer
+            eq:
+              type: integer
+            not_eq:
+              type: integer
+          additionalProperties: false
+        style: deepObject
+        required: false
+        description: Use `gt` (>), `gte` (>=), `lt` (<), `lte` (<=), `eq` (=), or
+          `not_eq` (!=) to filter by balance amount.
+      - name: posted_balance_amount
+        in: query
+        schema:
+          type: object
+          properties:
+            gt:
+              type: integer
+            lt:
+              type: integer
+            gte:
+              type: integer
+            lte:
+              type: integer
+            eq:
+              type: integer
+            not_eq:
+              type: integer
+          additionalProperties: false
+        style: deepObject
+        required: false
+        description: Use `gt` (>), `gte` (>=), `lt` (<), `lte` (<=), `eq` (=), or
+          `not_eq` (!=) to filter by balance amount.
+      - name: available_balance_amount
+        in: query
+        schema:
+          type: object
+          properties:
+            gt:
+              type: integer
+            lt:
+              type: integer
+            gte:
+              type: integer
+            lte:
+              type: integer
+            eq:
+              type: integer
+            not_eq:
+              type: integer
+          additionalProperties: false
+        style: deepObject
+        required: false
+        description: Use `gt` (>), `gte` (>=), `lt` (<), `lte` (<=), `eq` (=), or
+          `not_eq` (!=) to filter by balance amount.
       - name: created_at
         in: query
         schema:
@@ -5395,7 +5461,7 @@ paths:
           application/json:
             schema:
               "$ref": "#/components/schemas/incoming_payment_detail_create_request"
-  "/api/transactions/{transaction_id}/line_items":
+  "/api/transactions/{transaction_id}/line_items (legacy)":
     parameters:
     - name: transaction_id
       in: path
@@ -5451,6 +5517,97 @@ paths:
                 type: array
                 items:
                   "$ref": "#/components/schemas/transaction_line_item"
+  "/api/transaction_line_items":
+    parameters:
+    - name: after_cursor
+      in: query
+      schema:
+        type: string
+        nullable: true
+      required: false
+    - name: id
+      in: query
+      required: false
+      style: deepObject
+      schema:
+        type: object
+        additionalProperties:
+          type: string
+    - name: type
+      in: query
+      schema:
+        type: string
+        enum:
+        - originating
+        - receiving
+        nullable: true
+      required: false
+    - name: per_page
+      in: query
+      schema:
+        type: integer
+      required: false
+    - name: transaction_id
+      in: query
+      schema:
+        type: string
+      required: false
+    get:
+      summary: list transaction_line_items
+      tags:
+      - TransactionLineItem
+      operationId: listTransactionLineItems
+      security:
+      - basic_auth: []
+      responses:
+        '200':
+          description: successful
+          headers:
+            X-After-Cursor:
+              schema:
+                type: string
+                nullable: true
+              description: The cursor for the next page. Including this in a call
+                as `after_cursor` will return the next page.
+            X-Per-Page:
+              schema:
+                type: integer
+                nullable: true
+              description: The current `per_page`.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  "$ref": "#/components/schemas/transaction_line_item"
+  "/api/transaction_line_items/{id}":
+    parameters:
+    - name: id
+      in: path
+      description: id
+      required: true
+      schema:
+        type: string
+    get:
+      summary: get transaction line item
+      tags:
+      - TransactionLineItem
+      operationId: listTransactionLineItems
+      security:
+      - basic_auth: []
+      responses:
+        '200':
+          description: successful
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/transaction_line_item"
+        '404':
+          description: not found
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/error_message"
   "/api/transactions":
     get:
       summary: list transactions
@@ -11350,9 +11507,26 @@ components:
           nullable: true
           description: If present, the ID of the payment order created using this
             flow.
+        effective_date_selection_enabled:
+          type: boolean
+          description: When `true`, your end-user can schedule the payment `effective_date`
+            while completing the pre-built UI.
+        due_date:
+          type: string
+          format: date
+          nullable: true
+          description: The due date for the flow. Can only be passed in when `effective_date_selection_enabled`
+            is `true`.
+        selected_effective_date:
+          type: string
+          format: date
+          nullable: true
+          description: This field is set after your end-user selects a payment date
+            while completing the pre-built UI. This field is always `null` unless
+            `effective_date_selection_enabled` is `true`.
       additionalProperties: false
-      minProperties: 12
-      maxProperties: 14
+      minProperties: 15
+      maxProperties: 17
     payment_flow_create_request:
       type: object
       properties:
@@ -11381,6 +11555,12 @@ components:
           type: string
           format: uuid
           description: Required. The ID of one of your organization's internal accounts.
+        due_date:
+          type: string
+          format: date
+          description: Optional. Can only be passed in when `effective_date_selection_enabled`
+            is `true`. When set, the due date is shown to your end-user in the pre-built
+            UI as they are selecting a payment `effective_date`.
       required:
       - amount
       - currency
@@ -13981,12 +14161,17 @@ components:
             default. Learn more about changing your settings at https://docs.moderntreasury.com/reference/personally-identifiable-information.
         counterparty_id:
           type: string
+          nullable: true
           description: The ID for the counterparty for this transaction line item.
         expected_payment_id:
           type: string
+          nullable: true
           description: The ID of the reconciled Expected Payment, otherwise `null`.
+        transaction_id:
+          type: string
+          description: The ID of the parent transaction.
       additionalProperties: false
-      minProperties: 13
+      minProperties: 14
       required:
       - id
       - object
@@ -14001,6 +14186,7 @@ components:
       - description
       - counterparty_id
       - expected_payment_id
+      - transaction_id
     virtual_account:
       type: object
       properties:
