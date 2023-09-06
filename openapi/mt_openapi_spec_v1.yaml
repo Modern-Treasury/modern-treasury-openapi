@@ -9100,6 +9100,16 @@ components:
             "$ref": "#/components/schemas/contact_detail"
           description: The invoicer's contact details displayed at the top of the
             invoice.
+        recipient_email:
+          type: string
+          nullable: true
+          description: The email of the recipient of the invoice. Leaving this value
+            as null will fallback to using the counterparty's name.
+        recipient_name:
+          type: string
+          nullable: true
+          description: The name of the recipient of the invoice. Leaving this value
+            as null will fallback to using the counterparty's name.
         counterparty_id:
           type: string
           description: The ID of the counterparty receiving the invoice.
@@ -9280,7 +9290,7 @@ components:
             format: uuid
           description: IDs of transaction line items associated with an invoice.
       additionalProperties: false
-      minProperties: 28
+      minProperties: 30
       required:
       - id
       - object
@@ -9288,6 +9298,8 @@ components:
       - created_at
       - updated_at
       - contact_details
+      - recipient_email
+      - recipient_name
       - counterparty_id
       - counterparty_billing_address
       - counterparty_shipping_address
@@ -9319,6 +9331,16 @@ components:
             "$ref": "#/components/schemas/contact_detail"
           description: The invoicer's contact details displayed at the top of the
             invoice.
+        recipient_email:
+          type: string
+          nullable: true
+          description: The email of the recipient of the invoice. Leaving this value
+            as null will fallback to using the counterparty's name.
+        recipient_name:
+          type: string
+          nullable: true
+          description: The name of the recipient of the invoice. Leaving this value
+            as null will fallback to using the counterparty's name.
         counterparty_id:
           type: string
           description: The ID of the counterparty receiving the invoice.
@@ -9496,6 +9518,16 @@ components:
             "$ref": "#/components/schemas/contact_detail"
           description: The invoicer's contact details displayed at the top of the
             invoice.
+        recipient_email:
+          type: string
+          nullable: true
+          description: The email of the recipient of the invoice. Leaving this value
+            as null will fallback to using the counterparty's name.
+        recipient_name:
+          type: string
+          nullable: true
+          description: The name of the recipient of the invoice. Leaving this value
+            as null will fallback to using the counterparty's name.
         counterparty_id:
           type: string
           description: The ID of the counterparty receiving the invoice.
