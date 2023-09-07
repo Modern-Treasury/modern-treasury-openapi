@@ -1137,6 +1137,7 @@ paths:
           type: string
           enum:
           - archived
+          - partially_reconciled
           - reconciled
           - unreconciled
         required: false
@@ -8101,6 +8102,7 @@ components:
           type: string
           enum:
           - archived
+          - partially_reconciled
           - reconciled
           - unreconciled
           description: One of unreconciled, reconciled, or archived.
