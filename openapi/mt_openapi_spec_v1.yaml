@@ -1137,6 +1137,7 @@ paths:
           type: string
           enum:
           - archived
+          - partially_reconciled
           - reconciled
           - unreconciled
         required: false
@@ -1176,6 +1177,7 @@ paths:
           - nics
           - provxchange
           - rtp
+          - se_bankgirot
           - sen
           - sepa
           - sic
@@ -1789,6 +1791,7 @@ paths:
           - nics
           - provxchange
           - rtp
+          - se_bankgirot
           - sen
           - sepa
           - sic
@@ -4828,6 +4831,7 @@ paths:
           - nics
           - provxchange
           - rtp
+          - se_bankgirot
           - sen
           - sepa
           - sic
@@ -5687,7 +5691,7 @@ paths:
           application/json:
             schema:
               "$ref": "#/components/schemas/incoming_payment_detail_create_request"
-  "/api/transactions/{transaction_id}/line_items (legacy)":
+  "/api/transactions/{transaction_id}/line_items":
     parameters:
     - name: transaction_id
       in: path
@@ -5717,6 +5721,8 @@ paths:
       required: false
     get:
       summary: list transaction_line_items
+      deprecated: true
+      description: This endpoint has been deprecated in favor of /api/transaction_line_items
       tags:
       - TransactionLineItem
       operationId: listTransactionLineItems
@@ -6036,12 +6042,13 @@ paths:
           - in_ifsc
           - jp_zengin_code
           - my_branch_code
+          - se_bankgiro_clearing_code
           - swift
         required: true
         description: One of `aba`, `au_bsb`, `br_codigo`, `ca_cpa`, `cnaps`, `gb_sort_code`,
-          `in_ifsc`, `my_branch_code`, or `swift`. In sandbox mode we currently only
-          support `aba` and `swift` with routing numbers '123456789' and 'GRINUST0XXX'
-          respectively.
+          `in_ifsc`, `my_branch_code`, `se_bankgiro_clearing_code`, or `swift`. In
+          sandbox mode we currently only support `aba` and `swift` with routing numbers
+          '123456789' and 'GRINUST0XXX' respectively.
       responses:
         '200':
           description: successful valid routing number and type
@@ -6663,8 +6670,32 @@ components:
             - wire
             description: An account created with this flow will support payments of
               one of these types.
+        receiving_countries:
+          type: array
+          items:
+            type: string
+            enum:
+            - USA
+            - AUS
+            - BEL
+            - CAN
+            - CHL
+            - CHN
+            - COL
+            - FRA
+            - DEU
+            - HKG
+            - IND
+            - IRL
+            - ITA
+            - MEX
+            - NLD
+            - PER
+            - ESP
+            description: An account created with this flow will support wires from
+              the US to these countries.
       additionalProperties: false
-      minProperties: 9
+      minProperties: 10
       required:
       - payment_types
       - counterparty_id
@@ -6680,6 +6711,29 @@ components:
           items:
             type: string
             description: Required. At least one of `ach`, `wire` or `check`.
+        receiving_countries:
+          type: array
+          items:
+            type: string
+            enum:
+            - USA
+            - AUS
+            - BEL
+            - CAN
+            - CHL
+            - CHN
+            - COL
+            - FRA
+            - DEU
+            - HKG
+            - IND
+            - IRL
+            - ITA
+            - MEX
+            - NLD
+            - PER
+            - ESP
+            description: Optional. Array of 3-digit ISO country codes.
       required:
       - payment_types
       - counterparty_id
@@ -7398,6 +7452,7 @@ components:
                       enum:
                       - aba
                       - au_bsb
+                      - se_bankgiro_clearing_code
                       - br_codigo
                       - ca_cpa
                       - chips
@@ -7412,6 +7467,7 @@ components:
                       enum:
                       - ach
                       - au_becs
+                      - se_bankgirot
                       - bacs
                       - book
                       - card
@@ -8022,6 +8078,7 @@ components:
           - nics
           - provxchange
           - rtp
+          - se_bankgirot
           - sen
           - sepa
           - sic
@@ -8101,6 +8158,7 @@ components:
           type: string
           enum:
           - archived
+          - partially_reconciled
           - reconciled
           - unreconciled
           description: One of unreconciled, reconciled, or archived.
@@ -8187,6 +8245,7 @@ components:
           - nics
           - provxchange
           - rtp
+          - se_bankgirot
           - sen
           - sepa
           - sic
@@ -8300,6 +8359,7 @@ components:
           - nics
           - provxchange
           - rtp
+          - se_bankgirot
           - sen
           - sepa
           - sic
@@ -8546,6 +8606,7 @@ components:
                 enum:
                 - aba
                 - au_bsb
+                - se_bankgiro_clearing_code
                 - br_codigo
                 - ca_cpa
                 - chips
@@ -8560,6 +8621,7 @@ components:
                 enum:
                 - ach
                 - au_becs
+                - se_bankgirot
                 - bacs
                 - book
                 - card
@@ -8680,6 +8742,7 @@ components:
           - nics
           - provxchange
           - rtp
+          - se_bankgirot
           - sen
           - sepa
           - sic
@@ -8828,6 +8891,7 @@ components:
           - in_ifsc
           - jp_zengin_code
           - my_branch_code
+          - se_bankgiro_clearing_code
           - swift
           description: The type of the originating routing number for the incoming
             payment detail.
@@ -9459,6 +9523,7 @@ components:
           enum:
           - ach
           - au_becs
+          - se_bankgirot
           - bacs
           - book
           - card
@@ -9477,8 +9542,8 @@ components:
           - signet
           - wire
           - zengin
-          description: One of `ach`, `eft`, `wire`, `check`, `sen`, `book`, `rtp`,
-            `sepa`, `bacs`, `au_becs`, `interac`, `neft`, `nics`, `sic`, `signet`,
+          description: One of `ach`, `bankgirot`, `eft`, `wire`, `check`, `sen`, `book`,
+            `rtp`, `sepa`, `bacs`, `au_becs`, `interac`, `neft`, `nics`, `sic`, `signet`,
             `provexchange`, `zengin`.
         payment_method:
           type: string
@@ -9646,6 +9711,7 @@ components:
           enum:
           - ach
           - au_becs
+          - se_bankgirot
           - bacs
           - book
           - card
@@ -9664,8 +9730,8 @@ components:
           - signet
           - wire
           - zengin
-          description: One of `ach`, `eft`, `wire`, `check`, `sen`, `book`, `rtp`,
-            `sepa`, `bacs`, `au_becs`, `interac`, `neft`, `nics`, `sic`, `signet`,
+          description: One of `ach`, `bankgirot`, `eft`, `wire`, `check`, `sen`, `book`,
+            `rtp`, `sepa`, `bacs`, `au_becs`, `interac`, `neft`, `nics`, `sic`, `signet`,
             `provexchange`, `zengin`.
         payment_method:
           type: string
@@ -12080,14 +12146,15 @@ components:
           - nics
           - provxchange
           - rtp
+          - se_bankgirot
           - sen
           - sepa
           - sic
           - signet
           - wire
           - zengin
-          description: One of `ach`, `eft`, `wire`, `check`, `sen`, `book`, `rtp`,
-            `sepa`, `bacs`, `au_becs`, `interac`, `neft`, `nics`, `sic`, `signet`,
+          description: One of `ach`, `bankgirot`, `eft`, `wire`, `check`, `sen`, `book`,
+            `rtp`, `sepa`, `bacs`, `au_becs`, `interac`, `neft`, `nics`, `sic`, `signet`,
             `provexchange`, `zengin`.
         subtype:
           type: string
@@ -12492,14 +12559,15 @@ components:
           - nics
           - provxchange
           - rtp
+          - se_bankgirot
           - sen
           - sepa
           - sic
           - signet
           - wire
           - zengin
-          description: One of `ach`, `eft`, `wire`, `check`, `sen`, `book`, `rtp`,
-            `sepa`, `bacs`, `au_becs`, `interac`, `neft`, `nics`, `sic`, `signet`,
+          description: One of `ach`, `bankgirot`, `eft`, `wire`, `check`, `sen`, `book`,
+            `rtp`, `sepa`, `bacs`, `au_becs`, `interac`, `neft`, `nics`, `sic`, `signet`,
             `provexchange`, `zengin`.
         subtype:
           type: string
@@ -12743,6 +12811,7 @@ components:
                     enum:
                     - aba
                     - au_bsb
+                    - se_bankgiro_clearing_code
                     - br_codigo
                     - ca_cpa
                     - chips
@@ -12757,6 +12826,7 @@ components:
                     enum:
                     - ach
                     - au_becs
+                    - se_bankgirot
                     - bacs
                     - book
                     - card
@@ -12859,14 +12929,15 @@ components:
           - nics
           - provxchange
           - rtp
+          - se_bankgirot
           - sen
           - sepa
           - sic
           - signet
           - wire
           - zengin
-          description: One of `ach`, `eft`, `wire`, `check`, `sen`, `book`, `rtp`,
-            `sepa`, `bacs`, `au_becs`, `interac`, `neft`, `nics`, `sic`, `signet`,
+          description: One of `ach`, `bankgirot`, `eft`, `wire`, `check`, `sen`, `book`,
+            `rtp`, `sepa`, `bacs`, `au_becs`, `interac`, `neft`, `nics`, `sic`, `signet`,
             `provexchange`, `zengin`.
         subtype:
           type: string
@@ -13110,6 +13181,7 @@ components:
                     enum:
                     - aba
                     - au_bsb
+                    - se_bankgiro_clearing_code
                     - br_codigo
                     - ca_cpa
                     - chips
@@ -13124,6 +13196,7 @@ components:
                     enum:
                     - ach
                     - au_becs
+                    - se_bankgirot
                     - bacs
                     - book
                     - card
@@ -13219,14 +13292,15 @@ components:
           - nics
           - provxchange
           - rtp
+          - se_bankgirot
           - sen
           - sepa
           - sic
           - signet
           - wire
           - zengin
-          description: One of `ach`, `eft`, `wire`, `check`, `sen`, `book`, `rtp`,
-            `sepa`, `bacs`, `au_becs`, `interac`, `neft`, `nics`, `sic`, `signet`,
+          description: One of `ach`, `bankgirot`, `eft`, `wire`, `check`, `sen`, `book`,
+            `rtp`, `sepa`, `bacs`, `au_becs`, `interac`, `neft`, `nics`, `sic`, `signet`,
             `provexchange`, `zengin`.
         subtype:
           type: string
@@ -13505,6 +13579,7 @@ components:
                     enum:
                     - aba
                     - au_bsb
+                    - se_bankgiro_clearing_code
                     - br_codigo
                     - ca_cpa
                     - chips
@@ -13519,6 +13594,7 @@ components:
                     enum:
                     - ach
                     - au_becs
+                    - se_bankgirot
                     - bacs
                     - book
                     - card
@@ -14198,6 +14274,7 @@ components:
           - in_ifsc
           - jp_zengin_code
           - my_branch_code
+          - se_bankgiro_clearing_code
           - swift
           description: One of `aba`, `swift`, `ca_cpa`, `au_bsb`, `gb_sort_code`,
             `in_ifsc`, `cnaps`.
@@ -14218,6 +14295,7 @@ components:
           - nics
           - provxchange
           - rtp
+          - se_bankgirot
           - sen
           - sepa
           - sic
@@ -14265,6 +14343,7 @@ components:
           - in_ifsc
           - jp_zengin_code
           - my_branch_code
+          - se_bankgiro_clearing_code
           - swift
           description: One of `aba`, `swift`, `ca_cpa`, `au_bsb`, `gb_sort_code`,
             `in_ifsc`, `cnaps`.
@@ -14285,6 +14364,7 @@ components:
           - nics
           - provxchange
           - rtp
+          - se_bankgirot
           - sen
           - sepa
           - sic
@@ -14311,11 +14391,12 @@ components:
           - ca_cpa
           - gb_sort_code
           - in_ifsc
+          - se_bankgiro_clearing_code
           - swift
           description: One of `aba`, `au_bsb`, `br_codigo`, `ca_cpa`, `cnaps`, `gb_sort_code`,
-            `in_ifsc`, `my_branch_code`, or `swift`. In sandbox mode we currently
-            only support `aba` and `swift` with routing numbers '123456789' and 'GRINUST0XXX'
-            respectively.
+            `in_ifsc`, `my_branch_code`, `se_bankgiro_clearing_code`, or `swift`.
+            In sandbox mode we currently only support `aba` and `swift` with routing
+            numbers '123456789' and 'GRINUST0XXX' respectively.
         supported_payment_types:
           type: array
           items:
@@ -14335,13 +14416,14 @@ components:
             - nics
             - provxchange
             - rtp
+            - se_bankgirot
             - sen
             - sepa
             - sic
             - signet
             - wire
             - zengin
-          maxItems: 20
+          maxItems: 21
           example:
           - ach
           - au_becs
@@ -14357,6 +14439,7 @@ components:
           - nics
           - provxchange
           - rtp
+          - se_bankgirot
           - sen
           - sepa
           - sic
@@ -14571,6 +14654,7 @@ components:
           - nics
           - provxchange
           - rtp
+          - se_bankgirot
           - sen
           - sepa
           - sic
