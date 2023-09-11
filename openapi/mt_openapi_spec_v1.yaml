@@ -4258,7 +4258,7 @@ paths:
       tags:
       - LedgerableEvent
       operationId: createLedgerableEvent
-      description: 'Translation missing: en.openapi.descriptions.ledger.operations.create_ledgerable_event'
+      description: Create a ledgerable event.
       security:
       - basic_auth: []
       parameters:
@@ -11102,9 +11102,18 @@ components:
         name:
           type: string
           description: Name of the ledger event handler.
+          example: My Event Handler
         description:
           type: string
           description: An optional description.
+          example: My Description
+          nullable: true
+        ledger_id:
+          type: string
+          description: The id of the ledger that this event handler belongs to.
+          nullable: true
+        variables:
+          "$ref": "#/components/schemas/ledger_event_handler_variables"
           nullable: true
         ledger_transaction_template:
           "$ref": "#/components/schemas/ledger_event_handler_ledger_transaction_template"
@@ -11123,7 +11132,7 @@ components:
             modern: treasury
           nullable: true
       additionalProperties: false
-      minProperties: 11
+      minProperties: 13
       required:
       - id
       - object
@@ -11133,6 +11142,8 @@ components:
       - discarded_at
       - name
       - description
+      - ledger_id
+      - variables
       - ledger_transaction_template
       - conditions
       - metadata
@@ -11141,16 +11152,19 @@ components:
       properties:
         field:
           type: string
-          description: The field you're fetching from the `ledgerable_event`.
+          description: The LHS of the conditional.
         operator:
           type: string
-          description: What the operator between the `field` and `value` is. Currently
-            only supports `equals`.
+          description: What the operator between the `field` and `value` is.
         value:
           type: string
-          description: What raw string you are comparing the `field` against.
+          description: The RHS of the conditional.
       additionalProperties: false
       minProperties: 3
+      example:
+        query: ledgerable_event.name
+        operator: equals
+        value: credit_card_swipe
       required:
       - field
       - operator
@@ -11169,6 +11183,9 @@ components:
           type: string
           format: uuid
           description: The id of the ledger that this account belongs to.
+        variables:
+          "$ref": "#/components/schemas/ledger_event_handler_variables"
+          nullable: true
         ledger_transaction_template:
           "$ref": "#/components/schemas/ledger_event_handler_ledger_transaction_template"
         conditions:
@@ -11193,14 +11210,13 @@ components:
       properties:
         amount:
           type: string
-          description: The field you're fetching from the `ledgerable_event`.
+          description: The LHS of the conditional.
         direction:
           type: string
-          description: What the operator between the `field` and `value` is. Currently
-            only supports `equals`.
+          description: What the operator between the `field` and `value` is.
         ledger_account_id:
           type: string
-          description: What raw string you are comparing the `field` against.
+          description: The RHS of the conditional.
       additionalProperties: false
       minProperties: 3
       required:
@@ -11213,36 +11229,62 @@ components:
         description:
           type: string
           description: An optional description for internal use.
+          example: My Ledger Transaction Template Description
           nullable: true
         effective_at:
           type: string
-          format: datetime
           description: The timestamp (ISO8601 format) at which the ledger transaction
             happened for reporting purposes.
+          example: My Ledger Transaction Template Effective At
           nullable: true
         ledger_entries:
           type: array
           items:
             "$ref": "#/components/schemas/ledger_event_handler_ledger_entries"
           description: An array of ledger entry objects.
-        metadata:
-          type: object
-          description: Additional data represented as key-value pairs. Both the key
-            and value must be strings.
-          additionalProperties:
-            type: string
-          example:
-            key: value
-            foo: bar
-            modern: treasury
-          nullable: true
       additionalProperties: false
-      minProperties: 4
+      minProperties: 3
       required:
       - description
       - effective_at
       - ledger_entries
-      - metadata
+    ledger_event_handler_variable:
+      type: object
+      properties:
+        type:
+          type: string
+          description: The type of object this variable is. Currently, only "ledger_account"
+            is supported.
+        query:
+          "$ref": "#/components/schemas/ledger_event_handler_conditions"
+          nullable: false
+      additionalProperties: false
+      minProperties: 2
+      example:
+        type: ledger_account
+        query:
+          field: name
+          operator: equals
+          value: my_credit_account
+      required:
+      - type
+      - query
+    ledger_event_handler_variables:
+      type: object
+      properties: {}
+      additionalProperties:
+        "$ref": "#/components/schemas/ledger_event_handler_variable"
+        description: Each variable may be named using alphabetic, numeric, underscore,
+          or dash characters. Variable names are how you refer to objects from the
+          ledger_transaction_template. There can only be a maximum of 10 variables
+          in this map.
+      example:
+        credit_account:
+          type: ledger_account
+          query:
+            field: name
+            operator: equals
+            value: my_credit_account
     ledger_transaction:
       type: object
       properties:
