@@ -30,10 +30,11 @@ paths:
         required: true
       - name: account_id
         in: path
-        description: The ID of the account.
-        required: true
         schema:
           type: string
+          format: uuid
+        description: The ID of the account.
+        required: true
       - name: after_cursor
         in: query
         schema:
@@ -91,10 +92,11 @@ paths:
         required: true
       - name: account_id
         in: path
-        description: The ID of the account.
-        required: true
         schema:
           type: string
+          format: uuid
+        description: The ID of the account.
+        required: true
       responses:
         '201':
           description: successful
@@ -139,16 +141,18 @@ paths:
         required: true
       - name: account_id
         in: path
+        schema:
+          type: string
+          format: uuid
         description: The ID of the account.
         required: true
-        schema:
-          type: string
       - name: id
         in: path
-        description: The ID of the account detail.
-        required: true
         schema:
           type: string
+          format: uuid
+        description: The ID of the account detail.
+        required: true
       responses:
         '200':
           description: successful
@@ -180,16 +184,18 @@ paths:
         required: true
       - name: account_id
         in: path
+        schema:
+          type: string
+          format: uuid
         description: The ID of the account.
         required: true
-        schema:
-          type: string
       - name: id
         in: path
-        description: The ID of the account detail.
-        required: true
         schema:
           type: string
+          format: uuid
+        description: The ID of the account detail.
+        required: true
       responses:
         '204':
           description: successful
@@ -205,9 +211,10 @@ paths:
       parameters:
       - name: internal_account_id
         in: path
-        required: true
         schema:
           type: string
+          format: uuid
+        required: true
       - name: as_of_date
         in: query
         schema:
@@ -277,16 +284,18 @@ paths:
       parameters:
       - name: internal_account_id
         in: path
-        required: true
         schema:
           type: string
+          format: uuid
+        required: true
       - name: id
         in: path
+        schema:
+          type: string
+          format: uuid
         required: true
         description: Either the unique identifier of the balance report or latest
           for the latest balance report.
-        schema:
-          type: string
       responses:
         '200':
           description: successful
@@ -374,10 +383,11 @@ paths:
           type: string
       - name: id
         in: path
-        description: counterparty id
-        required: true
         schema:
           type: string
+          format: uuid
+        description: counterparty id
+        required: true
       responses:
         '200':
           description: successful
@@ -520,10 +530,11 @@ paths:
     parameters:
     - name: id
       in: path
-      description: The id of an existing counterparty.
-      required: true
       schema:
         type: string
+        format: uuid
+      description: The id of an existing counterparty.
+      required: true
     get:
       summary: show counterparty
       tags:
@@ -597,6 +608,7 @@ paths:
         in: query
         schema:
           type: string
+          format: uuid
         description: The unique identifier for the associated object.
         required: false
       - name: documentable_type
@@ -711,6 +723,7 @@ paths:
         in: path
         schema:
           type: string
+          format: uuid
         description: The unique identifier for the associated object.
         required: true
       - name: documentable_type
@@ -784,6 +797,7 @@ paths:
         in: path
         schema:
           type: string
+          format: uuid
         description: The unique identifier for the associated object.
         required: true
       - name: documentable_type
@@ -843,6 +857,7 @@ paths:
       in: path
       schema:
         type: string
+        format: uuid
       description: The unique identifier for the associated object.
       required: true
     - name: documentable_type
@@ -929,6 +944,7 @@ paths:
       in: path
       schema:
         type: string
+        format: uuid
       description: The unique identifier for the associated object.
       required: true
     - name: documentable_type
@@ -1054,9 +1070,10 @@ paths:
           type: string
       - name: entity_id
         in: query
-        required: false
         schema:
           type: string
+          format: uuid
+        required: false
       - name: event_name
         in: query
         required: false
@@ -1087,10 +1104,11 @@ paths:
     parameters:
     - name: id
       in: path
-      required: true
-      description: event id
       schema:
         type: string
+        format: uuid
+      required: true
+      description: event id
     get:
       summary: get event
       tags:
@@ -1144,11 +1162,12 @@ paths:
         description: One of unreconciled, reconciled, or archived.
       - name: internal_account_id
         in: query
+        schema:
+          type: string
+          format: uuid
         required: false
         description: Specify internal_account_id to see expected_payments for a specific
           account.
-        schema:
-          type: string
       - name: direction
         in: query
         schema:
@@ -1175,6 +1194,7 @@ paths:
           - masav
           - neft
           - nics
+          - nz_becs
           - provxchange
           - rtp
           - se_bankgirot
@@ -1189,11 +1209,12 @@ paths:
           rtp,sen, sepa, signet, wire'
       - name: counterparty_id
         in: query
+        schema:
+          type: string
+          format: uuid
         required: false
         description: Specify counterparty_id to see expected_payments for a specific
           account.
-        schema:
-          type: string
       - "$ref": "#/components/parameters/metadata_query"
       - name: created_at_lower_bound
         in: query
@@ -1273,10 +1294,11 @@ paths:
     parameters:
     - name: id
       in: path
-      description: id
-      required: true
       schema:
         type: string
+        format: uuid
+      description: id
+      required: true
     get:
       summary: get expected payment
       tags:
@@ -1355,10 +1377,11 @@ paths:
           type: string
       - name: id
         in: path
-        description: external account id
-        required: true
         schema:
           type: string
+          format: uuid
+        description: external account id
+        required: true
       responses:
         '200':
           description: successful
@@ -1395,10 +1418,11 @@ paths:
           type: string
       - name: id
         in: path
-        description: external account id
-        required: true
         schema:
           type: string
+          format: uuid
+        description: external account id
+        required: true
       responses:
         '200':
           description: successful
@@ -1446,9 +1470,10 @@ paths:
           type: string
       - name: counterparty_id
         in: query
-        required: false
         schema:
           type: string
+          format: uuid
+        required: false
       - "$ref": "#/components/parameters/metadata_query"
       responses:
         '200':
@@ -1514,10 +1539,11 @@ paths:
     parameters:
     - name: id
       in: path
-      description: external account id
-      required: true
       schema:
         type: string
+        format: uuid
+      description: external account id
+      required: true
     get:
       summary: show external account
       tags:
@@ -1651,11 +1677,12 @@ paths:
       - "$ref": "#/components/parameters/metadata_query"
       - name: virtual_account_id
         in: query
+        schema:
+          type: string
+          format: uuid
         required: false
         description: If the incoming payment detail is in a virtual account, the ID
           of the Virtual Account.
-        schema:
-          type: string
       responses:
         '200':
           description: successful
@@ -1687,10 +1714,11 @@ paths:
     parameters:
     - name: id
       in: path
-      description: The unique identifier of the incoming payment detail.
-      required: true
       schema:
         type: string
+        format: uuid
+      description: The unique identifier of the incoming payment detail.
+      required: true
     get:
       summary: get incoming payment detail
       tags:
@@ -1770,6 +1798,7 @@ paths:
         in: query
         schema:
           type: string
+          format: uuid
         required: false
         description: The counterparty associated with the internal account.
       - name: payment_type
@@ -1789,6 +1818,7 @@ paths:
           - masav
           - neft
           - nics
+          - nz_becs
           - provxchange
           - rtp
           - se_bankgirot
@@ -1874,10 +1904,11 @@ paths:
     parameters:
     - name: id
       in: path
-      description: Unique identifier for the account.
-      required: true
       schema:
         type: string
+        format: uuid
+      description: Unique identifier for the account.
+      required: true
     get:
       summary: get internal account
       tags:
@@ -1928,10 +1959,11 @@ paths:
     parameters:
     - name: invoice_id
       in: path
-      description: invoice_id
-      required: true
       schema:
         type: string
+        format: uuid
+      description: invoice_id
+      required: true
     get:
       summary: list invoice_line_items
       tags:
@@ -2003,16 +2035,18 @@ paths:
     parameters:
     - name: invoice_id
       in: path
+      schema:
+        type: string
+        format: uuid
       description: invoice_id
       required: true
-      schema:
-        type: string
     - name: id
       in: path
-      description: id
-      required: true
       schema:
         type: string
+        format: uuid
+      description: id
+      required: true
     get:
       summary: get invoice_line_item
       tags:
@@ -2164,10 +2198,11 @@ paths:
     parameters:
     - name: id
       in: path
-      description: id
-      required: true
       schema:
         type: string
+        format: uuid
+      description: id
+      required: true
     get:
       summary: get invoice
       tags:
@@ -2229,6 +2264,7 @@ paths:
         in: query
         schema:
           type: string
+          format: uuid
         description: Query the balance monitors for a single ledger account.
         required: false
       responses:
@@ -2297,10 +2333,11 @@ paths:
     parameters:
     - name: id
       in: path
-      description: id
-      required: true
       schema:
         type: string
+        format: uuid
+      description: id
+      required: true
     get:
       summary: get ledger_account_balance_monitor
       tags:
@@ -2418,22 +2455,25 @@ paths:
           type: string
       - name: ledger_id
         in: query
-        required: false
         schema:
           type: string
+          format: uuid
+        required: false
       - name: parent_ledger_account_category_id
         in: query
-        required: false
-        description: Query categories that are nested underneath a parent category
         schema:
           type: string
+          format: uuid
+        required: false
+        description: Query categories that are nested underneath a parent category
       - name: ledger_account_id
         in: query
+        schema:
+          type: string
+          format: uuid
         required: false
         description: Query categories which contain a ledger account directly or through
           child categories.
-        schema:
-          type: string
       - name: balances
         in: query
         schema:
@@ -2514,10 +2554,11 @@ paths:
     parameters:
     - name: id
       in: path
-      description: id
-      required: true
       schema:
         type: string
+        format: uuid
+      description: id
+      required: true
     get:
       summary: get ledger_account_category
       tags:
@@ -2633,16 +2674,18 @@ paths:
     parameters:
     - name: id
       in: path
+      schema:
+        type: string
+        format: uuid
       description: id
       required: true
-      schema:
-        type: string
     - name: ledger_account_id
       in: path
-      description: ledger_account_id
-      required: true
       schema:
         type: string
+        format: uuid
+      description: ledger_account_id
+      required: true
     put:
       summary: add ledger_account to ledger_account_category
       tags:
@@ -2705,16 +2748,18 @@ paths:
     parameters:
     - name: id
       in: path
+      schema:
+        type: string
+        format: uuid
       description: id
       required: true
-      schema:
-        type: string
     - name: sub_category_id
       in: path
-      description: sub_category_id
-      required: true
       schema:
         type: string
+        format: uuid
+      description: sub_category_id
+      required: true
     put:
       summary: add ledger_account_category to ledger_account_category
       tags:
@@ -2838,9 +2883,10 @@ paths:
       - "$ref": "#/components/parameters/bulk_id"
       - name: payout_ledger_account_id
         in: query
-        required: false
         schema:
           type: string
+          format: uuid
+        required: false
       responses:
         '200':
           description: successful
@@ -2867,10 +2913,11 @@ paths:
     parameters:
     - name: id
       in: path
-      description: id
-      required: true
       schema:
         type: string
+        format: uuid
+      description: id
+      required: true
     get:
       summary: get ledger_account_payout
       tags:
@@ -2976,10 +3023,11 @@ paths:
     parameters:
     - name: id
       in: path
-      description: id
-      required: true
       schema:
         type: string
+        format: uuid
+      description: id
+      required: true
     get:
       summary: get ledger_account_statement
       tags:
@@ -3031,9 +3079,10 @@ paths:
           type: string
       - name: ledger_id
         in: query
-        required: false
         schema:
           type: string
+          format: uuid
+        required: false
       - name: currency
         in: query
         required: false
@@ -3156,9 +3205,10 @@ paths:
           1 2000 12:00 UTC, use updated_at%5Bgt%5D=2000-01-01T12:00:00Z.
       - name: ledger_account_category_id
         in: query
-        required: false
         schema:
           type: string
+          format: uuid
+        required: false
       responses:
         '200':
           description: successful
@@ -3231,10 +3281,11 @@ paths:
     parameters:
     - name: id
       in: path
-      description: id
-      required: true
       schema:
         type: string
+        format: uuid
+      description: id
+      required: true
     get:
       summary: get ledger_account
       tags:
@@ -3381,19 +3432,22 @@ paths:
       - "$ref": "#/components/parameters/bulk_id"
       - name: ledger_account_id
         in: query
-        required: false
         schema:
           type: string
+          format: uuid
+        required: false
       - name: ledger_transaction_id
         in: query
-        required: false
         schema:
           type: string
+          format: uuid
+        required: false
       - name: ledger_account_payout_id
         in: query
-        required: false
         schema:
           type: string
+          format: uuid
+        required: false
       - name: effective_date
         in: query
         schema:
@@ -3448,18 +3502,20 @@ paths:
           created at or before before lock_version 1000 of a ledger account, use `ledger_account_lock_version%5Blte%5D=1000`.
       - name: ledger_account_category_id
         in: query
+        schema:
+          type: string
+          format: uuid
         required: false
         description: Get all ledger entries that match the direction specified. One
           of `credit`, `debit`.
-        schema:
-          type: string
       - name: ledger_account_statement_id
         in: query
+        schema:
+          type: string
+          format: uuid
         required: false
         description: Get all ledger entries that are included in the ledger account
           statement.
-        schema:
-          type: string
       - name: show_deleted
         in: query
         required: false
@@ -3551,10 +3607,11 @@ paths:
     parameters:
     - name: id
       in: path
-      description: id
-      required: true
       schema:
         type: string
+        format: uuid
+      description: id
+      required: true
     get:
       summary: get ledger_entry
       tags:
@@ -3684,10 +3741,11 @@ paths:
     parameters:
     - name: id
       in: path
-      description: id
-      required: true
       schema:
         type: string
+        format: uuid
+      description: id
+      required: true
     get:
       summary: get ledger_event_handler
       tags:
@@ -3742,10 +3800,11 @@ paths:
       parameters:
       - name: id
         in: path
-        description: The id of ledger transaction to reverse.
-        required: true
         schema:
           type: string
+          format: uuid
+        description: The id of ledger transaction to reverse.
+        required: true
       responses:
         '201':
           description: successful
@@ -3815,18 +3874,20 @@ paths:
           filter by the version. For example, for all versions after 2, use version%5Bgt%5D=2.
       - name: ledger_transaction_id
         in: query
+        schema:
+          type: string
+          format: uuid
         required: false
         description: Get all the ledger transaction versions corresponding to the
           ID of a ledger transaction.
-        schema:
-          type: string
       - name: ledger_account_statement_id
         in: query
+        schema:
+          type: string
+          format: uuid
         required: false
         description: Get all ledger transaction versions that are included in the
           ledger account statement.
-        schema:
-          type: string
       responses:
         '200':
           description: successful
@@ -3880,21 +3941,23 @@ paths:
       - "$ref": "#/components/parameters/bulk_id"
       - name: ledger_id
         in: query
-        required: false
         schema:
           type: string
+          format: uuid
+        required: false
       - name: ledger_account_id
         in: query
-        required: false
         schema:
           type: string
+          format: uuid
+        required: false
       - name: effective_at
         in: query
         schema:
           type: object
           additionalProperties:
             type: string
-            format: time
+            format: date-time
         style: deepObject
         required: false
         description: Use "gt" (>), "gte" (>=), "lt" (<), "lte" (<=), or "eq" (=) to
@@ -3973,24 +4036,28 @@ paths:
           type: string
       - name: ledger_account_category_id
         in: query
-        required: false
         schema:
           type: string
+          format: uuid
+        required: false
       - name: ledger_account_payout_id
         in: query
-        required: false
         schema:
           type: string
+          format: uuid
+        required: false
       - name: reverses_ledger_transaction_id
         in: query
-        required: false
         schema:
           type: string
+          format: uuid
+        required: false
       - name: ledgerable_id
         in: query
-        required: false
         schema:
           type: string
+          format: uuid
+        required: false
       - name: ledgerable_type
         in: query
         schema:
@@ -4091,10 +4158,11 @@ paths:
     parameters:
     - name: id
       in: path
-      description: id
-      required: true
       schema:
         type: string
+        format: uuid
+      description: id
+      required: true
     get:
       summary: get ledger_transaction
       tags:
@@ -4132,12 +4200,6 @@ paths:
             application/json:
               schema:
                 "$ref": "#/components/schemas/ledger_transaction"
-        '400':
-          description: parameter_invalid
-          content:
-            application/json:
-              schema:
-                "$ref": "#/components/schemas/error_message"
         '403':
           description: forbidden
           content:
@@ -4171,10 +4233,11 @@ paths:
     parameters:
     - name: id
       in: path
-      description: id
-      required: true
       schema:
         type: string
+        format: uuid
+      description: id
+      required: true
     get:
       summary: list ledger_transaction versions
       tags:
@@ -4258,7 +4321,7 @@ paths:
       tags:
       - LedgerableEvent
       operationId: createLedgerableEvent
-      description: 'Translation missing: en.openapi.descriptions.ledger.operations.create_ledgerable_event'
+      description: Create a ledgerable event.
       security:
       - basic_auth: []
       parameters:
@@ -4297,10 +4360,11 @@ paths:
     parameters:
     - name: id
       in: path
-      description: id
-      required: true
       schema:
         type: string
+        format: uuid
+      description: id
+      required: true
     get:
       summary: get ledgerable_event
       tags:
@@ -4423,10 +4487,11 @@ paths:
     parameters:
     - name: id
       in: path
-      description: id
-      required: true
       schema:
         type: string
+        format: uuid
+      description: id
+      required: true
     get:
       summary: get ledger
       tags:
@@ -4528,6 +4593,7 @@ paths:
         in: path
         schema:
           type: string
+          format: uuid
         description: The ID of the payment order or expected payment.
         required: true
       - name: itemizable_type
@@ -4585,6 +4651,7 @@ paths:
         in: path
         schema:
           type: string
+          format: uuid
         description: The ID of the payment order or expected payment.
         required: true
       - name: itemizable_type
@@ -4600,6 +4667,7 @@ paths:
         in: path
         schema:
           type: string
+          format: uuid
         description: The ID of the line item.
         required: true
       responses:
@@ -4621,6 +4689,7 @@ paths:
         in: path
         schema:
           type: string
+          format: uuid
         description: The ID of the payment order or expected payment.
         required: true
       - name: itemizable_type
@@ -4636,6 +4705,7 @@ paths:
         in: path
         schema:
           type: string
+          format: uuid
         description: The ID of the line item.
         required: true
       responses:
@@ -4725,10 +4795,11 @@ paths:
     parameters:
     - name: id
       in: path
-      description: id
-      required: true
       schema:
         type: string
+        format: uuid
+      description: id
+      required: true
     get:
       summary: get paper item
       tags:
@@ -4829,6 +4900,7 @@ paths:
           - masav
           - neft
           - nics
+          - nz_becs
           - provxchange
           - rtp
           - se_bankgirot
@@ -5005,9 +5077,10 @@ paths:
     parameters:
     - name: id
       in: path
-      required: true
       schema:
         type: string
+        format: uuid
+      required: true
     get:
       summary: get payment order
       tags:
@@ -5086,6 +5159,7 @@ paths:
         in: query
         schema:
           type: string
+          format: uuid
         required: false
         description: The id of the referenceable to search for. Must be accompanied
           by the referenceable_type or will return an error.
@@ -5132,10 +5206,11 @@ paths:
     parameters:
     - name: id
       in: path
-      description: id
-      required: true
       schema:
         type: string
+        format: uuid
+      description: id
+      required: true
     get:
       summary: get payment_reference
       tags:
@@ -5200,24 +5275,27 @@ paths:
           type: integer
       - name: internal_account_id
         in: query
+        schema:
+          type: string
+          format: uuid
         required: false
         description: Specify `internal_account_id` if you wish to see returns to/from
           a specific account.
-        schema:
-          type: string
       - name: counterparty_id
         in: query
+        schema:
+          type: string
+          format: uuid
         required: false
         description: Specify `counterparty_id` if you wish to see returns that occurred
           with a specific counterparty.
-        schema:
-          type: string
       - name: returnable_id
         in: query
-        required: false
-        description: The ID of a valid returnable. Must be accompanied by `returnable_type`.
         schema:
           type: string
+          format: uuid
+        required: false
+        description: The ID of a valid returnable. Must be accompanied by `returnable_type`.
       - name: returnable_type
         in: query
         schema:
@@ -5302,10 +5380,11 @@ paths:
     parameters:
     - name: id
       in: path
-      description: The ID of an existing return.
-      required: true
       schema:
         type: string
+        format: uuid
+      description: The ID of an existing return.
+      required: true
     get:
       summary: show return
       tags:
@@ -5341,6 +5420,7 @@ paths:
         in: path
         schema:
           type: string
+          format: uuid
         description: The ID of the relevant Payment Order.
         required: true
       - name: after_cursor
@@ -5481,10 +5561,11 @@ paths:
         required: true
       - name: account_id
         in: path
-        description: The ID of the account.
-        required: true
         schema:
           type: string
+          format: uuid
+        description: The ID of the account.
+        required: true
       - name: after_cursor
         in: query
         schema:
@@ -5542,10 +5623,11 @@ paths:
         required: true
       - name: account_id
         in: path
-        description: The ID of the account.
-        required: true
         schema:
           type: string
+          format: uuid
+        description: The ID of the account.
+        required: true
       responses:
         '201':
           description: successful
@@ -5590,16 +5672,18 @@ paths:
         required: true
       - name: account_id
         in: path
+        schema:
+          type: string
+          format: uuid
         description: The ID of the account.
         required: true
-        schema:
-          type: string
       - name: id
         in: path
-        description: The ID of the routing detail.
-        required: true
         schema:
           type: string
+          format: uuid
+        description: The ID of the routing detail.
+        required: true
       responses:
         '200':
           description: successful
@@ -5631,16 +5715,18 @@ paths:
         required: true
       - name: account_id
         in: path
+        schema:
+          type: string
+          format: uuid
         description: The ID of the account.
         required: true
-        schema:
-          type: string
       - name: id
         in: path
-        description: The ID of the routing detail.
-        required: true
         schema:
           type: string
+          format: uuid
+        description: The ID of the routing detail.
+        required: true
       responses:
         '204':
           description: successful
@@ -5695,10 +5781,11 @@ paths:
     parameters:
     - name: transaction_id
       in: path
-      description: transaction_id
-      required: true
       schema:
         type: string
+        format: uuid
+      description: transaction_id
+      required: true
     - name: after_cursor
       in: query
       schema:
@@ -5765,6 +5852,7 @@ paths:
         type: object
         additionalProperties:
           type: string
+          format: uuid
     - name: type
       in: query
       schema:
@@ -5783,6 +5871,7 @@ paths:
       in: query
       schema:
         type: string
+        format: uuid
       required: false
     get:
       summary: list transaction_line_items
@@ -5816,10 +5905,11 @@ paths:
     parameters:
     - name: id
       in: path
-      description: id
-      required: true
       schema:
         type: string
+        format: uuid
+      description: id
+      required: true
     get:
       summary: get transaction line item
       tags:
@@ -5958,10 +6048,11 @@ paths:
     parameters:
     - name: id
       in: path
-      required: true
-      description: Transaction ID
       schema:
         type: string
+        format: uuid
+      required: true
+      description: Transaction ID
     get:
       summary: get transaction
       tags:
@@ -6042,13 +6133,14 @@ paths:
           - in_ifsc
           - jp_zengin_code
           - my_branch_code
+          - nz_national_clearing_code
           - se_bankgiro_clearing_code
           - swift
         required: true
         description: One of `aba`, `au_bsb`, `br_codigo`, `ca_cpa`, `cnaps`, `gb_sort_code`,
-          `in_ifsc`, `my_branch_code`, `se_bankgiro_clearing_code`, or `swift`. In
-          sandbox mode we currently only support `aba` and `swift` with routing numbers
-          '123456789' and 'GRINUST0XXX' respectively.
+          `in_ifsc`, `my_branch_code`, `nz_national_clearing_code`, `se_bankgiro_clearing_code`,
+          or `swift`. In sandbox mode we currently only support `aba` and `swift`
+          with routing numbers '123456789' and 'GRINUST0XXX' respectively.
       responses:
         '200':
           description: successful valid routing number and type
@@ -6172,10 +6264,11 @@ paths:
     parameters:
     - name: id
       in: path
-      required: true
-      description: Virtual Acccount ID
       schema:
         type: string
+        format: uuid
+      required: true
+      description: Virtual Acccount ID
     get:
       summary: get virtual_account
       tags:
@@ -6262,14 +6355,16 @@ paths:
           type: string
       - name: counterparty_id
         in: query
-        required: false
         schema:
           type: string
+          format: uuid
+        required: false
       - name: external_account_id
         in: query
-        required: false
         schema:
           type: string
+          format: uuid
+        required: false
       responses:
         '200':
           description: successful
@@ -6328,10 +6423,11 @@ paths:
     parameters:
     - name: id
       in: path
-      description: id
-      required: true
       schema:
         type: string
+        format: uuid
+      description: id
+      required: true
     get:
       summary: get account_collection_flow
       tags:
@@ -6425,24 +6521,28 @@ paths:
           type: string
       - name: counterparty_id
         in: query
-        required: false
         schema:
           type: string
+          format: uuid
+        required: false
       - name: receiving_account_id
         in: query
-        required: false
         schema:
           type: string
+          format: uuid
+        required: false
       - name: originating_account_id
         in: query
-        required: false
         schema:
           type: string
+          format: uuid
+        required: false
       - name: payment_order_id
         in: query
-        required: false
         schema:
           type: string
+          format: uuid
+        required: false
       responses:
         '200':
           description: successful
@@ -6501,10 +6601,11 @@ paths:
     parameters:
     - name: id
       in: path
-      description: id
-      required: true
       schema:
         type: string
+        format: uuid
+      description: id
+      required: true
     get:
       summary: get payment_flow
       tags:
@@ -6692,6 +6793,7 @@ components:
             - NLD
             - PER
             - ESP
+            - GBR
             description: An account created with this flow will support wires from
               the US to these countries.
       additionalProperties: false
@@ -6733,6 +6835,7 @@ components:
             - NLD
             - PER
             - ESP
+            - GBR
             description: Optional. Array of 3-digit ISO country codes.
       required:
       - payment_types
@@ -7348,6 +7451,8 @@ components:
             - routingNumberType
             - address
             - jp_zengin_code
+            - se_bankgiro_clearing_code
+            - nz_national_clearing_code
           description: The list of fields you want on the form. This field is optional
             and if it is not set, will default to [\"nameOnAccount\", \"accountType\",
             \"accountNumber\", \"routingNumber\", \"address\"]. The full list of options
@@ -7460,6 +7565,7 @@ components:
                       - gb_sort_code
                       - in_ifsc
                       - my_branch_code
+                      - nz_national_clearing_code
                       - swift
                       - jp_zengin_code
                     payment_type:
@@ -7467,22 +7573,23 @@ components:
                       enum:
                       - ach
                       - au_becs
-                      - se_bankgirot
                       - bacs
                       - book
                       - card
                       - check
-                      - eft
                       - cross_border
+                      - eft
                       - interac
                       - masav
                       - neft
                       - nics
+                      - nz_becs
                       - provxchange
                       - rtp
+                      - se_bankgirot
                       - sen
-                      - sic
                       - sepa
+                      - sic
                       - signet
                       - wire
                       - zengin
@@ -8076,6 +8183,7 @@ components:
           - masav
           - neft
           - nics
+          - nz_becs
           - provxchange
           - rtp
           - se_bankgirot
@@ -8142,6 +8250,10 @@ components:
           type: object
           nullable: true
           description: The reconciliation filters you have for this payment.
+        reconciliation_rule_variables:
+          type: array
+          nullable: true
+          description: An array of reconciliation rule variables for this payment.
         transaction_id:
           type: string
           format: uuid
@@ -8177,7 +8289,7 @@ components:
           nullable: true
           description: The ID of the ledger transaction linked to the expected payment.
       additionalProperties: false
-      minProperties: 25
+      minProperties: 26
       required:
       - id
       - object
@@ -8199,6 +8311,7 @@ components:
       - remittance_information
       - reconciliation_groups
       - reconciliation_filters
+      - reconciliation_rule_variables
       - transaction_id
       - transaction_line_item_id
       - status
@@ -8243,6 +8356,7 @@ components:
           - masav
           - neft
           - nics
+          - nz_becs
           - provxchange
           - rtp
           - se_bankgirot
@@ -8309,6 +8423,10 @@ components:
           type: object
           nullable: true
           description: The reconciliation filters you have for this payment.
+        reconciliation_rule_variables:
+          type: array
+          nullable: true
+          description: An array of reconciliation rule variables for this payment.
         line_items:
           type: array
           items:
@@ -8357,6 +8475,7 @@ components:
           - masav
           - neft
           - nics
+          - nz_becs
           - provxchange
           - rtp
           - se_bankgirot
@@ -8423,6 +8542,10 @@ components:
           type: object
           nullable: true
           description: The reconciliation filters you have for this payment.
+        reconciliation_rule_variables:
+          type: array
+          nullable: true
+          description: An array of reconciliation rule variables for this payment.
     external_account:
       type: object
       properties:
@@ -8614,6 +8737,7 @@ components:
                 - gb_sort_code
                 - in_ifsc
                 - my_branch_code
+                - nz_national_clearing_code
                 - swift
                 - jp_zengin_code
               payment_type:
@@ -8621,22 +8745,23 @@ components:
                 enum:
                 - ach
                 - au_becs
-                - se_bankgirot
                 - bacs
                 - book
                 - card
                 - check
-                - eft
                 - cross_border
+                - eft
                 - interac
                 - masav
                 - neft
                 - nics
+                - nz_becs
                 - provxchange
                 - rtp
+                - se_bankgirot
                 - sen
-                - sic
                 - sepa
+                - sic
                 - signet
                 - wire
                 - zengin
@@ -8740,6 +8865,7 @@ components:
           - masav
           - neft
           - nics
+          - nz_becs
           - provxchange
           - rtp
           - se_bankgirot
@@ -8891,6 +9017,7 @@ components:
           - in_ifsc
           - jp_zengin_code
           - my_branch_code
+          - nz_national_clearing_code
           - se_bankgiro_clearing_code
           - swift
           description: The type of the originating routing number for the incoming
@@ -9330,6 +9457,11 @@ components:
             "$ref": "#/components/schemas/payment_order"
           description: The payment orders created for paying the invoice through the
             invoice payment UI.
+        expected_payments:
+          type: array
+          items:
+            "$ref": "#/components/schemas/expected_payment"
+          description: The expected payments created for an unpaid invoice.
         pdf_url:
           type: string
           nullable: true
@@ -9339,6 +9471,7 @@ components:
           enum:
           - draft
           - paid
+          - partially_paid
           - payment_pending
           - unpaid
           - voided
@@ -9347,6 +9480,14 @@ components:
           type: integer
           description: Total amount due in specified currency's smallest unit, e.g.,
             $10 USD would be represented as 1000.
+        amount_remaining:
+          type: integer
+          description: Amount remaining due on the invoice in specified currency's
+            smallest unit, e.g., $10 USD would be represented as 1000.
+        amount_paid:
+          type: integer
+          description: Amount paid on the invoice in specified currency's smallest
+            unit, e.g., $10 USD would be represented as 1000.
         transaction_line_item_ids:
           type: array
           items:
@@ -9354,7 +9495,7 @@ components:
             format: uuid
           description: IDs of transaction line items associated with an invoice.
       additionalProperties: false
-      minProperties: 30
+      minProperties: 33
       required:
       - id
       - object
@@ -9382,9 +9523,12 @@ components:
       - hosted_url
       - number
       - payment_orders
+      - expected_payments
       - pdf_url
       - status
       - total_amount
+      - amount_remaining
+      - amount_paid
       - transaction_line_item_ids
     invoice_create_request:
       type: object
@@ -9523,28 +9667,29 @@ components:
           enum:
           - ach
           - au_becs
-          - se_bankgirot
           - bacs
           - book
           - card
           - check
-          - eft
           - cross_border
+          - eft
           - interac
           - masav
           - neft
           - nics
+          - nz_becs
           - provxchange
           - rtp
+          - se_bankgirot
           - sen
-          - sic
           - sepa
+          - sic
           - signet
           - wire
           - zengin
           description: One of `ach`, `bankgirot`, `eft`, `wire`, `check`, `sen`, `book`,
-            `rtp`, `sepa`, `bacs`, `au_becs`, `interac`, `neft`, `nics`, `sic`, `signet`,
-            `provexchange`, `zengin`.
+            `rtp`, `sepa`, `bacs`, `au_becs`, `interac`, `neft`, `nics`, `nz_national_clearing_code`,
+            `sic`, `signet`, `provexchange`, `zengin`.
         payment_method:
           type: string
           enum:
@@ -9711,28 +9856,29 @@ components:
           enum:
           - ach
           - au_becs
-          - se_bankgirot
           - bacs
           - book
           - card
           - check
-          - eft
           - cross_border
+          - eft
           - interac
           - masav
           - neft
           - nics
+          - nz_becs
           - provxchange
           - rtp
+          - se_bankgirot
           - sen
-          - sic
           - sepa
+          - sic
           - signet
           - wire
           - zengin
           description: One of `ach`, `bankgirot`, `eft`, `wire`, `check`, `sen`, `book`,
-            `rtp`, `sepa`, `bacs`, `au_becs`, `interac`, `neft`, `nics`, `sic`, `signet`,
-            `provexchange`, `zengin`.
+            `rtp`, `sepa`, `bacs`, `au_becs`, `interac`, `neft`, `nics`, `nz_national_clearing_code`,
+            `sic`, `signet`, `provexchange`, `zengin`.
         payment_method:
           type: string
           enum:
@@ -10474,7 +10620,7 @@ components:
             funds from the payout ledger account.
         effective_at_upper_bound:
           type: string
-          format: time
+          format: date-time
           description: The exclusive upper bound of the effective_at timestamp of
             the ledger entries to be included in the ledger account payout. The default
             value is the created_at timestamp of the ledger account payout.
@@ -10642,12 +10788,12 @@ components:
           description: The normal balance of the ledger account.
         effective_at_lower_bound:
           type: string
-          format: time
+          format: date-time
           description: The inclusive lower bound of the effective_at timestamp of
             the ledger entries to be included in the ledger account statement.
         effective_at_upper_bound:
           type: string
-          format: time
+          format: date-time
           description: The exclusive upper bound of the effective_at timestamp of
             the ledger entries to be included in the ledger account statement.
         starting_balance:
@@ -10708,12 +10854,12 @@ components:
             against, and its balances are computed as a result.
         effective_at_lower_bound:
           type: string
-          format: time
+          format: date-time
           description: The inclusive lower bound of the effective_at timestamp of
             the ledger entries to be included in the ledger account statement.
         effective_at_upper_bound:
           type: string
-          format: time
+          format: date-time
           description: The exclusive upper bound of the effective_at timestamp of
             the ledger entries to be included in the ledger account statement.
         metadata:
@@ -10779,13 +10925,13 @@ components:
       properties:
         effective_at_lower_bound:
           type: string
-          format: time
+          format: date-time
           description: The inclusive lower bound of the effective_at timestamp for
             the returned balances.
           nullable: true
         effective_at_upper_bound:
           type: string
-          format: time
+          format: date-time
           description: The exclusive upper bound of the effective_at timestamp for
             the returned balances.
           nullable: true
@@ -11102,9 +11248,18 @@ components:
         name:
           type: string
           description: Name of the ledger event handler.
+          example: My Event Handler
         description:
           type: string
           description: An optional description.
+          example: My Description
+          nullable: true
+        ledger_id:
+          type: string
+          description: The id of the ledger that this event handler belongs to.
+          nullable: true
+        variables:
+          "$ref": "#/components/schemas/ledger_event_handler_variables"
           nullable: true
         ledger_transaction_template:
           "$ref": "#/components/schemas/ledger_event_handler_ledger_transaction_template"
@@ -11123,7 +11278,7 @@ components:
             modern: treasury
           nullable: true
       additionalProperties: false
-      minProperties: 11
+      minProperties: 13
       required:
       - id
       - object
@@ -11133,6 +11288,8 @@ components:
       - discarded_at
       - name
       - description
+      - ledger_id
+      - variables
       - ledger_transaction_template
       - conditions
       - metadata
@@ -11141,16 +11298,19 @@ components:
       properties:
         field:
           type: string
-          description: The field you're fetching from the `ledgerable_event`.
+          description: The LHS of the conditional.
         operator:
           type: string
-          description: What the operator between the `field` and `value` is. Currently
-            only supports `equals`.
+          description: What the operator between the `field` and `value` is.
         value:
           type: string
-          description: What raw string you are comparing the `field` against.
+          description: The RHS of the conditional.
       additionalProperties: false
       minProperties: 3
+      example:
+        query: ledgerable_event.name
+        operator: equals
+        value: credit_card_swipe
       required:
       - field
       - operator
@@ -11169,6 +11329,9 @@ components:
           type: string
           format: uuid
           description: The id of the ledger that this account belongs to.
+        variables:
+          "$ref": "#/components/schemas/ledger_event_handler_variables"
+          nullable: true
         ledger_transaction_template:
           "$ref": "#/components/schemas/ledger_event_handler_ledger_transaction_template"
         conditions:
@@ -11193,14 +11356,13 @@ components:
       properties:
         amount:
           type: string
-          description: The field you're fetching from the `ledgerable_event`.
+          description: The LHS of the conditional.
         direction:
           type: string
-          description: What the operator between the `field` and `value` is. Currently
-            only supports `equals`.
+          description: What the operator between the `field` and `value` is.
         ledger_account_id:
           type: string
-          description: What raw string you are comparing the `field` against.
+          description: The RHS of the conditional.
       additionalProperties: false
       minProperties: 3
       required:
@@ -11212,37 +11374,68 @@ components:
       properties:
         description:
           type: string
-          description: An optional description for internal use.
+          description: 'Translation missing: en.openapi.descriptions.ledger_event_handler.schema.ledger_transaction.description'
+          example: My Ledger Transaction Template Description
           nullable: true
         effective_at:
           type: string
-          format: datetime
-          description: The timestamp (ISO8601 format) at which the ledger transaction
-            happened for reporting purposes.
+          description: 'Translation missing: en.openapi.descriptions.ledger_event_handler.schema.ledger_transaction.effective_at'
+          example: My Ledger Transaction Template Effective At
+          nullable: true
+        status:
+          type: string
+          description: 'Translation missing: en.openapi.descriptions.ledger_event_handler.schema.ledger_transaction.status'
+          example: posted
           nullable: true
         ledger_entries:
           type: array
           items:
             "$ref": "#/components/schemas/ledger_event_handler_ledger_entries"
           description: An array of ledger entry objects.
-        metadata:
-          type: object
-          description: Additional data represented as key-value pairs. Both the key
-            and value must be strings.
-          additionalProperties:
-            type: string
-          example:
-            key: value
-            foo: bar
-            modern: treasury
-          nullable: true
       additionalProperties: false
       minProperties: 4
       required:
       - description
       - effective_at
+      - status
       - ledger_entries
-      - metadata
+    ledger_event_handler_variable:
+      type: object
+      properties:
+        type:
+          type: string
+          description: The type of object this variable is. Currently, only "ledger_account"
+            is supported.
+        query:
+          "$ref": "#/components/schemas/ledger_event_handler_conditions"
+          nullable: false
+      additionalProperties: false
+      minProperties: 2
+      example:
+        type: ledger_account
+        query:
+          field: name
+          operator: equals
+          value: my_credit_account
+      required:
+      - type
+      - query
+    ledger_event_handler_variables:
+      type: object
+      properties: {}
+      additionalProperties:
+        "$ref": "#/components/schemas/ledger_event_handler_variable"
+        description: Each variable may be named using alphabetic, numeric, underscore,
+          or dash characters. Variable names are how you refer to objects from the
+          ledger_transaction_template. There can only be a maximum of 10 variables
+          in this map.
+      example:
+        credit_account:
+          type: ledger_account
+          query:
+            field: name
+            operator: equals
+            value: my_credit_account
     ledger_transaction:
       type: object
       properties:
@@ -11284,7 +11477,7 @@ components:
             modern: treasury
         effective_at:
           type: string
-          format: date
+          format: date-time
           description: The timestamp (ISO8601 format) at which the ledger transaction
             happened for reporting purposes.
         effective_date:
@@ -11299,7 +11492,7 @@ components:
           description: An array of ledger entry objects.
         posted_at:
           type: string
-          format: time
+          format: date-time
           nullable: true
           description: The time on which the ledger transaction posted. This is null
             if the ledger transaction is pending.
@@ -11403,7 +11596,7 @@ components:
             modern: treasury
         effective_at:
           type: string
-          format: time
+          format: date-time
           description: The timestamp (ISO8601 format) at which the ledger transaction
             happened for reporting purposes.
         effective_date:
@@ -11418,7 +11611,7 @@ components:
           description: An array of ledger entry objects.
         posted_at:
           type: string
-          format: time
+          format: date-time
           nullable: true
           description: The time on which the ledger transaction posted. This is null
             if the ledger transaction is pending.
@@ -11504,7 +11697,7 @@ components:
             modern: treasury
         effective_at:
           type: string
-          format: date
+          format: date-time
           description: The timestamp (ISO8601 format) at which the ledger transaction
             happened for reporting purposes.
         effective_date:
@@ -11571,7 +11764,7 @@ components:
             modern: treasury
         effective_at:
           type: string
-          format: date
+          format: date-time
           description: The timestamp (ISO8601 format) at which the ledger transaction
             happened for reporting purposes.
         ledger_entries:
@@ -11659,22 +11852,6 @@ components:
           type: string
           description: Description of the ledgerable event.
           nullable: true
-        direction:
-          type: string
-          description: One of `credit`, `debit`.
-          nullable: true
-        amount:
-          type: integer
-          description: Value in specified currency's smallest unit. e.g. $10 would
-            be represented as 1000.
-        currency:
-          type: string
-          description: An ISO 4217 conformed currency or a custom currency.
-        currency_exponent:
-          type: integer
-          description: Must be included if currency is a custom currency. The currency_exponent
-            cannot exceed 30.
-          nullable: true
         custom_data:
           type: object
           description: Additionally data to be used by the Ledger Event Handler.
@@ -11696,7 +11873,7 @@ components:
             modern: treasury
           nullable: true
       additionalProperties: false
-      minProperties: 14
+      minProperties: 10
       required:
       - id
       - object
@@ -11705,10 +11882,6 @@ components:
       - updated_at
       - name
       - description
-      - direction
-      - amount
-      - currency
-      - currency_exponent
       - custom_data
       - ledger_event_handler_id
       - metadata
@@ -11721,23 +11894,6 @@ components:
         description:
           type: string
           description: Description of the ledgerable event.
-          nullable: true
-        direction:
-          type: string
-          description: One of `credit`, `debit`.
-          nullable: true
-        amount:
-          type: integer
-          description: Value in specified currency's smallest unit. e.g. $10 would
-            be represented as 1000.
-        currency:
-          type: string
-          description: An ISO 4217 conformed currency or a custom currency.
-          nullable: true
-        currency_exponent:
-          type: integer
-          description: Must be included if currency is a custom currency. The currency_exponent
-            cannot exceed 30.
           nullable: true
         custom_data:
           type: object
@@ -12144,6 +12300,7 @@ components:
           - masav
           - neft
           - nics
+          - nz_becs
           - provxchange
           - rtp
           - se_bankgirot
@@ -12154,8 +12311,8 @@ components:
           - wire
           - zengin
           description: One of `ach`, `bankgirot`, `eft`, `wire`, `check`, `sen`, `book`,
-            `rtp`, `sepa`, `bacs`, `au_becs`, `interac`, `neft`, `nics`, `sic`, `signet`,
-            `provexchange`, `zengin`.
+            `rtp`, `sepa`, `bacs`, `au_becs`, `interac`, `neft`, `nics`, `nz_national_clearing_code`,
+            `sic`, `signet`, `provexchange`, `zengin`.
         subtype:
           type: string
           enum:
@@ -12557,6 +12714,7 @@ components:
           - masav
           - neft
           - nics
+          - nz_becs
           - provxchange
           - rtp
           - se_bankgirot
@@ -12567,8 +12725,8 @@ components:
           - wire
           - zengin
           description: One of `ach`, `bankgirot`, `eft`, `wire`, `check`, `sen`, `book`,
-            `rtp`, `sepa`, `bacs`, `au_becs`, `interac`, `neft`, `nics`, `sic`, `signet`,
-            `provexchange`, `zengin`.
+            `rtp`, `sepa`, `bacs`, `au_becs`, `interac`, `neft`, `nics`, `nz_national_clearing_code`,
+            `sic`, `signet`, `provexchange`, `zengin`.
         subtype:
           type: string
           enum:
@@ -12819,6 +12977,7 @@ components:
                     - gb_sort_code
                     - in_ifsc
                     - my_branch_code
+                    - nz_national_clearing_code
                     - swift
                     - jp_zengin_code
                   payment_type:
@@ -12826,22 +12985,23 @@ components:
                     enum:
                     - ach
                     - au_becs
-                    - se_bankgirot
                     - bacs
                     - book
                     - card
                     - check
-                    - eft
                     - cross_border
+                    - eft
                     - interac
                     - masav
                     - neft
                     - nics
+                    - nz_becs
                     - provxchange
                     - rtp
+                    - se_bankgirot
                     - sen
-                    - sic
                     - sepa
+                    - sic
                     - signet
                     - wire
                     - zengin
@@ -12927,6 +13087,7 @@ components:
           - masav
           - neft
           - nics
+          - nz_becs
           - provxchange
           - rtp
           - se_bankgirot
@@ -12937,8 +13098,8 @@ components:
           - wire
           - zengin
           description: One of `ach`, `bankgirot`, `eft`, `wire`, `check`, `sen`, `book`,
-            `rtp`, `sepa`, `bacs`, `au_becs`, `interac`, `neft`, `nics`, `sic`, `signet`,
-            `provexchange`, `zengin`.
+            `rtp`, `sepa`, `bacs`, `au_becs`, `interac`, `neft`, `nics`, `nz_national_clearing_code`,
+            `sic`, `signet`, `provexchange`, `zengin`.
         subtype:
           type: string
           enum:
@@ -13189,6 +13350,7 @@ components:
                     - gb_sort_code
                     - in_ifsc
                     - my_branch_code
+                    - nz_national_clearing_code
                     - swift
                     - jp_zengin_code
                   payment_type:
@@ -13196,22 +13358,23 @@ components:
                     enum:
                     - ach
                     - au_becs
-                    - se_bankgirot
                     - bacs
                     - book
                     - card
                     - check
-                    - eft
                     - cross_border
+                    - eft
                     - interac
                     - masav
                     - neft
                     - nics
+                    - nz_becs
                     - provxchange
                     - rtp
+                    - se_bankgirot
                     - sen
-                    - sic
                     - sepa
+                    - sic
                     - signet
                     - wire
                     - zengin
@@ -13290,6 +13453,7 @@ components:
           - masav
           - neft
           - nics
+          - nz_becs
           - provxchange
           - rtp
           - se_bankgirot
@@ -13300,8 +13464,8 @@ components:
           - wire
           - zengin
           description: One of `ach`, `bankgirot`, `eft`, `wire`, `check`, `sen`, `book`,
-            `rtp`, `sepa`, `bacs`, `au_becs`, `interac`, `neft`, `nics`, `sic`, `signet`,
-            `provexchange`, `zengin`.
+            `rtp`, `sepa`, `bacs`, `au_becs`, `interac`, `neft`, `nics`, `nz_national_clearing_code`,
+            `sic`, `signet`, `provexchange`, `zengin`.
         subtype:
           type: string
           enum:
@@ -13587,6 +13751,7 @@ components:
                     - gb_sort_code
                     - in_ifsc
                     - my_branch_code
+                    - nz_national_clearing_code
                     - swift
                     - jp_zengin_code
                   payment_type:
@@ -13594,22 +13759,23 @@ components:
                     enum:
                     - ach
                     - au_becs
-                    - se_bankgirot
                     - bacs
                     - book
                     - card
                     - check
-                    - eft
                     - cross_border
+                    - eft
                     - interac
                     - masav
                     - neft
                     - nics
+                    - nz_becs
                     - provxchange
                     - rtp
+                    - se_bankgirot
                     - sen
-                    - sic
                     - sepa
+                    - sic
                     - signet
                     - wire
                     - zengin
@@ -14274,6 +14440,7 @@ components:
           - in_ifsc
           - jp_zengin_code
           - my_branch_code
+          - nz_national_clearing_code
           - se_bankgiro_clearing_code
           - swift
           description: One of `aba`, `swift`, `ca_cpa`, `au_bsb`, `gb_sort_code`,
@@ -14293,6 +14460,7 @@ components:
           - masav
           - neft
           - nics
+          - nz_becs
           - provxchange
           - rtp
           - se_bankgirot
@@ -14343,6 +14511,7 @@ components:
           - in_ifsc
           - jp_zengin_code
           - my_branch_code
+          - nz_national_clearing_code
           - se_bankgiro_clearing_code
           - swift
           description: One of `aba`, `swift`, `ca_cpa`, `au_bsb`, `gb_sort_code`,
@@ -14362,6 +14531,7 @@ components:
           - masav
           - neft
           - nics
+          - nz_becs
           - provxchange
           - rtp
           - se_bankgirot
@@ -14391,12 +14561,13 @@ components:
           - ca_cpa
           - gb_sort_code
           - in_ifsc
+          - nz_national_clearing_code
           - se_bankgiro_clearing_code
           - swift
           description: One of `aba`, `au_bsb`, `br_codigo`, `ca_cpa`, `cnaps`, `gb_sort_code`,
-            `in_ifsc`, `my_branch_code`, `se_bankgiro_clearing_code`, or `swift`.
-            In sandbox mode we currently only support `aba` and `swift` with routing
-            numbers '123456789' and 'GRINUST0XXX' respectively.
+            `in_ifsc`, `my_branch_code`, `nz_national_clearing_code`, `se_bankgiro_clearing_code`,
+            or `swift`. In sandbox mode we currently only support `aba` and `swift`
+            with routing numbers '123456789' and 'GRINUST0XXX' respectively.
         supported_payment_types:
           type: array
           items:
@@ -14414,6 +14585,7 @@ components:
             - masav
             - neft
             - nics
+            - nz_becs
             - provxchange
             - rtp
             - se_bankgirot
@@ -14423,7 +14595,7 @@ components:
             - signet
             - wire
             - zengin
-          maxItems: 21
+          maxItems: 22
           example:
           - ach
           - au_becs
@@ -14437,6 +14609,7 @@ components:
           - masav
           - neft
           - nics
+          - nz_becs
           - provxchange
           - rtp
           - se_bankgirot
@@ -14652,6 +14825,7 @@ components:
           - masav
           - neft
           - nics
+          - nz_becs
           - provxchange
           - rtp
           - se_bankgirot
@@ -14766,8 +14940,12 @@ components:
         transaction_id:
           type: string
           description: The ID of the parent transaction.
+        reconcilable:
+          type: boolean
+          description: Describes whether this line item should be counted towards
+            the corresponding transaction’s reconciliation.
       additionalProperties: false
-      minProperties: 14
+      minProperties: 15
       required:
       - id
       - object
@@ -14783,6 +14961,7 @@ components:
       - counterparty_id
       - expected_payment_id
       - transaction_id
+      - reconcilable
     virtual_account:
       type: object
       properties:
