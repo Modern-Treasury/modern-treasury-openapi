@@ -1591,6 +1591,12 @@ paths:
             application/json:
               schema:
                 "$ref": "#/components/schemas/error_message"
+        '422':
+          description: unsuccessful
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/error_message"
       requestBody:
         content:
           application/json:
@@ -11345,7 +11351,7 @@ components:
       additionalProperties: false
       minProperties: 3
       example:
-        query: ledgerable_event.name
+        field: ledgerable_event.name
         operator: equals
         value: credit_card_swipe
       required:
@@ -11411,17 +11417,18 @@ components:
       properties:
         description:
           type: string
-          description: 'Translation missing: en.openapi.descriptions.ledger_event_handler.schema.ledger_transaction.description'
+          description: An optional description for internal use.
           example: My Ledger Transaction Template Description
           nullable: true
         effective_at:
           type: string
-          description: 'Translation missing: en.openapi.descriptions.ledger_event_handler.schema.ledger_transaction.effective_at'
-          example: My Ledger Transaction Template Effective At
+          description: The timestamp (ISO8601 format) at which the ledger transaction
+            happened for reporting purposes.
+          example: "{{ledgerable_event.custom_data.effective_at}}"
           nullable: true
         status:
           type: string
-          description: 'Translation missing: en.openapi.descriptions.ledger_event_handler.schema.ledger_transaction.status'
+          description: To post a ledger transaction at creation, use `posted`.
           example: posted
           nullable: true
         ledger_entries:
