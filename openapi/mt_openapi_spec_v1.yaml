@@ -1963,6 +1963,8 @@ paths:
             application/json:
               schema:
                 "$ref": "#/components/schemas/error_message"
+        '422':
+          description: unsuccessful
       requestBody:
         content:
           application/json:
@@ -9297,6 +9299,9 @@ components:
         counterparty_id:
           type: string
           description: The Counterparty associated to this account.
+        ledger_account_id:
+          type: string
+          description: The Ledger Account associated to this account.
     invoice:
       type: object
       properties:
