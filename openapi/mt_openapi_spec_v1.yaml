@@ -1206,6 +1206,7 @@ paths:
           - se_bankgirot
           - sen
           - sepa
+          - sg_giro
           - sic
           - signet
           - wire
@@ -1837,6 +1838,7 @@ paths:
           - se_bankgirot
           - sen
           - sepa
+          - sg_giro
           - sic
           - signet
           - wire
@@ -1963,6 +1965,8 @@ paths:
             application/json:
               schema:
                 "$ref": "#/components/schemas/error_message"
+        '422':
+          description: unsuccessful
       requestBody:
         content:
           application/json:
@@ -4925,6 +4929,7 @@ paths:
           - se_bankgirot
           - sen
           - sepa
+          - sg_giro
           - sic
           - signet
           - wire
@@ -7607,6 +7612,7 @@ components:
                       - nz_becs
                       - provxchange
                       - rtp
+                      - sg_giro
                       - se_bankgirot
                       - sen
                       - sepa
@@ -8213,6 +8219,7 @@ components:
           - se_bankgirot
           - sen
           - sepa
+          - sg_giro
           - sic
           - signet
           - wire
@@ -8387,6 +8394,7 @@ components:
           - se_bankgirot
           - sen
           - sepa
+          - sg_giro
           - sic
           - signet
           - wire
@@ -8507,6 +8515,7 @@ components:
           - se_bankgirot
           - sen
           - sepa
+          - sg_giro
           - sic
           - signet
           - wire
@@ -8786,6 +8795,7 @@ components:
                 - nz_becs
                 - provxchange
                 - rtp
+                - sg_giro
                 - se_bankgirot
                 - sen
                 - sepa
@@ -8900,6 +8910,7 @@ components:
           - se_bankgirot
           - sen
           - sepa
+          - sg_giro
           - sic
           - signet
           - wire
@@ -9297,6 +9308,9 @@ components:
         counterparty_id:
           type: string
           description: The Counterparty associated to this account.
+        ledger_account_id:
+          type: string
+          description: The Ledger Account associated to this account.
     invoice:
       type: object
       properties:
@@ -9711,6 +9725,7 @@ components:
           - nz_becs
           - provxchange
           - rtp
+          - sg_giro
           - se_bankgirot
           - sen
           - sepa
@@ -9901,6 +9916,7 @@ components:
           - nz_becs
           - provxchange
           - rtp
+          - sg_giro
           - se_bankgirot
           - sen
           - sepa
@@ -12351,6 +12367,7 @@ components:
           - se_bankgirot
           - sen
           - sepa
+          - sg_giro
           - sic
           - signet
           - wire
@@ -12863,6 +12880,7 @@ components:
           - se_bankgirot
           - sen
           - sepa
+          - sg_giro
           - sic
           - signet
           - wire
@@ -13143,6 +13161,7 @@ components:
                     - nz_becs
                     - provxchange
                     - rtp
+                    - sg_giro
                     - se_bankgirot
                     - sen
                     - sepa
@@ -13239,6 +13258,7 @@ components:
           - se_bankgirot
           - sen
           - sepa
+          - sg_giro
           - sic
           - signet
           - wire
@@ -13519,6 +13539,7 @@ components:
                     - nz_becs
                     - provxchange
                     - rtp
+                    - sg_giro
                     - se_bankgirot
                     - sen
                     - sepa
@@ -13608,6 +13629,7 @@ components:
           - se_bankgirot
           - sen
           - sepa
+          - sg_giro
           - sic
           - signet
           - wire
@@ -13923,6 +13945,7 @@ components:
                     - nz_becs
                     - provxchange
                     - rtp
+                    - sg_giro
                     - se_bankgirot
                     - sen
                     - sepa
@@ -14618,6 +14641,7 @@ components:
           - se_bankgirot
           - sen
           - sepa
+          - sg_giro
           - sic
           - signet
           - wire
@@ -14691,6 +14715,7 @@ components:
           - se_bankgirot
           - sen
           - sepa
+          - sg_giro
           - sic
           - signet
           - wire
@@ -14745,11 +14770,12 @@ components:
             - se_bankgirot
             - sen
             - sepa
+            - sg_giro
             - sic
             - signet
             - wire
             - zengin
-          maxItems: 23
+          maxItems: 24
           example:
           - ach
           - au_becs
@@ -14770,6 +14796,7 @@ components:
           - se_bankgirot
           - sen
           - sepa
+          - sg_giro
           - sic
           - signet
           - wire
@@ -14987,6 +15014,7 @@ components:
           - se_bankgirot
           - sen
           - sepa
+          - sg_giro
           - sic
           - signet
           - wire
