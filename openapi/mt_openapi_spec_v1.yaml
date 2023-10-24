@@ -1206,6 +1206,7 @@ paths:
           - se_bankgirot
           - sen
           - sepa
+          - sg_giro
           - sic
           - signet
           - wire
@@ -1837,6 +1838,7 @@ paths:
           - se_bankgirot
           - sen
           - sepa
+          - sg_giro
           - sic
           - signet
           - wire
@@ -1963,6 +1965,8 @@ paths:
             application/json:
               schema:
                 "$ref": "#/components/schemas/error_message"
+        '422':
+          description: unsuccessful
       requestBody:
         content:
           application/json:
@@ -3483,7 +3487,7 @@ paths:
           type: object
           additionalProperties:
             type: string
-            format: time
+            format: date-time
         style: deepObject
         required: false
         description: Use `gt` (>), `gte` (>=), `lt` (<), `lte` (<=), or `eq` (=) to
@@ -4925,6 +4929,7 @@ paths:
           - se_bankgirot
           - sen
           - sepa
+          - sg_giro
           - sic
           - signet
           - wire
@@ -7607,6 +7612,7 @@ components:
                       - nz_becs
                       - provxchange
                       - rtp
+                      - sg_giro
                       - se_bankgirot
                       - sen
                       - sepa
@@ -8213,6 +8219,7 @@ components:
           - se_bankgirot
           - sen
           - sepa
+          - sg_giro
           - sic
           - signet
           - wire
@@ -8387,6 +8394,7 @@ components:
           - se_bankgirot
           - sen
           - sepa
+          - sg_giro
           - sic
           - signet
           - wire
@@ -8507,6 +8515,7 @@ components:
           - se_bankgirot
           - sen
           - sepa
+          - sg_giro
           - sic
           - signet
           - wire
@@ -8786,6 +8795,7 @@ components:
                 - nz_becs
                 - provxchange
                 - rtp
+                - sg_giro
                 - se_bankgirot
                 - sen
                 - sepa
@@ -8900,6 +8910,7 @@ components:
           - se_bankgirot
           - sen
           - sepa
+          - sg_giro
           - sic
           - signet
           - wire
@@ -9297,6 +9308,9 @@ components:
         counterparty_id:
           type: string
           description: The Counterparty associated to this account.
+        ledger_account_id:
+          type: string
+          description: The Ledger Account associated to this account.
     invoice:
       type: object
       properties:
@@ -9711,6 +9725,7 @@ components:
           - nz_becs
           - provxchange
           - rtp
+          - sg_giro
           - se_bankgirot
           - sen
           - sepa
@@ -9901,6 +9916,7 @@ components:
           - nz_becs
           - provxchange
           - rtp
+          - sg_giro
           - se_bankgirot
           - sen
           - sepa
@@ -10740,7 +10756,7 @@ components:
           nullable: true
         effective_at_upper_bound:
           type: string
-          format: time
+          format: date-time
           description: The exclusive upper bound of the effective_at timestamp of
             the ledger entries to be included in the ledger account payout. The default
             value is the created_at timestamp of the ledger account payout.
@@ -12351,6 +12367,7 @@ components:
           - se_bankgirot
           - sen
           - sepa
+          - sg_giro
           - sic
           - signet
           - wire
@@ -12646,82 +12663,7 @@ components:
           - external_account
         ultimate_originating_account:
           oneOf:
-          - type: object
-            properties:
-              id:
-                type: string
-                format: uuid
-              object:
-                type: string
-              live_mode:
-                type: boolean
-                description: This field will be true if this object exists in the
-                  live environment or false if it exists in the test environment.
-              created_at:
-                type: string
-                format: date-time
-              updated_at:
-                type: string
-                format: date-time
-              discarded_at:
-                type: string
-                format: date-time
-                nullable: true
-              name:
-                type: string
-                description: The name of the virtual account.
-              description:
-                type: string
-                description: An optional free-form description for internal use.
-                nullable: true
-              counterparty_id:
-                type: string
-                format: uuid
-                description: The ID of a counterparty that the virtual account belongs
-                  to. Optional.
-                nullable: true
-              internal_account_id:
-                type: string
-                format: uuid
-                description: The ID of the internal account that the virtual account
-                  is in.
-              account_details:
-                type: array
-                description: An array of account detail objects.
-                items:
-                  "$ref": "#/components/schemas/account_detail"
-              routing_details:
-                type: array
-                description: An array of routing detail objects. These will be the
-                  routing details of the internal account.
-                items:
-                  "$ref": "#/components/schemas/routing_detail"
-              debit_ledger_account_id:
-                type: string
-                format: uuid
-                description: The ID of a debit normal ledger account. When money enters
-                  the virtual account, this ledger account will be debited. Must be
-                  accompanied by a credit_ledger_account_id if present.
-                nullable: true
-              credit_ledger_account_id:
-                type: string
-                format: uuid
-                description: The ID of a credit normal ledger account. When money
-                  enters the virtual account, this ledger account will be credited.
-                  Must be accompanied by a debit_ledger_account_id if present.
-                nullable: true
-              metadata:
-                type: object
-                description: Additional data represented as key-value pairs. Both
-                  the key and value must be strings.
-                additionalProperties:
-                  type: string
-                example:
-                  key: value
-                  foo: bar
-                  modern: treasury
-            additionalProperties: false
-            minProperties: 15
+          - "$ref": "#/components/schemas/virtual_account"
           - "$ref": "#/components/schemas/internal_account"
           description: The account to which the originating of this payment should
             be attributed to. Can be a `virtual_account` or `internal_account`.
@@ -12863,6 +12805,7 @@ components:
           - se_bankgirot
           - sen
           - sepa
+          - sg_giro
           - sic
           - signet
           - wire
@@ -13143,6 +13086,7 @@ components:
                     - nz_becs
                     - provxchange
                     - rtp
+                    - sg_giro
                     - se_bankgirot
                     - sen
                     - sepa
@@ -13239,6 +13183,7 @@ components:
           - se_bankgirot
           - sen
           - sepa
+          - sg_giro
           - sic
           - signet
           - wire
@@ -13519,6 +13464,7 @@ components:
                     - nz_becs
                     - provxchange
                     - rtp
+                    - sg_giro
                     - se_bankgirot
                     - sen
                     - sepa
@@ -13608,6 +13554,7 @@ components:
           - se_bankgirot
           - sen
           - sepa
+          - sg_giro
           - sic
           - signet
           - wire
@@ -13923,6 +13870,7 @@ components:
                     - nz_becs
                     - provxchange
                     - rtp
+                    - sg_giro
                     - se_bankgirot
                     - sen
                     - sepa
@@ -14618,6 +14566,7 @@ components:
           - se_bankgirot
           - sen
           - sepa
+          - sg_giro
           - sic
           - signet
           - wire
@@ -14691,6 +14640,7 @@ components:
           - se_bankgirot
           - sen
           - sepa
+          - sg_giro
           - sic
           - signet
           - wire
@@ -14745,11 +14695,12 @@ components:
             - se_bankgirot
             - sen
             - sepa
+            - sg_giro
             - sic
             - signet
             - wire
             - zengin
-          maxItems: 23
+          maxItems: 24
           example:
           - ach
           - au_becs
@@ -14770,6 +14721,7 @@ components:
           - se_bankgirot
           - sen
           - sepa
+          - sg_giro
           - sic
           - signet
           - wire
@@ -14987,6 +14939,7 @@ components:
           - se_bankgirot
           - sen
           - sepa
+          - sg_giro
           - sic
           - signet
           - wire
