@@ -13136,6 +13136,13 @@ components:
             with the payment order. If the ledger transaction cannot be created, then
             the payment order creation will fail. The resulting ledger transaction
             will mirror the status of the payment order.
+        ledger_transaction_id:
+          type: string
+          format: uuid
+          description: Either ledger_transaction or ledger_transaction_id can be provided.
+            Only a pending ledger transaction can be attached upon payment order creation.
+            Once the payment order is created, the status of the ledger transaction
+            tracks the payment order automatically.
         line_items:
           type: array
           items:
@@ -13514,6 +13521,13 @@ components:
             with the payment order. If the ledger transaction cannot be created, then
             the payment order creation will fail. The resulting ledger transaction
             will mirror the status of the payment order.
+        ledger_transaction_id:
+          type: string
+          format: uuid
+          description: Either ledger_transaction or ledger_transaction_id can be provided.
+            Only a pending ledger transaction can be attached upon payment order creation.
+            Once the payment order is created, the status of the ledger transaction
+            tracks the payment order automatically.
         line_items:
           type: array
           items:
