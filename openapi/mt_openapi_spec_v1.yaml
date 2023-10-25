@@ -12273,9 +12273,25 @@ components:
           description: This field is set after your end-user selects a payment date
             while completing the pre-built UI. This field is always `null` unless
             `effective_date_selection_enabled` is `true`.
+        external_account_collection:
+          type: string
+          enum:
+          - disabled
+          - enabled
+          description: When `enabled`, your end-user can select from an existing external
+            account when completing the flow. When `disabled`, your end-user must
+            add new payment details when completing the flow.
+        existing_external_accounts_filter:
+          type: string
+          enum:
+          - verified
+          nullable: true
+          description: When `verified` and `external_account_collection` is `enabled`,
+            filters the list of external accounts your end-user can select to those
+            with a `verification_status` of `verified`.
       additionalProperties: false
-      minProperties: 15
-      maxProperties: 17
+      minProperties: 17
+      maxProperties: 19
     payment_flow_create_request:
       type: object
       properties:
