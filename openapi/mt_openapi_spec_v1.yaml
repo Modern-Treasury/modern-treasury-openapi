@@ -11756,8 +11756,10 @@ components:
           - pending
           - posted
           - processing
+          - reversed
+          - reversing
           description: The status of the ledger account payout. One of `processing`,
-            `pending`, `posted`, `archiving` or `archived`.
+            `pending`, `posted`, `archiving`, `archived`, `reversing` or `reversed`.
         payout_ledger_account_id:
           type: string
           format: uuid
@@ -15126,6 +15128,8 @@ components:
           - signet_confirmation_id
           - signet_request_id
           - silvergate_payment_id
+          - svb_transaction_cleared_for_sanctions_review
+          - svb_transaction_held_for_sanctions_review
           - swift_mir
           - swift_uetr
           - usbank_payment_id
@@ -15229,6 +15233,8 @@ components:
           - signet_confirmation_id
           - signet_request_id
           - silvergate_payment_id
+          - svb_transaction_cleared_for_sanctions_review
+          - svb_transaction_held_for_sanctions_review
           - swift_mir
           - swift_uetr
           - usbank_payment_id
