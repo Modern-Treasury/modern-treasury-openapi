@@ -6375,6 +6375,39 @@ paths:
                 type: array
                 items:
                   "$ref": "#/components/schemas/transaction"
+    post:
+      summary: create transaction
+      tags:
+      - Transaction
+      operationId: createTransaction
+      security:
+      - basic_auth: []
+      parameters:
+      - name: Idempotency-Key
+        in: header
+        required: false
+        description: This key should be something unique, preferably something like
+          an UUID.
+        schema:
+          type: string
+      responses:
+        '422':
+          description: unsuccessful
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/error_message"
+        '201':
+          description: successful
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/transaction"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              "$ref": "#/components/schemas/transaction_create_request"
   "/api/transactions/{id}":
     parameters:
     - name: id
@@ -6432,6 +6465,22 @@ paths:
           application/json:
             schema:
               "$ref": "#/components/schemas/transaction_update_request"
+    delete:
+      summary: delete transaction
+      tags:
+      - Transaction
+      operationId: deleteTransaction
+      security:
+      - basic_auth: []
+      responses:
+        '204':
+          description: successful
+        '422':
+          description: unsuccessful
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/error_message"
   "/api/validations/routing_numbers":
     get:
       summary: validate routing numbers
@@ -15474,7 +15523,7 @@ components:
           description: The type of `vendor_code` being reported. Can be one of `bai2`,
             `bankprov`, `bnk_dev`, `cleartouch`, `currencycloud`, `cross_river`, `dc_bank`,
             `dwolla`, `evolve`, `goldman_sachs`, `iso20022`, `jpmc`, `mx`, `signet`,
-            `silvergate`, `swift`, or `us_bank`.
+            `silvergate`, `swift`, `us_bank`, or others.
         vendor_id:
           type: string
           nullable: true
@@ -15591,6 +15640,60 @@ components:
             type: string
           description: Additional data in the form of key-value pairs. Pairs can be
             removed by passing an empty string or `null` as the value.
+    transaction_create_request:
+      type: object
+      properties:
+        amount:
+          type: integer
+          description: Value in specified currency's smallest unit. e.g. $10 would
+            be represented as 1000.
+        direction:
+          type: string
+          description: Either `credit` or `debit`.
+        vendor_description:
+          type: string
+          nullable: true
+          description: The transaction detail text that often appears in on your bank
+            statement and in your banking portal.
+        vendor_code:
+          type: string
+          description: When applicable, the bank-given code that determines the transaction's
+            category. For most banks this is the BAI2/BTRS transaction code.
+        vendor_code_type:
+          type: string
+          description: The type of `vendor_code` being reported. Can be one of `bai2`,
+            `bankprov`, `bnk_dev`, `cleartouch`, `currencycloud`, `cross_river`, `dc_bank`,
+            `dwolla`, `evolve`, `goldman_sachs`, `iso20022`, `jpmc`, `mx`, `signet`,
+            `silvergate`, `swift`, `us_bank`, or others.
+        as_of_date:
+          type: string
+          nullable: true
+          format: date
+          description: The date on which the transaction occurred.
+        internal_account_id:
+          type: string
+          format: uuid
+          description: The ID of the relevant Internal Account.
+        metadata:
+          type: object
+          description: Additional data represented as key-value pairs. Both the key
+            and value must be strings.
+          additionalProperties:
+            type: string
+          example:
+            key: value
+            foo: bar
+            modern: treasury
+        posted:
+          type: boolean
+          description: This field will be `true` if the transaction has posted to
+            the account.
+      required:
+      - amount
+      - direction
+      - vendor_code
+      - vendor_code_type
+      - as_of_date
     transaction_line_item:
       type: object
       properties:
