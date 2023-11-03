@@ -15694,6 +15694,7 @@ components:
       - vendor_code
       - vendor_code_type
       - as_of_date
+      - internal_account_id
     transaction_line_item:
       type: object
       properties:
