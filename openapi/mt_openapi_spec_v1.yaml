@@ -1502,6 +1502,7 @@ paths:
           - chats
           - check
           - cross_border
+          - dk_nets
           - eft
           - interac
           - masav
@@ -2134,6 +2135,7 @@ paths:
           - chats
           - check
           - cross_border
+          - dk_nets
           - eft
           - interac
           - masav
@@ -5225,6 +5227,7 @@ paths:
           - chats
           - check
           - cross_border
+          - dk_nets
           - eft
           - interac
           - masav
@@ -6509,6 +6512,7 @@ paths:
           - ca_cpa
           - chips
           - cnaps
+          - dk_interbank_clearing_code
           - gb_sort_code
           - hk_interbank_clearing_code
           - in_ifsc
@@ -8196,6 +8200,7 @@ components:
                       - ca_cpa
                       - chips
                       - cnaps
+                      - dk_interbank_clearing_code
                       - gb_sort_code
                       - hk_interbank_clearing_code
                       - in_ifsc
@@ -8214,6 +8219,7 @@ components:
                       - chats
                       - check
                       - cross_border
+                      - dk_nets
                       - eft
                       - interac
                       - masav
@@ -8818,6 +8824,7 @@ components:
           - chats
           - check
           - cross_border
+          - dk_nets
           - eft
           - interac
           - masav
@@ -8993,6 +9000,7 @@ components:
           - chats
           - check
           - cross_border
+          - dk_nets
           - eft
           - interac
           - masav
@@ -9114,6 +9122,7 @@ components:
           - chats
           - check
           - cross_border
+          - dk_nets
           - eft
           - interac
           - masav
@@ -9379,6 +9388,7 @@ components:
                 - ca_cpa
                 - chips
                 - cnaps
+                - dk_interbank_clearing_code
                 - gb_sort_code
                 - hk_interbank_clearing_code
                 - in_ifsc
@@ -9397,6 +9407,7 @@ components:
                 - chats
                 - check
                 - cross_border
+                - dk_nets
                 - eft
                 - interac
                 - masav
@@ -9509,6 +9520,7 @@ components:
           - chats
           - check
           - cross_border
+          - dk_nets
           - eft
           - interac
           - masav
@@ -9663,6 +9675,7 @@ components:
           - ca_cpa
           - chips
           - cnaps
+          - dk_interbank_clearing_code
           - gb_sort_code
           - hk_interbank_clearing_code
           - in_ifsc
@@ -10327,6 +10340,7 @@ components:
           - chats
           - check
           - cross_border
+          - dk_nets
           - eft
           - interac
           - masav
@@ -10518,6 +10532,7 @@ components:
           - chats
           - check
           - cross_border
+          - dk_nets
           - eft
           - interac
           - masav
@@ -13000,6 +13015,7 @@ components:
           - chats
           - check
           - cross_border
+          - dk_nets
           - eft
           - interac
           - masav
@@ -13438,6 +13454,7 @@ components:
           - chats
           - check
           - cross_border
+          - dk_nets
           - eft
           - interac
           - masav
@@ -13704,6 +13721,7 @@ components:
                     - ca_cpa
                     - chips
                     - cnaps
+                    - dk_interbank_clearing_code
                     - gb_sort_code
                     - hk_interbank_clearing_code
                     - in_ifsc
@@ -13722,6 +13740,7 @@ components:
                     - chats
                     - check
                     - cross_border
+                    - dk_nets
                     - eft
                     - interac
                     - masav
@@ -13823,6 +13842,7 @@ components:
           - chats
           - check
           - cross_border
+          - dk_nets
           - eft
           - interac
           - masav
@@ -14089,6 +14109,7 @@ components:
                     - ca_cpa
                     - chips
                     - cnaps
+                    - dk_interbank_clearing_code
                     - gb_sort_code
                     - hk_interbank_clearing_code
                     - in_ifsc
@@ -14107,6 +14128,7 @@ components:
                     - chats
                     - check
                     - cross_border
+                    - dk_nets
                     - eft
                     - interac
                     - masav
@@ -14201,6 +14223,7 @@ components:
           - chats
           - check
           - cross_border
+          - dk_nets
           - eft
           - interac
           - masav
@@ -14502,6 +14525,7 @@ components:
                     - ca_cpa
                     - chips
                     - cnaps
+                    - dk_interbank_clearing_code
                     - gb_sort_code
                     - hk_interbank_clearing_code
                     - in_ifsc
@@ -14520,6 +14544,7 @@ components:
                     - chats
                     - check
                     - cross_border
+                    - dk_nets
                     - eft
                     - interac
                     - masav
@@ -15196,6 +15221,7 @@ components:
           - ca_cpa
           - chips
           - cnaps
+          - dk_interbank_clearing_code
           - gb_sort_code
           - hk_interbank_clearing_code
           - in_ifsc
@@ -15217,6 +15243,7 @@ components:
           - chats
           - check
           - cross_border
+          - dk_nets
           - eft
           - interac
           - masav
@@ -15270,6 +15297,7 @@ components:
           - ca_cpa
           - chips
           - cnaps
+          - dk_interbank_clearing_code
           - gb_sort_code
           - hk_interbank_clearing_code
           - in_ifsc
@@ -15291,6 +15319,7 @@ components:
           - chats
           - check
           - cross_border
+          - dk_nets
           - eft
           - interac
           - masav
@@ -15346,6 +15375,7 @@ components:
             - chats
             - check
             - cross_border
+            - dk_nets
             - eft
             - interac
             - masav
@@ -15362,7 +15392,7 @@ components:
             - signet
             - wire
             - zengin
-          maxItems: 24
+          maxItems: 25
           example:
           - ach
           - au_becs
@@ -15372,6 +15402,7 @@ components:
           - chats
           - check
           - cross_border
+          - dk_nets
           - eft
           - interac
           - masav
@@ -15590,6 +15621,7 @@ components:
           - chats
           - check
           - cross_border
+          - dk_nets
           - eft
           - interac
           - masav
@@ -15694,6 +15726,7 @@ components:
       - vendor_code
       - vendor_code_type
       - as_of_date
+      - internal_account_id
     transaction_line_item:
       type: object
       properties:
