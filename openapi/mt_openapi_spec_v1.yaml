@@ -7639,7 +7639,7 @@ components:
             for a single `action_type` request on a `resource_type` resource
           items:
             oneOf:
-            - "$ref": "#/components/schemas/payment_order_create_request"
+            - "$ref": "#/components/schemas/payment_order_async_create_request"
             - "$ref": "#/components/schemas/expected_payment_create_request"
             - "$ref": "#/components/schemas/ledger_transaction_create_request"
             - allOf:
