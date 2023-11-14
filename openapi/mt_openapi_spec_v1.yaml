@@ -1504,12 +1504,14 @@ paths:
           - cross_border
           - dk_nets
           - eft
+          - hu_ics
           - interac
           - masav
           - neft
           - nics
           - nz_becs
           - provxchange
+          - ro_sent
           - rtp
           - se_bankgirot
           - sen
@@ -2137,12 +2139,14 @@ paths:
           - cross_border
           - dk_nets
           - eft
+          - hu_ics
           - interac
           - masav
           - neft
           - nics
           - nz_becs
           - provxchange
+          - ro_sent
           - rtp
           - se_bankgirot
           - sen
@@ -5229,12 +5233,14 @@ paths:
           - cross_border
           - dk_nets
           - eft
+          - hu_ics
           - interac
           - masav
           - neft
           - nics
           - nz_becs
           - provxchange
+          - ro_sent
           - rtp
           - se_bankgirot
           - sen
@@ -6515,6 +6521,7 @@ paths:
           - dk_interbank_clearing_code
           - gb_sort_code
           - hk_interbank_clearing_code
+          - hu_interbank_clearing_code
           - in_ifsc
           - jp_zengin_code
           - my_branch_code
@@ -8195,7 +8202,6 @@ components:
                       enum:
                       - aba
                       - au_bsb
-                      - se_bankgiro_clearing_code
                       - br_codigo
                       - ca_cpa
                       - chips
@@ -8203,11 +8209,13 @@ components:
                       - dk_interbank_clearing_code
                       - gb_sort_code
                       - hk_interbank_clearing_code
+                      - hu_interbank_clearing_code
                       - in_ifsc
+                      - jp_zengin_code
                       - my_branch_code
                       - nz_national_clearing_code
+                      - se_bankgiro_clearing_code
                       - swift
-                      - jp_zengin_code
                     payment_type:
                       type: string
                       enum:
@@ -8221,12 +8229,14 @@ components:
                       - cross_border
                       - dk_nets
                       - eft
+                      - hu_ics
                       - interac
                       - masav
                       - neft
                       - nics
                       - nz_becs
                       - provxchange
+                      - ro_sent
                       - rtp
                       - sg_giro
                       - se_bankgirot
@@ -8826,12 +8836,14 @@ components:
           - cross_border
           - dk_nets
           - eft
+          - hu_ics
           - interac
           - masav
           - neft
           - nics
           - nz_becs
           - provxchange
+          - ro_sent
           - rtp
           - se_bankgirot
           - sen
@@ -9002,12 +9014,14 @@ components:
           - cross_border
           - dk_nets
           - eft
+          - hu_ics
           - interac
           - masav
           - neft
           - nics
           - nz_becs
           - provxchange
+          - ro_sent
           - rtp
           - se_bankgirot
           - sen
@@ -9124,12 +9138,14 @@ components:
           - cross_border
           - dk_nets
           - eft
+          - hu_ics
           - interac
           - masav
           - neft
           - nics
           - nz_becs
           - provxchange
+          - ro_sent
           - rtp
           - se_bankgirot
           - sen
@@ -9383,7 +9399,6 @@ components:
                 enum:
                 - aba
                 - au_bsb
-                - se_bankgiro_clearing_code
                 - br_codigo
                 - ca_cpa
                 - chips
@@ -9391,11 +9406,13 @@ components:
                 - dk_interbank_clearing_code
                 - gb_sort_code
                 - hk_interbank_clearing_code
+                - hu_interbank_clearing_code
                 - in_ifsc
+                - jp_zengin_code
                 - my_branch_code
                 - nz_national_clearing_code
+                - se_bankgiro_clearing_code
                 - swift
-                - jp_zengin_code
               payment_type:
                 type: string
                 enum:
@@ -9409,12 +9426,14 @@ components:
                 - cross_border
                 - dk_nets
                 - eft
+                - hu_ics
                 - interac
                 - masav
                 - neft
                 - nics
                 - nz_becs
                 - provxchange
+                - ro_sent
                 - rtp
                 - sg_giro
                 - se_bankgirot
@@ -9522,12 +9541,14 @@ components:
           - cross_border
           - dk_nets
           - eft
+          - hu_ics
           - interac
           - masav
           - neft
           - nics
           - nz_becs
           - provxchange
+          - ro_sent
           - rtp
           - se_bankgirot
           - sen
@@ -9678,6 +9699,7 @@ components:
           - dk_interbank_clearing_code
           - gb_sort_code
           - hk_interbank_clearing_code
+          - hu_interbank_clearing_code
           - in_ifsc
           - jp_zengin_code
           - my_branch_code
@@ -10342,12 +10364,14 @@ components:
           - cross_border
           - dk_nets
           - eft
+          - hu_ics
           - interac
           - masav
           - neft
           - nics
           - nz_becs
           - provxchange
+          - ro_sent
           - rtp
           - sg_giro
           - se_bankgirot
@@ -10534,12 +10558,14 @@ components:
           - cross_border
           - dk_nets
           - eft
+          - hu_ics
           - interac
           - masav
           - neft
           - nics
           - nz_becs
           - provxchange
+          - ro_sent
           - rtp
           - sg_giro
           - se_bankgirot
@@ -13017,12 +13043,14 @@ components:
           - cross_border
           - dk_nets
           - eft
+          - hu_ics
           - interac
           - masav
           - neft
           - nics
           - nz_becs
           - provxchange
+          - ro_sent
           - rtp
           - se_bankgirot
           - sen
@@ -13456,12 +13484,14 @@ components:
           - cross_border
           - dk_nets
           - eft
+          - hu_ics
           - interac
           - masav
           - neft
           - nics
           - nz_becs
           - provxchange
+          - ro_sent
           - rtp
           - se_bankgirot
           - sen
@@ -13716,7 +13746,6 @@ components:
                     enum:
                     - aba
                     - au_bsb
-                    - se_bankgiro_clearing_code
                     - br_codigo
                     - ca_cpa
                     - chips
@@ -13724,11 +13753,13 @@ components:
                     - dk_interbank_clearing_code
                     - gb_sort_code
                     - hk_interbank_clearing_code
+                    - hu_interbank_clearing_code
                     - in_ifsc
+                    - jp_zengin_code
                     - my_branch_code
                     - nz_national_clearing_code
+                    - se_bankgiro_clearing_code
                     - swift
-                    - jp_zengin_code
                   payment_type:
                     type: string
                     enum:
@@ -13742,12 +13773,14 @@ components:
                     - cross_border
                     - dk_nets
                     - eft
+                    - hu_ics
                     - interac
                     - masav
                     - neft
                     - nics
                     - nz_becs
                     - provxchange
+                    - ro_sent
                     - rtp
                     - sg_giro
                     - se_bankgirot
@@ -13844,12 +13877,14 @@ components:
           - cross_border
           - dk_nets
           - eft
+          - hu_ics
           - interac
           - masav
           - neft
           - nics
           - nz_becs
           - provxchange
+          - ro_sent
           - rtp
           - se_bankgirot
           - sen
@@ -14104,7 +14139,6 @@ components:
                     enum:
                     - aba
                     - au_bsb
-                    - se_bankgiro_clearing_code
                     - br_codigo
                     - ca_cpa
                     - chips
@@ -14112,11 +14146,13 @@ components:
                     - dk_interbank_clearing_code
                     - gb_sort_code
                     - hk_interbank_clearing_code
+                    - hu_interbank_clearing_code
                     - in_ifsc
+                    - jp_zengin_code
                     - my_branch_code
                     - nz_national_clearing_code
+                    - se_bankgiro_clearing_code
                     - swift
-                    - jp_zengin_code
                   payment_type:
                     type: string
                     enum:
@@ -14130,12 +14166,14 @@ components:
                     - cross_border
                     - dk_nets
                     - eft
+                    - hu_ics
                     - interac
                     - masav
                     - neft
                     - nics
                     - nz_becs
                     - provxchange
+                    - ro_sent
                     - rtp
                     - sg_giro
                     - se_bankgirot
@@ -14225,12 +14263,14 @@ components:
           - cross_border
           - dk_nets
           - eft
+          - hu_ics
           - interac
           - masav
           - neft
           - nics
           - nz_becs
           - provxchange
+          - ro_sent
           - rtp
           - se_bankgirot
           - sen
@@ -14520,7 +14560,6 @@ components:
                     enum:
                     - aba
                     - au_bsb
-                    - se_bankgiro_clearing_code
                     - br_codigo
                     - ca_cpa
                     - chips
@@ -14528,11 +14567,13 @@ components:
                     - dk_interbank_clearing_code
                     - gb_sort_code
                     - hk_interbank_clearing_code
+                    - hu_interbank_clearing_code
                     - in_ifsc
+                    - jp_zengin_code
                     - my_branch_code
                     - nz_national_clearing_code
+                    - se_bankgiro_clearing_code
                     - swift
-                    - jp_zengin_code
                   payment_type:
                     type: string
                     enum:
@@ -14546,12 +14587,14 @@ components:
                     - cross_border
                     - dk_nets
                     - eft
+                    - hu_ics
                     - interac
                     - masav
                     - neft
                     - nics
                     - nz_becs
                     - provxchange
+                    - ro_sent
                     - rtp
                     - sg_giro
                     - se_bankgirot
@@ -15224,6 +15267,7 @@ components:
           - dk_interbank_clearing_code
           - gb_sort_code
           - hk_interbank_clearing_code
+          - hu_interbank_clearing_code
           - in_ifsc
           - jp_zengin_code
           - my_branch_code
@@ -15245,12 +15289,14 @@ components:
           - cross_border
           - dk_nets
           - eft
+          - hu_ics
           - interac
           - masav
           - neft
           - nics
           - nz_becs
           - provxchange
+          - ro_sent
           - rtp
           - se_bankgirot
           - sen
@@ -15300,6 +15346,7 @@ components:
           - dk_interbank_clearing_code
           - gb_sort_code
           - hk_interbank_clearing_code
+          - hu_interbank_clearing_code
           - in_ifsc
           - jp_zengin_code
           - my_branch_code
@@ -15321,12 +15368,14 @@ components:
           - cross_border
           - dk_nets
           - eft
+          - hu_ics
           - interac
           - masav
           - neft
           - nics
           - nz_becs
           - provxchange
+          - ro_sent
           - rtp
           - se_bankgirot
           - sen
@@ -15377,12 +15426,14 @@ components:
             - cross_border
             - dk_nets
             - eft
+            - hu_ics
             - interac
             - masav
             - neft
             - nics
             - nz_becs
             - provxchange
+            - ro_sent
             - rtp
             - se_bankgirot
             - sen
@@ -15392,7 +15443,7 @@ components:
             - signet
             - wire
             - zengin
-          maxItems: 25
+          maxItems: 27
           example:
           - ach
           - au_becs
@@ -15404,12 +15455,14 @@ components:
           - cross_border
           - dk_nets
           - eft
+          - hu_ics
           - interac
           - masav
           - neft
           - nics
           - nz_becs
           - provxchange
+          - ro_sent
           - rtp
           - se_bankgirot
           - sen
@@ -15623,12 +15676,14 @@ components:
           - cross_border
           - dk_nets
           - eft
+          - hu_ics
           - interac
           - masav
           - neft
           - nics
           - nz_becs
           - provxchange
+          - ro_sent
           - rtp
           - se_bankgirot
           - sen
