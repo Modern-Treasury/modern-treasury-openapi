@@ -1519,6 +1519,7 @@ paths:
           - sg_giro
           - sic
           - signet
+          - sknbi
           - wire
           - zengin
         required: false
@@ -2154,6 +2155,7 @@ paths:
           - sg_giro
           - sic
           - signet
+          - sknbi
           - wire
           - zengin
         required: false
@@ -3313,6 +3315,171 @@ paths:
           application/json:
             schema:
               "$ref": "#/components/schemas/ledger_account_payout_update_request"
+  "/api/ledger_account_settlements":
+    post:
+      summary: create ledger_account_settlement
+      tags:
+      - LedgerAccountSettlement
+      operationId: createLedgerAccountSettlement
+      description: Create a ledger account settlement.
+      security:
+      - basic_auth: []
+      parameters:
+      - name: Idempotency-Key
+        in: header
+        required: false
+        description: This key should be something unique, preferably something like
+          an UUID.
+        schema:
+          type: string
+      responses:
+        '201':
+          description: successful
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/ledger_account_settlement"
+        '403':
+          description: forbidden
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/error_message"
+        '422':
+          description: unsuccessful
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/error_message"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              "$ref": "#/components/schemas/ledger_account_settlement_create_request"
+    get:
+      summary: list ledger_account_settlements
+      tags:
+      - LedgerAccountSettlement
+      operationId: listLedgerAccountSettlements
+      description: Get a list of ledger account settlements.
+      security:
+      - basic_auth: []
+      parameters:
+      - name: after_cursor
+        in: query
+        schema:
+          type: string
+          nullable: true
+        required: false
+      - name: per_page
+        in: query
+        schema:
+          type: integer
+        required: false
+      - "$ref": "#/components/parameters/metadata_query"
+      - "$ref": "#/components/parameters/bulk_id"
+      - name: settled_ledger_account_id
+        in: query
+        schema:
+          type: string
+          format: uuid
+        required: false
+      - name: settlement_entry_direction
+        in: query
+        schema:
+          type: string
+        required: false
+      responses:
+        '200':
+          description: successful
+          headers:
+            X-After-Cursor:
+              schema:
+                type: string
+                nullable: true
+              required: false
+              description: The cursor for the next page. Including this in a call
+                as `after_cursor` will return the next page.
+            X-Per-Page:
+              schema:
+                type: integer
+                nullable: true
+              description: The current `per_page`.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  "$ref": "#/components/schemas/ledger_account_settlement"
+  "/api/ledger_account_settlements/{id}":
+    parameters:
+    - name: id
+      in: path
+      schema:
+        type: string
+        format: uuid
+      description: id
+      required: true
+    get:
+      summary: get ledger_account_settlement
+      tags:
+      - LedgerAccountSettlement
+      operationId: getLedgerAccountSettlement
+      description: Get details on a single ledger account settlement.
+      security:
+      - basic_auth: []
+      responses:
+        '200':
+          description: successful
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/ledger_account_settlement"
+        '404':
+          description: not found
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/error_message"
+    patch:
+      summary: update ledger_account_settlement
+      tags:
+      - LedgerAccountSettlement
+      operationId: updateLedgerAccountSettlement
+      description: Update the details of a ledger account settlement.
+      security:
+      - basic_auth: []
+      parameters: []
+      responses:
+        '200':
+          description: successful
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/ledger_account_settlement"
+        '403':
+          description: forbidden
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/error_message"
+        '404':
+          description: not found
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/error_message"
+        '422':
+          description: unsuccessful
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/error_message"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              "$ref": "#/components/schemas/ledger_account_settlement_update_request"
   "/api/ledger_account_statements":
     post:
       summary: create ledger_account_statement
@@ -3778,6 +3945,12 @@ paths:
           format: uuid
         required: false
       - name: ledger_account_payout_id
+        in: query
+        schema:
+          type: string
+          format: uuid
+        required: false
+      - name: ledger_account_settlement_id
         in: query
         schema:
           type: string
@@ -4376,6 +4549,12 @@ paths:
           format: uuid
         required: false
       - name: ledger_account_payout_id
+        in: query
+        schema:
+          type: string
+          format: uuid
+        required: false
+      - name: ledger_account_settlement_id
         in: query
         schema:
           type: string
@@ -5248,6 +5427,7 @@ paths:
           - sg_giro
           - sic
           - signet
+          - sknbi
           - wire
           - zengin
         required: false
@@ -6522,6 +6702,7 @@ paths:
           - gb_sort_code
           - hk_interbank_clearing_code
           - hu_interbank_clearing_code
+          - id_sknbi_code
           - in_ifsc
           - jp_zengin_code
           - my_branch_code
@@ -8098,6 +8279,7 @@ components:
             - jp_zengin_code
             - se_bankgiro_clearing_code
             - nz_national_clearing_code
+            - hk_interbank_clearing_code
           description: The list of fields you want on the form. This field is optional
             and if it is not set, will default to [\"nameOnAccount\", \"accountType\",
             \"accountNumber\", \"routingNumber\", \"address\"]. The full list of options
@@ -8210,6 +8392,7 @@ components:
                       - gb_sort_code
                       - hk_interbank_clearing_code
                       - hu_interbank_clearing_code
+                      - id_sknbi_code
                       - in_ifsc
                       - jp_zengin_code
                       - my_branch_code
@@ -8244,6 +8427,7 @@ components:
                       - sepa
                       - sic
                       - signet
+                      - sknbi
                       - wire
                       - zengin
                   required:
@@ -8851,6 +9035,7 @@ components:
           - sg_giro
           - sic
           - signet
+          - sknbi
           - wire
           - zengin
           nullable: true
@@ -9029,6 +9214,7 @@ components:
           - sg_giro
           - sic
           - signet
+          - sknbi
           - wire
           - zengin
           nullable: true
@@ -9153,6 +9339,7 @@ components:
           - sg_giro
           - sic
           - signet
+          - sknbi
           - wire
           - zengin
           nullable: true
@@ -9407,6 +9594,7 @@ components:
                 - gb_sort_code
                 - hk_interbank_clearing_code
                 - hu_interbank_clearing_code
+                - id_sknbi_code
                 - in_ifsc
                 - jp_zengin_code
                 - my_branch_code
@@ -9441,6 +9629,7 @@ components:
                 - sepa
                 - sic
                 - signet
+                - sknbi
                 - wire
                 - zengin
             required:
@@ -9556,6 +9745,7 @@ components:
           - sg_giro
           - sic
           - signet
+          - sknbi
           - wire
           - zengin
           description: Both ach and eft are supported payment types.
@@ -9700,6 +9890,7 @@ components:
           - gb_sort_code
           - hk_interbank_clearing_code
           - hu_interbank_clearing_code
+          - id_sknbi_code
           - in_ifsc
           - jp_zengin_code
           - my_branch_code
@@ -10379,6 +10570,7 @@ components:
           - sepa
           - sic
           - signet
+          - sknbi
           - wire
           - zengin
           description: One of `ach`, `bankgirot`, `eft`, `wire`, `check`, `sen`, `book`,
@@ -10573,6 +10765,7 @@ components:
           - sepa
           - sic
           - signet
+          - sknbi
           - wire
           - zengin
           description: One of `ach`, `bankgirot`, `eft`, `wire`, `check`, `sen`, `book`,
@@ -11462,6 +11655,192 @@ components:
           - archived
           description: To post a pending ledger account payout, use `posted`. To archive
             a pending ledger transaction, use `archived`.
+        metadata:
+          type: object
+          description: Additional data represented as key-value pairs. Both the key
+            and value must be strings.
+          additionalProperties:
+            type: string
+          example:
+            key: value
+            foo: bar
+            modern: treasury
+    ledger_account_settlement:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        object:
+          type: string
+        live_mode:
+          type: boolean
+          description: This field will be true if this object exists in the live environment
+            or false if it exists in the test environment.
+        created_at:
+          type: string
+          format: date-time
+        updated_at:
+          type: string
+          format: date-time
+        ledger_id:
+          type: string
+          format: uuid
+          description: The id of the ledger that this ledger account settlement belongs
+            to.
+        description:
+          type: string
+          description: The description of the ledger account settlement.
+          nullable: true
+        status:
+          type: string
+          enum:
+          - archived
+          - archiving
+          - pending
+          - posted
+          - processing
+          - reversed
+          - reversing
+          description: The status of the ledger account settlement. One of `processing`,
+            `pending`, `posted`, `archiving` or `archived`.
+        settled_ledger_account_id:
+          type: string
+          format: uuid
+          description: The id of the settled ledger account whose ledger entries are
+            queried against, and its balance is reduced as a result.
+        contra_ledger_account_id:
+          type: string
+          format: uuid
+          description: The id of the contra ledger account that sends to or receives
+            funds from the settled ledger account.
+        effective_at_upper_bound:
+          type: string
+          format: date-time
+          description: The exclusive upper bound of the effective_at timestamp of
+            the ledger entries to be included in the ledger account settlement. The
+            default value is the created_at timestamp of the ledger account settlement.
+        ledger_transaction_id:
+          type: string
+          format: uuid
+          description: The id of the ledger transaction that this settlement is associated
+            with.
+          nullable: true
+        amount:
+          type: integer
+          description: The amount of the ledger account settlement.
+          nullable: true
+        settlement_entry_direction:
+          type: string
+          description: The direction of the ledger entry with the settlement_ledger_account.
+          nullable: true
+        currency:
+          type: string
+          description: The currency of the ledger account settlement.
+        currency_exponent:
+          type: integer
+          description: The currency exponent of the ledger account settlement.
+          nullable: true
+        metadata:
+          type: object
+          description: Additional data represented as key-value pairs. Both the key
+            and value must be strings.
+          additionalProperties:
+            type: string
+          example:
+            key: value
+            foo: bar
+            modern: treasury
+      additionalProperties: false
+      minProperties: 17
+      required:
+      - id
+      - object
+      - live_mode
+      - created_at
+      - updated_at
+      - ledger_id
+      - description
+      - status
+      - settled_ledger_account_id
+      - contra_ledger_account_id
+      - effective_at_upper_bound
+      - ledger_transaction_id
+      - amount
+      - settlement_entry_direction
+      - currency
+      - currency_exponent
+      - metadata
+    ledger_account_settlement_create_request:
+      type: object
+      properties:
+        description:
+          type: string
+          description: The description of the ledger account settlement.
+          nullable: true
+        status:
+          type: string
+          enum:
+          - pending
+          - posted
+          description: The status of the ledger account settlement. It is set to `pending`
+            by default. To post a ledger account settlement at creation, use `posted`.
+          nullable: true
+        settled_ledger_account_id:
+          type: string
+          format: uuid
+          description: The id of the settled ledger account whose ledger entries are
+            queried against, and its balance is reduced as a result.
+        contra_ledger_account_id:
+          type: string
+          format: uuid
+          description: The id of the contra ledger account that sends to or receives
+            funds from the settled ledger account.
+        allow_either_direction:
+          type: boolean
+          description: If true, the settlement amount and settlement_entry_direction
+            will bring the settlement ledger account's balance closer to zero, even
+            if the balance is negative.
+          nullable: true
+        effective_at_upper_bound:
+          type: string
+          format: date-time
+          description: The exclusive upper bound of the effective_at timestamp of
+            the ledger entries to be included in the ledger account settlement. The
+            default value is the created_at timestamp of the ledger account settlement.
+          nullable: true
+        metadata:
+          type: object
+          description: Additional data represented as key-value pairs. Both the key
+            and value must be strings.
+          additionalProperties:
+            type: string
+          example:
+            key: value
+            foo: bar
+            modern: treasury
+        skip_settlement_ledger_transaction:
+          type: boolean
+          description: It is set to `false` by default. It should be set to `true`
+            when migrating existing settlements.
+          nullable: true
+      required:
+      - settled_ledger_account_id
+      - contra_ledger_account_id
+    ledger_account_settlement_update_request:
+      type: object
+      properties:
+        description:
+          type: string
+          description: The description of the ledger account settlement.
+          nullable: true
+        status:
+          type: string
+          enum:
+          - posted
+          - archived
+          description: To post a pending ledger account settlement, use `posted`.
+            To archive a pending ledger transaction, use `archived`.
         metadata:
           type: object
           description: Additional data represented as key-value pairs. Both the key
@@ -13058,6 +13437,7 @@ components:
           - sg_giro
           - sic
           - signet
+          - sknbi
           - wire
           - zengin
           description: One of `ach`, `bankgirot`, `eft`, `wire`, `check`, `sen`, `book`,
@@ -13499,6 +13879,7 @@ components:
           - sg_giro
           - sic
           - signet
+          - sknbi
           - wire
           - zengin
           description: One of `ach`, `bankgirot`, `eft`, `wire`, `check`, `sen`, `book`,
@@ -13754,6 +14135,7 @@ components:
                     - gb_sort_code
                     - hk_interbank_clearing_code
                     - hu_interbank_clearing_code
+                    - id_sknbi_code
                     - in_ifsc
                     - jp_zengin_code
                     - my_branch_code
@@ -13788,6 +14170,7 @@ components:
                     - sepa
                     - sic
                     - signet
+                    - sknbi
                     - wire
                     - zengin
                 required:
@@ -13892,6 +14275,7 @@ components:
           - sg_giro
           - sic
           - signet
+          - sknbi
           - wire
           - zengin
           description: One of `ach`, `bankgirot`, `eft`, `wire`, `check`, `sen`, `book`,
@@ -14147,6 +14531,7 @@ components:
                     - gb_sort_code
                     - hk_interbank_clearing_code
                     - hu_interbank_clearing_code
+                    - id_sknbi_code
                     - in_ifsc
                     - jp_zengin_code
                     - my_branch_code
@@ -14181,6 +14566,7 @@ components:
                     - sepa
                     - sic
                     - signet
+                    - sknbi
                     - wire
                     - zengin
                 required:
@@ -14278,6 +14664,7 @@ components:
           - sg_giro
           - sic
           - signet
+          - sknbi
           - wire
           - zengin
           description: One of `ach`, `bankgirot`, `eft`, `wire`, `check`, `sen`, `book`,
@@ -14568,6 +14955,7 @@ components:
                     - gb_sort_code
                     - hk_interbank_clearing_code
                     - hu_interbank_clearing_code
+                    - id_sknbi_code
                     - in_ifsc
                     - jp_zengin_code
                     - my_branch_code
@@ -14602,6 +14990,7 @@ components:
                     - sepa
                     - sic
                     - signet
+                    - sknbi
                     - wire
                     - zengin
                 required:
@@ -15268,6 +15657,7 @@ components:
           - gb_sort_code
           - hk_interbank_clearing_code
           - hu_interbank_clearing_code
+          - id_sknbi_code
           - in_ifsc
           - jp_zengin_code
           - my_branch_code
@@ -15304,6 +15694,7 @@ components:
           - sg_giro
           - sic
           - signet
+          - sknbi
           - wire
           - zengin
           nullable: true
@@ -15347,6 +15738,7 @@ components:
           - gb_sort_code
           - hk_interbank_clearing_code
           - hu_interbank_clearing_code
+          - id_sknbi_code
           - in_ifsc
           - jp_zengin_code
           - my_branch_code
@@ -15383,6 +15775,7 @@ components:
           - sg_giro
           - sic
           - signet
+          - sknbi
           - wire
           - zengin
           nullable: true
@@ -15441,9 +15834,10 @@ components:
             - sg_giro
             - sic
             - signet
+            - sknbi
             - wire
             - zengin
-          maxItems: 27
+          maxItems: 28
           example:
           - ach
           - au_becs
@@ -15470,6 +15864,7 @@ components:
           - sg_giro
           - sic
           - signet
+          - sknbi
           - wire
           - zengin
           description: An array of payment types that are supported for this routing
@@ -15691,6 +16086,7 @@ components:
           - sg_giro
           - sic
           - signet
+          - sknbi
           - wire
           - zengin
           description: The type of the transaction. Can be one of `ach`, `wire`, `check`,
