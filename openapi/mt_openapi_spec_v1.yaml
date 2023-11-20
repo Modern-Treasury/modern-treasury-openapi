@@ -1510,6 +1510,7 @@ paths:
           - neft
           - nics
           - nz_becs
+          - pl_elixir
           - provxchange
           - ro_sent
           - rtp
@@ -2146,6 +2147,7 @@ paths:
           - neft
           - nics
           - nz_becs
+          - pl_elixir
           - provxchange
           - ro_sent
           - rtp
@@ -5418,6 +5420,7 @@ paths:
           - neft
           - nics
           - nz_becs
+          - pl_elixir
           - provxchange
           - ro_sent
           - rtp
@@ -8419,6 +8422,7 @@ components:
                       - nics
                       - nz_becs
                       - provxchange
+                      - pl_elixir
                       - ro_sent
                       - rtp
                       - sg_giro
@@ -9026,6 +9030,7 @@ components:
           - neft
           - nics
           - nz_becs
+          - pl_elixir
           - provxchange
           - ro_sent
           - rtp
@@ -9205,6 +9210,7 @@ components:
           - neft
           - nics
           - nz_becs
+          - pl_elixir
           - provxchange
           - ro_sent
           - rtp
@@ -9330,6 +9336,7 @@ components:
           - neft
           - nics
           - nz_becs
+          - pl_elixir
           - provxchange
           - ro_sent
           - rtp
@@ -9621,6 +9628,7 @@ components:
                 - nics
                 - nz_becs
                 - provxchange
+                - pl_elixir
                 - ro_sent
                 - rtp
                 - sg_giro
@@ -9736,6 +9744,7 @@ components:
           - neft
           - nics
           - nz_becs
+          - pl_elixir
           - provxchange
           - ro_sent
           - rtp
@@ -10562,6 +10571,7 @@ components:
           - nics
           - nz_becs
           - provxchange
+          - pl_elixir
           - ro_sent
           - rtp
           - sg_giro
@@ -10757,6 +10767,7 @@ components:
           - nics
           - nz_becs
           - provxchange
+          - pl_elixir
           - ro_sent
           - rtp
           - sg_giro
@@ -13428,6 +13439,7 @@ components:
           - neft
           - nics
           - nz_becs
+          - pl_elixir
           - provxchange
           - ro_sent
           - rtp
@@ -13870,6 +13882,7 @@ components:
           - neft
           - nics
           - nz_becs
+          - pl_elixir
           - provxchange
           - ro_sent
           - rtp
@@ -14162,6 +14175,7 @@ components:
                     - nics
                     - nz_becs
                     - provxchange
+                    - pl_elixir
                     - ro_sent
                     - rtp
                     - sg_giro
@@ -14266,6 +14280,7 @@ components:
           - neft
           - nics
           - nz_becs
+          - pl_elixir
           - provxchange
           - ro_sent
           - rtp
@@ -14558,6 +14573,7 @@ components:
                     - nics
                     - nz_becs
                     - provxchange
+                    - pl_elixir
                     - ro_sent
                     - rtp
                     - sg_giro
@@ -14655,6 +14671,7 @@ components:
           - neft
           - nics
           - nz_becs
+          - pl_elixir
           - provxchange
           - ro_sent
           - rtp
@@ -14982,6 +14999,7 @@ components:
                     - nics
                     - nz_becs
                     - provxchange
+                    - pl_elixir
                     - ro_sent
                     - rtp
                     - sg_giro
@@ -15685,6 +15703,7 @@ components:
           - neft
           - nics
           - nz_becs
+          - pl_elixir
           - provxchange
           - ro_sent
           - rtp
@@ -15766,6 +15785,7 @@ components:
           - neft
           - nics
           - nz_becs
+          - pl_elixir
           - provxchange
           - ro_sent
           - rtp
@@ -15825,6 +15845,7 @@ components:
             - neft
             - nics
             - nz_becs
+            - pl_elixir
             - provxchange
             - ro_sent
             - rtp
@@ -15837,7 +15858,7 @@ components:
             - sknbi
             - wire
             - zengin
-          maxItems: 28
+          maxItems: 29
           example:
           - ach
           - au_becs
@@ -15855,6 +15876,7 @@ components:
           - neft
           - nics
           - nz_becs
+          - pl_elixir
           - provxchange
           - ro_sent
           - rtp
@@ -16077,6 +16099,7 @@ components:
           - neft
           - nics
           - nz_becs
+          - pl_elixir
           - provxchange
           - ro_sent
           - rtp
