@@ -4122,6 +4122,27 @@ paths:
         format: uuid
       description: id
       required: true
+    patch:
+      summary: update ledger_entry
+      tags:
+      - LedgerEntry
+      operationId: updateLedgerEntry
+      description: Update the details of a ledger entry.
+      security:
+      - basic_auth: []
+      parameters: []
+      responses:
+        '200':
+          description: successful
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/ledger_entry"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              "$ref": "#/components/schemas/ledger_entry_update_request"
     get:
       summary: get ledger_entry
       tags:
@@ -12268,6 +12289,19 @@ components:
       - amount
       - direction
       - ledger_account_id
+    ledger_entry_update_request:
+      type: object
+      properties:
+        metadata:
+          type: object
+          description: Additional data represented as key-value pairs. Both the key
+            and value must be strings.
+          additionalProperties:
+            type: string
+          example:
+            key: value
+            foo: bar
+            modern: treasury
     ledger_entry_of_transaction_version:
       type: object
       properties:
