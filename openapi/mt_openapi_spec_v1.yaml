@@ -1510,6 +1510,7 @@ paths:
           - neft
           - nics
           - nz_becs
+          - pl_elixir
           - provxchange
           - ro_sent
           - rtp
@@ -2146,6 +2147,7 @@ paths:
           - neft
           - nics
           - nz_becs
+          - pl_elixir
           - provxchange
           - ro_sent
           - rtp
@@ -5418,6 +5420,7 @@ paths:
           - neft
           - nics
           - nz_becs
+          - pl_elixir
           - provxchange
           - ro_sent
           - rtp
@@ -6707,6 +6710,7 @@ paths:
           - jp_zengin_code
           - my_branch_code
           - nz_national_clearing_code
+          - pl_national_clearing_code
           - se_bankgiro_clearing_code
           - swift
         required: true
@@ -8397,6 +8401,7 @@ components:
                       - jp_zengin_code
                       - my_branch_code
                       - nz_national_clearing_code
+                      - pl_national_clearing_code
                       - se_bankgiro_clearing_code
                       - swift
                     payment_type:
@@ -8418,6 +8423,7 @@ components:
                       - neft
                       - nics
                       - nz_becs
+                      - pl_elixir
                       - provxchange
                       - ro_sent
                       - rtp
@@ -9026,6 +9032,7 @@ components:
           - neft
           - nics
           - nz_becs
+          - pl_elixir
           - provxchange
           - ro_sent
           - rtp
@@ -9205,6 +9212,7 @@ components:
           - neft
           - nics
           - nz_becs
+          - pl_elixir
           - provxchange
           - ro_sent
           - rtp
@@ -9330,6 +9338,7 @@ components:
           - neft
           - nics
           - nz_becs
+          - pl_elixir
           - provxchange
           - ro_sent
           - rtp
@@ -9599,6 +9608,7 @@ components:
                 - jp_zengin_code
                 - my_branch_code
                 - nz_national_clearing_code
+                - pl_national_clearing_code
                 - se_bankgiro_clearing_code
                 - swift
               payment_type:
@@ -9620,6 +9630,7 @@ components:
                 - neft
                 - nics
                 - nz_becs
+                - pl_elixir
                 - provxchange
                 - ro_sent
                 - rtp
@@ -9736,6 +9747,7 @@ components:
           - neft
           - nics
           - nz_becs
+          - pl_elixir
           - provxchange
           - ro_sent
           - rtp
@@ -9895,6 +9907,7 @@ components:
           - jp_zengin_code
           - my_branch_code
           - nz_national_clearing_code
+          - pl_national_clearing_code
           - se_bankgiro_clearing_code
           - swift
           description: The type of the originating routing number for the incoming
@@ -10561,6 +10574,7 @@ components:
           - neft
           - nics
           - nz_becs
+          - pl_elixir
           - provxchange
           - ro_sent
           - rtp
@@ -10756,6 +10770,7 @@ components:
           - neft
           - nics
           - nz_becs
+          - pl_elixir
           - provxchange
           - ro_sent
           - rtp
@@ -13428,6 +13443,7 @@ components:
           - neft
           - nics
           - nz_becs
+          - pl_elixir
           - provxchange
           - ro_sent
           - rtp
@@ -13870,6 +13886,7 @@ components:
           - neft
           - nics
           - nz_becs
+          - pl_elixir
           - provxchange
           - ro_sent
           - rtp
@@ -14140,6 +14157,7 @@ components:
                     - jp_zengin_code
                     - my_branch_code
                     - nz_national_clearing_code
+                    - pl_national_clearing_code
                     - se_bankgiro_clearing_code
                     - swift
                   payment_type:
@@ -14161,6 +14179,7 @@ components:
                     - neft
                     - nics
                     - nz_becs
+                    - pl_elixir
                     - provxchange
                     - ro_sent
                     - rtp
@@ -14266,6 +14285,7 @@ components:
           - neft
           - nics
           - nz_becs
+          - pl_elixir
           - provxchange
           - ro_sent
           - rtp
@@ -14536,6 +14556,7 @@ components:
                     - jp_zengin_code
                     - my_branch_code
                     - nz_national_clearing_code
+                    - pl_national_clearing_code
                     - se_bankgiro_clearing_code
                     - swift
                   payment_type:
@@ -14557,6 +14578,7 @@ components:
                     - neft
                     - nics
                     - nz_becs
+                    - pl_elixir
                     - provxchange
                     - ro_sent
                     - rtp
@@ -14655,6 +14677,7 @@ components:
           - neft
           - nics
           - nz_becs
+          - pl_elixir
           - provxchange
           - ro_sent
           - rtp
@@ -14960,6 +14983,7 @@ components:
                     - jp_zengin_code
                     - my_branch_code
                     - nz_national_clearing_code
+                    - pl_national_clearing_code
                     - se_bankgiro_clearing_code
                     - swift
                   payment_type:
@@ -14981,6 +15005,7 @@ components:
                     - neft
                     - nics
                     - nz_becs
+                    - pl_elixir
                     - provxchange
                     - ro_sent
                     - rtp
@@ -15662,6 +15687,7 @@ components:
           - jp_zengin_code
           - my_branch_code
           - nz_national_clearing_code
+          - pl_national_clearing_code
           - se_bankgiro_clearing_code
           - swift
           description: The type of routing number. See https://docs.moderntreasury.com/platform/reference/routing-detail-object
@@ -15685,6 +15711,7 @@ components:
           - neft
           - nics
           - nz_becs
+          - pl_elixir
           - provxchange
           - ro_sent
           - rtp
@@ -15743,6 +15770,7 @@ components:
           - jp_zengin_code
           - my_branch_code
           - nz_national_clearing_code
+          - pl_national_clearing_code
           - se_bankgiro_clearing_code
           - swift
           description: The type of routing number. See https://docs.moderntreasury.com/platform/reference/routing-detail-object
@@ -15766,6 +15794,7 @@ components:
           - neft
           - nics
           - nz_becs
+          - pl_elixir
           - provxchange
           - ro_sent
           - rtp
@@ -15825,6 +15854,7 @@ components:
             - neft
             - nics
             - nz_becs
+            - pl_elixir
             - provxchange
             - ro_sent
             - rtp
@@ -15837,7 +15867,7 @@ components:
             - sknbi
             - wire
             - zengin
-          maxItems: 28
+          maxItems: 29
           example:
           - ach
           - au_becs
@@ -15855,6 +15885,7 @@ components:
           - neft
           - nics
           - nz_becs
+          - pl_elixir
           - provxchange
           - ro_sent
           - rtp
@@ -16077,6 +16108,7 @@ components:
           - neft
           - nics
           - nz_becs
+          - pl_elixir
           - provxchange
           - ro_sent
           - rtp
