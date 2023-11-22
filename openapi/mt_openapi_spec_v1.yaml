@@ -4122,6 +4122,27 @@ paths:
         format: uuid
       description: id
       required: true
+    patch:
+      summary: update ledger_entry
+      tags:
+      - LedgerEntry
+      operationId: updateLedgerEntry
+      description: Update the details of a ledger entry.
+      security:
+      - basic_auth: []
+      parameters: []
+      responses:
+        '200':
+          description: successful
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/ledger_entry"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              "$ref": "#/components/schemas/ledger_entry_update_request"
     get:
       summary: get ledger_entry
       tags:
@@ -5510,6 +5531,20 @@ paths:
           format: date
         required: false
         description: An inclusive upper bound for searching effective_date
+      - name: created_at_start
+        in: query
+        schema:
+          type: string
+          format: date
+        required: false
+        description: An inclusive lower bound for searching created_at
+      - name: created_at_end
+        in: query
+        schema:
+          type: string
+          format: date
+        required: false
+        description: An inclusive upper bound for searching created_at
       - "$ref": "#/components/parameters/metadata_query"
       responses:
         '200':
@@ -8284,6 +8319,9 @@ components:
             - se_bankgiro_clearing_code
             - nz_national_clearing_code
             - hk_interbank_clearing_code
+            - hu_interbank_clearing_code
+            - dk_interbank_clearing_code
+            - id_sknbi_code
           description: The list of fields you want on the form. This field is optional
             and if it is not set, will default to [\"nameOnAccount\", \"accountType\",
             \"accountNumber\", \"routingNumber\", \"address\"]. The full list of options
@@ -12268,6 +12306,19 @@ components:
       - amount
       - direction
       - ledger_account_id
+    ledger_entry_update_request:
+      type: object
+      properties:
+        metadata:
+          type: object
+          description: Additional data represented as key-value pairs. Both the key
+            and value must be strings.
+          additionalProperties:
+            type: string
+          example:
+            key: value
+            foo: bar
+            modern: treasury
     ledger_entry_of_transaction_version:
       type: object
       properties:
