@@ -1507,6 +1507,7 @@ paths:
           - hu_ics
           - interac
           - masav
+          - mx_ccen
           - neft
           - nics
           - nz_becs
@@ -2144,6 +2145,7 @@ paths:
           - hu_ics
           - interac
           - masav
+          - mx_ccen
           - neft
           - nics
           - nz_becs
@@ -5438,6 +5440,7 @@ paths:
           - hu_ics
           - interac
           - masav
+          - mx_ccen
           - neft
           - nics
           - nz_becs
@@ -8458,6 +8461,7 @@ components:
                       - hu_ics
                       - interac
                       - masav
+                      - mx_ccen
                       - neft
                       - nics
                       - nz_becs
@@ -9067,6 +9071,7 @@ components:
           - hu_ics
           - interac
           - masav
+          - mx_ccen
           - neft
           - nics
           - nz_becs
@@ -9247,6 +9252,7 @@ components:
           - hu_ics
           - interac
           - masav
+          - mx_ccen
           - neft
           - nics
           - nz_becs
@@ -9373,6 +9379,7 @@ components:
           - hu_ics
           - interac
           - masav
+          - mx_ccen
           - neft
           - nics
           - nz_becs
@@ -9665,6 +9672,7 @@ components:
                 - hu_ics
                 - interac
                 - masav
+                - mx_ccen
                 - neft
                 - nics
                 - nz_becs
@@ -9782,6 +9790,7 @@ components:
           - hu_ics
           - interac
           - masav
+          - mx_ccen
           - neft
           - nics
           - nz_becs
@@ -10430,8 +10439,18 @@ components:
             type: string
             format: uuid
           description: IDs of transaction line items associated with an invoice.
+        metadata:
+          type: object
+          description: Additional data represented as key-value pairs. Both the key
+            and value must be strings.
+          additionalProperties:
+            type: string
+          example:
+            key: value
+            foo: bar
+            modern: treasury
       additionalProperties: false
-      minProperties: 34
+      minProperties: 35
       required:
       - id
       - object
@@ -10467,6 +10486,7 @@ components:
       - amount_remaining
       - amount_paid
       - transaction_line_item_ids
+      - metadata
     invoice_create_request:
       type: object
       properties:
@@ -10615,6 +10635,7 @@ components:
           - hu_ics
           - interac
           - masav
+          - mx_ccen
           - neft
           - nics
           - nz_becs
@@ -10816,6 +10837,7 @@ components:
           - hu_ics
           - interac
           - masav
+          - mx_ccen
           - neft
           - nics
           - nz_becs
@@ -13507,6 +13529,7 @@ components:
           - hu_ics
           - interac
           - masav
+          - mx_ccen
           - neft
           - nics
           - nz_becs
@@ -13950,6 +13973,7 @@ components:
           - hu_ics
           - interac
           - masav
+          - mx_ccen
           - neft
           - nics
           - nz_becs
@@ -14243,6 +14267,7 @@ components:
                     - hu_ics
                     - interac
                     - masav
+                    - mx_ccen
                     - neft
                     - nics
                     - nz_becs
@@ -14349,6 +14374,7 @@ components:
           - hu_ics
           - interac
           - masav
+          - mx_ccen
           - neft
           - nics
           - nz_becs
@@ -14642,6 +14668,7 @@ components:
                     - hu_ics
                     - interac
                     - masav
+                    - mx_ccen
                     - neft
                     - nics
                     - nz_becs
@@ -14741,6 +14768,7 @@ components:
           - hu_ics
           - interac
           - masav
+          - mx_ccen
           - neft
           - nics
           - nz_becs
@@ -15069,6 +15097,7 @@ components:
                     - hu_ics
                     - interac
                     - masav
+                    - mx_ccen
                     - neft
                     - nics
                     - nz_becs
@@ -15775,6 +15804,7 @@ components:
           - hu_ics
           - interac
           - masav
+          - mx_ccen
           - neft
           - nics
           - nz_becs
@@ -15858,6 +15888,7 @@ components:
           - hu_ics
           - interac
           - masav
+          - mx_ccen
           - neft
           - nics
           - nz_becs
@@ -15918,6 +15949,7 @@ components:
             - hu_ics
             - interac
             - masav
+            - mx_ccen
             - neft
             - nics
             - nz_becs
@@ -15934,7 +15966,7 @@ components:
             - sknbi
             - wire
             - zengin
-          maxItems: 29
+          maxItems: 30
           example:
           - ach
           - au_becs
@@ -15949,6 +15981,7 @@ components:
           - hu_ics
           - interac
           - masav
+          - mx_ccen
           - neft
           - nics
           - nz_becs
@@ -16172,6 +16205,7 @@ components:
           - hu_ics
           - interac
           - masav
+          - mx_ccen
           - neft
           - nics
           - nz_becs
