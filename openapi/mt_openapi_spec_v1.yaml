@@ -12747,8 +12747,13 @@ components:
           description: The ID of the original ledger transaction that this ledger
             transaction reverses.
           nullable: true
+        reversed_by_ledger_transaction_id:
+          type: string
+          description: The ID of the ledger transaction that reversed this ledger
+            transaction.
+          nullable: true
       additionalProperties: false
-      minProperties: 17
+      minProperties: 18
       required:
       - id
       - object
@@ -12767,6 +12772,7 @@ components:
       - ledgerable_id
       - external_id
       - reverses_ledger_transaction_id
+      - reversed_by_ledger_transaction_id
     ledger_transaction_version:
       type: object
       properties:
@@ -12796,7 +12802,7 @@ components:
           - archived
           - pending
           - posted
-          description: One of `pending`, `posted`, or `archived`
+          description: One of `pending`, `posted`, or `archived`.
         metadata:
           type: object
           description: Additional data represented as key-value pairs. Both the key
@@ -12864,8 +12870,18 @@ components:
         version:
           type: integer
           description: Version number of the ledger transaction.
+        reverses_ledger_transaction_id:
+          type: string
+          description: The ID of the original ledger transaction. that this ledger
+            transaction reverses.
+          nullable: true
+        reversed_by_ledger_transaction_id:
+          type: string
+          description: The ID of the ledger transaction that reversed this ledger
+            transaction.
+          nullable: true
       additionalProperties: false
-      minProperties: 17
+      minProperties: 19
       required:
       - id
       - object
@@ -12884,6 +12900,8 @@ components:
       - ledgerable_id
       - external_id
       - version
+      - reverses_ledger_transaction_id
+      - reversed_by_ledger_transaction_id
     ledger_transaction_create_request:
       type: object
       properties:
