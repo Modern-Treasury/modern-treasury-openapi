@@ -9337,6 +9337,19 @@ components:
           type: array
           items:
             "$ref": "#/components/schemas/line_item_request"
+        ledger_transaction:
+          "$ref": "#/components/schemas/ledger_transaction_create_request"
+          description: Specifies a ledger transaction object that will be created
+            with the expected payment. If the ledger transaction cannot be created,
+            then the expected payment creation will fail. The resulting ledger transaction
+            will mirror the status of the expected payment.
+        ledger_transaction_id:
+          type: string
+          format: uuid
+          description: Either ledger_transaction or ledger_transaction_id can be provided.
+            Only a pending ledger transaction can be attached upon expected payment
+            creation. Once the expected payment is created, the status of the ledger
+            transaction tracks the expected payment automatically.
       required:
       - amount_upper_bound
       - amount_lower_bound
@@ -12747,8 +12760,13 @@ components:
           description: The ID of the original ledger transaction that this ledger
             transaction reverses.
           nullable: true
+        reversed_by_ledger_transaction_id:
+          type: string
+          description: The ID of the ledger transaction that reversed this ledger
+            transaction.
+          nullable: true
       additionalProperties: false
-      minProperties: 17
+      minProperties: 18
       required:
       - id
       - object
@@ -12767,6 +12785,7 @@ components:
       - ledgerable_id
       - external_id
       - reverses_ledger_transaction_id
+      - reversed_by_ledger_transaction_id
     ledger_transaction_version:
       type: object
       properties:
@@ -12796,7 +12815,7 @@ components:
           - archived
           - pending
           - posted
-          description: One of `pending`, `posted`, or `archived`
+          description: One of `pending`, `posted`, or `archived`.
         metadata:
           type: object
           description: Additional data represented as key-value pairs. Both the key
@@ -12864,8 +12883,18 @@ components:
         version:
           type: integer
           description: Version number of the ledger transaction.
+        reverses_ledger_transaction_id:
+          type: string
+          description: The ID of the original ledger transaction. that this ledger
+            transaction reverses.
+          nullable: true
+        reversed_by_ledger_transaction_id:
+          type: string
+          description: The ID of the ledger transaction that reversed this ledger
+            transaction.
+          nullable: true
       additionalProperties: false
-      minProperties: 17
+      minProperties: 19
       required:
       - id
       - object
@@ -12884,6 +12913,8 @@ components:
       - ledgerable_id
       - external_id
       - version
+      - reverses_ledger_transaction_id
+      - reversed_by_ledger_transaction_id
     ledger_transaction_create_request:
       type: object
       properties:
@@ -15234,6 +15265,8 @@ components:
           - signet_confirmation_id
           - signet_request_id
           - silvergate_payment_id
+          - svb_end_to_end_id
+          - svb_payment_id
           - svb_transaction_cleared_for_sanctions_review
           - svb_transaction_held_for_sanctions_review
           - swift_mir
@@ -15339,6 +15372,8 @@ components:
           - signet_confirmation_id
           - signet_request_id
           - silvergate_payment_id
+          - svb_end_to_end_id
+          - svb_payment_id
           - svb_transaction_cleared_for_sanctions_review
           - svb_transaction_held_for_sanctions_review
           - swift_mir
