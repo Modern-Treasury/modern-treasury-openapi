@@ -272,6 +272,45 @@ paths:
             application/json:
               schema:
                 "$ref": "#/components/schemas/error_message"
+    post:
+      summary: create balance reports
+      tags:
+      - BalanceReport
+      operationId: createBalanceReport
+      security:
+      - basic_auth: []
+      parameters:
+      - name: internal_account_id
+        in: path
+        schema:
+          type: string
+          format: uuid
+        required: true
+      - name: Idempotency-Key
+        in: header
+        required: false
+        description: This key should be something unique, preferably something like
+          an UUID.
+        schema:
+          type: string
+      responses:
+        '422':
+          description: unsuccessful
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/error_message"
+        '201':
+          description: successful
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/balance_report"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              "$ref": "#/components/schemas/balance_report_create_request"
   "/api/internal_accounts/{internal_account_id}/balance_reports/{id}":
     get:
       summary: get balance_report
@@ -305,6 +344,50 @@ paths:
                 "$ref": "#/components/schemas/balance_report"
         '404':
           description: not found
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/error_message"
+    delete:
+      summary: delete balance_report
+      tags:
+      - BalanceReport
+      description: Deletes a given balance report.
+      operationId: deleteBalanceReport
+      security:
+      - basic_auth: []
+      parameters:
+      - name: internal_account_id
+        in: path
+        schema:
+          type: string
+          format: uuid
+        required: true
+      - name: id
+        in: path
+        schema:
+          type: string
+          format: uuid
+        required: true
+        description: Either the unique identifier of the balance report or latest
+          for the latest balance report.
+      responses:
+        '204':
+          description: no content
+        '404':
+          description: not found
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/error_message"
+        '422':
+          description: not allowed
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/error_message"
+        '403':
+          description: forbidden
           content:
             application/json:
               schema:
@@ -7686,6 +7769,40 @@ components:
       - as_of_time
       - balances
       - internal_account_id
+    balance_report_create_request:
+      type: object
+      properties:
+        as_of_date:
+          type: string
+          format: date
+          description: The date of the balance report in local time.
+        as_of_time:
+          type: string
+          description: The time (24-hour clock) of the balance report in local time.
+        amount:
+          type: integer
+          description: Value in specified currency's smallest unit. e.g. $10 would
+            be represented as 1000.
+        balance_report_type:
+          type: string
+          enum:
+          - intraday
+          - other
+          - previous_day
+          - real_time
+          description: The specific type of balance report. One of `intraday`, `previous_day`,
+            `real_time`, or `other`.
+        balances:
+          type: array
+          items:
+            "$ref": "#/components/schemas/balance_create_request"
+          description: An array of `Balance` objects.
+      required:
+      - as_of_date
+      - as_of_time
+      - amount
+      - balance_report_type
+      - balances
     balance:
       type: object
       properties:
@@ -7729,29 +7846,11 @@ components:
           description: The code used by the bank when reporting this specific balance.
         vendor_code_type:
           type: string
-          enum:
-          - bai2
-          - bankprov
-          - bnk_dev
-          - cleartouch
-          - column
-          - cross_river
-          - currencycloud
-          - dc_bank
-          - dwolla
-          - evolve
-          - goldman_sachs
-          - iso20022
-          - jpmc
-          - mx
-          - plaid
-          - rspec_vendor
-          - signet
-          - silvergate
-          - swift
-          - us_bank
           nullable: true
-          description: The code used by the bank when reporting this specific balance.
+          description: The type of `vendor_code` being reported. Can be one of `bai2`,
+            `bankprov`, `bnk_dev`, `cleartouch`, `currencycloud`, `cross_river`, `dc_bank`,
+            `dwolla`, `evolve`, `goldman_sachs`, `iso20022`, `jpmc`, `mx`, `signet`,
+            `silvergate`, `swift`, or `us_bank`.
       additionalProperties: false
       minProperties: 10
       required:
@@ -7762,6 +7861,43 @@ components:
       - updated_at
       - amount
       - currency
+      - balance_type
+      - vendor_code
+      - vendor_code_type
+    balance_create_request:
+      type: object
+      properties:
+        amount:
+          type: integer
+          description: The balance amount.
+        balance_type:
+          type: string
+          enum:
+          - closing_available
+          - closing_ledger
+          - current_available
+          - current_ledger
+          - opening_available
+          - opening_available_next_business_day
+          - opening_ledger
+          - other
+          description: The specific type of balance reported. One of `opening_ledger`,
+            `closing_ledger`, `current_ledger`, `opening_available`, `opening_available_next_business_day`,
+            `closing_available`, `current_available`, or `other`.
+        vendor_code:
+          type: string
+          description: The code used by the bank when reporting this specific balance.
+        vendor_code_type:
+          type: string
+          nullable: true
+          description: The type of `vendor_code` being reported. Can be one of `bai2`,
+            `bankprov`, `bnk_dev`, `cleartouch`, `currencycloud`, `cross_river`, `dc_bank`,
+            `dwolla`, `evolve`, `goldman_sachs`, `iso20022`, `jpmc`, `mx`, `signet`,
+            `silvergate`, `swift`, or `us_bank`.
+      additionalProperties: false
+      minProperties: 4
+      required:
+      - amount
       - balance_type
       - vendor_code
       - vendor_code_type
@@ -15272,6 +15408,7 @@ components:
           - svb_transaction_held_for_sanctions_review
           - swift_mir
           - swift_uetr
+          - umb_product_partner_account_number
           - usbank_payment_id
           - wells_fargo_payment_id
           - wells_fargo_trace_number
@@ -15380,6 +15517,7 @@ components:
           - svb_transaction_held_for_sanctions_review
           - swift_mir
           - swift_uetr
+          - umb_product_partner_account_number
           - usbank_payment_id
           - wells_fargo_payment_id
           - wells_fargo_trace_number
