@@ -10508,7 +10508,7 @@ components:
           type: string
           nullable: true
           format: uuid
-          description: The ledger account settlment object linked to the invoice.
+          description: The ledger account settlement object linked to the invoice.
         payment_effective_date:
           type: string
           nullable: true
