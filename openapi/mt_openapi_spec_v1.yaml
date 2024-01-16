@@ -3476,6 +3476,11 @@ paths:
         schema:
           type: string
         required: false
+      - name: ledger_transaction_id
+        in: query
+        schema:
+          type: string
+        required: false
       responses:
         '200':
           description: successful
@@ -10508,7 +10513,7 @@ components:
           type: string
           nullable: true
           format: uuid
-          description: The ledger account settlment object linked to the invoice.
+          description: The ledger account settlement object linked to the invoice.
         payment_effective_date:
           type: string
           nullable: true
