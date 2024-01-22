@@ -3476,6 +3476,11 @@ paths:
         schema:
           type: string
         required: false
+      - name: ledger_transaction_id
+        in: query
+        schema:
+          type: string
+        required: false
       responses:
         '200':
           description: successful
@@ -3851,6 +3856,12 @@ paths:
                 "$ref": "#/components/schemas/ledger_account"
         '403':
           description: forbidden
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/error_message"
+        '404':
+          description: not found
           content:
             application/json:
               schema:
@@ -6829,6 +6840,7 @@ paths:
           - id_sknbi_code
           - in_ifsc
           - jp_zengin_code
+          - mx_bank_identifier
           - my_branch_code
           - nz_national_clearing_code
           - pl_national_clearing_code
@@ -8580,6 +8592,7 @@ components:
                       - in_ifsc
                       - jp_zengin_code
                       - my_branch_code
+                      - mx_bank_identifier
                       - nz_national_clearing_code
                       - pl_national_clearing_code
                       - se_bankgiro_clearing_code
@@ -9805,6 +9818,7 @@ components:
                 - in_ifsc
                 - jp_zengin_code
                 - my_branch_code
+                - mx_bank_identifier
                 - nz_national_clearing_code
                 - pl_national_clearing_code
                 - se_bankgiro_clearing_code
@@ -10105,6 +10119,7 @@ components:
           - id_sknbi_code
           - in_ifsc
           - jp_zengin_code
+          - mx_bank_identifier
           - my_branch_code
           - nz_national_clearing_code
           - pl_national_clearing_code
@@ -10508,7 +10523,7 @@ components:
           type: string
           nullable: true
           format: uuid
-          description: The ledger account settlment object linked to the invoice.
+          description: The ledger account settlement object linked to the invoice.
         payment_effective_date:
           type: string
           nullable: true
@@ -11411,6 +11426,13 @@ components:
           type: integer
           description: The currency exponent of the ledger account.
           nullable: true
+        ledger_account_category_ids:
+          type: array
+          items:
+            type: string
+            format: uuid
+          description: The array of ledger account category ids that this ledger account
+            should be a child of.
         ledgerable_id:
           type: string
           format: uuid
@@ -14449,6 +14471,7 @@ components:
                     - in_ifsc
                     - jp_zengin_code
                     - my_branch_code
+                    - mx_bank_identifier
                     - nz_national_clearing_code
                     - pl_national_clearing_code
                     - se_bankgiro_clearing_code
@@ -14851,6 +14874,7 @@ components:
                     - in_ifsc
                     - jp_zengin_code
                     - my_branch_code
+                    - mx_bank_identifier
                     - nz_national_clearing_code
                     - pl_national_clearing_code
                     - se_bankgiro_clearing_code
@@ -15281,6 +15305,7 @@ components:
                     - in_ifsc
                     - jp_zengin_code
                     - my_branch_code
+                    - mx_bank_identifier
                     - nz_national_clearing_code
                     - pl_national_clearing_code
                     - se_bankgiro_clearing_code
@@ -15993,6 +16018,7 @@ components:
           - id_sknbi_code
           - in_ifsc
           - jp_zengin_code
+          - mx_bank_identifier
           - my_branch_code
           - nz_national_clearing_code
           - pl_national_clearing_code
@@ -16077,6 +16103,7 @@ components:
           - id_sknbi_code
           - in_ifsc
           - jp_zengin_code
+          - mx_bank_identifier
           - my_branch_code
           - nz_national_clearing_code
           - pl_national_clearing_code
