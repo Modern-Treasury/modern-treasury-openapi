@@ -3476,6 +3476,11 @@ paths:
         schema:
           type: string
         required: false
+      - name: ledger_transaction_id
+        in: query
+        schema:
+          type: string
+        required: false
       responses:
         '200':
           description: successful
@@ -3851,6 +3856,12 @@ paths:
                 "$ref": "#/components/schemas/ledger_account"
         '403':
           description: forbidden
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/error_message"
+        '404':
+          description: not found
           content:
             application/json:
               schema:
@@ -5631,6 +5642,20 @@ paths:
           format: date
         required: false
         description: An inclusive upper bound for searching created_at
+      - name: process_after_start
+        in: query
+        schema:
+          type: string
+          format: date-time
+        required: false
+        description: An inclusive lower bound for searching process_after
+      - name: process_after_end
+        in: query
+        schema:
+          type: string
+          format: date-time
+        required: false
+        description: An inclusive upper bound for searching process_after
       - "$ref": "#/components/parameters/metadata_query"
       responses:
         '200':
@@ -6829,6 +6854,7 @@ paths:
           - id_sknbi_code
           - in_ifsc
           - jp_zengin_code
+          - mx_bank_identifier
           - my_branch_code
           - nz_national_clearing_code
           - pl_national_clearing_code
@@ -8580,6 +8606,7 @@ components:
                       - in_ifsc
                       - jp_zengin_code
                       - my_branch_code
+                      - mx_bank_identifier
                       - nz_national_clearing_code
                       - pl_national_clearing_code
                       - se_bankgiro_clearing_code
@@ -9805,6 +9832,7 @@ components:
                 - in_ifsc
                 - jp_zengin_code
                 - my_branch_code
+                - mx_bank_identifier
                 - nz_national_clearing_code
                 - pl_national_clearing_code
                 - se_bankgiro_clearing_code
@@ -10105,6 +10133,7 @@ components:
           - id_sknbi_code
           - in_ifsc
           - jp_zengin_code
+          - mx_bank_identifier
           - my_branch_code
           - nz_national_clearing_code
           - pl_national_clearing_code
@@ -10508,7 +10537,7 @@ components:
           type: string
           nullable: true
           format: uuid
-          description: The ledger account settlment object linked to the invoice.
+          description: The ledger account settlement object linked to the invoice.
         payment_effective_date:
           type: string
           nullable: true
@@ -11411,6 +11440,13 @@ components:
           type: integer
           description: The currency exponent of the ledger account.
           nullable: true
+        ledger_account_category_ids:
+          type: array
+          items:
+            type: string
+            format: uuid
+          description: The array of ledger account category ids that this ledger account
+            should be a child of.
         ledgerable_id:
           type: string
           format: uuid
@@ -13843,6 +13879,12 @@ components:
           description: For `ach`, this field will be passed through on an addenda
             record. For `wire` payments the field will be passed through as the "Originator
             to Beneficiary Information", also known as OBI or Fedwire tag 6000.
+        process_after:
+          type: string
+          format: date-time
+          nullable: true
+          description: If present, the time until which the payment may not be processed.
+            Format is ISO8601 timestamp.
         purpose:
           type: string
           nullable: true
@@ -14105,7 +14147,7 @@ components:
           description: The ID of the compliance decision for the payment order, if
             transaction monitoring is enabled.
       additionalProperties: false
-      minProperties: 48
+      minProperties: 49
       required:
       - id
       - object
@@ -14127,6 +14169,7 @@ components:
       - description
       - statement_descriptor
       - remittance_information
+      - process_after
       - purpose
       - metadata
       - charge_bearer
@@ -14289,6 +14332,12 @@ components:
           description: For `ach`, this field will be passed through on an addenda
             record. For `wire` payments the field will be passed through as the "Originator
             to Beneficiary Information", also known as OBI or Fedwire tag 6000.
+        process_after:
+          type: string
+          format: date-time
+          nullable: true
+          description: If present, the time until which the payment may not be processed.
+            Format is ISO8601 timestamp.
         purpose:
           type: string
           nullable: true
@@ -14449,6 +14498,7 @@ components:
                     - in_ifsc
                     - jp_zengin_code
                     - my_branch_code
+                    - mx_bank_identifier
                     - nz_national_clearing_code
                     - pl_national_clearing_code
                     - se_bankgiro_clearing_code
@@ -14691,6 +14741,12 @@ components:
           description: For `ach`, this field will be passed through on an addenda
             record. For `wire` payments the field will be passed through as the "Originator
             to Beneficiary Information", also known as OBI or Fedwire tag 6000.
+        process_after:
+          type: string
+          format: date-time
+          nullable: true
+          description: If present, the time until which the payment may not be processed.
+            Format is ISO8601 timestamp.
         purpose:
           type: string
           nullable: true
@@ -14851,6 +14907,7 @@ components:
                     - in_ifsc
                     - jp_zengin_code
                     - my_branch_code
+                    - mx_bank_identifier
                     - nz_national_clearing_code
                     - pl_national_clearing_code
                     - se_bankgiro_clearing_code
@@ -15086,6 +15143,12 @@ components:
           description: For `ach`, this field will be passed through on an addenda
             record. For `wire` payments the field will be passed through as the "Originator
             to Beneficiary Information", also known as OBI or Fedwire tag 6000.
+        process_after:
+          type: string
+          format: date-time
+          nullable: true
+          description: If present, the time until which the payment may not be processed.
+            Format is ISO8601 timestamp.
         purpose:
           type: string
           nullable: true
@@ -15281,6 +15344,7 @@ components:
                     - in_ifsc
                     - jp_zengin_code
                     - my_branch_code
+                    - mx_bank_identifier
                     - nz_national_clearing_code
                     - pl_national_clearing_code
                     - se_bankgiro_clearing_code
@@ -15993,6 +16057,7 @@ components:
           - id_sknbi_code
           - in_ifsc
           - jp_zengin_code
+          - mx_bank_identifier
           - my_branch_code
           - nz_national_clearing_code
           - pl_national_clearing_code
@@ -16077,6 +16142,7 @@ components:
           - id_sknbi_code
           - in_ifsc
           - jp_zengin_code
+          - mx_bank_identifier
           - my_branch_code
           - nz_national_clearing_code
           - pl_national_clearing_code
