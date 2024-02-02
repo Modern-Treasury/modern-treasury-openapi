@@ -11405,6 +11405,7 @@ components:
           enum:
           - external_account
           - internal_account
+          - virtual_account
           nullable: true
           description: If the ledger account links to another object in Modern Treasury,
             the type will be populated here, otherwise null. The value is one of internal_account
@@ -11481,6 +11482,7 @@ components:
           enum:
           - external_account
           - internal_account
+          - virtual_account
           description: If the ledger account links to another object in Modern Treasury,
             the type will be populated here, otherwise null. The value is one of internal_account
             or external_account.
@@ -13907,7 +13909,10 @@ components:
           type: string
           format: date-time
           nullable: true
-          description: If present, the time until which the payment may not be processed.
+          description: If present, Modern Treasury will not process the payment until
+            after this time. If `process_after` is past the cutoff for `effective_date`,
+            `process_after` will take precedence and `effective_date` will automatically
+            update to reflect the earliest possible sending date after `process_after`.
             Format is ISO8601 timestamp.
         purpose:
           type: string
@@ -14360,7 +14365,10 @@ components:
           type: string
           format: date-time
           nullable: true
-          description: If present, the time until which the payment may not be processed.
+          description: If present, Modern Treasury will not process the payment until
+            after this time. If `process_after` is past the cutoff for `effective_date`,
+            `process_after` will take precedence and `effective_date` will automatically
+            update to reflect the earliest possible sending date after `process_after`.
             Format is ISO8601 timestamp.
         purpose:
           type: string
@@ -14769,7 +14777,10 @@ components:
           type: string
           format: date-time
           nullable: true
-          description: If present, the time until which the payment may not be processed.
+          description: If present, Modern Treasury will not process the payment until
+            after this time. If `process_after` is past the cutoff for `effective_date`,
+            `process_after` will take precedence and `effective_date` will automatically
+            update to reflect the earliest possible sending date after `process_after`.
             Format is ISO8601 timestamp.
         purpose:
           type: string
@@ -15171,7 +15182,10 @@ components:
           type: string
           format: date-time
           nullable: true
-          description: If present, the time until which the payment may not be processed.
+          description: If present, Modern Treasury will not process the payment until
+            after this time. If `process_after` is past the cutoff for `effective_date`,
+            `process_after` will take precedence and `effective_date` will automatically
+            update to reflect the earliest possible sending date after `process_after`.
             Format is ISO8601 timestamp.
         purpose:
           type: string
@@ -15797,6 +15811,7 @@ components:
           - bacs
           - book
           - check
+          - cross_border
           - eft
           - interac
           - manual
@@ -16838,6 +16853,11 @@ components:
           description: The ID of a credit normal ledger account. When money leaves
             the virtual account, this ledger account will be credited. Must be accompanied
             by a debit_ledger_account_id if present.
+        ledger_account:
+          "$ref": "#/components/schemas/ledger_account_create_request"
+          description: Specifies a ledger account object that will be created with
+            the virtual account. The resulting ledger account is linked to the virtual
+            account for auto-ledgering IPDs.
         metadata:
           type: object
           description: Additional data represented as key-value pairs. Both the key
