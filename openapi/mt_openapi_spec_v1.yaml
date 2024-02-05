@@ -7051,6 +7051,12 @@ paths:
             application/json:
               schema:
                 "$ref": "#/components/schemas/virtual_account"
+        '422':
+          description: unsuccessful
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/error_message"
       requestBody:
         content:
           application/json:
@@ -16883,6 +16889,10 @@ components:
         counterparty_id:
           type: string
           format: uuid
+        ledger_account_id:
+          type: string
+          format: uuid
+          description: The ledger account that you'd like to link to the virtual account.
         metadata:
           type: object
           additionalProperties:
