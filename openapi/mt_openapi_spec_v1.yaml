@@ -7051,6 +7051,12 @@ paths:
             application/json:
               schema:
                 "$ref": "#/components/schemas/virtual_account"
+        '422':
+          description: unsuccessful
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/error_message"
       requestBody:
         content:
           application/json:
@@ -8358,6 +8364,7 @@ components:
                 enum:
                 - cash
                 - checking
+                - general_ledger
                 - loan
                 - non_resident
                 - other
@@ -8567,6 +8574,7 @@ components:
                 enum:
                 - cash
                 - checking
+                - general_ledger
                 - loan
                 - non_resident
                 - other
@@ -9687,6 +9695,7 @@ components:
           enum:
           - cash
           - checking
+          - general_ledger
           - loan
           - non_resident
           - other
@@ -9789,6 +9798,7 @@ components:
           enum:
           - cash
           - checking
+          - general_ledger
           - loan
           - non_resident
           - other
@@ -9944,6 +9954,7 @@ components:
           enum:
           - cash
           - checking
+          - general_ledger
           - loan
           - non_resident
           - other
@@ -10238,6 +10249,7 @@ components:
           enum:
           - cash
           - checking
+          - general_ledger
           - loan
           - non_resident
           - other
@@ -14037,6 +14049,7 @@ components:
                 enum:
                 - cash
                 - checking
+                - general_ledger
                 - loan
                 - non_resident
                 - other
@@ -14467,6 +14480,7 @@ components:
               enum:
               - cash
               - checking
+              - general_ledger
               - loan
               - non_resident
               - other
@@ -14879,6 +14893,7 @@ components:
               enum:
               - cash
               - checking
+              - general_ledger
               - loan
               - non_resident
               - other
@@ -15319,6 +15334,7 @@ components:
               enum:
               - cash
               - checking
+              - general_ledger
               - loan
               - non_resident
               - other
@@ -15727,6 +15743,16 @@ components:
           - '911'
           - '912'
           - '914'
+          - C01
+          - C02
+          - C03
+          - C05
+          - C06
+          - C07
+          - C08
+          - C09
+          - C13
+          - C14
           - R01
           - R02
           - R03
@@ -15901,6 +15927,16 @@ components:
           - '911'
           - '912'
           - '914'
+          - C01
+          - C02
+          - C03
+          - C05
+          - C06
+          - C07
+          - C08
+          - C09
+          - C13
+          - C14
           - R01
           - R02
           - R03
@@ -16539,6 +16575,7 @@ components:
           - sknbi
           - wire
           - zengin
+          - other
           description: The type of the transaction. Can be one of `ach`, `wire`, `check`,
             `rtp`, `book`, or `sen`.
       additionalProperties: false
@@ -16883,6 +16920,10 @@ components:
         counterparty_id:
           type: string
           format: uuid
+        ledger_account_id:
+          type: string
+          format: uuid
+          description: The ledger account that you'd like to link to the virtual account.
         metadata:
           type: object
           additionalProperties:
