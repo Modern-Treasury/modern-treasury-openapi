@@ -14469,8 +14469,12 @@ components:
           nullable: true
           description: The ID of the compliance decision for the payment order, if
             transaction monitoring is enabled.
+        foreign_exchange_rate:
+          "$ref": "#/components/schemas/foreign_exchange_rate"
+          nullable: true
+          description: Associated serialized foreign exchange rate information.
       additionalProperties: false
-      minProperties: 49
+      minProperties: 50
       required:
       - id
       - object
@@ -14521,6 +14525,7 @@ components:
       - reference_numbers
       - vendor_failure_reason
       - decision_id
+      - foreign_exchange_rate
     payment_order_create_request:
       type: object
       properties:
