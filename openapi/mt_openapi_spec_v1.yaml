@@ -699,6 +699,174 @@ paths:
             application/json:
               schema:
                 "$ref": "#/components/schemas/error_message"
+  "/api/connection_legal_entities":
+    get:
+      summary: list connection_legal_entities
+      tags:
+      - ConnectionLegalEntity
+      operationId: listConnectionLegalEntities
+      description: Get a list of all connection legal entities.
+      security:
+      - basic_auth: []
+      parameters:
+      - name: after_cursor
+        in: query
+        schema:
+          type: string
+          nullable: true
+        required: false
+      - name: per_page
+        in: query
+        required: false
+        schema:
+          type: integer
+      - name: connection_id
+        in: query
+        schema:
+          type: string
+          format: uuid
+        required: false
+      - name: legal_entity_id
+        in: query
+        schema:
+          type: string
+          format: uuid
+        required: false
+      - name: status
+        in: query
+        schema:
+          type: string
+          enum:
+          - completed
+          - denied
+          - failed
+          - processing
+        required: false
+      responses:
+        '200':
+          description: successful
+          headers:
+            X-After-Cursor:
+              schema:
+                type: string
+                nullable: true
+              description: The cursor for the next page. Including this in a call
+                as `after_cursor` will return the next page.
+            X-Per-Page:
+              schema:
+                type: integer
+                nullable: true
+              description: The current `per_page`.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  "$ref": "#/components/schemas/connection_legal_entity"
+    post:
+      summary: create connection_legal_entity
+      tags:
+      - ConnectionLegalEntity
+      operationId: createConnectionLegalEntity
+      description: Create a connection legal entity.
+      security:
+      - basic_auth: []
+      parameters:
+      - name: Idempotency-Key
+        in: header
+        required: false
+        description: This key should be something unique, preferably something like
+          an UUID.
+        schema:
+          type: string
+      responses:
+        '201':
+          description: successful
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/connection_legal_entity"
+        '422':
+          description: unsuccessful
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/error_message"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              "$ref": "#/components/schemas/connection_legal_entity_create_request"
+  "/api/connection_legal_entities/{id}":
+    parameters:
+    - name: id
+      in: path
+      description: The id of an existing connection legal entity.
+      required: true
+      schema:
+        type: string
+    get:
+      summary: get connection_legal_entity
+      tags:
+      - ConnectionLegalEntity
+      operationId: getConnectionLegalEntity
+      description: Get details on a single connection legal entity.
+      security:
+      - basic_auth: []
+      parameters:
+      - name: Idempotency-Key
+        in: header
+        required: false
+        description: This key should be something unique, preferably something like
+          an UUID.
+        schema:
+          type: string
+      responses:
+        '200':
+          description: successful
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/connection_legal_entity"
+        '404':
+          description: not found
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/error_message"
+    patch:
+      summary: update connection_legal_entity
+      tags:
+      - ConnectionLegalEntity
+      operationId: updateConnectionLegalEntity
+      description: Update a connection legal entity.
+      security:
+      - basic_auth: []
+      parameters: []
+      responses:
+        '200':
+          description: successful
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/connection_legal_entity"
+        '404':
+          description: not found
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/error_message"
+        '422':
+          description: unsuccessful
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/error_message"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              "$ref": "#/components/schemas/connection_legal_entity_update_request"
   "/api/connections":
     get:
       summary: list connections
@@ -832,6 +1000,13 @@ paths:
         required: false
         description: Performs a partial string match of the email field. This is also
           case insensitive.
+      - name: legal_entity_id
+        in: query
+        schema:
+          type: string
+          format: uuid
+        required: false
+        description: Filters for counterparties with the given legal entity ID.
       - "$ref": "#/components/parameters/metadata_query"
       - name: created_at_lower_bound
         in: query
@@ -964,6 +1139,12 @@ paths:
                 "$ref": "#/components/schemas/counterparty"
         '404':
           description: not found
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/error_message"
+        '422':
+          description: unsuccessful
           content:
             application/json:
               schema:
@@ -2351,14 +2532,21 @@ paths:
           type: string
           "$ref": "#/components/schemas/currency"
         required: false
-        description: The currency associated with the internal account.
+        description: Only return internal accounts with this currency.
       - name: counterparty_id
         in: query
         schema:
           type: string
           format: uuid
         required: false
-        description: The counterparty associated with the internal account.
+        description: Only return internal accounts associated with this counterparty.
+      - name: legal_entity_id
+        in: query
+        schema:
+          type: string
+          format: uuid
+        required: false
+        description: Only return internal accounts associated with this legal entity.
       - name: payment_type
         in: query
         schema:
@@ -2395,7 +2583,7 @@ paths:
           - wire
           - zengin
         required: false
-        description: The type of payment that can be made by the internal account.
+        description: Only return internal accounts that can make this type of payment.
       - name: payment_direction
         in: query
         schema:
@@ -2404,7 +2592,8 @@ paths:
           - credit
           - debit
         required: false
-        description: The direction of payments that can be made by internal account.
+        description: Only return internal accounts that can originate payments with
+          this direction.
       - "$ref": "#/components/parameters/metadata_query"
       responses:
         '200':
@@ -5385,6 +5574,199 @@ paths:
             application/json:
               schema:
                 "$ref": "#/components/schemas/error_message"
+  "/api/legal_entities":
+    get:
+      summary: list legal_entities
+      tags:
+      - LegalEntity
+      operationId: listLegalEntities
+      description: Get a list of all legal entities.
+      security:
+      - basic_auth: []
+      parameters:
+      - name: after_cursor
+        in: query
+        schema:
+          type: string
+          nullable: true
+        required: false
+      - name: per_page
+        in: query
+        required: false
+        schema:
+          type: integer
+      - name: legal_entity_type
+        in: query
+        schema:
+          type: string
+          enum:
+          - business
+          - individual
+        required: false
+      - name: show_deleted
+        in: query
+        required: false
+        schema:
+          type: string
+      - "$ref": "#/components/parameters/metadata_query"
+      responses:
+        '200':
+          description: successful
+          headers:
+            X-After-Cursor:
+              schema:
+                type: string
+                nullable: true
+              description: The cursor for the next page. Including this in a call
+                as `after_cursor` will return the next page.
+            X-Per-Page:
+              schema:
+                type: integer
+                nullable: true
+              description: The current `per_page`.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  "$ref": "#/components/schemas/legal_entity"
+    post:
+      summary: create legal_entity
+      tags:
+      - LegalEntity
+      operationId: createLegalEntity
+      security:
+      - basic_auth: []
+      parameters:
+      - name: Idempotency-Key
+        in: header
+        required: false
+        description: This key should be something unique, preferably something like
+          an UUID.
+        schema:
+          type: string
+      responses:
+        '201':
+          description: successful
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/legal_entity"
+        '422':
+          description: unsuccessful
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/error_message"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              "$ref": "#/components/schemas/legal_entity_create_request"
+  "/api/legal_entities/{id}":
+    parameters:
+    - name: id
+      in: path
+      description: id
+      required: true
+      schema:
+        type: string
+    get:
+      summary: get legal_entity
+      tags:
+      - LegalEntity
+      operationId: getLegalEntity
+      description: Get details on a single legal entity.
+      security:
+      - basic_auth: []
+      parameters:
+      - name: Idempotency-Key
+        in: header
+        required: false
+        description: This key should be something unique, preferably something like
+          an UUID.
+        schema:
+          type: string
+      responses:
+        '200':
+          description: successful
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/legal_entity"
+        '404':
+          description: not found
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/error_message"
+    patch:
+      summary: update legal entity
+      tags:
+      - LegalEntity
+      operationId: updateLegalEntity
+      description: Update a legal entity.
+      security:
+      - basic_auth: []
+      parameters: []
+      responses:
+        '200':
+          description: successful
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/legal_entity"
+        '404':
+          description: not found
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/error_message"
+        '422':
+          description: unsuccessful
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/error_message"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              "$ref": "#/components/schemas/legal_entity_update_request"
+  "/api/legal_entity_associations":
+    post:
+      summary: create legal_entity_association
+      tags:
+      - LegalEntityAssociation
+      operationId: createLegalEntityAssociation
+      security:
+      - basic_auth: []
+      parameters:
+      - name: Idempotency-Key
+        in: header
+        required: false
+        description: This key should be something unique, preferably something like
+          an UUID.
+        schema:
+          type: string
+      responses:
+        '201':
+          description: successful
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/legal_entity_association"
+        '422':
+          description: unsuccessful
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/error_message"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              "$ref": "#/components/schemas/legal_entity_association_create_request"
   "/api/{itemizable_type}/{itemizable_id}/line_items":
     get:
       summary: list line items
@@ -7984,10 +8366,6 @@ components:
         as_of_time:
           type: string
           description: The time (24-hour clock) of the balance report in local time.
-        amount:
-          type: integer
-          description: Value in specified currency's smallest unit. e.g. $10 would
-            be represented as 1000.
         balance_report_type:
           type: string
           enum:
@@ -8005,7 +8383,6 @@ components:
       required:
       - as_of_date
       - as_of_time
-      - amount
       - balance_report_type
       - balances
     balance:
@@ -8406,6 +8783,132 @@ components:
       - vendor_id
       - vendor_customer_id
       - vendor_name
+    connection_legal_entity:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        object:
+          type: string
+        live_mode:
+          type: boolean
+          description: This field will be true if this object exists in the live environment
+            or false if it exists in the test environment.
+        created_at:
+          type: string
+          format: date-time
+        updated_at:
+          type: string
+          format: date-time
+        discarded_at:
+          type: string
+          format: date-time
+          nullable: true
+        connection_id:
+          type: string
+          description: The ID of the connection.
+        legal_entity_id:
+          type: string
+          description: The ID of the legal entity.
+        status:
+          type: string
+          enum:
+          - completed
+          - denied
+          - failed
+          - processing
+          description: The status of the connection legal entity.
+      additionalProperties: false
+      minProperties: 9
+    connection_legal_entity_create_request:
+      type: object
+      properties:
+        connection_id:
+          type: string
+          description: The ID of the connection.
+        legal_entity_id:
+          type: string
+          description: The ID of the legal entity.
+        legal_entity:
+          type: object
+          properties:
+            legal_entity_type:
+              type: string
+              enum:
+              - business
+              - individual
+              description: The type of legal entity.
+            first_name:
+              type: string
+              nullable: true
+              description: An individual's first name.
+            last_name:
+              type: string
+              nullable: true
+              description: An individual's last name.
+            date_of_birth:
+              type: string
+              format: date
+              nullable: true
+              description: An individual's data of birth (YYYY-MM-DD).
+            business_name:
+              type: string
+              nullable: true
+              description: The business's legal business name.
+            doing_business_as_names:
+              type: array
+              items:
+                type: string
+                description: A list of "Doing Business As" (DBA) / trade names for
+                  a business, different than their legal business name.
+            phone_numbers:
+              type: array
+              items:
+                type: object
+                properties:
+                  phone_number:
+                    type: string
+                description: A list of phone numbers in E.164 format.
+            email:
+              type: string
+              nullable: true
+              description: The entity's primary email.
+            website:
+              type: string
+              nullable: true
+              description: The entity's primary website URL.
+            metadata:
+              type: object
+              description: Additional data represented as key-value pairs. Both the
+                key and value must be strings.
+              additionalProperties:
+                type: string
+              example:
+                key: value
+                foo: bar
+                modern: treasury
+            addresses:
+              type: array
+              description: A list of addresses for the entity.
+              items:
+                "$ref": "#/components/schemas/legal_entity_address_create_request"
+            identifications:
+              type: array
+              description: A list of identifications for the legal entity.
+              items:
+                "$ref": "#/components/schemas/identification_create_request"
+          description: The legal entity.
+      required:
+      - connection_id
+    connection_legal_entity_update_request:
+      type: object
+      properties:
+        status:
+          type: string
+          enum:
+          - processing
+          description: The status of the connection legal entity.
     contact_detail:
       type: object
       properties:
@@ -8581,6 +9084,11 @@ components:
           format: email
           description: The counterparty's email.
           nullable: true
+        legal_entity_id:
+          type: string
+          format: uuid
+          description: The id of the legal entity.
+          nullable: true
         metadata:
           type: object
           additionalProperties:
@@ -8604,7 +9112,7 @@ components:
           - verified
           description: The verification status of the counterparty.
       additionalProperties: false
-      minProperties: 12
+      minProperties: 13
       required:
       - id
       - object
@@ -8615,6 +9123,7 @@ components:
       - name
       - accounts
       - email
+      - legal_entity_id
       - metadata
       - send_remittance_advice
       - verification_status
@@ -8866,6 +9375,11 @@ components:
           format: email
           description: The counterparty's email.
           nullable: true
+        legal_entity_id:
+          type: string
+          format: uuid
+          description: The id of the legal entity.
+          nullable: true
         metadata:
           type: object
           additionalProperties:
@@ -8909,6 +9423,9 @@ components:
         taxpayer_identifier:
           type: string
           description: Either a valid SSN or EIN.
+        legal_entity:
+          type: object
+          "$ref": "#/components/schemas/legal_entity_create_request"
       required:
       - name
     counterparty_update_request:
@@ -8931,6 +9448,11 @@ components:
           type: boolean
           description: If this is `true`, Modern Treasury will send an email to the
             counterparty whenever an associated payment order is sent to the bank.
+        legal_entity_id:
+          type: string
+          format: uuid
+          description: The id of the legal entity.
+          nullable: true
         taxpayer_identifier:
           type: string
           description: Either a valid SSN or EIN.
@@ -10311,6 +10833,92 @@ components:
       required:
       - internal_account_id
       - target_currency
+    identification:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        object:
+          type: string
+        live_mode:
+          type: boolean
+          description: This field will be true if this object exists in the live environment
+            or false if it exists in the test environment.
+        created_at:
+          type: string
+          format: date-time
+        updated_at:
+          type: string
+          format: date-time
+        discarded_at:
+          type: string
+          format: date-time
+          nullable: true
+        id_type:
+          type: string
+          enum:
+          - ar_cuil
+          - ar_cuit
+          - br_cnpj
+          - br_cpf
+          - cl_nut
+          - co_cedulas
+          - co_nit
+          - hn_id
+          - hn_rtn
+          - passport
+          - us_ein
+          - us_itin
+          - us_ssn
+          description: The type of ID number.
+        issuing_country:
+          type: string
+          nullable: true
+          description: The ISO 3166-1 alpha-2 country code of the country that issued
+            the identification
+      additionalProperties: false
+      minProperties: 8
+      required:
+      - id
+      - object
+      - live_mode
+      - created_at
+      - updated_at
+      - discarded_at
+      - id_type
+      - issuing_country
+    identification_create_request:
+      type: object
+      properties:
+        id_number:
+          type: string
+          description: The ID number of identification document.
+        id_type:
+          type: string
+          enum:
+          - ar_cuil
+          - ar_cuit
+          - br_cnpj
+          - br_cpf
+          - cl_nut
+          - co_cedulas
+          - co_nit
+          - hn_id
+          - hn_rtn
+          - passport
+          - us_ein
+          - us_itin
+          - us_ssn
+          description: The type of ID number.
+        issuing_country:
+          type: string
+          nullable: true
+          description: The ISO 3166-1 alpha-2 country code of the country that issued
+            the identification
+      required:
+      - id_number
+      - id_type
     incoming_payment_detail_update_request:
       type: object
       properties:
@@ -10591,6 +11199,11 @@ components:
           format: uuid
           nullable: true
           description: The Counterparty associated to this account.
+        legal_entity_id:
+          type: string
+          format: uuid
+          nullable: true
+          description: The Legal Entity associated to this account
         ledger_account_id:
           type: string
           format: uuid
@@ -10598,7 +11211,7 @@ components:
           description: If the internal account links to a ledger account in Modern
             Treasury, the id of the ledger account will be populated here.
       additionalProperties: false
-      minProperties: 18
+      minProperties: 19
       required:
       - id
       - object
@@ -10617,6 +11230,7 @@ components:
       - metadata
       - parent_account_id
       - counterparty_id
+      - legal_entity_id
       - ledger_account_id
     internal_account_create_request:
       type: object
@@ -10681,6 +11295,9 @@ components:
         counterparty_id:
           type: string
           description: The Counterparty associated to this account.
+        legal_entity_id:
+          type: string
+          description: The LegalEntity associated to this account.
       required:
       - connection_id
       - name
@@ -13680,6 +14297,593 @@ components:
       required:
       - name
       - amount
+    associated_legal_entity:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        object:
+          type: string
+        live_mode:
+          type: boolean
+          description: This field will be true if this object exists in the live environment
+            or false if it exists in the test environment.
+        created_at:
+          type: string
+          format: date-time
+        updated_at:
+          type: string
+          format: date-time
+        discarded_at:
+          type: string
+          format: date-time
+          nullable: true
+        legal_entity_type:
+          type: string
+          enum:
+          - business
+          - individual
+          - joint
+          description: The type of legal entity.
+        first_name:
+          type: string
+          nullable: true
+          description: An individual's first name.
+        last_name:
+          type: string
+          nullable: true
+          description: An individual's last name.
+        date_of_birth:
+          type: string
+          format: date
+          nullable: true
+          description: An individual's data of birth (YYYY-MM-DD).
+        business_name:
+          type: string
+          nullable: true
+          description: The business's legal business name.
+        doing_business_as_names:
+          type: array
+          items:
+            type: string
+            description: A list of "Doing Business As" (DBA) / trade names for a business,
+              different than their legal business name.
+        phone_numbers:
+          type: array
+          items:
+            type: object
+            properties:
+              phone_number:
+                type: string
+            description: A list of phone numbers in E.164 format.
+        email:
+          type: string
+          nullable: true
+          description: The entity's primary email.
+        website:
+          type: string
+          nullable: true
+          description: The entity's primary website URL.
+        metadata:
+          type: object
+          description: Additional data represented as key-value pairs. Both the key
+            and value must be strings.
+          additionalProperties:
+            type: string
+          example:
+            key: value
+            foo: bar
+            modern: treasury
+        addresses:
+          type: array
+          description: A list of addresses for the entity.
+          items:
+            "$ref": "#/components/schemas/legal_entity_address"
+        identifications:
+          type: array
+          description: A list of identifications for the legal entity.
+          items:
+            "$ref": "#/components/schemas/identification"
+      additionalProperties: false
+      minProperties: 18
+    associated_legal_entity_create:
+      type: object
+      properties:
+        legal_entity_type:
+          type: string
+          enum:
+          - business
+          - individual
+          description: The type of legal entity.
+        first_name:
+          type: string
+          nullable: true
+          description: An individual's first name.
+        last_name:
+          type: string
+          nullable: true
+          description: An individual's last name.
+        date_of_birth:
+          type: string
+          format: date
+          nullable: true
+          description: An individual's data of birth (YYYY-MM-DD).
+        business_name:
+          type: string
+          nullable: true
+          description: The business's legal business name.
+        doing_business_as_names:
+          type: array
+          items:
+            type: string
+            description: A list of "Doing Business As" (DBA) / trade names for a business,
+              different than their legal business name.
+        phone_numbers:
+          type: array
+          items:
+            type: object
+            properties:
+              phone_number:
+                type: string
+            description: A list of phone numbers in E.164 format.
+        email:
+          type: string
+          nullable: true
+          description: The entity's primary email.
+        website:
+          type: string
+          nullable: true
+          description: The entity's primary website URL.
+        metadata:
+          type: object
+          description: Additional data represented as key-value pairs. Both the key
+            and value must be strings.
+          additionalProperties:
+            type: string
+          example:
+            key: value
+            foo: bar
+            modern: treasury
+        addresses:
+          type: array
+          description: A list of addresses for the entity.
+          items:
+            "$ref": "#/components/schemas/legal_entity_address_create_request"
+        identifications:
+          type: array
+          description: A list of identifications for the legal entity.
+          items:
+            "$ref": "#/components/schemas/identification_create_request"
+      additionalProperties: false
+      minProperties: 12
+    legal_entity:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        object:
+          type: string
+        live_mode:
+          type: boolean
+          description: This field will be true if this object exists in the live environment
+            or false if it exists in the test environment.
+        created_at:
+          type: string
+          format: date-time
+        updated_at:
+          type: string
+          format: date-time
+        discarded_at:
+          type: string
+          format: date-time
+          nullable: true
+        legal_entity_type:
+          type: string
+          enum:
+          - business
+          - individual
+          - joint
+          description: The type of legal entity.
+        first_name:
+          type: string
+          nullable: true
+          description: An individual's first name.
+        last_name:
+          type: string
+          nullable: true
+          description: An individual's last name.
+        date_of_birth:
+          type: string
+          format: date
+          nullable: true
+          description: An individual's data of birth (YYYY-MM-DD).
+        business_name:
+          type: string
+          nullable: true
+          description: The business's legal business name.
+        doing_business_as_names:
+          type: array
+          items:
+            type: string
+            description: A list of "Doing Business As" (DBA) / trade names for a business,
+              different than their legal business name.
+        phone_numbers:
+          type: array
+          items:
+            type: object
+            properties:
+              phone_number:
+                type: string
+            description: A list of phone numbers in E.164 format.
+        email:
+          type: string
+          nullable: true
+          description: The entity's primary email.
+        website:
+          type: string
+          nullable: true
+          description: The entity's primary website URL.
+        metadata:
+          type: object
+          description: Additional data represented as key-value pairs. Both the key
+            and value must be strings.
+          additionalProperties:
+            type: string
+          example:
+            key: value
+            foo: bar
+            modern: treasury
+        addresses:
+          type: array
+          description: A list of addresses for the entity.
+          items:
+            "$ref": "#/components/schemas/legal_entity_address"
+        identifications:
+          type: array
+          description: A list of identifications for the legal entity.
+          items:
+            "$ref": "#/components/schemas/identification"
+      additionalProperties: false
+      minProperties: 18
+    legal_entity_create_request:
+      type: object
+      properties:
+        legal_entity_type:
+          type: string
+          enum:
+          - business
+          - individual
+          description: The type of legal entity.
+        first_name:
+          type: string
+          nullable: true
+          description: An individual's first name.
+        last_name:
+          type: string
+          nullable: true
+          description: An individual's last name.
+        date_of_birth:
+          type: string
+          format: date
+          nullable: true
+          description: An individual's data of birth (YYYY-MM-DD).
+        business_name:
+          type: string
+          nullable: true
+          description: The business's legal business name.
+        doing_business_as_names:
+          type: array
+          items:
+            type: string
+            description: A list of "Doing Business As" (DBA) / trade names for a business,
+              different than their legal business name.
+        phone_numbers:
+          type: array
+          items:
+            type: object
+            properties:
+              phone_number:
+                type: string
+            description: A list of phone numbers in E.164 format.
+        email:
+          type: string
+          nullable: true
+          description: The entity's primary email.
+        website:
+          type: string
+          nullable: true
+          description: The entity's primary website URL.
+        metadata:
+          type: object
+          description: Additional data represented as key-value pairs. Both the key
+            and value must be strings.
+          additionalProperties:
+            type: string
+          example:
+            key: value
+            foo: bar
+            modern: treasury
+        addresses:
+          type: array
+          description: A list of addresses for the entity.
+          items:
+            "$ref": "#/components/schemas/legal_entity_address_create_request"
+        identifications:
+          type: array
+          description: A list of identifications for the legal entity.
+          items:
+            "$ref": "#/components/schemas/identification_create_request"
+      required:
+      - legal_entity_type
+    legal_entity_update_request:
+      type: object
+      properties:
+        first_name:
+          type: string
+          nullable: true
+          description: An individual's first name.
+        last_name:
+          type: string
+          nullable: true
+          description: An individual's last name.
+        date_of_birth:
+          type: string
+          format: date
+          nullable: true
+          description: An individual's data of birth (YYYY-MM-DD).
+        business_name:
+          type: string
+          nullable: true
+          description: The business's legal business name.
+        doing_business_as_names:
+          type: array
+          items:
+            type: string
+            description: A list of "Doing Business As" (DBA) / trade names for a business,
+              different than their legal business name.
+        phone_numbers:
+          type: array
+          items:
+            type: object
+            properties:
+              phone_number:
+                type: string
+            description: A list of phone numbers in E.164 format.
+        email:
+          type: string
+          nullable: true
+          description: The entity's primary email.
+        website:
+          type: string
+          nullable: true
+          description: The entity's primary website URL.
+        metadata:
+          type: object
+          description: Additional data represented as key-value pairs. Both the key
+            and value must be strings.
+          additionalProperties:
+            type: string
+          example:
+            key: value
+            foo: bar
+            modern: treasury
+    legal_entity_address:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        object:
+          type: string
+        live_mode:
+          type: boolean
+          description: This field will be true if this object exists in the live environment
+            or false if it exists in the test environment.
+        created_at:
+          type: string
+          format: date-time
+        updated_at:
+          type: string
+          format: date-time
+        discarded_at:
+          type: string
+          format: date-time
+          nullable: true
+        address_types:
+          type: array
+          items:
+            type: string
+          description: The types of this address.
+        line1:
+          type: string
+          nullable: true
+        line2:
+          type: string
+          nullable: true
+        locality:
+          type: string
+          nullable: true
+          description: Locality or City.
+        region:
+          type: string
+          nullable: true
+          description: Region or State.
+        postal_code:
+          type: string
+          description: The postal code of the address.
+          nullable: true
+        country:
+          type: string
+          description: Country code conforms to [ISO 3166-1 alpha-2]
+          nullable: true
+      additionalProperties: false
+      minProperties: 13
+      required:
+      - id
+      - object
+      - live_mode
+      - created_at
+      - updated_at
+      - discarded_at
+      - address_types
+      - line1
+      - line2
+      - locality
+      - region
+      - postal_code
+      - country
+    legal_entity_address_create_request:
+      type: object
+      properties:
+        address_types:
+          type: array
+          items:
+            type: string
+          description: The types of this address.
+        line1:
+          type: string
+          nullable: true
+        line2:
+          type: string
+          nullable: true
+        locality:
+          type: string
+          nullable: true
+          description: Locality or City.
+        region:
+          type: string
+          nullable: true
+          description: Region or State.
+        postal_code:
+          type: string
+          description: The postal code of the address.
+          nullable: true
+        country:
+          type: string
+          description: Country code conforms to [ISO 3166-1 alpha-2]
+          nullable: true
+      required:
+      - line1
+      - locality
+      - region
+      - postal_code
+      - country
+    legal_entity_association:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        object:
+          type: string
+        live_mode:
+          type: boolean
+          description: This field will be true if this object exists in the live environment
+            or false if it exists in the test environment.
+        created_at:
+          type: string
+          format: date-time
+        updated_at:
+          type: string
+          format: date-time
+        discarded_at:
+          type: string
+          format: date-time
+          nullable: true
+        associator_legal_entity_id:
+          type: string
+          description: The ID of the associator legal entity. This must be a business
+            or joint legal entity.
+        relationship_types:
+          type: array
+          items:
+            type: string
+            enum:
+            - beneficial_owner
+            - control_person
+            description: A list of relationship types for how the associated entity
+              relates to associator entity.
+        title:
+          type: string
+          nullable: true
+          description: The job title of the associated entity at the associator entity.
+        ownership_percentage:
+          type: integer
+          nullable: true
+          description: The associated entity's ownership percentage iff they are a
+            beneficial owner.
+        associated_legal_entity:
+          type: object
+          "$ref": "#/components/schemas/associated_legal_entity"
+          description: The associated legal entity.
+      additionalProperties: false
+      minProperties: 11
+    legal_entity_association_create_request:
+      type: object
+      properties:
+        associator_legal_entity_id:
+          type: string
+          description: The ID of the associator legal entity. This must be a business
+            or joint legal entity.
+        relationship_types:
+          type: array
+          items:
+            type: string
+            enum:
+            - beneficial_owner
+            - control_person
+            description: A list of relationship types for how the associated entity
+              relates to associator entity.
+        title:
+          type: string
+          nullable: true
+          description: The job title of the associated entity at the associator entity.
+        ownership_percentage:
+          type: integer
+          nullable: true
+          description: The associated entity's ownership percentage iff they are a
+            beneficial owner.
+        associated_legal_entity:
+          type: object
+          "$ref": "#/components/schemas/associated_legal_entity_create"
+          description: The associated legal entity.
+        associated_legal_entity_id:
+          type: string
+          description: The ID of the associated legal entity.
+      required:
+      - relationship_types
+    legal_entity_association_inline_create_request:
+      type: object
+      properties:
+        relationship_types:
+          type: array
+          items:
+            type: string
+            enum:
+            - beneficial_owner
+            - control_person
+            description: A list of relationship types for how the associated entity
+              relates to associator entity.
+        title:
+          type: string
+          nullable: true
+          description: The job title of the associated entity at the associator entity.
+        ownership_percentage:
+          type: integer
+          nullable: true
+          description: The associated entity's ownership percentage iff they are a
+            beneficial owner.
+        associated_legal_entity:
+          type: object
+          "$ref": "#/components/schemas/associated_legal_entity_create"
+          description: The associated legal entity.
+        associated_legal_entity_id:
+          type: string
+          description: The ID of the associated legal entity.
+      required:
+      - relationship_types
     line_item:
       type: object
       properties:
