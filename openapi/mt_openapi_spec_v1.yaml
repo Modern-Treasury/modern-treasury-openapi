@@ -2217,13 +2217,6 @@ paths:
           format: uuid
         required: false
         description: The ID for the `InternalAccount` this quote is associated with.
-      - name: effective_at
-        in: query
-        schema:
-          type: string
-          format: date-time
-        required: false
-        description: The timestamp until when the quoted rate is valid.
       - name: expires_at
         in: query
         schema:
@@ -2245,6 +2238,20 @@ paths:
         description: Currency to convert the `base_currency` to, often called the
           "buy" currency.
       - "$ref": "#/components/parameters/metadata_query"
+      - name: effective_at_start
+        in: query
+        schema:
+          type: string
+          format: date
+        required: false
+        description: An inclusive lower bound for searching effective_at
+      - name: effective_at_end
+        in: query
+        schema:
+          type: string
+          format: date
+        required: false
+        description: An inclusive upper bound for searching effective_at
       responses:
         '200':
           description: successful
