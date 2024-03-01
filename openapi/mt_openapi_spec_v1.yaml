@@ -3612,6 +3612,8 @@ paths:
             application/json:
               schema:
                 "$ref": "#/components/schemas/error_message"
+        '410':
+          description: gone
         '422':
           description: unsuccessful
           content:
@@ -3678,6 +3680,8 @@ paths:
                 type: array
                 items:
                   "$ref": "#/components/schemas/ledger_account_payout"
+        '410':
+          description: gone
   "/api/ledger_account_payouts/{id}":
     parameters:
     - name: id
@@ -3708,6 +3712,8 @@ paths:
             application/json:
               schema:
                 "$ref": "#/components/schemas/error_message"
+        '410':
+          description: gone
     patch:
       summary: update ledger_account_payout
       tags:
@@ -3736,6 +3742,8 @@ paths:
             application/json:
               schema:
                 "$ref": "#/components/schemas/error_message"
+        '410':
+          description: gone
         '422':
           description: unsuccessful
           content:
@@ -14702,6 +14710,12 @@ components:
           type: array
           items:
             type: string
+            enum:
+            - business
+            - mailing
+            - other
+            - po_box
+            - residential
           description: The types of this address.
         line1:
           type: string
@@ -14748,6 +14762,12 @@ components:
           type: array
           items:
             type: string
+            enum:
+            - business
+            - mailing
+            - other
+            - po_box
+            - residential
           description: The types of this address.
         line1:
           type: string
