@@ -3612,6 +3612,8 @@ paths:
             application/json:
               schema:
                 "$ref": "#/components/schemas/error_message"
+        '410':
+          description: gone
         '422':
           description: unsuccessful
           content:
@@ -3678,6 +3680,8 @@ paths:
                 type: array
                 items:
                   "$ref": "#/components/schemas/ledger_account_payout"
+        '410':
+          description: gone
   "/api/ledger_account_payouts/{id}":
     parameters:
     - name: id
@@ -3708,6 +3712,8 @@ paths:
             application/json:
               schema:
                 "$ref": "#/components/schemas/error_message"
+        '410':
+          description: gone
     patch:
       summary: update ledger_account_payout
       tags:
@@ -3736,6 +3742,8 @@ paths:
             application/json:
               schema:
                 "$ref": "#/components/schemas/error_message"
+        '410':
+          description: gone
         '422':
           description: unsuccessful
           content:
@@ -8869,6 +8877,17 @@ components:
                 type: string
                 description: A list of "Doing Business As" (DBA) / trade names for
                   a business, different than their legal business name.
+            legal_structure:
+              type: string
+              enum:
+              - corporation
+              - llc
+              - non_profit
+              - partnership
+              - sole_proprietorship
+              - trust
+              nullable: true
+              description: The business's legal structure.
             phone_numbers:
               type: array
               items:
@@ -14356,6 +14375,17 @@ components:
             type: string
             description: A list of "Doing Business As" (DBA) / trade names for a business,
               different than their legal business name.
+        legal_structure:
+          type: string
+          enum:
+          - corporation
+          - llc
+          - non_profit
+          - partnership
+          - sole_proprietorship
+          - trust
+          nullable: true
+          description: The business's legal structure.
         phone_numbers:
           type: array
           items:
@@ -14393,7 +14423,7 @@ components:
           items:
             "$ref": "#/components/schemas/identification"
       additionalProperties: false
-      minProperties: 18
+      minProperties: 19
     associated_legal_entity_create:
       type: object
       properties:
@@ -14426,6 +14456,17 @@ components:
             type: string
             description: A list of "Doing Business As" (DBA) / trade names for a business,
               different than their legal business name.
+        legal_structure:
+          type: string
+          enum:
+          - corporation
+          - llc
+          - non_profit
+          - partnership
+          - sole_proprietorship
+          - trust
+          nullable: true
+          description: The business's legal structure.
         phone_numbers:
           type: array
           items:
@@ -14463,7 +14504,7 @@ components:
           items:
             "$ref": "#/components/schemas/identification_create_request"
       additionalProperties: false
-      minProperties: 12
+      minProperties: 13
     legal_entity:
       type: object
       properties:
@@ -14516,6 +14557,17 @@ components:
             type: string
             description: A list of "Doing Business As" (DBA) / trade names for a business,
               different than their legal business name.
+        legal_structure:
+          type: string
+          enum:
+          - corporation
+          - llc
+          - non_profit
+          - partnership
+          - sole_proprietorship
+          - trust
+          nullable: true
+          description: The business's legal structure.
         phone_numbers:
           type: array
           items:
@@ -14553,7 +14605,7 @@ components:
           items:
             "$ref": "#/components/schemas/identification"
       additionalProperties: false
-      minProperties: 18
+      minProperties: 19
     legal_entity_create_request:
       type: object
       properties:
@@ -14586,6 +14638,17 @@ components:
             type: string
             description: A list of "Doing Business As" (DBA) / trade names for a business,
               different than their legal business name.
+        legal_structure:
+          type: string
+          enum:
+          - corporation
+          - llc
+          - non_profit
+          - partnership
+          - sole_proprietorship
+          - trust
+          nullable: true
+          description: The business's legal structure.
         phone_numbers:
           type: array
           items:
@@ -14650,6 +14713,17 @@ components:
             type: string
             description: A list of "Doing Business As" (DBA) / trade names for a business,
               different than their legal business name.
+        legal_structure:
+          type: string
+          enum:
+          - corporation
+          - llc
+          - non_profit
+          - partnership
+          - sole_proprietorship
+          - trust
+          nullable: true
+          description: The business's legal structure.
         phone_numbers:
           type: array
           items:
@@ -14702,6 +14776,12 @@ components:
           type: array
           items:
             type: string
+            enum:
+            - business
+            - mailing
+            - other
+            - po_box
+            - residential
           description: The types of this address.
         line1:
           type: string
@@ -14748,6 +14828,12 @@ components:
           type: array
           items:
             type: string
+            enum:
+            - business
+            - mailing
+            - other
+            - po_box
+            - residential
           description: The types of this address.
         line1:
           type: string
@@ -17012,6 +17098,7 @@ components:
           - column_reversal_pair_transfer_id
           - column_transfer_id
           - cross_river_payment_id
+          - cross_river_service_message
           - cross_river_transaction_id
           - currencycloud_conversion_id
           - currencycloud_payment_id
@@ -17121,6 +17208,7 @@ components:
           - column_reversal_pair_transfer_id
           - column_transfer_id
           - cross_river_payment_id
+          - cross_river_service_message
           - cross_river_transaction_id
           - currencycloud_conversion_id
           - currencycloud_payment_id
