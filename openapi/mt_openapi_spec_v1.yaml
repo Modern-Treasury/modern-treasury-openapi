@@ -7153,7 +7153,7 @@ paths:
       summary: get transaction line item
       tags:
       - TransactionLineItem
-      operationId: listTransactionLineItems
+      operationId: listTransactionLineItem
       security:
       - basic_auth: []
       responses:
@@ -9897,6 +9897,7 @@ components:
           description: The body of the event.
         entity_id:
           type: string
+          format: uuid
           description: The ID of the entity for the event.
       additionalProperties: false
       minProperties: 10
