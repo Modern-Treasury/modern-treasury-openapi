@@ -7153,7 +7153,7 @@ paths:
       summary: get transaction line item
       tags:
       - TransactionLineItem
-      operationId: listTransactionLineItems
+      operationId: listTransactionLineItem
       security:
       - basic_auth: []
       responses:
@@ -8866,7 +8866,12 @@ components:
               type: string
               format: date
               nullable: true
-              description: An individual's data of birth (YYYY-MM-DD).
+              description: An individual's date of birth (YYYY-MM-DD).
+            date_formed:
+              type: string
+              format: date
+              nullable: true
+              description: A business's formation date (YYYY-MM-DD).
             business_name:
               type: string
               nullable: true
@@ -9897,6 +9902,7 @@ components:
           description: The body of the event.
         entity_id:
           type: string
+          format: uuid
           description: The ID of the entity for the event.
       additionalProperties: false
       minProperties: 10
@@ -14364,7 +14370,12 @@ components:
           type: string
           format: date
           nullable: true
-          description: An individual's data of birth (YYYY-MM-DD).
+          description: An individual's date of birth (YYYY-MM-DD).
+        date_formed:
+          type: string
+          format: date
+          nullable: true
+          description: A business's formation date (YYYY-MM-DD).
         business_name:
           type: string
           nullable: true
@@ -14423,7 +14434,7 @@ components:
           items:
             "$ref": "#/components/schemas/identification"
       additionalProperties: false
-      minProperties: 19
+      minProperties: 20
     associated_legal_entity_create:
       type: object
       properties:
@@ -14445,7 +14456,12 @@ components:
           type: string
           format: date
           nullable: true
-          description: An individual's data of birth (YYYY-MM-DD).
+          description: An individual's date of birth (YYYY-MM-DD).
+        date_formed:
+          type: string
+          format: date
+          nullable: true
+          description: A business's formation date (YYYY-MM-DD).
         business_name:
           type: string
           nullable: true
@@ -14504,7 +14520,7 @@ components:
           items:
             "$ref": "#/components/schemas/identification_create_request"
       additionalProperties: false
-      minProperties: 13
+      minProperties: 14
     legal_entity:
       type: object
       properties:
@@ -14546,7 +14562,12 @@ components:
           type: string
           format: date
           nullable: true
-          description: An individual's data of birth (YYYY-MM-DD).
+          description: An individual's date of birth (YYYY-MM-DD).
+        date_formed:
+          type: string
+          format: date
+          nullable: true
+          description: A business's formation date (YYYY-MM-DD).
         business_name:
           type: string
           nullable: true
@@ -14605,7 +14626,7 @@ components:
           items:
             "$ref": "#/components/schemas/identification"
       additionalProperties: false
-      minProperties: 19
+      minProperties: 20
     legal_entity_create_request:
       type: object
       properties:
@@ -14627,7 +14648,12 @@ components:
           type: string
           format: date
           nullable: true
-          description: An individual's data of birth (YYYY-MM-DD).
+          description: An individual's date of birth (YYYY-MM-DD).
+        date_formed:
+          type: string
+          format: date
+          nullable: true
+          description: A business's formation date (YYYY-MM-DD).
         business_name:
           type: string
           nullable: true
@@ -14702,7 +14728,12 @@ components:
           type: string
           format: date
           nullable: true
-          description: An individual's data of birth (YYYY-MM-DD).
+          description: An individual's date of birth (YYYY-MM-DD).
+        date_formed:
+          type: string
+          format: date
+          nullable: true
+          description: A business's formation date (YYYY-MM-DD).
         business_name:
           type: string
           nullable: true
