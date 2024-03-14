@@ -10120,6 +10120,10 @@ components:
           type: array
           nullable: true
           description: An array of reconciliation rule variables for this payment.
+          items:
+            type: object
+            additionalProperties:
+              type: string
         transaction_id:
           type: string
           format: uuid
@@ -10301,6 +10305,10 @@ components:
           type: array
           nullable: true
           description: An array of reconciliation rule variables for this payment.
+          items:
+            type: object
+            additionalProperties:
+              type: string
         line_items:
           type: array
           items:
@@ -10441,6 +10449,10 @@ components:
           type: array
           nullable: true
           description: An array of reconciliation rule variables for this payment.
+          items:
+            type: object
+            additionalProperties:
+              type: string
     external_account:
       type: object
       properties:
