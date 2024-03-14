@@ -2879,6 +2879,63 @@ paths:
         required: false
         schema:
           type: integer
+      - name: counterparty_id
+        in: query
+        schema:
+          type: string
+          format: uuid
+        required: false
+      - name: originating_account_id
+        in: query
+        schema:
+          type: string
+          format: uuid
+        required: false
+      - name: payment_order_id
+        in: query
+        schema:
+          type: string
+          format: uuid
+        required: false
+      - name: expected_payment_id
+        in: query
+        schema:
+          type: string
+          format: uuid
+        required: false
+      - name: status
+        in: query
+        schema:
+          type: string
+          enum:
+          - draft
+          - paid
+          - partially_paid
+          - payment_pending
+          - unpaid
+          - voided
+        required: false
+      - name: number
+        in: query
+        schema:
+          type: string
+        description: A unique record number assigned to each invoice that is issued.
+        required: false
+      - name: due_date_start
+        in: query
+        schema:
+          type: string
+          format: date
+        description: 'Translation missing: en.openapi.descriptions.invoice.query_params.due_date_start'
+        required: false
+      - name: due_date_end
+        in: query
+        schema:
+          type: string
+          format: date
+        description: 'Translation missing: en.openapi.descriptions.invoice.query_params.due_date_end'
+        required: false
+      - "$ref": "#/components/parameters/metadata_query"
       responses:
         '200':
           description: successful
