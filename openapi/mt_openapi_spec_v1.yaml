@@ -2879,6 +2879,63 @@ paths:
         required: false
         schema:
           type: integer
+      - name: counterparty_id
+        in: query
+        schema:
+          type: string
+          format: uuid
+        required: false
+      - name: originating_account_id
+        in: query
+        schema:
+          type: string
+          format: uuid
+        required: false
+      - name: payment_order_id
+        in: query
+        schema:
+          type: string
+          format: uuid
+        required: false
+      - name: expected_payment_id
+        in: query
+        schema:
+          type: string
+          format: uuid
+        required: false
+      - name: status
+        in: query
+        schema:
+          type: string
+          enum:
+          - draft
+          - paid
+          - partially_paid
+          - payment_pending
+          - unpaid
+          - voided
+        required: false
+      - name: number
+        in: query
+        schema:
+          type: string
+        description: A unique record number assigned to each invoice that is issued.
+        required: false
+      - name: due_date_start
+        in: query
+        schema:
+          type: string
+          format: date
+        description: An inclusive lower bound for searching due_date
+        required: false
+      - name: due_date_end
+        in: query
+        schema:
+          type: string
+          format: date
+        description: An inclusive upper bound for searching due_date
+        required: false
+      - "$ref": "#/components/parameters/metadata_query"
       responses:
         '200':
           description: successful
@@ -8935,6 +8992,13 @@ components:
               description: A list of identifications for the legal entity.
               items:
                 "$ref": "#/components/schemas/identification_create_request"
+            legal_entity_associations:
+              type: array
+              items:
+                "$ref": "#/components/schemas/legal_entity_association_inline_create_request"
+              nullable: true
+              description: The legal entity associations and its associated legal
+                entities.
           description: The legal entity.
       required:
       - connection_id
@@ -12351,6 +12415,7 @@ components:
         ledgerable_type:
           type: string
           enum:
+          - counterparty
           - external_account
           - internal_account
           - virtual_account
@@ -12428,6 +12493,7 @@ components:
         ledgerable_type:
           type: string
           enum:
+          - counterparty
           - external_account
           - internal_account
           - virtual_account
@@ -14631,8 +14697,14 @@ components:
           description: A list of identifications for the legal entity.
           items:
             "$ref": "#/components/schemas/identification"
+        legal_entity_associations:
+          type: array
+          description: The legal entity associations and its associated legal entities.
+          items:
+            "$ref": "#/components/schemas/legal_entity_association"
+          nullable: true
       additionalProperties: false
-      minProperties: 20
+      minProperties: 21
     legal_entity_create_request:
       type: object
       properties:
@@ -14717,6 +14789,12 @@ components:
           description: A list of identifications for the legal entity.
           items:
             "$ref": "#/components/schemas/identification_create_request"
+        legal_entity_associations:
+          type: array
+          items:
+            "$ref": "#/components/schemas/legal_entity_association_inline_create_request"
+          nullable: true
+          description: The legal entity associations and its associated legal entities.
       required:
       - legal_entity_type
     legal_entity_update_request:
