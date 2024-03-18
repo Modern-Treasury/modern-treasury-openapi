@@ -8997,8 +8997,7 @@ components:
               items:
                 "$ref": "#/components/schemas/legal_entity_association_inline_create_request"
               nullable: true
-              description: The legal entity associations and its associated legal
-                entities.
+              description: The legal entity associations and its child legal entities.
           description: The legal entity.
       required:
       - connection_id
@@ -10976,7 +10975,7 @@ components:
           - ar_cuit
           - br_cnpj
           - br_cpf
-          - cl_nut
+          - cl_rut
           - co_cedulas
           - co_nit
           - hn_id
@@ -11015,7 +11014,7 @@ components:
           - ar_cuit
           - br_cnpj
           - br_cpf
-          - cl_nut
+          - cl_rut
           - co_cedulas
           - co_nit
           - hn_id
@@ -14413,7 +14412,7 @@ components:
       required:
       - name
       - amount
-    associated_legal_entity:
+    child_legal_entity:
       type: object
       properties:
         id:
@@ -14519,7 +14518,7 @@ components:
             "$ref": "#/components/schemas/identification"
       additionalProperties: false
       minProperties: 20
-    associated_legal_entity_create:
+    child_legal_entity_create:
       type: object
       properties:
         legal_entity_type:
@@ -14711,7 +14710,7 @@ components:
             "$ref": "#/components/schemas/identification"
         legal_entity_associations:
           type: array
-          description: The legal entity associations and its associated legal entities.
+          description: The legal entity associations and its child legal entities.
           items:
             "$ref": "#/components/schemas/legal_entity_association"
           nullable: true
@@ -14806,7 +14805,7 @@ components:
           items:
             "$ref": "#/components/schemas/legal_entity_association_inline_create_request"
           nullable: true
-          description: The legal entity associations and its associated legal entities.
+          description: The legal entity associations and its child legal entities.
       required:
       - legal_entity_type
     legal_entity_update_request:
@@ -15012,9 +15011,9 @@ components:
           type: string
           format: date-time
           nullable: true
-        associator_legal_entity_id:
+        parent_legal_entity_id:
           type: string
-          description: The ID of the associator legal entity. This must be a business
+          description: The ID of the parent legal entity. This must be a business
             or joint legal entity.
         relationship_types:
           type: array
@@ -15023,29 +15022,29 @@ components:
             enum:
             - beneficial_owner
             - control_person
-            description: A list of relationship types for how the associated entity
-              relates to associator entity.
+            description: A list of relationship types for how the child entity relates
+              to parent entity.
         title:
           type: string
           nullable: true
-          description: The job title of the associated entity at the associator entity.
+          description: The job title of the child entity at the parent entity.
         ownership_percentage:
           type: integer
           nullable: true
-          description: The associated entity's ownership percentage iff they are a
-            beneficial owner.
-        associated_legal_entity:
+          description: The child entity's ownership percentage iff they are a beneficial
+            owner.
+        child_legal_entity:
           type: object
-          "$ref": "#/components/schemas/associated_legal_entity"
-          description: The associated legal entity.
+          "$ref": "#/components/schemas/child_legal_entity"
+          description: The child legal entity.
       additionalProperties: false
       minProperties: 11
     legal_entity_association_create_request:
       type: object
       properties:
-        associator_legal_entity_id:
+        parent_legal_entity_id:
           type: string
-          description: The ID of the associator legal entity. This must be a business
+          description: The ID of the parent legal entity. This must be a business
             or joint legal entity.
         relationship_types:
           type: array
@@ -15054,24 +15053,24 @@ components:
             enum:
             - beneficial_owner
             - control_person
-            description: A list of relationship types for how the associated entity
-              relates to associator entity.
+            description: A list of relationship types for how the child entity relates
+              to parent entity.
         title:
           type: string
           nullable: true
-          description: The job title of the associated entity at the associator entity.
+          description: The job title of the child entity at the parent entity.
         ownership_percentage:
           type: integer
           nullable: true
-          description: The associated entity's ownership percentage iff they are a
-            beneficial owner.
-        associated_legal_entity:
+          description: The child entity's ownership percentage iff they are a beneficial
+            owner.
+        child_legal_entity:
           type: object
-          "$ref": "#/components/schemas/associated_legal_entity_create"
-          description: The associated legal entity.
-        associated_legal_entity_id:
+          "$ref": "#/components/schemas/child_legal_entity_create"
+          description: The child legal entity.
+        child_legal_entity_id:
           type: string
-          description: The ID of the associated legal entity.
+          description: The ID of the child legal entity.
       required:
       - relationship_types
     legal_entity_association_inline_create_request:
@@ -15084,24 +15083,24 @@ components:
             enum:
             - beneficial_owner
             - control_person
-            description: A list of relationship types for how the associated entity
-              relates to associator entity.
+            description: A list of relationship types for how the child entity relates
+              to parent entity.
         title:
           type: string
           nullable: true
-          description: The job title of the associated entity at the associator entity.
+          description: The job title of the child entity at the parent entity.
         ownership_percentage:
           type: integer
           nullable: true
-          description: The associated entity's ownership percentage iff they are a
-            beneficial owner.
-        associated_legal_entity:
+          description: The child entity's ownership percentage iff they are a beneficial
+            owner.
+        child_legal_entity:
           type: object
-          "$ref": "#/components/schemas/associated_legal_entity_create"
-          description: The associated legal entity.
-        associated_legal_entity_id:
+          "$ref": "#/components/schemas/child_legal_entity_create"
+          description: The child legal entity.
+        child_legal_entity_id:
           type: string
-          description: The ID of the associated legal entity.
+          description: The ID of the child legal entity.
       required:
       - relationship_types
     line_item:
