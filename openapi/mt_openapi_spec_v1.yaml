@@ -429,6 +429,7 @@ paths:
           enum:
           - payment_order
           - ledger_transaction
+          - transaction
           - expected_payment
         required: false
         description: One of payment_order, expected_payment, or ledger_transaction.
@@ -614,6 +615,7 @@ paths:
           enum:
           - payment_order
           - ledger_transaction
+          - transaction
           - expected_payment
           - bulk_error
         required: false
@@ -8590,6 +8592,7 @@ components:
           enum:
           - payment_order
           - ledger_transaction
+          - transaction
           - expected_payment
           description: One of payment_order, expected_payment, or ledger_transaction.
         status:
@@ -8649,6 +8652,7 @@ components:
           enum:
           - payment_order
           - ledger_transaction
+          - transaction
           - expected_payment
           description: One of payment_order, expected_payment, or ledger_transaction.
         metadata:
@@ -8670,6 +8674,7 @@ components:
             - "$ref": "#/components/schemas/payment_order_async_create_request"
             - "$ref": "#/components/schemas/expected_payment_create_request"
             - "$ref": "#/components/schemas/ledger_transaction_create_request"
+            - "$ref": "#/components/schemas/transaction_create_request"
             - allOf:
               - "$ref": "#/components/schemas/payment_order_update_request"
               - type: object
@@ -8748,6 +8753,7 @@ components:
           enum:
           - payment_order
           - ledger_transaction
+          - transaction
           - expected_payment
           - bulk_error
           description: The type of the result entity object. For a successful bulk
@@ -8761,6 +8767,7 @@ components:
           - "$ref": "#/components/schemas/payment_order"
           - "$ref": "#/components/schemas/expected_payment"
           - "$ref": "#/components/schemas/ledger_transaction"
+          - "$ref": "#/components/schemas/transaction"
           - "$ref": "#/components/schemas/bulk_error"
       additionalProperties: false
       minProperties: 12
