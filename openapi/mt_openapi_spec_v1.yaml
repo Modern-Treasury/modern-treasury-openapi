@@ -10988,9 +10988,12 @@ components:
           - hn_id
           - hn_rtn
           - passport
+          - sa_tin
+          - sa_vat
           - us_ein
           - us_itin
           - us_ssn
+          - vn_tin
           description: The type of ID number.
         issuing_country:
           type: string
@@ -11027,9 +11030,12 @@ components:
           - hn_id
           - hn_rtn
           - passport
+          - sa_tin
+          - sa_vat
           - us_ein
           - us_itin
           - us_ssn
+          - vn_tin
           description: The type of ID number.
         issuing_country:
           type: string
