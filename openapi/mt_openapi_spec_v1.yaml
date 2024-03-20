@@ -12205,12 +12205,22 @@ components:
           description: Either `debit` or `credit`. `debit` indicates that a client
             owes the business money           and increases the invoice's `total_amount`
             due. `credit` has the opposite intention and effect.
+        metadata:
+          type: object
+          additionalProperties:
+            type: string
+          example:
+            key: value
+            foo: bar
+            modern: treasury
+          description: Additional data represented as key-value pairs. Both the key
+            and value must be strings.
         amount:
           type: integer
           description: The total amount for this line item specified in the invoice
             currency's smallest unit.
       additionalProperties: false
-      minProperties: 12
+      minProperties: 13
       required:
       - id
       - object
@@ -12223,6 +12233,7 @@ components:
       - unit_amount
       - unit_amount_decimal
       - direction
+      - metadata
       - amount
     invoice_line_item_create_request:
       type: object
@@ -12251,6 +12262,16 @@ components:
           description: Either `debit` or `credit`. `debit` indicates that a client
             owes the business money           and increases the invoice's `total_amount`
             due. `credit` has the opposite intention and effect.
+        metadata:
+          type: object
+          additionalProperties:
+            type: string
+          example:
+            key: value
+            foo: bar
+            modern: treasury
+          description: Additional data represented as key-value pairs. Both the key
+            and value must be strings.
       required:
       - name
       - unit_amount
@@ -12281,6 +12302,16 @@ components:
           description: Either `debit` or `credit`. `debit` indicates that a client
             owes the business money           and increases the invoice's `total_amount`
             due. `credit` has the opposite intention and effect.
+        metadata:
+          type: object
+          additionalProperties:
+            type: string
+          example:
+            key: value
+            foo: bar
+            modern: treasury
+          description: Additional data represented as key-value pairs. Both the key
+            and value must be strings.
     ledger:
       type: object
       properties:
@@ -18296,8 +18327,12 @@ components:
           - other
           description: The type of the transaction. Can be one of `ach`, `wire`, `check`,
             `rtp`, `book`, or `sen`.
+        foreign_exchange_rate:
+          "$ref": "#/components/schemas/foreign_exchange_rate"
+          nullable: true
+          description: Associated serialized foreign exchange rate information.
       additionalProperties: false
-      minProperties: 20
+      minProperties: 21
       required:
       - id
       - object
@@ -18319,6 +18354,7 @@ components:
       - vendor_customer_id
       - reconciled
       - type
+      - foreign_exchange_rate
     transaction_update_request:
       type: object
       properties:
