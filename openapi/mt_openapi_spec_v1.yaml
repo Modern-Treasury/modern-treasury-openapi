@@ -8675,6 +8675,11 @@ components:
             - "$ref": "#/components/schemas/expected_payment_create_request"
             - "$ref": "#/components/schemas/ledger_transaction_create_request"
             - "$ref": "#/components/schemas/transaction_create_request"
+            - type: object
+              properties:
+                id:
+                  type: string
+                  format: uuid
             - allOf:
               - "$ref": "#/components/schemas/payment_order_update_request"
               - type: object
@@ -8684,6 +8689,13 @@ components:
                     format: uuid
             - allOf:
               - "$ref": "#/components/schemas/expected_payment_update_request"
+              - type: object
+                properties:
+                  id:
+                    type: string
+                    format: uuid
+            - allOf:
+              - "$ref": "#/components/schemas/transaction_update_request"
               - type: object
                 properties:
                   id:
@@ -10988,9 +11000,12 @@ components:
           - hn_id
           - hn_rtn
           - passport
+          - sa_tin
+          - sa_vat
           - us_ein
           - us_itin
           - us_ssn
+          - vn_tin
           description: The type of ID number.
         issuing_country:
           type: string
@@ -11027,9 +11042,12 @@ components:
           - hn_id
           - hn_rtn
           - passport
+          - sa_tin
+          - sa_vat
           - us_ein
           - us_itin
           - us_ssn
+          - vn_tin
           description: The type of ID number.
         issuing_country:
           type: string
