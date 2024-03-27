@@ -8246,6 +8246,7 @@ components:
           - clabe
           - hk_number
           - iban
+          - nz_number
           - other
           - pan
           - wallet_address
@@ -8278,6 +8279,7 @@ components:
           - clabe
           - hk_number
           - iban
+          - nz_number
           - other
           - pan
           - wallet_address
@@ -9386,6 +9388,7 @@ components:
                       - iban
                       - hk_number
                       - clabe
+                      - nz_number
                       - wallet_address
                       - pan
                       - other
@@ -10640,6 +10643,7 @@ components:
                 - iban
                 - hk_number
                 - clabe
+                - nz_number
                 - wallet_address
                 - pan
                 - other
@@ -11220,6 +11224,7 @@ components:
           - clabe
           - hk_number
           - iban
+          - nz_number
           - other
           - pan
           - wallet_address
@@ -16280,6 +16285,7 @@ components:
                     - iban
                     - hk_number
                     - clabe
+                    - nz_number
                     - wallet_address
                     - pan
                     - other
@@ -16693,6 +16699,7 @@ components:
                     - iban
                     - hk_number
                     - clabe
+                    - nz_number
                     - wallet_address
                     - pan
                     - other
@@ -17134,6 +17141,7 @@ components:
                     - iban
                     - hk_number
                     - clabe
+                    - nz_number
                     - wallet_address
                     - pan
                     - other
