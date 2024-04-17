@@ -17810,6 +17810,11 @@ components:
           format: uuid
           nullable: true
           description: The ID of the relevant Payment Order.
+        ledger_transaction_id:
+          type: string
+          format: uuid
+          nullable: true
+          description: The ID of the ledger transaction linked to the reversal.
         metadata:
           type: object
           additionalProperties:
@@ -17830,7 +17835,7 @@ components:
           - date_later_than_intended
           description: The reason for the reversal.
       additionalProperties: false
-      minProperties: 9
+      minProperties: 10
       required:
       - id
       - object
@@ -17839,6 +17844,7 @@ components:
       - updated_at
       - status
       - payment_order_id
+      - ledger_transaction_id
       - metadata
       - reason
     reversal_create_request:
