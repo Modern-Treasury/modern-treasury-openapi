@@ -11967,6 +11967,14 @@ components:
           description: Emails in addition to the counterparty email to send invoice
             status notifications to. At least one email is required if notifications
             are enabled and the counterparty doesn't have an email.
+        invoice_line_items:
+          type: array
+          nullable: true
+          items:
+            "$ref": "#/components/schemas/invoice_line_item_create_request"
+          description: An array of invoice line items. The API supports a maximum
+            of 50 invoice line items per invoice. If a greater number of invoice line
+            items is required, please contact support.
       required:
       - counterparty_id
       - due_date
@@ -12182,6 +12190,14 @@ components:
           description: Emails in addition to the counterparty email to send invoice
             status notifications to. At least one email is required if notifications
             are enabled and the counterparty doesn't have an email.
+        invoice_line_items:
+          type: array
+          nullable: true
+          items:
+            "$ref": "#/components/schemas/invoice_line_item_create_request"
+          description: An array of invoice line items. The API supports a maximum
+            of 50 invoice line items per invoice. If a greater number of invoice line
+            items is required, please contact support.
         status:
           type: string
           description: Invoice status must be updated in a `PATCH` request that does
@@ -18269,6 +18285,7 @@ components:
           - silvergate
           - swift
           - us_bank
+          - user
           nullable: true
           description: The type of `vendor_code` being reported. Can be one of `bai2`,
             `bankprov`, `bnk_dev`, `cleartouch`, `currencycloud`, `cross_river`, `dc_bank`,
@@ -18363,8 +18380,8 @@ components:
           - wire
           - zengin
           - other
-          description: The type of the transaction. Can be one of `ach`, `wire`, `check`,
-            `rtp`, `book`, or `sen`.
+          description: The type of the transaction. Examples could be `card, `ach`,
+            `wire`, `check`, `rtp`, `book`, or `sen`.
         foreign_exchange_rate:
           "$ref": "#/components/schemas/foreign_exchange_rate"
           nullable: true
@@ -18421,12 +18438,14 @@ components:
           type: string
           description: When applicable, the bank-given code that determines the transaction's
             category. For most banks this is the BAI2/BTRS transaction code.
+          nullable: true
         vendor_code_type:
           type: string
           description: The type of `vendor_code` being reported. Can be one of `bai2`,
             `bankprov`, `bnk_dev`, `cleartouch`, `currencycloud`, `cross_river`, `dc_bank`,
             `dwolla`, `evolve`, `goldman_sachs`, `iso20022`, `jpmc`, `mx`, `signet`,
             `silvergate`, `swift`, `us_bank`, or others.
+          nullable: true
         as_of_date:
           type: string
           nullable: true
@@ -18450,6 +18469,11 @@ components:
           type: boolean
           description: This field will be `true` if the transaction has posted to
             the account.
+        type:
+          type: boolean
+          description: The type of the transaction. Examples could be `card, `ach`,
+            `wire`, `check`, `rtp`, `book`, or `sen`.
+          nullable: true
       required:
       - amount
       - direction
