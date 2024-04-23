@@ -1289,7 +1289,7 @@ paths:
       tags:
       - Document
       description: Get a list of documents.
-      operationId: listDocuments
+      operationId: listDocumentsNested
       security:
       - basic_auth: []
       parameters:
@@ -1364,7 +1364,7 @@ paths:
       tags:
       - Document
       description: Create a document.
-      operationId: createDocument
+      operationId: createDocumentNested
       security:
       - basic_auth: []
       parameters:
@@ -1469,7 +1469,7 @@ paths:
       tags:
       - Document
       description: Get an existing document.
-      operationId: getDocument
+      operationId: getDocumentNested
       security:
       - basic_auth: []
       responses:
@@ -1557,7 +1557,7 @@ paths:
       tags:
       - Document
       description: Download an existing document.
-      operationId: downloadDocument
+      operationId: downloadDocumentNested
       security:
       - basic_auth: []
       responses:
@@ -5311,7 +5311,7 @@ paths:
       summary: list ledger_transaction versions
       tags:
       - LedgerTransaction
-      operationId: listLedgerTransactionVersions
+      operationId: listLedgerTransactionVersionsNested
       description: Get a list of ledger transaction versions.
       security:
       - basic_auth: []
@@ -7116,7 +7116,7 @@ paths:
       description: This endpoint has been deprecated in favor of /api/transaction_line_items
       tags:
       - TransactionLineItem
-      operationId: listTransactionLineItems
+      operationId: listTransactionLineItemsNested
       security:
       - basic_auth: []
       responses:
