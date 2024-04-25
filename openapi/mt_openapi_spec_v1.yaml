@@ -12815,6 +12815,9 @@ components:
           type: string
           description: The description of the ledger account category.
           nullable: true
+        currency:
+          "$ref": "#/components/schemas/currency"
+          description: The currency of the ledger account category.
         metadata:
           type: object
           description: Additional data represented as key-value pairs. Both the key
@@ -12843,7 +12846,7 @@ components:
             entries on the account. The available balance is the posted incoming entries
             minus the sum of the pending and posted outgoing amounts.
       additionalProperties: false
-      minProperties: 12
+      minProperties: 13
       required:
       - id
       - object
@@ -12853,6 +12856,7 @@ components:
       - discarded_at
       - name
       - description
+      - currency
       - metadata
       - ledger_id
       - normal_balance
