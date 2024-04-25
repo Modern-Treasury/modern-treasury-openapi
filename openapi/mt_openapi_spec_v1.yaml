@@ -7137,47 +7137,47 @@ paths:
                 items:
                   "$ref": "#/components/schemas/transaction_line_item"
   "/api/transaction_line_items":
-    parameters:
-    - name: after_cursor
-      in: query
-      schema:
-        type: string
-        nullable: true
-      required: false
-    - name: id
-      in: query
-      required: false
-      style: deepObject
-      schema:
-        type: object
-        additionalProperties:
-          type: string
-          format: uuid
-    - name: type
-      in: query
-      schema:
-        type: string
-        enum:
-        - originating
-        - receiving
-        nullable: true
-      required: false
-    - name: per_page
-      in: query
-      schema:
-        type: integer
-      required: false
-    - name: transaction_id
-      in: query
-      schema:
-        type: string
-        format: uuid
-      required: false
     get:
       summary: list transaction_line_items
       tags:
       - TransactionLineItem
       operationId: listTransactionLineItems
+      parameters:
+      - name: after_cursor
+        in: query
+        schema:
+          type: string
+          nullable: true
+        required: false
+      - name: id
+        in: query
+        required: false
+        style: deepObject
+        schema:
+          type: object
+          additionalProperties:
+            type: string
+            format: uuid
+      - name: type
+        in: query
+        schema:
+          type: string
+          enum:
+          - originating
+          - receiving
+          nullable: true
+        required: false
+      - name: per_page
+        in: query
+        schema:
+          type: integer
+        required: false
+      - name: transaction_id
+        in: query
+        schema:
+          type: string
+          format: uuid
+        required: false
       security:
       - basic_auth: []
       responses:
@@ -7201,6 +7201,32 @@ paths:
                 type: array
                 items:
                   "$ref": "#/components/schemas/transaction_line_item"
+    post:
+      summary: create transaction line items
+      tags:
+      - TransactionLineItem
+      operationId: createTransactionLineItem
+      security:
+      - basic_auth: []
+      parameters: []
+      responses:
+        '422':
+          description: unsuccessful
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/error_message"
+        '201':
+          description: successful
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/transaction_line_item"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              "$ref": "#/components/schemas/transaction_line_item_create_request"
   "/api/transaction_line_items/{id}":
     parameters:
     - name: id
@@ -7226,6 +7252,22 @@ paths:
                 "$ref": "#/components/schemas/transaction_line_item"
         '404':
           description: not found
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/error_message"
+    delete:
+      summary: delete transaction line item
+      tags:
+      - TransactionLineItem
+      operationId: deleteTransactionLineItem
+      security:
+      - basic_auth: []
+      responses:
+        '200':
+          description: successful
+        '422':
+          description: unsuccessful
           content:
             application/json:
               schema:
@@ -18602,6 +18644,26 @@ components:
       - expected_payment_id
       - transaction_id
       - reconcilable
+    transaction_line_item_create_request:
+      type: object
+      properties:
+        amount:
+          type: integer
+          description: If a matching object exists in Modern Treasury, `amount` will
+            be populated. Value in specified currency's smallest unit (taken from
+            parent Transaction).
+        expected_payment_id:
+          type: string
+          format: uuid
+          description: The ID of the reconciled Expected Payment, otherwise `null`.
+        transaction_id:
+          type: string
+          format: uuid
+          description: The ID of the parent transaction.
+      required:
+      - amount
+      - transaction_id
+      - expected_payment_id
     virtual_account:
       type: object
       properties:
