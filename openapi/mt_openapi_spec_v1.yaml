@@ -3898,6 +3898,13 @@ paths:
         in: query
         schema:
           type: string
+          format: uuid
+        required: false
+      - name: ledger_id
+        in: query
+        schema:
+          type: string
+          format: uuid
         required: false
       responses:
         '200':
