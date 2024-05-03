@@ -15767,8 +15767,7 @@ components:
           type: string
           nullable: true
           description: For `wire`, this is usually the purpose which is transmitted
-            via the "InstrForDbtrAgt" field in the ISO20022 file. If you are using
-            Currencycloud, this is the `payment.purpose_code` field. For `eft`, this
+            via the "InstrForDbtrAgt" field in the ISO20022 file. For `eft`, this
             field is the 3 digit CPA Code that will be attached to the payment.
         metadata:
           type: object
@@ -16016,8 +16015,8 @@ components:
             "$ref": "#/components/schemas/payment_reference"
         vendor_failure_reason:
           type: string
-          description: This field will be populated if a vendor (e.g. Currencycloud)
-            failure occurs. Logic shouldn't be built on its value as it is free-form.
+          description: This field will be populated if a vendor failure occurs. Logic
+            shouldn't be built on its value as it is free-form.
           nullable: true
         decision_id:
           type: string
@@ -16229,8 +16228,7 @@ components:
           type: string
           nullable: true
           description: For `wire`, this is usually the purpose which is transmitted
-            via the "InstrForDbtrAgt" field in the ISO20022 file. If you are using
-            Currencycloud, this is the `payment.purpose_code` field. For `eft`, this
+            via the "InstrForDbtrAgt" field in the ISO20022 file. For `eft`, this
             field is the 3 digit CPA Code that will be attached to the payment.
         metadata:
           type: object
@@ -16643,8 +16641,7 @@ components:
           type: string
           nullable: true
           description: For `wire`, this is usually the purpose which is transmitted
-            via the "InstrForDbtrAgt" field in the ISO20022 file. If you are using
-            Currencycloud, this is the `payment.purpose_code` field. For `eft`, this
+            via the "InstrForDbtrAgt" field in the ISO20022 file. For `eft`, this
             field is the 3 digit CPA Code that will be attached to the payment.
         metadata:
           type: object
@@ -17050,8 +17047,7 @@ components:
           type: string
           nullable: true
           description: For `wire`, this is usually the purpose which is transmitted
-            via the "InstrForDbtrAgt" field in the ISO20022 file. If you are using
-            Currencycloud, this is the `payment.purpose_code` field. For `eft`, this
+            via the "InstrForDbtrAgt" field in the ISO20022 file. For `eft`, this
             field is the 3 digit CPA Code that will be attached to the payment.
         metadata:
           type: object
