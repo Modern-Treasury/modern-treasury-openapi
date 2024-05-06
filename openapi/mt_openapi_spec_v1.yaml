@@ -16028,8 +16028,12 @@ components:
           "$ref": "#/components/schemas/foreign_exchange_rate"
           nullable: true
           description: Associated serialized foreign exchange rate information.
+        vendor_attributes:
+          type: object
+          nullable: true
+          description: 'Translation missing: en.openapi.descriptions.payment_order.schema.vendor_attributes'
       additionalProperties: false
-      minProperties: 50
+      minProperties: 51
       required:
       - id
       - object
@@ -16081,6 +16085,7 @@ components:
       - vendor_failure_reason
       - decision_id
       - foreign_exchange_rate
+      - vendor_attributes
     payment_order_create_request:
       type: object
       properties:
