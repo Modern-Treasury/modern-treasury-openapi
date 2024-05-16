@@ -3288,6 +3288,11 @@ paths:
           type: string
           format: uuid
         required: false
+      - name: currency
+        in: query
+        required: false
+        schema:
+          type: string
       - name: parent_ledger_account_category_id
         in: query
         schema:
@@ -16028,8 +16033,13 @@ components:
           "$ref": "#/components/schemas/foreign_exchange_rate"
           nullable: true
           description: Associated serialized foreign exchange rate information.
+        vendor_attributes:
+          type: object
+          nullable: true
+          description: Additional vendor specific fields for this payment. Data must
+            be represented as key-value pairs.
       additionalProperties: false
-      minProperties: 50
+      minProperties: 51
       required:
       - id
       - object
@@ -16081,6 +16091,7 @@ components:
       - vendor_failure_reason
       - decision_id
       - foreign_exchange_rate
+      - vendor_attributes
     payment_order_create_request:
       type: object
       properties:
