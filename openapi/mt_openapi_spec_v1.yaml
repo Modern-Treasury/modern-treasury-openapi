@@ -11715,6 +11715,13 @@ components:
           description: Emails in addition to the counterparty email to send invoice
             status notifications to. At least one email is required if notifications
             are enabled and the counterparty doesn't have an email.
+        remind_after_overdue_days:
+          type: array
+          items:
+            type: integer
+          nullable: true
+          description: Number of days after due date when overdue reminder emails
+            will be sent out to invoice recipients.
         hosted_url:
           type: string
           description: The URL of the hosted web UI where the invoice can be viewed.
@@ -11775,7 +11782,7 @@ components:
             foo: bar
             modern: treasury
       additionalProperties: false
-      minProperties: 36
+      minProperties: 37
       required:
       - id
       - object
@@ -11802,6 +11809,7 @@ components:
       - fallback_payment_method
       - notifications_enabled
       - notification_email_addresses
+      - remind_after_overdue_days
       - hosted_url
       - number
       - payment_orders
@@ -12024,6 +12032,13 @@ components:
           description: Emails in addition to the counterparty email to send invoice
             status notifications to. At least one email is required if notifications
             are enabled and the counterparty doesn't have an email.
+        remind_after_overdue_days:
+          type: array
+          nullable: true
+          items:
+            type: integer
+          description: Number of days after due date when overdue reminder emails
+            will be sent out to invoice recipients.
         invoice_line_items:
           type: array
           nullable: true
@@ -12247,6 +12262,13 @@ components:
           description: Emails in addition to the counterparty email to send invoice
             status notifications to. At least one email is required if notifications
             are enabled and the counterparty doesn't have an email.
+        remind_after_overdue_days:
+          type: array
+          nullable: true
+          items:
+            type: integer
+          description: Number of days after due date when overdue reminder emails
+            will be sent out to invoice recipients.
         invoice_line_items:
           type: array
           nullable: true
