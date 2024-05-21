@@ -9318,10 +9318,10 @@ components:
                       - provxchange
                       - ro_sent
                       - rtp
-                      - sg_giro
                       - se_bankgirot
                       - sen
                       - sepa
+                      - sg_giro
                       - sic
                       - signet
                       - sknbi
@@ -10580,10 +10580,10 @@ components:
                 - provxchange
                 - ro_sent
                 - rtp
-                - sg_giro
                 - se_bankgirot
                 - sen
                 - sepa
+                - sg_giro
                 - sic
                 - signet
                 - sknbi
@@ -11811,10 +11811,10 @@ components:
           - provxchange
           - ro_sent
           - rtp
-          - sg_giro
           - se_bankgirot
           - sen
           - sepa
+          - sg_giro
           - sic
           - signet
           - sknbi
@@ -12041,10 +12041,10 @@ components:
           - provxchange
           - ro_sent
           - rtp
-          - sg_giro
           - se_bankgirot
           - sen
           - sepa
+          - sg_giro
           - sic
           - signet
           - sknbi
@@ -16084,10 +16084,10 @@ components:
                     - provxchange
                     - ro_sent
                     - rtp
-                    - sg_giro
                     - se_bankgirot
                     - sen
                     - sepa
+                    - sg_giro
                     - sic
                     - signet
                     - sknbi
@@ -16497,10 +16497,10 @@ components:
                     - provxchange
                     - ro_sent
                     - rtp
-                    - sg_giro
                     - se_bankgirot
                     - sen
                     - sepa
+                    - sg_giro
                     - sic
                     - signet
                     - sknbi
@@ -16938,10 +16938,10 @@ components:
                     - provxchange
                     - ro_sent
                     - rtp
-                    - sg_giro
                     - se_bankgirot
                     - sen
                     - sepa
+                    - sg_giro
                     - sic
                     - signet
                     - sknbi
