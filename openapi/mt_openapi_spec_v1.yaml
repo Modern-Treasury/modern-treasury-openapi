@@ -8791,6 +8791,16 @@ components:
           description: The status of the connection legal entity.
       additionalProperties: false
       minProperties: 9
+      required:
+      - id
+      - object
+      - live_mode
+      - created_at
+      - updated_at
+      - discarded_at
+      - connection_id
+      - legal_entity_id
+      - status
     connection_legal_entity_create_request:
       type: object
       properties:
@@ -9318,10 +9328,10 @@ components:
                       - provxchange
                       - ro_sent
                       - rtp
-                      - sg_giro
                       - se_bankgirot
                       - sen
                       - sepa
+                      - sg_giro
                       - sic
                       - signet
                       - sknbi
@@ -10580,10 +10590,10 @@ components:
                 - provxchange
                 - ro_sent
                 - rtp
-                - sg_giro
                 - se_bankgirot
                 - sen
                 - sepa
+                - sg_giro
                 - sic
                 - signet
                 - sknbi
@@ -11811,10 +11821,10 @@ components:
           - provxchange
           - ro_sent
           - rtp
-          - sg_giro
           - se_bankgirot
           - sen
           - sepa
+          - sg_giro
           - sic
           - signet
           - sknbi
@@ -12041,10 +12051,10 @@ components:
           - provxchange
           - ro_sent
           - rtp
-          - sg_giro
           - se_bankgirot
           - sen
           - sepa
+          - sg_giro
           - sic
           - signet
           - sknbi
@@ -14315,6 +14325,27 @@ components:
             "$ref": "#/components/schemas/identification"
       additionalProperties: false
       minProperties: 20
+      required:
+      - id
+      - object
+      - live_mode
+      - created_at
+      - updated_at
+      - discarded_at
+      - legal_entity_type
+      - first_name
+      - last_name
+      - date_of_birth
+      - date_formed
+      - business_name
+      - doing_business_as_names
+      - legal_structure
+      - phone_numbers
+      - email
+      - website
+      - metadata
+      - addresses
+      - identifications
     child_legal_entity_create:
       type: object
       properties:
@@ -14513,6 +14544,28 @@ components:
           nullable: true
       additionalProperties: false
       minProperties: 21
+      required:
+      - id
+      - object
+      - live_mode
+      - created_at
+      - updated_at
+      - discarded_at
+      - legal_entity_type
+      - first_name
+      - last_name
+      - date_of_birth
+      - date_formed
+      - business_name
+      - doing_business_as_names
+      - legal_structure
+      - phone_numbers
+      - email
+      - website
+      - metadata
+      - addresses
+      - identifications
+      - legal_entity_associations
     legal_entity_create_request:
       type: object
       properties:
@@ -14836,6 +14889,18 @@ components:
           description: The child legal entity.
       additionalProperties: false
       minProperties: 11
+      required:
+      - id
+      - object
+      - live_mode
+      - created_at
+      - updated_at
+      - discarded_at
+      - parent_legal_entity_id
+      - relationship_types
+      - title
+      - ownership_percentage
+      - child_legal_entity
     legal_entity_association_create_request:
       type: object
       properties:
@@ -14870,6 +14935,7 @@ components:
           description: The ID of the child legal entity.
       required:
       - relationship_types
+      - parent_legal_entity_id
     legal_entity_association_inline_create_request:
       type: object
       properties:
@@ -16084,10 +16150,10 @@ components:
                     - provxchange
                     - ro_sent
                     - rtp
-                    - sg_giro
                     - se_bankgirot
                     - sen
                     - sepa
+                    - sg_giro
                     - sic
                     - signet
                     - sknbi
@@ -16497,10 +16563,10 @@ components:
                     - provxchange
                     - ro_sent
                     - rtp
-                    - sg_giro
                     - se_bankgirot
                     - sen
                     - sepa
+                    - sg_giro
                     - sic
                     - signet
                     - sknbi
@@ -16938,10 +17004,10 @@ components:
                     - provxchange
                     - ro_sent
                     - rtp
-                    - sg_giro
                     - se_bankgirot
                     - sen
                     - sepa
+                    - sg_giro
                     - sic
                     - signet
                     - sknbi
