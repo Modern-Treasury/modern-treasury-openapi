@@ -7366,6 +7366,7 @@ paths:
           - pl_national_clearing_code
           - se_bankgiro_clearing_code
           - swift
+          - za_national_clearing_code
         required: true
         description: The type of routing number. See https://docs.moderntreasury.com/platform/reference/routing-detail-object
           for more details. In sandbox mode we currently only support `aba` and `swift`
@@ -8791,6 +8792,16 @@ components:
           description: The status of the connection legal entity.
       additionalProperties: false
       minProperties: 9
+      required:
+      - id
+      - object
+      - live_mode
+      - created_at
+      - updated_at
+      - discarded_at
+      - connection_id
+      - legal_entity_id
+      - status
     connection_legal_entity_create_request:
       type: object
       properties:
@@ -9294,6 +9305,7 @@ components:
                       - pl_national_clearing_code
                       - se_bankgiro_clearing_code
                       - swift
+                      - za_national_clearing_code
                     payment_type:
                       type: string
                       enum:
@@ -9318,10 +9330,10 @@ components:
                       - provxchange
                       - ro_sent
                       - rtp
-                      - sg_giro
                       - se_bankgirot
                       - sen
                       - sepa
+                      - sg_giro
                       - sic
                       - signet
                       - sknbi
@@ -10556,6 +10568,7 @@ components:
                 - pl_national_clearing_code
                 - se_bankgiro_clearing_code
                 - swift
+                - za_national_clearing_code
               payment_type:
                 type: string
                 enum:
@@ -10580,10 +10593,10 @@ components:
                 - provxchange
                 - ro_sent
                 - rtp
-                - sg_giro
                 - se_bankgirot
                 - sen
                 - sepa
+                - sg_giro
                 - sic
                 - signet
                 - sknbi
@@ -11085,6 +11098,7 @@ components:
           - pl_national_clearing_code
           - se_bankgiro_clearing_code
           - swift
+          - za_national_clearing_code
           description: The type of the originating routing number for the incoming
             payment detail.
           nullable: true
@@ -11811,10 +11825,10 @@ components:
           - provxchange
           - ro_sent
           - rtp
-          - sg_giro
           - se_bankgirot
           - sen
           - sepa
+          - sg_giro
           - sic
           - signet
           - sknbi
@@ -12041,10 +12055,10 @@ components:
           - provxchange
           - ro_sent
           - rtp
-          - sg_giro
           - se_bankgirot
           - sen
           - sepa
+          - sg_giro
           - sic
           - signet
           - sknbi
@@ -14315,6 +14329,27 @@ components:
             "$ref": "#/components/schemas/identification"
       additionalProperties: false
       minProperties: 20
+      required:
+      - id
+      - object
+      - live_mode
+      - created_at
+      - updated_at
+      - discarded_at
+      - legal_entity_type
+      - first_name
+      - last_name
+      - date_of_birth
+      - date_formed
+      - business_name
+      - doing_business_as_names
+      - legal_structure
+      - phone_numbers
+      - email
+      - website
+      - metadata
+      - addresses
+      - identifications
     child_legal_entity_create:
       type: object
       properties:
@@ -14513,6 +14548,28 @@ components:
           nullable: true
       additionalProperties: false
       minProperties: 21
+      required:
+      - id
+      - object
+      - live_mode
+      - created_at
+      - updated_at
+      - discarded_at
+      - legal_entity_type
+      - first_name
+      - last_name
+      - date_of_birth
+      - date_formed
+      - business_name
+      - doing_business_as_names
+      - legal_structure
+      - phone_numbers
+      - email
+      - website
+      - metadata
+      - addresses
+      - identifications
+      - legal_entity_associations
     legal_entity_create_request:
       type: object
       properties:
@@ -14836,6 +14893,18 @@ components:
           description: The child legal entity.
       additionalProperties: false
       minProperties: 11
+      required:
+      - id
+      - object
+      - live_mode
+      - created_at
+      - updated_at
+      - discarded_at
+      - parent_legal_entity_id
+      - relationship_types
+      - title
+      - ownership_percentage
+      - child_legal_entity
     legal_entity_association_create_request:
       type: object
       properties:
@@ -14870,6 +14939,7 @@ components:
           description: The ID of the child legal entity.
       required:
       - relationship_types
+      - parent_legal_entity_id
     legal_entity_association_inline_create_request:
       type: object
       properties:
@@ -16060,6 +16130,7 @@ components:
                     - pl_national_clearing_code
                     - se_bankgiro_clearing_code
                     - swift
+                    - za_national_clearing_code
                   payment_type:
                     type: string
                     enum:
@@ -16084,10 +16155,10 @@ components:
                     - provxchange
                     - ro_sent
                     - rtp
-                    - sg_giro
                     - se_bankgirot
                     - sen
                     - sepa
+                    - sg_giro
                     - sic
                     - signet
                     - sknbi
@@ -16473,6 +16544,7 @@ components:
                     - pl_national_clearing_code
                     - se_bankgiro_clearing_code
                     - swift
+                    - za_national_clearing_code
                   payment_type:
                     type: string
                     enum:
@@ -16497,10 +16569,10 @@ components:
                     - provxchange
                     - ro_sent
                     - rtp
-                    - sg_giro
                     - se_bankgirot
                     - sen
                     - sepa
+                    - sg_giro
                     - sic
                     - signet
                     - sknbi
@@ -16914,6 +16986,7 @@ components:
                     - pl_national_clearing_code
                     - se_bankgiro_clearing_code
                     - swift
+                    - za_national_clearing_code
                   payment_type:
                     type: string
                     enum:
@@ -16938,10 +17011,10 @@ components:
                     - provxchange
                     - ro_sent
                     - rtp
-                    - sg_giro
                     - se_bankgirot
                     - sen
                     - sepa
+                    - sg_giro
                     - sic
                     - signet
                     - sknbi
@@ -17661,6 +17734,7 @@ components:
           - pl_national_clearing_code
           - se_bankgiro_clearing_code
           - swift
+          - za_national_clearing_code
           description: The type of routing number. See https://docs.moderntreasury.com/platform/reference/routing-detail-object
             for more details.
         payment_type:
@@ -17746,6 +17820,7 @@ components:
           - pl_national_clearing_code
           - se_bankgiro_clearing_code
           - swift
+          - za_national_clearing_code
           description: The type of routing number. See https://docs.moderntreasury.com/platform/reference/routing-detail-object
             for more details.
         payment_type:
