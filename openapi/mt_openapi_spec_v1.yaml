@@ -10909,6 +10909,9 @@ components:
           - hn_id
           - hn_rtn
           - in_lei
+          - kr_brn
+          - kr_crn
+          - kr_rrn
           - passport
           - sa_tin
           - sa_vat
@@ -10952,6 +10955,9 @@ components:
           - hn_id
           - hn_rtn
           - in_lei
+          - kr_brn
+          - kr_crn
+          - kr_rrn
           - passport
           - sa_tin
           - sa_vat
