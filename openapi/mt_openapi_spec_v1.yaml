@@ -8820,6 +8820,14 @@ components:
               - business
               - individual
               description: The type of legal entity.
+            risk_rating:
+              type: string
+              enum:
+              - low
+              - medium
+              - high
+              nullable: true
+              description: 'Translation missing: en.openapi.descriptions.legal_entity.schema.risk_rating'
             first_name:
               type: string
               nullable: true
@@ -14272,6 +14280,14 @@ components:
           - individual
           - joint
           description: The type of legal entity.
+        risk_rating:
+          type: string
+          enum:
+          - low
+          - medium
+          - high
+          nullable: true
+          description: 'Translation missing: en.openapi.descriptions.legal_entity.schema.risk_rating'
         first_name:
           type: string
           nullable: true
@@ -14348,7 +14364,7 @@ components:
           items:
             "$ref": "#/components/schemas/identification"
       additionalProperties: false
-      minProperties: 20
+      minProperties: 21
       required:
       - id
       - object
@@ -14357,6 +14373,7 @@ components:
       - updated_at
       - discarded_at
       - legal_entity_type
+      - risk_rating
       - first_name
       - last_name
       - date_of_birth
@@ -14379,6 +14396,14 @@ components:
           - business
           - individual
           description: The type of legal entity.
+        risk_rating:
+          type: string
+          enum:
+          - low
+          - medium
+          - high
+          nullable: true
+          description: 'Translation missing: en.openapi.descriptions.legal_entity.schema.risk_rating'
         first_name:
           type: string
           nullable: true
@@ -14455,7 +14480,7 @@ components:
           items:
             "$ref": "#/components/schemas/identification_create_request"
       additionalProperties: false
-      minProperties: 14
+      minProperties: 15
     legal_entity:
       type: object
       properties:
@@ -14485,6 +14510,14 @@ components:
           - individual
           - joint
           description: The type of legal entity.
+        risk_rating:
+          type: string
+          enum:
+          - low
+          - medium
+          - high
+          nullable: true
+          description: 'Translation missing: en.openapi.descriptions.legal_entity.schema.risk_rating'
         first_name:
           type: string
           nullable: true
@@ -14567,7 +14600,7 @@ components:
             "$ref": "#/components/schemas/legal_entity_association"
           nullable: true
       additionalProperties: false
-      minProperties: 21
+      minProperties: 22
       required:
       - id
       - object
@@ -14576,6 +14609,7 @@ components:
       - updated_at
       - discarded_at
       - legal_entity_type
+      - risk_rating
       - first_name
       - last_name
       - date_of_birth
@@ -14599,6 +14633,14 @@ components:
           - business
           - individual
           description: The type of legal entity.
+        risk_rating:
+          type: string
+          enum:
+          - low
+          - medium
+          - high
+          nullable: true
+          description: 'Translation missing: en.openapi.descriptions.legal_entity.schema.risk_rating'
         first_name:
           type: string
           nullable: true
@@ -14685,6 +14727,14 @@ components:
     legal_entity_update_request:
       type: object
       properties:
+        risk_rating:
+          type: string
+          enum:
+          - low
+          - medium
+          - high
+          nullable: true
+          description: 'Translation missing: en.openapi.descriptions.legal_entity.schema.risk_rating'
         first_name:
           type: string
           nullable: true
