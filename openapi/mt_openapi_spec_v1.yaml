@@ -8790,8 +8790,11 @@ components:
           - failed
           - processing
           description: The status of the connection legal entity.
+        vendor_id:
+          type: string
+          description: The ID of the legal entity at the vendor.
       additionalProperties: false
-      minProperties: 9
+      minProperties: 10
       required:
       - id
       - object
@@ -8802,6 +8805,7 @@ components:
       - connection_id
       - legal_entity_id
       - status
+      - vendor_id
     connection_legal_entity_create_request:
       type: object
       properties:
