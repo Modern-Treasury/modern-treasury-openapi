@@ -1974,7 +1974,7 @@ paths:
           content:
             application/json:
               schema:
-                "$ref": "#/components/schemas/external_account"
+                "$ref": "#/components/schemas/external_account_verification_attempt"
         '422':
           description: unsuccessful
           content:
@@ -8790,8 +8790,11 @@ components:
           - failed
           - processing
           description: The status of the connection legal entity.
+        vendor_id:
+          type: string
+          description: The ID of the legal entity at the vendor.
       additionalProperties: false
-      minProperties: 9
+      minProperties: 10
       required:
       - id
       - object
@@ -8802,6 +8805,7 @@ components:
       - connection_id
       - legal_entity_id
       - status
+      - vendor_id
     connection_legal_entity_create_request:
       type: object
       properties:
@@ -10688,6 +10692,97 @@ components:
             type: string
           description: Additional data in the form of key-value pairs. Pairs can be
             removed by passing an empty string or `null` as the value.
+    external_account_verification_attempt:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        object:
+          type: string
+        live_mode:
+          type: boolean
+          description: This field will be true if this object exists in the live environment
+            or false if it exists in the test environment.
+        created_at:
+          type: string
+          format: date-time
+        updated_at:
+          type: string
+          format: date-time
+        external_account_id:
+          type: string
+          format: uuid
+          description: The ID of the external account.
+        originating_account_id:
+          type: string
+          format: uuid
+          description: The ID of the internal account where the micro-deposits originate
+            from.
+        payment_type:
+          type: string
+          enum:
+          - ach
+          - au_becs
+          - bacs
+          - book
+          - card
+          - chats
+          - check
+          - cross_border
+          - dk_nets
+          - eft
+          - hu_ics
+          - interac
+          - masav
+          - mx_ccen
+          - neft
+          - nics
+          - nz_becs
+          - pl_elixir
+          - provxchange
+          - ro_sent
+          - rtp
+          - se_bankgirot
+          - sen
+          - sepa
+          - sg_giro
+          - sic
+          - signet
+          - sknbi
+          - wire
+          - zengin
+          description: The type of payment that can be made to this account. Can be
+            `ach`, `eft`, or `rtp`.
+        priority:
+          type: string
+          enum:
+          - high
+          - normal
+          nullable: true
+          description: The priority of the payment. Can be `normal` or `high`.
+        status:
+          type: string
+          enum:
+          - cancelled
+          - failed
+          - pending_verification
+          - verified
+          description: The status of the verification attempt. Can be `pending_verification`,
+            `verified`, `failed`, or `cancelled`.
+      additionalProperties: false
+      minProperties: 10
+      required:
+      - id
+      - object
+      - live_mode
+      - created_at
+      - updated_at
+      - external_account_id
+      - originating_account_id
+      - payment_type
+      - priority
+      - status
     external_account_verify_request:
       type: object
       properties:
