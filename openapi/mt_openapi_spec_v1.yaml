@@ -8115,12 +8115,15 @@ components:
         account_number_type:
           type: string
           enum:
+          - au_number
           - clabe
           - hk_number
           - iban
+          - id_number
           - nz_number
           - other
           - pan
+          - sg_number
           - wallet_address
           description: One of `iban`, `clabe`, `wallet_address`, or `other`. Use `other`
             if the bank account number is in a generic format.
@@ -8148,12 +8151,15 @@ components:
         account_number_type:
           type: string
           enum:
+          - au_number
           - clabe
           - hk_number
           - iban
+          - id_number
           - nz_number
           - other
           - pan
+          - sg_number
           - wallet_address
           description: One of `iban`, `clabe`, `wallet_address`, or `other`. Use `other`
             if the bank account number is in a generic format.
@@ -9279,13 +9285,16 @@ components:
                     account_number_type:
                       type: string
                       enum:
-                      - iban
-                      - hk_number
+                      - au_number
                       - clabe
+                      - hk_number
+                      - iban
+                      - id_number
                       - nz_number
-                      - wallet_address
-                      - pan
                       - other
+                      - pan
+                      - sg_number
+                      - wallet_address
                   required:
                   - account_number
               routing_details:
@@ -10542,13 +10551,16 @@ components:
               account_number_type:
                 type: string
                 enum:
-                - iban
-                - hk_number
+                - au_number
                 - clabe
+                - hk_number
+                - iban
+                - id_number
                 - nz_number
-                - wallet_address
-                - pan
                 - other
+                - pan
+                - sg_number
+                - wallet_address
             required:
             - account_number
         routing_details:
@@ -11238,12 +11250,15 @@ components:
         originating_account_number_type:
           type: string
           enum:
+          - au_number
           - clabe
           - hk_number
           - iban
+          - id_number
           - nz_number
           - other
           - pan
+          - sg_number
           - wallet_address
           description: The type of the originating account number for the incoming
             payment detail.
@@ -16297,13 +16312,16 @@ components:
                   account_number_type:
                     type: string
                     enum:
-                    - iban
-                    - hk_number
+                    - au_number
                     - clabe
+                    - hk_number
+                    - iban
+                    - id_number
                     - nz_number
-                    - wallet_address
-                    - pan
                     - other
+                    - pan
+                    - sg_number
+                    - wallet_address
                 required:
                 - account_number
             routing_details:
@@ -16731,13 +16749,16 @@ components:
                   account_number_type:
                     type: string
                     enum:
-                    - iban
-                    - hk_number
+                    - au_number
                     - clabe
+                    - hk_number
+                    - iban
+                    - id_number
                     - nz_number
-                    - wallet_address
-                    - pan
                     - other
+                    - pan
+                    - sg_number
+                    - wallet_address
                 required:
                 - account_number
             routing_details:
@@ -17193,13 +17214,16 @@ components:
                   account_number_type:
                     type: string
                     enum:
-                    - iban
-                    - hk_number
+                    - au_number
                     - clabe
+                    - hk_number
+                    - iban
+                    - id_number
                     - nz_number
-                    - wallet_address
-                    - pan
                     - other
+                    - pan
+                    - sg_number
+                    - wallet_address
                 required:
                 - account_number
             routing_details:
