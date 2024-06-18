@@ -9210,13 +9210,13 @@ components:
             - brCodigo
             - routingNumberType
             - address
-            - jp_zengin_code
-            - se_bankgiro_clearing_code
-            - nz_national_clearing_code
-            - hk_interbank_clearing_code
-            - hu_interbank_clearing_code
-            - dk_interbank_clearing_code
-            - id_sknbi_code
+            - jpZenginCode
+            - seBankgiroClearingCode
+            - nzNationalClearingCode
+            - hkInterbankClearingCode
+            - huInterbankClearingCode
+            - dkInterbankClearingCode
+            - idSknbiCode
           description: The list of fields you want on the form. This field is optional
             and if it is not set, will default to [\"nameOnAccount\", \"accountType\",
             \"accountNumber\", \"routingNumber\", \"address\"]. The full list of options
