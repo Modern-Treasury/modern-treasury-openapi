@@ -3375,6 +3375,12 @@ paths:
             application/json:
               schema:
                 "$ref": "#/components/schemas/error_message"
+        '404':
+          description: not found
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/error_message"
         '422':
           description: unsuccessful
           content:
@@ -3740,6 +3746,30 @@ paths:
           type: string
           format: uuid
         required: false
+      - name: created_at
+        in: query
+        schema:
+          type: object
+          additionalProperties:
+            type: string
+            format: date-time
+        style: deepObject
+        required: false
+        description: Use `gt` (>), `gte` (>=), `lt` (<), `lte` (<=), or `eq` (=) to
+          filter by the created at timestamp. For example, for all times after Jan
+          1 2000 12:00 UTC, use created_at%5Bgt%5D=2000-01-01T12:00:00Z.
+      - name: updated_at
+        in: query
+        schema:
+          type: object
+          additionalProperties:
+            type: string
+            format: date-time
+        style: deepObject
+        required: false
+        description: Use `gt` (>), `gte` (>=), `lt` (<), `lte` (<=), or `eq` (=) to
+          filter by the updated at timestamp. For example, for all times after Jan
+          1 2000 12:00 UTC, use updated_at%5Bgt%5D=2000-01-01T12:00:00Z.
       responses:
         '200':
           description: successful
@@ -12976,6 +13006,13 @@ components:
           - credit
           - debit
           description: The normal balance of the ledger account category.
+        ledger_account_category_ids:
+          type: array
+          items:
+            type: string
+            format: uuid
+          description: The array of ledger account category ids that this ledger account
+            category should be a child of.
       required:
       - name
       - normal_balance
