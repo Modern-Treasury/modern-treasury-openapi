@@ -18459,6 +18459,11 @@ components:
           description: The time on which the transaction occurred. Depending on the
             granularity of the timestamp information received from the bank, it may
             be `null`.
+        as_of_timezone:
+          type: string
+          nullable: true
+          description: The timezone in which the `as_of_time` is represented. Can
+            be `null` if the bank does not provide timezone info.
         internal_account_id:
           type: string
           format: uuid
@@ -18549,7 +18554,7 @@ components:
             foo: bar
             modern: treasury
       additionalProperties: false
-      minProperties: 22
+      minProperties: 23
       required:
       - id
       - object
@@ -18565,6 +18570,7 @@ components:
       - vendor_id
       - as_of_date
       - as_of_time
+      - as_of_timezone
       - internal_account_id
       - metadata
       - posted
