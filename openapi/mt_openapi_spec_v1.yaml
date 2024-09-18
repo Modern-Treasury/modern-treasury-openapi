@@ -11752,6 +11752,17 @@ components:
           nullable: true
           description: Number of days after due date when overdue reminder emails
             will be sent out to invoice recipients.
+        metadata:
+          type: object
+          description: Additional data represented as key-value pairs. Both the key
+            and value must be strings.
+          additionalProperties:
+            type: string
+          example:
+            key: value
+            foo: bar
+            modern: treasury
+          nullable: true
         hosted_url:
           type: string
           description: The URL of the hosted web UI where the invoice can be viewed.
@@ -11801,16 +11812,6 @@ components:
             type: string
             format: uuid
           description: IDs of transaction line items associated with an invoice.
-        metadata:
-          type: object
-          description: Additional data represented as key-value pairs. Both the key
-            and value must be strings.
-          additionalProperties:
-            type: string
-          example:
-            key: value
-            foo: bar
-            modern: treasury
       additionalProperties: false
       minProperties: 37
       required:
@@ -11840,6 +11841,7 @@ components:
       - notifications_enabled
       - notification_email_addresses
       - remind_after_overdue_days
+      - metadata
       - hosted_url
       - number
       - payment_orders
@@ -11850,7 +11852,6 @@ components:
       - amount_remaining
       - amount_paid
       - transaction_line_item_ids
-      - metadata
     invoice_create_request:
       type: object
       properties:
@@ -12077,6 +12078,21 @@ components:
           description: An array of invoice line items. The API supports a maximum
             of 50 invoice line items per invoice. If a greater number of invoice line
             items is required, please contact support.
+        auto_advance:
+          type: boolean
+          nullable: true
+          description: 'Translation missing: en.openapi.descriptions.invoice.schema.auto_advance'
+        metadata:
+          type: object
+          description: Additional data represented as key-value pairs. Both the key
+            and value must be strings.
+          additionalProperties:
+            type: string
+          example:
+            key: value
+            foo: bar
+            modern: treasury
+          nullable: true
       required:
       - counterparty_id
       - due_date
@@ -12307,6 +12323,17 @@ components:
           description: An array of invoice line items. The API supports a maximum
             of 50 invoice line items per invoice. If a greater number of invoice line
             items is required, please contact support.
+        metadata:
+          type: object
+          description: Additional data represented as key-value pairs. Both the key
+            and value must be strings.
+          additionalProperties:
+            type: string
+          example:
+            key: value
+            foo: bar
+            modern: treasury
+          nullable: true
         status:
           type: string
           description: Invoice status must be updated in a `PATCH` request that does
