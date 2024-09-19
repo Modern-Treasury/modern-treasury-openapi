@@ -11079,6 +11079,7 @@ components:
           - ar_cuit
           - br_cnpj
           - br_cpf
+          - cl_run
           - cl_rut
           - co_cedulas
           - co_nit
@@ -11125,6 +11126,7 @@ components:
           - ar_cuit
           - br_cnpj
           - br_cpf
+          - cl_run
           - cl_rut
           - co_cedulas
           - co_nit
