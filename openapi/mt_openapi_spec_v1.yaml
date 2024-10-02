@@ -9985,16 +9985,19 @@ components:
           format: date-time
         amount_upper_bound:
           type: integer
+          nullable: true
           description: The highest amount this expected payment may be equal to. Value
             in specified currency's smallest unit. e.g. $10 would be represented as
             1000.
         amount_lower_bound:
           type: integer
+          nullable: true
           description: The lowest amount this expected payment may be equal to. Value
             in specified currency's smallest unit. e.g. $10 would be represented as
             1000.
         direction:
           type: string
+          nullable: true
           enum:
           - credit
           - debit
@@ -10002,6 +10005,7 @@ components:
             When you are being charged, use debit.
         internal_account_id:
           type: string
+          nullable: true
           format: uuid
           description: The ID of the Internal Account for the expected payment.
         type:
@@ -10042,6 +10046,7 @@ components:
             rtp, sen, sepa, signet, wire.'
         currency:
           "$ref": "#/components/schemas/currency"
+          nullable: true
           description: Must conform to ISO 4217. Defaults to the currency of the internal
             account.
         date_upper_bound:
@@ -10097,11 +10102,9 @@ components:
         reconciliation_rule_variables:
           type: array
           nullable: true
-          description: An array of reconciliation rule variables for this payment.
           items:
-            type: object
-            additionalProperties:
-              type: string
+            "$ref": "#/components/schemas/reconciliation_rule_variable"
+          description: An array of reconciliation rule variables for this payment.
         transaction_id:
           type: string
           format: uuid
@@ -10170,16 +10173,19 @@ components:
       properties:
         amount_upper_bound:
           type: integer
+          nullable: true
           description: The highest amount this expected payment may be equal to. Value
             in specified currency's smallest unit. e.g. $10 would be represented as
             1000.
         amount_lower_bound:
           type: integer
+          nullable: true
           description: The lowest amount this expected payment may be equal to. Value
             in specified currency's smallest unit. e.g. $10 would be represented as
             1000.
         direction:
           type: string
+          nullable: true
           enum:
           - credit
           - debit
@@ -10187,6 +10193,7 @@ components:
             When you are being charged, use debit.
         internal_account_id:
           type: string
+          nullable: true
           format: uuid
           description: The ID of the Internal Account for the expected payment.
         type:
@@ -10227,6 +10234,7 @@ components:
             rtp, sen, sepa, signet, wire.'
         currency:
           "$ref": "#/components/schemas/currency"
+          nullable: true
           description: Must conform to ISO 4217. Defaults to the currency of the internal
             account.
         date_upper_bound:
@@ -10282,11 +10290,9 @@ components:
         reconciliation_rule_variables:
           type: array
           nullable: true
-          description: An array of reconciliation rule variables for this payment.
           items:
-            type: object
-            additionalProperties:
-              type: string
+            "$ref": "#/components/schemas/reconciliation_rule_variable"
+          description: An array of reconciliation rule variables for this payment.
         line_items:
           type: array
           items:
@@ -10314,16 +10320,19 @@ components:
       properties:
         amount_upper_bound:
           type: integer
+          nullable: true
           description: The highest amount this expected payment may be equal to. Value
             in specified currency's smallest unit. e.g. $10 would be represented as
             1000.
         amount_lower_bound:
           type: integer
+          nullable: true
           description: The lowest amount this expected payment may be equal to. Value
             in specified currency's smallest unit. e.g. $10 would be represented as
             1000.
         direction:
           type: string
+          nullable: true
           enum:
           - credit
           - debit
@@ -10331,6 +10340,7 @@ components:
             When you are being charged, use debit.
         internal_account_id:
           type: string
+          nullable: true
           format: uuid
           description: The ID of the Internal Account for the expected payment.
         type:
@@ -10371,6 +10381,7 @@ components:
             rtp, sen, sepa, signet, wire.'
         currency:
           "$ref": "#/components/schemas/currency"
+          nullable: true
           description: Must conform to ISO 4217. Defaults to the currency of the internal
             account.
         date_upper_bound:
@@ -10426,11 +10437,9 @@ components:
         reconciliation_rule_variables:
           type: array
           nullable: true
-          description: An array of reconciliation rule variables for this payment.
           items:
-            type: object
-            additionalProperties:
-              type: string
+            "$ref": "#/components/schemas/reconciliation_rule_variable"
+          description: An array of reconciliation rule variables for this payment.
         status:
           type: string
           nullable: true
@@ -17515,6 +17524,7 @@ components:
           - pnc_instruction_id
           - pnc_multipayment_id
           - pnc_payment_trace_id
+          - pnc_transaction_reference_number
           - rspec_vendor_payment_id
           - rtp_instruction_id
           - signet_api_reference_id
@@ -17633,6 +17643,7 @@ components:
           - pnc_instruction_id
           - pnc_multipayment_id
           - pnc_payment_trace_id
+          - pnc_transaction_reference_number
           - rspec_vendor_payment_id
           - rtp_instruction_id
           - signet_api_reference_id
@@ -19001,3 +19012,105 @@ components:
           type: object
           additionalProperties:
             type: string
+    reconciliation_rule_variable:
+      type: object
+      properties:
+        amount_upper_bound:
+          type: integer
+          nullable: true
+          description: The highest amount this expected payment may be equal to. Value
+            in specified currency's smallest unit. e.g. $10 would be represented as
+            1000.
+        amount_lower_bound:
+          type: integer
+          nullable: true
+          description: The lowest amount this expected payment may be equal to. Value
+            in specified currency's smallest unit. e.g. $10 would be represented as
+            1000.
+        direction:
+          type: string
+          nullable: true
+          enum:
+          - credit
+          - debit
+          description: One of credit or debit. When you are receiving money, use credit.
+            When you are being charged, use debit.
+        internal_account_id:
+          type: string
+          nullable: true
+          format: uuid
+          description: The ID of the Internal Account for the expected payment
+        type:
+          type: string
+          enum:
+          - ach
+          - au_becs
+          - bacs
+          - book
+          - card
+          - chats
+          - check
+          - cross_border
+          - dk_nets
+          - eft
+          - hu_ics
+          - interac
+          - masav
+          - mx_ccen
+          - neft
+          - nics
+          - nz_becs
+          - pl_elixir
+          - provxchange
+          - ro_sent
+          - rtp
+          - se_bankgirot
+          - sen
+          - sepa
+          - sg_giro
+          - sic
+          - signet
+          - sknbi
+          - wire
+          - zengin
+          nullable: true
+          description: One of ach, au_becs, bacs, book, check, eft, interac, provxchange,
+            rtp, sen, sepa, signet wire
+        currency:
+          "$ref": "#/components/schemas/currency"
+          description: Must conform to ISO 4217. Defaults to the currency of the internal
+            account
+        date_upper_bound:
+          type: string
+          format: date
+          nullable: true
+          description: The latest date the payment may come in. Format is yyyy-mm-dd
+        date_lower_bound:
+          type: string
+          format: date
+          nullable: true
+          description: The earliest date the payment may come in. Format is yyyy-mm-dd
+        counterparty_id:
+          type: string
+          format: uuid
+          description: The ID of the counterparty you expect for this payment
+          nullable: true
+        custom_identifiers:
+          type: object
+          description: A hash of custom identifiers for this payment
+          nullable: true
+          additionalProperties:
+            type: string
+      additionalProperties: false
+      minProperties: 10
+      required:
+      - amount_upper_bound
+      - amount_lower_bound
+      - direction
+      - internal_account_id
+      - type
+      - currency
+      - date_upper_bound
+      - date_lower_bound
+      - counterparty_id
+      - custom_identifiers
