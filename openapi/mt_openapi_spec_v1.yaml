@@ -10310,11 +10310,6 @@ components:
             Only a pending ledger transaction can be attached upon expected payment
             creation. Once the expected payment is created, the status of the ledger
             transaction tracks the expected payment automatically.
-      required:
-      - amount_upper_bound
-      - amount_lower_bound
-      - direction
-      - internal_account_id
     expected_payment_update_request:
       type: object
       properties:
@@ -19018,19 +19013,16 @@ components:
       properties:
         amount_upper_bound:
           type: integer
-          nullable: true
           description: The highest amount this expected payment may be equal to. Value
             in specified currency's smallest unit. e.g. $10 would be represented as
             1000.
         amount_lower_bound:
           type: integer
-          nullable: true
           description: The lowest amount this expected payment may be equal to. Value
             in specified currency's smallest unit. e.g. $10 would be represented as
             1000.
         direction:
           type: string
-          nullable: true
           enum:
           - credit
           - debit
@@ -19038,11 +19030,11 @@ components:
             When you are being charged, use debit.
         internal_account_id:
           type: string
-          nullable: true
           format: uuid
           description: The ID of the Internal Account for the expected payment
         type:
           type: string
+          nullable: true
           enum:
           - ach
           - au_becs
@@ -19074,7 +19066,6 @@ components:
           - sknbi
           - wire
           - zengin
-          nullable: true
           description: One of ach, au_becs, bacs, book, check, eft, interac, provxchange,
             rtp, sen, sepa, signet wire
         currency:
@@ -19094,8 +19085,8 @@ components:
         counterparty_id:
           type: string
           format: uuid
-          description: The ID of the counterparty you expect for this payment
           nullable: true
+          description: The ID of the counterparty you expect for this payment
         custom_identifiers:
           type: object
           description: A hash of custom identifiers for this payment
@@ -19109,9 +19100,3 @@ components:
       - amount_lower_bound
       - direction
       - internal_account_id
-      - type
-      - currency
-      - date_upper_bound
-      - date_lower_bound
-      - counterparty_id
-      - custom_identifiers
