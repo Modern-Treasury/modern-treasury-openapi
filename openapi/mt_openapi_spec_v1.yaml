@@ -13111,6 +13111,7 @@ components:
           enum:
           - archived
           - archiving
+          - drafting
           - pending
           - posted
           - processing
