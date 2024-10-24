@@ -8883,14 +8883,38 @@ components:
               nullable: true
               description: The risk rating of the legal entity. One of low, medium,
                 high.
+            prefix:
+              type: string
+              nullable: true
+              description: An individual's prefix.
             first_name:
               type: string
               nullable: true
               description: An individual's first name.
+            middle_name:
+              type: string
+              nullable: true
+              description: An individual's middle name.
             last_name:
               type: string
               nullable: true
               description: An individual's last name.
+            suffix:
+              type: string
+              nullable: true
+              description: An individual's suffix.
+            preferred_name:
+              type: string
+              nullable: true
+              description: An individual's preferred name.
+            citizenship_country:
+              type: string
+              nullable: true
+              description: The country of citizenship for an individual.
+            politically_exposed_person:
+              type: boolean
+              nullable: true
+              description: Whether the individual is a politically exposed person.
             date_of_birth:
               type: string
               format: date
@@ -8948,6 +8972,12 @@ components:
                 key: value
                 foo: bar
                 modern: treasury
+            bank_settings:
+              "$ref": "#/components/schemas/legal_entity_bank_setting"
+              nullable: true
+            wealth_and_employment_details:
+              "$ref": "#/components/schemas/legal_entity_wealth_employment_detail"
+              nullable: true
             addresses:
               type: array
               description: A list of addresses for the entity.
@@ -13111,6 +13141,7 @@ components:
           enum:
           - archived
           - archiving
+          - drafting
           - pending
           - posted
           - processing
@@ -14510,14 +14541,38 @@ components:
           - high
           nullable: true
           description: The risk rating of the legal entity. One of low, medium, high.
+        prefix:
+          type: string
+          nullable: true
+          description: An individual's prefix.
         first_name:
           type: string
           nullable: true
           description: An individual's first name.
+        middle_name:
+          type: string
+          nullable: true
+          description: An individual's middle name.
         last_name:
           type: string
           nullable: true
           description: An individual's last name.
+        suffix:
+          type: string
+          nullable: true
+          description: An individual's suffix.
+        preferred_name:
+          type: string
+          nullable: true
+          description: An individual's preferred name.
+        citizenship_country:
+          type: string
+          nullable: true
+          description: The country of citizenship for an individual.
+        politically_exposed_person:
+          type: boolean
+          nullable: true
+          description: Whether the individual is a politically exposed person.
         date_of_birth:
           type: string
           format: date
@@ -14575,6 +14630,12 @@ components:
             key: value
             foo: bar
             modern: treasury
+        bank_settings:
+          "$ref": "#/components/schemas/legal_entity_bank_setting"
+          nullable: true
+        wealth_and_employment_details:
+          "$ref": "#/components/schemas/legal_entity_wealth_employment_detail"
+          nullable: true
         addresses:
           type: array
           description: A list of addresses for the entity.
@@ -14586,7 +14647,7 @@ components:
           items:
             "$ref": "#/components/schemas/identification"
       additionalProperties: false
-      minProperties: 21
+      minProperties: 29
       required:
       - id
       - object
@@ -14596,8 +14657,14 @@ components:
       - discarded_at
       - legal_entity_type
       - risk_rating
+      - prefix
       - first_name
+      - middle_name
       - last_name
+      - suffix
+      - preferred_name
+      - citizenship_country
+      - politically_exposed_person
       - date_of_birth
       - date_formed
       - business_name
@@ -14607,6 +14674,8 @@ components:
       - email
       - website
       - metadata
+      - bank_settings
+      - wealth_and_employment_details
       - addresses
       - identifications
     child_legal_entity_create:
@@ -14626,14 +14695,38 @@ components:
           - high
           nullable: true
           description: The risk rating of the legal entity. One of low, medium, high.
+        prefix:
+          type: string
+          nullable: true
+          description: An individual's prefix.
         first_name:
           type: string
           nullable: true
           description: An individual's first name.
+        middle_name:
+          type: string
+          nullable: true
+          description: An individual's middle name.
         last_name:
           type: string
           nullable: true
           description: An individual's last name.
+        suffix:
+          type: string
+          nullable: true
+          description: An individual's suffix.
+        preferred_name:
+          type: string
+          nullable: true
+          description: An individual's preferred name.
+        citizenship_country:
+          type: string
+          nullable: true
+          description: The country of citizenship for an individual.
+        politically_exposed_person:
+          type: boolean
+          nullable: true
+          description: Whether the individual is a politically exposed person.
         date_of_birth:
           type: string
           format: date
@@ -14691,6 +14784,12 @@ components:
             key: value
             foo: bar
             modern: treasury
+        bank_settings:
+          "$ref": "#/components/schemas/legal_entity_bank_setting"
+          nullable: true
+        wealth_and_employment_details:
+          "$ref": "#/components/schemas/legal_entity_wealth_employment_detail"
+          nullable: true
         addresses:
           type: array
           description: A list of addresses for the entity.
@@ -14702,7 +14801,7 @@ components:
           items:
             "$ref": "#/components/schemas/identification_create_request"
       additionalProperties: false
-      minProperties: 15
+      minProperties: 23
     legal_entity:
       type: object
       properties:
@@ -14740,14 +14839,38 @@ components:
           - high
           nullable: true
           description: The risk rating of the legal entity. One of low, medium, high.
+        prefix:
+          type: string
+          nullable: true
+          description: An individual's prefix.
         first_name:
           type: string
           nullable: true
           description: An individual's first name.
+        middle_name:
+          type: string
+          nullable: true
+          description: An individual's middle name.
         last_name:
           type: string
           nullable: true
           description: An individual's last name.
+        suffix:
+          type: string
+          nullable: true
+          description: An individual's suffix.
+        preferred_name:
+          type: string
+          nullable: true
+          description: An individual's preferred name.
+        citizenship_country:
+          type: string
+          nullable: true
+          description: The country of citizenship for an individual.
+        politically_exposed_person:
+          type: boolean
+          nullable: true
+          description: Whether the individual is a politically exposed person.
         date_of_birth:
           type: string
           format: date
@@ -14805,6 +14928,12 @@ components:
             key: value
             foo: bar
             modern: treasury
+        bank_settings:
+          "$ref": "#/components/schemas/legal_entity_bank_setting"
+          nullable: true
+        wealth_and_employment_details:
+          "$ref": "#/components/schemas/legal_entity_wealth_employment_detail"
+          nullable: true
         addresses:
           type: array
           description: A list of addresses for the entity.
@@ -14822,7 +14951,7 @@ components:
             "$ref": "#/components/schemas/legal_entity_association"
           nullable: true
       additionalProperties: false
-      minProperties: 22
+      minProperties: 30
       required:
       - id
       - object
@@ -14832,8 +14961,14 @@ components:
       - discarded_at
       - legal_entity_type
       - risk_rating
+      - prefix
       - first_name
+      - middle_name
       - last_name
+      - suffix
+      - preferred_name
+      - citizenship_country
+      - politically_exposed_person
       - date_of_birth
       - date_formed
       - business_name
@@ -14843,6 +14978,8 @@ components:
       - email
       - website
       - metadata
+      - bank_settings
+      - wealth_and_employment_details
       - addresses
       - identifications
       - legal_entity_associations
@@ -14863,14 +15000,38 @@ components:
           - high
           nullable: true
           description: The risk rating of the legal entity. One of low, medium, high.
+        prefix:
+          type: string
+          nullable: true
+          description: An individual's prefix.
         first_name:
           type: string
           nullable: true
           description: An individual's first name.
+        middle_name:
+          type: string
+          nullable: true
+          description: An individual's middle name.
         last_name:
           type: string
           nullable: true
           description: An individual's last name.
+        suffix:
+          type: string
+          nullable: true
+          description: An individual's suffix.
+        preferred_name:
+          type: string
+          nullable: true
+          description: An individual's preferred name.
+        citizenship_country:
+          type: string
+          nullable: true
+          description: The country of citizenship for an individual.
+        politically_exposed_person:
+          type: boolean
+          nullable: true
+          description: Whether the individual is a politically exposed person.
         date_of_birth:
           type: string
           format: date
@@ -14928,6 +15089,12 @@ components:
             key: value
             foo: bar
             modern: treasury
+        bank_settings:
+          "$ref": "#/components/schemas/legal_entity_bank_setting"
+          nullable: true
+        wealth_and_employment_details:
+          "$ref": "#/components/schemas/legal_entity_wealth_employment_detail"
+          nullable: true
         addresses:
           type: array
           description: A list of addresses for the entity.
@@ -14957,14 +15124,38 @@ components:
           - high
           nullable: true
           description: The risk rating of the legal entity. One of low, medium, high.
+        prefix:
+          type: string
+          nullable: true
+          description: An individual's prefix.
         first_name:
           type: string
           nullable: true
           description: An individual's first name.
+        middle_name:
+          type: string
+          nullable: true
+          description: An individual's middle name.
         last_name:
           type: string
           nullable: true
           description: An individual's last name.
+        suffix:
+          type: string
+          nullable: true
+          description: An individual's suffix.
+        preferred_name:
+          type: string
+          nullable: true
+          description: An individual's preferred name.
+        citizenship_country:
+          type: string
+          nullable: true
+          description: The country of citizenship for an individual.
+        politically_exposed_person:
+          type: boolean
+          nullable: true
+          description: Whether the individual is a politically exposed person.
         date_of_birth:
           type: string
           format: date
@@ -15022,6 +15213,22 @@ components:
             key: value
             foo: bar
             modern: treasury
+        bank_settings:
+          "$ref": "#/components/schemas/legal_entity_bank_setting"
+          nullable: true
+        wealth_and_employment_details:
+          "$ref": "#/components/schemas/legal_entity_wealth_employment_detail"
+          nullable: true
+        addresses:
+          type: array
+          description: A list of addresses for the entity.
+          items:
+            "$ref": "#/components/schemas/legal_entity_address_create_request"
+        identifications:
+          type: array
+          description: A list of identifications for the legal entity.
+          items:
+            "$ref": "#/components/schemas/identification_create_request"
     legal_entity_address:
       type: object
       properties:
@@ -15262,6 +15469,243 @@ components:
           description: The ID of the child legal entity.
       required:
       - relationship_types
+    legal_entity_bank_setting:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        object:
+          type: string
+        live_mode:
+          type: boolean
+          description: This field will be true if this object exists in the live environment
+            or false if it exists in the test environment.
+        created_at:
+          type: string
+          format: date-time
+        updated_at:
+          type: string
+          format: date-time
+        discarded_at:
+          type: string
+          format: date-time
+          nullable: true
+        enable_backup_withholding:
+          type: boolean
+          nullable: true
+          description: Whether backup withholding is enabled. See more here - https://www.irs.gov/businesses/small-businesses-self-employed/backup-withholding.
+        backup_withholding_percentage:
+          type: integer
+          nullable: true
+          description: The percentage of backup withholding to apply to the legal
+            entity.
+        privacy_opt_out:
+          type: boolean
+          nullable: true
+          description: Cross River Bank specific setting to opt out of privacy policy.
+        regulation_o:
+          type: boolean
+          nullable: true
+          description: It covers, among other types of insider loans, extensions of
+            credit by a member bank to an executive officer, director, or principal
+            shareholder of the member bank; a bank holding company of which the member
+            bank is a subsidiary; and any other subsidiary of that bank holding company.
+      additionalProperties: false
+      minProperties: 10
+      required:
+      - id
+      - object
+      - live_mode
+      - created_at
+      - updated_at
+      - discarded_at
+      - enable_backup_withholding
+      - backup_withholding_percentage
+      - privacy_opt_out
+      - regulation_o
+    legal_entity_wealth_employment_detail:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        object:
+          type: string
+        live_mode:
+          type: boolean
+          description: This field will be true if this object exists in the live environment
+            or false if it exists in the test environment.
+        created_at:
+          type: string
+          format: date-time
+        updated_at:
+          type: string
+          format: date-time
+        discarded_at:
+          type: string
+          format: date-time
+          nullable: true
+        employment_status:
+          type: string
+          enum:
+          - employed
+          - retired
+          - self_employed
+          - student
+          - unemployed
+          nullable: true
+          description: The employment status of the individual.
+        occupation:
+          type: string
+          enum:
+          - consulting
+          - executive
+          - finance_accounting
+          - food_services
+          - government
+          - healthcare
+          - legal_services
+          - manufacturing
+          - other
+          - sales
+          - science_engineering
+          - technology
+          nullable: true
+          description: The occupation of the individual.
+        industry:
+          type: string
+          enum:
+          - accounting
+          - agriculture
+          - automotive
+          - chemical_manufacturing
+          - construction
+          - educational_medical
+          - food_service
+          - finance
+          - gasoline
+          - health_stores
+          - laundry
+          - maintenance
+          - manufacturing
+          - merchant_wholesale
+          - mining
+          - performing_arts
+          - professional_non_legal
+          - public_administration
+          - publishing
+          - real_estate
+          - recreation_gambling
+          - religious_charity
+          - rental_services
+          - retail_clothing
+          - retail_electronics
+          - retail_food
+          - retail_furnishing
+          - retail_home
+          - retail_non_store
+          - retail_sporting
+          - transportation
+          - travel
+          - utilities
+          nullable: true
+          description: The industry of the individual.
+        income_source:
+          type: string
+          enum:
+          - family_support
+          - government_benefits
+          - inheritance
+          - investments
+          - rental_income
+          - retirement
+          - salary
+          - self_employed
+          nullable: true
+          description: The source of the individual's income.
+        income_state:
+          type: string
+          nullable: true
+          description: The state in which the individual's income is earned.
+        income_country:
+          type: string
+          nullable: true
+          description: The country in which the individual's income is earned.
+        employer_name:
+          type: string
+          nullable: true
+          description: The name of the employer.
+        employer_state:
+          type: string
+          nullable: true
+          description: The state in which the employer is located.
+        employer_country:
+          type: string
+          nullable: true
+          description: The country in which the employer is located.
+        source_of_funds:
+          type: string
+          enum:
+          - alimony
+          - annuity
+          - business_owner
+          - general_employee
+          - government_benefits
+          - homemaker
+          - inheritance_gift
+          - investment
+          - legal_settlement
+          - lottery
+          - real_estate
+          - retired
+          - retirement
+          - salary
+          - self_employed
+          - senior_executive
+          - trust_income
+          nullable: true
+          description: The source of the individual's funds.
+        wealth_source:
+          type: string
+          enum:
+          - business_sale
+          - family_support
+          - government_benefits
+          - inheritance
+          - investments
+          - other
+          - rental_income
+          - retirement
+          - salary
+          - self_employed
+          nullable: true
+          description: The source of the individual's wealth.
+        annual_income:
+          type: integer
+          nullable: true
+          description: The annual income of the individual.
+      additionalProperties: false
+      minProperties: 18
+      required:
+      - id
+      - object
+      - live_mode
+      - created_at
+      - updated_at
+      - discarded_at
+      - employment_status
+      - occupation
+      - industry
+      - income_source
+      - income_state
+      - income_country
+      - employer_name
+      - employer_state
+      - employer_country
+      - source_of_funds
+      - wealth_source
+      - annual_income
     line_item:
       type: object
       properties:
