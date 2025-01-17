@@ -3661,6 +3661,76 @@ paths:
             application/json:
               schema:
                 "$ref": "#/components/schemas/error_message"
+  "/api/ledger_account_settlements/{id}/ledger_entries":
+    parameters:
+    - name: id
+      in: path
+      description: id
+      required: true
+      schema:
+        type: string
+    patch:
+      summary: patch ledger_account_settlement_entries
+      tags:
+      - LedgerAccountSettlement
+      operationId: patchLedgerAccountSettlementEntries
+      description: Add ledger entries to a draft ledger account settlement.
+      security:
+      - basic_auth: []
+      parameters: []
+      responses:
+        '200':
+          description: successful
+        '403':
+          description: forbidden
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/error_message"
+        '404':
+          description: not found
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/error_message"
+        '422':
+          description: unsuccessful
+      requestBody:
+        content:
+          application/json:
+            schema:
+              "$ref": "#/components/schemas/ledger_account_settlement_entries_patch_request"
+    delete:
+      summary: delete ledger_account_settlement_entries
+      tags:
+      - LedgerAccountSettlement
+      operationId: deleteLedgerAccountSettlementEntries
+      description: Remove ledger entries from a draft ledger account settlement.
+      security:
+      - basic_auth: []
+      parameters: []
+      responses:
+        '200':
+          description: successful
+        '403':
+          description: forbidden
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/error_message"
+        '404':
+          description: not found
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/error_message"
+        '422':
+          description: unsuccessful
+      requestBody:
+        content:
+          application/json:
+            schema:
+              "$ref": "#/components/schemas/ledger_account_settlement_entries_delete_request"
   "/api/ledger_account_settlements":
     post:
       summary: create ledger_account_settlement
@@ -4713,6 +4783,48 @@ paths:
             application/json:
               schema:
                 "$ref": "#/components/schemas/error_message"
+  "/api/ledger_transactions/{id}/partial_post":
+    post:
+      summary: create ledger_transaction partial post
+      tags:
+      - LedgerTransaction
+      operationId: CreateLedgerTransactionPartialPost
+      description: Create a ledger transaction that partially posts another ledger
+        transaction.
+      security:
+      - basic_auth: []
+      parameters:
+      - name: id
+        in: path
+        schema:
+          type: string
+          format: uuid
+        description: The ID of the ledger transaction to partially post.
+        required: true
+      responses:
+        '201':
+          description: successful
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/ledger_transaction"
+        '404':
+          description: not found
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/error_message"
+        '422':
+          description: unsuccessful
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/error_message"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              "$ref": "#/components/schemas/ledger_transaction_partial_post_create_request"
   "/api/ledger_transactions/{id}/reversal":
     post:
       summary: create ledger_transaction reversal
@@ -4972,6 +5084,12 @@ paths:
           format: uuid
         required: false
       - name: reverses_ledger_transaction_id
+        in: query
+        schema:
+          type: string
+          format: uuid
+        required: false
+      - name: partially_posts_ledger_transaction_id
         in: query
         schema:
           type: string
@@ -7394,6 +7512,7 @@ paths:
           - nz_national_clearing_code
           - pl_national_clearing_code
           - se_bankgiro_clearing_code
+          - sg_interbank_clearing_code
           - swift
           - za_national_clearing_code
         required: true
@@ -8422,9 +8541,11 @@ components:
           - opening_available_next_business_day
           - opening_ledger
           - other
+          - previously_closed_book
           description: The specific type of balance reported. One of `opening_ledger`,
             `closing_ledger`, `current_ledger`, `opening_available`, `opening_available_next_business_day`,
-            `closing_available`, `current_available`, or `other`.
+            `closing_available`, `current_available`, 'previously_closed_book', or
+            `other`.
         vendor_code:
           type: string
           description: The code used by the bank when reporting this specific balance.
@@ -8483,9 +8604,11 @@ components:
           - opening_available_next_business_day
           - opening_ledger
           - other
+          - previously_closed_book
           description: The specific type of balance reported. One of `opening_ledger`,
             `closing_ledger`, `current_ledger`, `opening_available`, `opening_available_next_business_day`,
-            `closing_available`, `current_available`, or `other`.
+            `closing_available`, `current_available`, 'previously_closed_book', or
+            `other`.
         vendor_code:
           type: string
           description: The code used by the bank when reporting this specific balance.
@@ -9426,6 +9549,7 @@ components:
                       - nz_national_clearing_code
                       - pl_national_clearing_code
                       - se_bankgiro_clearing_code
+                      - sg_interbank_clearing_code
                       - swift
                       - za_national_clearing_code
                     payment_type:
@@ -10704,6 +10828,7 @@ components:
                 - nz_national_clearing_code
                 - pl_national_clearing_code
                 - se_bankgiro_clearing_code
+                - sg_interbank_clearing_code
                 - swift
                 - za_national_clearing_code
               payment_type:
@@ -11347,6 +11472,7 @@ components:
           - nz_national_clearing_code
           - pl_national_clearing_code
           - se_bankgiro_clearing_code
+          - sg_interbank_clearing_code
           - swift
           - za_national_clearing_code
           description: The type of the originating routing number for the incoming
@@ -13312,6 +13438,71 @@ components:
             key: value
             foo: bar
             modern: treasury
+    ledger_account_settlement_entries_patch_request:
+      type: object
+      properties:
+        description:
+          type: string
+          description: The description of the ledger account settlement.
+          nullable: true
+        status:
+          type: string
+          enum:
+          - pending
+          - posted
+          description: The status of the ledger account settlement. It is set to `pending`
+            by default. To post a ledger account settlement at creation, use `posted`.
+          nullable: true
+        settled_ledger_account_id:
+          type: string
+          format: uuid
+          description: The id of the settled ledger account whose ledger entries are
+            queried against, and its balance is reduced as a result.
+        contra_ledger_account_id:
+          type: string
+          format: uuid
+          description: The id of the contra ledger account that sends to or receives
+            funds from the settled ledger account.
+        allow_either_direction:
+          type: boolean
+          description: If true, the settlement amount and settlement_entry_direction
+            will bring the settlement ledger account's balance closer to zero, even
+            if the balance is negative.
+          nullable: true
+        effective_at_upper_bound:
+          type: string
+          format: date-time
+          description: The exclusive upper bound of the effective_at timestamp of
+            the ledger entries to be included in the ledger account settlement. The
+            default value is the created_at timestamp of the ledger account settlement.
+          nullable: true
+        metadata:
+          type: object
+          description: Additional data represented as key-value pairs. Both the key
+            and value must be strings.
+          additionalProperties:
+            type: string
+          example:
+            key: value
+            foo: bar
+            modern: treasury
+        skip_settlement_ledger_transaction:
+          type: boolean
+          description: It is set to `false` by default. It should be set to `true`
+            when migrating existing settlements.
+          nullable: true
+      required:
+      - ledger_entry_ids
+    ledger_account_settlement_entries_delete_request:
+      type: object
+      properties:
+        ledger_entry_ids:
+          type: array
+          description: The ids of the ledger entries that are to be added or removed
+            from the ledger account settlement.
+          nullable: true
+      required:
+      - ledger_entry_ids
     ledger_account_statement:
       type: object
       properties:
@@ -13804,6 +13995,40 @@ components:
       - ledger_transaction_id
       - metadata
       - resulting_ledger_account_balances
+    ledger_entry_partial_post_create_request:
+      type: object
+      properties:
+        amount:
+          type: integer
+          description: Value in specified currency's smallest unit. e.g. $10 would
+            be represented as 1000. Can be any integer up to 36 digits.
+        direction:
+          type: string
+          enum:
+          - credit
+          - debit
+          description: One of `credit`, `debit`. Describes the direction money is
+            flowing in the transaction. A `credit` moves money from your account to
+            someone else's. A `debit` pulls money from someone else's account to your
+            own. Note that wire, rtp, and check payments will always be `credit`.
+        ledger_account_id:
+          type: string
+          format: uuid
+          description: The ledger account that this ledger entry is associated with.
+        metadata:
+          type: object
+          description: Additional data represented as key-value pairs. Both the key
+            and value must be strings.
+          additionalProperties:
+            type: string
+          example:
+            key: value
+            foo: bar
+            modern: treasury
+      required:
+      - amount
+      - direction
+      - ledger_account_id
     ledger_event_handler:
       type: object
       properties:
@@ -14123,8 +14348,13 @@ components:
           description: The ID of the ledger transaction that reversed this ledger
             transaction.
           nullable: true
+        partially_posts_ledger_transaction_id:
+          type: string
+          description: The ID of the ledger transaction that this ledger transaction
+            partially posts.
+          nullable: true
       additionalProperties: false
-      minProperties: 18
+      minProperties: 19
       required:
       - id
       - object
@@ -14144,6 +14374,7 @@ components:
       - external_id
       - reverses_ledger_transaction_id
       - reversed_by_ledger_transaction_id
+      - partially_posts_ledger_transaction_id
     ledger_transaction_version:
       type: object
       properties:
@@ -14247,8 +14478,13 @@ components:
           description: The ID of the ledger transaction that reversed this ledger
             transaction.
           nullable: true
+        partially_posts_ledger_transaction_id:
+          type: string
+          description: The ID of the ledger transaction that this ledger transaction
+            partially posts.
+          nullable: true
       additionalProperties: false
-      minProperties: 19
+      minProperties: 20
       required:
       - id
       - object
@@ -14269,6 +14505,7 @@ components:
       - version
       - reverses_ledger_transaction_id
       - reversed_by_ledger_transaction_id
+      - partially_posts_ledger_transaction_id
     ledger_transaction_create_request:
       type: object
       properties:
@@ -14435,6 +14672,37 @@ components:
           format: uuid
           description: Specify this if you'd like to link the reversal ledger transaction
             to a Payment object like Return or Reversal.
+    ledger_transaction_partial_post_create_request:
+      type: object
+      properties:
+        posted_ledger_entries:
+          type: array
+          items:
+            "$ref": "#/components/schemas/ledger_entry_partial_post_create_request"
+          description: An array of ledger entry objects to be set on the posted ledger
+            transaction. There must be one entry for each of the existing entries
+            with a lesser amount than the existing entry.
+        description:
+          type: string
+          description: An optional free-form description for the posted ledger transaction.
+            Maximum of 1000 characters allowed.
+        effective_at:
+          type: string
+          format: date-time
+          description: The timestamp (IS08601 format) at which the posted ledger transaction
+            happened for reporting purposes.
+        metadata:
+          type: object
+          description: Additional data represented as key-value pairs. Both the key
+            and value must be strings.
+          additionalProperties:
+            type: string
+          example:
+            key: value
+            foo: bar
+            modern: treasury
+      required:
+      - posted_ledger_entries
     ledgerable_event:
       type: object
       properties:
@@ -16931,6 +17199,7 @@ components:
                     - nz_national_clearing_code
                     - pl_national_clearing_code
                     - se_bankgiro_clearing_code
+                    - sg_interbank_clearing_code
                     - swift
                     - za_national_clearing_code
                   payment_type:
@@ -17367,6 +17636,7 @@ components:
                     - nz_national_clearing_code
                     - pl_national_clearing_code
                     - se_bankgiro_clearing_code
+                    - sg_interbank_clearing_code
                     - swift
                     - za_national_clearing_code
                   payment_type:
@@ -17831,6 +18101,7 @@ components:
                     - nz_national_clearing_code
                     - pl_national_clearing_code
                     - se_bankgiro_clearing_code
+                    - sg_interbank_clearing_code
                     - swift
                     - za_national_clearing_code
                   payment_type:
@@ -18479,6 +18750,12 @@ components:
           format: uuid
           nullable: true
           description: The ID of the relevant Payment Order.
+        transaction_ids:
+          type: array
+          items:
+            format: uuid
+            nullable: true
+            description: The ID of the relevant Transaction or `null`.
         ledger_transaction_id:
           type: string
           format: uuid
@@ -18504,7 +18781,7 @@ components:
           - date_later_than_intended
           description: The reason for the reversal.
       additionalProperties: false
-      minProperties: 10
+      minProperties: 11
       required:
       - id
       - object
@@ -18513,6 +18790,7 @@ components:
       - updated_at
       - status
       - payment_order_id
+      - transaction_ids
       - ledger_transaction_id
       - metadata
       - reason
@@ -18593,6 +18871,7 @@ components:
           - nz_national_clearing_code
           - pl_national_clearing_code
           - se_bankgiro_clearing_code
+          - sg_interbank_clearing_code
           - swift
           - za_national_clearing_code
           description: The type of routing number. See https://docs.moderntreasury.com/platform/reference/routing-detail-object
@@ -18679,6 +18958,7 @@ components:
           - nz_national_clearing_code
           - pl_national_clearing_code
           - se_bankgiro_clearing_code
+          - sg_interbank_clearing_code
           - swift
           - za_national_clearing_code
           description: The type of routing number. See https://docs.moderntreasury.com/platform/reference/routing-detail-object
@@ -18810,8 +19090,8 @@ components:
           - wire
           - zengin
           description: An array of payment types that are supported for this routing
-            number. This can include `ach`, `wire`, `rtp`, `sepa`, `bacs`, `au_becs`
-            currently.
+            number. This can include `ach`, `wire`, `rtp`, `sepa`, `bacs`, `au_becs`,
+            and 'fednow' currently.
         bank_name:
           type: string
           description: The name of the bank.
@@ -18921,6 +19201,7 @@ components:
           type: string
           enum:
           - bai2
+          - banking_circle
           - bankprov
           - bnk_dev
           - cleartouch
