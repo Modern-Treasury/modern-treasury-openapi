@@ -13441,55 +13441,13 @@ components:
     ledger_account_settlement_entries_patch_request:
       type: object
       properties:
-        description:
-          type: string
-          description: The description of the ledger account settlement.
-          nullable: true
-        status:
-          type: string
-          enum:
-          - pending
-          - posted
-          description: The status of the ledger account settlement. It is set to `pending`
-            by default. To post a ledger account settlement at creation, use `posted`.
-          nullable: true
-        settled_ledger_account_id:
-          type: string
-          format: uuid
-          description: The id of the settled ledger account whose ledger entries are
-            queried against, and its balance is reduced as a result.
-        contra_ledger_account_id:
-          type: string
-          format: uuid
-          description: The id of the contra ledger account that sends to or receives
-            funds from the settled ledger account.
-        allow_either_direction:
-          type: boolean
-          description: If true, the settlement amount and settlement_entry_direction
-            will bring the settlement ledger account's balance closer to zero, even
-            if the balance is negative.
-          nullable: true
-        effective_at_upper_bound:
-          type: string
-          format: date-time
-          description: The exclusive upper bound of the effective_at timestamp of
-            the ledger entries to be included in the ledger account settlement. The
-            default value is the created_at timestamp of the ledger account settlement.
-          nullable: true
-        metadata:
-          type: object
-          description: Additional data represented as key-value pairs. Both the key
-            and value must be strings.
-          additionalProperties:
+        ledger_entry_ids:
+          type: array
+          items:
             type: string
-          example:
-            key: value
-            foo: bar
-            modern: treasury
-        skip_settlement_ledger_transaction:
-          type: boolean
-          description: It is set to `false` by default. It should be set to `true`
-            when migrating existing settlements.
+            format: uuid
+          description: The ids of the ledger entries that are to be added or removed
+            from the ledger account settlement.
           nullable: true
       required:
       - ledger_entry_ids
