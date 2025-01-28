@@ -9422,7 +9422,7 @@ components:
             - huInterbankClearingCode
             - dkInterbankClearingCode
             - idSknbiCode
-            - za_national_clearing_code
+            - zaNationalClearingCode
           description: The list of fields you want on the form. This field is optional
             and if it is not set, will default to [\"nameOnAccount\", \"accountType\",
             \"accountNumber\", \"routingNumber\", \"address\"]. The full list of options
@@ -18203,6 +18203,7 @@ components:
           - jpmc_payment_batch_id
           - jpmc_payment_information_id
           - jpmc_payment_returned_datetime
+          - jpmc_transaction_reference_number
           - lob_check_id
           - other
           - partial_swift_mir
@@ -18210,6 +18211,7 @@ components:
           - pnc_instruction_id
           - pnc_multipayment_id
           - pnc_payment_trace_id
+          - pnc_request_for_payment_id
           - pnc_transaction_reference_number
           - rspec_vendor_payment_id
           - rtp_instruction_id
@@ -18322,6 +18324,7 @@ components:
           - jpmc_payment_batch_id
           - jpmc_payment_information_id
           - jpmc_payment_returned_datetime
+          - jpmc_transaction_reference_number
           - lob_check_id
           - other
           - partial_swift_mir
@@ -18329,6 +18332,7 @@ components:
           - pnc_instruction_id
           - pnc_multipayment_id
           - pnc_payment_trace_id
+          - pnc_request_for_payment_id
           - pnc_transaction_reference_number
           - rspec_vendor_payment_id
           - rtp_instruction_id
