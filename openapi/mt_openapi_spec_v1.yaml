@@ -2400,10 +2400,14 @@ paths:
           type: string
           enum:
           - ach
+          - au_becs
+          - bacs
           - book
           - check
           - eft
           - interac
+          - neft
+          - nz_becs
           - rtp
           - sepa
           - signet
@@ -11403,10 +11407,14 @@ components:
           type: string
           enum:
           - ach
+          - au_becs
+          - bacs
           - book
           - check
           - eft
           - interac
+          - neft
+          - nz_becs
           - rtp
           - sepa
           - signet
@@ -18224,6 +18232,7 @@ components:
           - pnc_payment_trace_id
           - pnc_request_for_payment_id
           - pnc_transaction_reference_number
+          - rbc_wire_reference_id
           - rspec_vendor_payment_id
           - rtp_instruction_id
           - signet_api_reference_id
@@ -18345,6 +18354,7 @@ components:
           - pnc_payment_trace_id
           - pnc_request_for_payment_id
           - pnc_transaction_reference_number
+          - rbc_wire_reference_id
           - rspec_vendor_payment_id
           - rtp_instruction_id
           - signet_api_reference_id
@@ -19086,10 +19096,14 @@ components:
           type: string
           enum:
           - ach
+          - au_becs
+          - bacs
           - book
           - check
           - eft
           - interac
+          - neft
+          - nz_becs
           - rtp
           - sepa
           - signet
