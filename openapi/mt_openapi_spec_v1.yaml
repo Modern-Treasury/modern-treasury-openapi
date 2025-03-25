@@ -430,8 +430,9 @@ paths:
           - payment_order
           - ledger_account
           - ledger_transaction
-          - transaction
           - expected_payment
+          - transaction
+          - entity_link
         required: false
         description: One of payment_order, expected_payment, or ledger_transaction.
       - name: action_type
@@ -618,8 +619,9 @@ paths:
           - payment_order
           - ledger_account
           - ledger_transaction
-          - transaction
           - expected_payment
+          - transaction
+          - entity_link
           - bulk_error
         required: false
         description: The type of the request that created this result. bulk_request
@@ -2400,10 +2402,14 @@ paths:
           type: string
           enum:
           - ach
+          - au_becs
+          - bacs
           - book
           - check
           - eft
           - interac
+          - neft
+          - nz_becs
           - rtp
           - sepa
           - signet
@@ -2543,7 +2549,6 @@ paths:
       - name: currency
         in: query
         schema:
-          type: string
           "$ref": "#/components/schemas/currency"
         required: false
         description: Only return internal accounts with this currency.
@@ -8665,8 +8670,9 @@ components:
           - payment_order
           - ledger_account
           - ledger_transaction
-          - transaction
           - expected_payment
+          - transaction
+          - entity_link
           description: One of payment_order, expected_payment, or ledger_transaction.
         status:
           type: string
@@ -8727,8 +8733,9 @@ components:
           - payment_order
           - ledger_account
           - ledger_transaction
-          - transaction
           - expected_payment
+          - transaction
+          - entity_link
           description: One of payment_order, expected_payment, or ledger_transaction.
         metadata:
           type: object
@@ -8841,8 +8848,9 @@ components:
           - payment_order
           - ledger_account
           - ledger_transaction
-          - transaction
           - expected_payment
+          - transaction
+          - entity_link
           - bulk_error
           description: The type of the result entity object. For a successful bulk
             result, this is the same as the `resource_type` of the bulk request. For
@@ -9127,6 +9135,9 @@ components:
             bank_settings:
               "$ref": "#/components/schemas/legal_entity_bank_setting"
               nullable: true
+            compliance_details:
+              "$ref": "#/components/schemas/legal_entity_compliance_detail"
+              nullable: true
             wealth_and_employment_details:
               "$ref": "#/components/schemas/legal_entity_wealth_employment_detail"
               nullable: true
@@ -9140,6 +9151,11 @@ components:
               description: A list of identifications for the legal entity.
               items:
                 "$ref": "#/components/schemas/identification_create_request"
+            industry_classifications:
+              type: array
+              description: A list of industry classifications for the legal entity.
+              items:
+                "$ref": "#/components/schemas/legal_entity_industry_classification"
             legal_entity_associations:
               type: array
               items:
@@ -9686,7 +9702,6 @@ components:
           type: string
           description: Either a valid SSN or EIN.
         legal_entity:
-          type: object
           "$ref": "#/components/schemas/legal_entity_create_request"
       required:
       - name
@@ -11403,10 +11418,14 @@ components:
           type: string
           enum:
           - ach
+          - au_becs
+          - bacs
           - book
           - check
           - eft
           - interac
+          - neft
+          - nz_becs
           - rtp
           - sepa
           - signet
@@ -13467,6 +13486,9 @@ components:
       properties:
         ledger_entry_ids:
           type: array
+          items:
+            type: string
+            format: uuid
           description: The ids of the ledger entries that are to be added or removed
             from the ledger account settlement.
           nullable: true
@@ -14888,6 +14910,9 @@ components:
         bank_settings:
           "$ref": "#/components/schemas/legal_entity_bank_setting"
           nullable: true
+        compliance_details:
+          "$ref": "#/components/schemas/legal_entity_compliance_detail"
+          nullable: true
         wealth_and_employment_details:
           "$ref": "#/components/schemas/legal_entity_wealth_employment_detail"
           nullable: true
@@ -14901,8 +14926,13 @@ components:
           description: A list of identifications for the legal entity.
           items:
             "$ref": "#/components/schemas/identification"
+        industry_classifications:
+          type: array
+          description: A list of industry classifications for the legal entity.
+          items:
+            "$ref": "#/components/schemas/legal_entity_industry_classification"
       additionalProperties: false
-      minProperties: 29
+      minProperties: 31
       required:
       - id
       - object
@@ -14930,9 +14960,11 @@ components:
       - website
       - metadata
       - bank_settings
+      - compliance_details
       - wealth_and_employment_details
       - addresses
       - identifications
+      - industry_classifications
     child_legal_entity_create:
       type: object
       properties:
@@ -15042,6 +15074,9 @@ components:
         bank_settings:
           "$ref": "#/components/schemas/legal_entity_bank_setting"
           nullable: true
+        compliance_details:
+          "$ref": "#/components/schemas/legal_entity_compliance_detail"
+          nullable: true
         wealth_and_employment_details:
           "$ref": "#/components/schemas/legal_entity_wealth_employment_detail"
           nullable: true
@@ -15055,8 +15090,13 @@ components:
           description: A list of identifications for the legal entity.
           items:
             "$ref": "#/components/schemas/identification_create_request"
+        industry_classifications:
+          type: array
+          description: A list of industry classifications for the legal entity.
+          items:
+            "$ref": "#/components/schemas/legal_entity_industry_classification"
       additionalProperties: false
-      minProperties: 23
+      minProperties: 25
     legal_entity:
       type: object
       properties:
@@ -15186,6 +15226,9 @@ components:
         bank_settings:
           "$ref": "#/components/schemas/legal_entity_bank_setting"
           nullable: true
+        compliance_details:
+          "$ref": "#/components/schemas/legal_entity_compliance_detail"
+          nullable: true
         wealth_and_employment_details:
           "$ref": "#/components/schemas/legal_entity_wealth_employment_detail"
           nullable: true
@@ -15199,6 +15242,11 @@ components:
           description: A list of identifications for the legal entity.
           items:
             "$ref": "#/components/schemas/identification"
+        industry_classifications:
+          type: array
+          description: A list of industry classifications for the legal entity.
+          items:
+            "$ref": "#/components/schemas/legal_entity_industry_classification"
         legal_entity_associations:
           type: array
           description: The legal entity associations and its child legal entities.
@@ -15206,7 +15254,7 @@ components:
             "$ref": "#/components/schemas/legal_entity_association"
           nullable: true
       additionalProperties: false
-      minProperties: 30
+      minProperties: 32
       required:
       - id
       - object
@@ -15234,9 +15282,11 @@ components:
       - website
       - metadata
       - bank_settings
+      - compliance_details
       - wealth_and_employment_details
       - addresses
       - identifications
+      - industry_classifications
       - legal_entity_associations
     legal_entity_create_request:
       type: object
@@ -15347,6 +15397,9 @@ components:
         bank_settings:
           "$ref": "#/components/schemas/legal_entity_bank_setting"
           nullable: true
+        compliance_details:
+          "$ref": "#/components/schemas/legal_entity_compliance_detail"
+          nullable: true
         wealth_and_employment_details:
           "$ref": "#/components/schemas/legal_entity_wealth_employment_detail"
           nullable: true
@@ -15360,6 +15413,11 @@ components:
           description: A list of identifications for the legal entity.
           items:
             "$ref": "#/components/schemas/identification_create_request"
+        industry_classifications:
+          type: array
+          description: A list of industry classifications for the legal entity.
+          items:
+            "$ref": "#/components/schemas/legal_entity_industry_classification"
         legal_entity_associations:
           type: array
           items:
@@ -15471,6 +15529,9 @@ components:
         bank_settings:
           "$ref": "#/components/schemas/legal_entity_bank_setting"
           nullable: true
+        compliance_details:
+          "$ref": "#/components/schemas/legal_entity_compliance_detail"
+          nullable: true
         wealth_and_employment_details:
           "$ref": "#/components/schemas/legal_entity_wealth_employment_detail"
           nullable: true
@@ -15484,6 +15545,11 @@ components:
           description: A list of identifications for the legal entity.
           items:
             "$ref": "#/components/schemas/identification_create_request"
+        industry_classifications:
+          type: array
+          description: A list of industry classifications for the legal entity.
+          items:
+            "$ref": "#/components/schemas/legal_entity_industry_classification"
     legal_entity_address:
       type: object
       properties:
@@ -15642,7 +15708,6 @@ components:
           description: The child entity's ownership percentage iff they are a beneficial
             owner.
         child_legal_entity:
-          type: object
           "$ref": "#/components/schemas/child_legal_entity"
           description: The child legal entity.
       additionalProperties: false
@@ -15685,7 +15750,6 @@ components:
           description: The child entity's ownership percentage iff they are a beneficial
             owner.
         child_legal_entity:
-          type: object
           "$ref": "#/components/schemas/child_legal_entity_create"
           description: The child legal entity.
         child_legal_entity_id:
@@ -15716,7 +15780,6 @@ components:
           description: The child entity's ownership percentage iff they are a beneficial
             owner.
         child_legal_entity:
-          type: object
           "$ref": "#/components/schemas/child_legal_entity_create"
           description: The child legal entity.
         child_legal_entity_id:
@@ -15779,6 +15842,130 @@ components:
       - backup_withholding_percentage
       - privacy_opt_out
       - regulation_o
+    legal_entity_compliance_detail:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        object:
+          type: string
+        live_mode:
+          type: boolean
+          description: This field will be true if this object exists in the live environment
+            or false if it exists in the test environment.
+        created_at:
+          type: string
+          format: date-time
+        updated_at:
+          type: string
+          format: date-time
+        discarded_at:
+          type: string
+          format: date-time
+          nullable: true
+        issuer:
+          type: string
+          nullable: false
+          description: The issuer of the compliance token.
+        token_url:
+          type: string
+          nullable: true
+          description: The URL to the compliance token. (ex. provider portal URL)
+        token_issued_at:
+          type: string
+          format: date-time
+          nullable: true
+          description: The timestamp when the compliance token was issued.
+        token_expires_at:
+          type: string
+          format: date-time
+          nullable: true
+          description: The timestamp when the compliance token expires.
+        validated:
+          type: boolean
+          nullable: false
+          description: Whether entity corresponding to the compliance token has been
+            validated.
+        validated_at:
+          type: string
+          format: date-time
+          nullable: true
+          description: The timestamp when the entity was validated.
+      additionalProperties: false
+      minProperties: 12
+      required:
+      - id
+      - object
+      - live_mode
+      - created_at
+      - updated_at
+      - discarded_at
+      - issuer
+      - token_url
+      - token_issued_at
+      - token_expires_at
+      - validated
+      - validated_at
+    legal_entity_industry_classification:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        object:
+          type: string
+        live_mode:
+          type: boolean
+          description: This field will be true if this object exists in the live environment
+            or false if it exists in the test environment.
+        created_at:
+          type: string
+          format: date-time
+        updated_at:
+          type: string
+          format: date-time
+        discarded_at:
+          type: string
+          format: date-time
+          nullable: true
+        classification_type:
+          type: string
+          enum:
+          - anzsic
+          - bics
+          - gics
+          - hsics
+          - icb
+          - isic
+          - mgecs
+          - nace
+          - naics
+          - rbics
+          - sic
+          - sni
+          - trbc
+          - uksic
+          - unspsc
+          nullable: false
+          description: The classification system of the classification codes.
+        classification_codes:
+          type: array
+          items:
+            type: string
+          nullable: false
+          description: The industry classification codes for the legal entity.
+      additionalProperties: false
+      minProperties: 8
+      required:
+      - id
+      - object
+      - live_mode
+      - created_at
+      - updated_at
+      - discarded_at
+      - classification_type
+      - classification_codes
     legal_entity_wealth_employment_detail:
       type: object
       properties:
@@ -18224,6 +18411,7 @@ components:
           - pnc_payment_trace_id
           - pnc_request_for_payment_id
           - pnc_transaction_reference_number
+          - rbc_wire_reference_id
           - rspec_vendor_payment_id
           - rtp_instruction_id
           - signet_api_reference_id
@@ -18345,6 +18533,7 @@ components:
           - pnc_payment_trace_id
           - pnc_request_for_payment_id
           - pnc_transaction_reference_number
+          - rbc_wire_reference_id
           - rspec_vendor_payment_id
           - rtp_instruction_id
           - signet_api_reference_id
@@ -18497,6 +18686,10 @@ components:
           nullable: true
           description: Some returns may include additional information from the bank.
             In these cases, this string will be present.
+        data:
+          type: object
+          nullable: true
+          description: The raw data from the return file that we get from the bank.
         status:
           type: string
           enum:
@@ -18681,6 +18874,10 @@ components:
           nullable: true
           description: Some returns may include additional information from the bank.
             In these cases, this string will be present.
+        data:
+          type: object
+          nullable: true
+          description: The raw data from the return file that we get from the bank.
         returnable_type:
           type: string
           enum:
@@ -18992,6 +19189,7 @@ components:
           - nz_national_clearing_code
           - se_bankgiro_clearing_code
           - swift
+          - za_national_clearing_code
           description: The type of routing number. See https://docs.moderntreasury.com/platform/reference/routing-detail-object
             for more details. In sandbox mode we currently only support `aba` and
             `swift` with routing numbers '123456789' and 'GRINUST0XXX' respectively.
@@ -19086,10 +19284,14 @@ components:
           type: string
           enum:
           - ach
+          - au_becs
+          - bacs
           - book
           - check
           - eft
           - interac
+          - neft
+          - nz_becs
           - rtp
           - sepa
           - signet
@@ -19193,6 +19395,7 @@ components:
           - iso20022
           - jpmc
           - mx
+          - paypal
           - plaid
           - pnc
           - rspec_vendor
