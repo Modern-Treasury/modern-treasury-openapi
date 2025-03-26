@@ -1821,6 +1821,20 @@ paths:
           format: date-time
         required: false
         description: Used to return expected payments created before some datetime
+      - name: updated_at_lower_bound
+        in: query
+        schema:
+          type: string
+          format: date-time
+        required: false
+        description: Used to return expected payments updated after some datetime
+      - name: updated_at_upper_bound
+        in: query
+        schema:
+          type: string
+          format: date-time
+        required: false
+        description: Used to return expected payments updated before some datetime
       responses:
         '200':
           description: successful
