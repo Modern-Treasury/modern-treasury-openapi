@@ -1821,6 +1821,20 @@ paths:
           format: date-time
         required: false
         description: Used to return expected payments created before some datetime
+      - name: updated_at_lower_bound
+        in: query
+        schema:
+          type: string
+          format: date-time
+        required: false
+        description: Used to return expected payments updated after some datetime
+      - name: updated_at_upper_bound
+        in: query
+        schema:
+          type: string
+          format: date-time
+        required: false
+        description: Used to return expected payments updated before some datetime
       responses:
         '200':
           description: successful
@@ -16938,10 +16952,6 @@ components:
           nullable: true
           description: If the payment order's status is `returned`, this will include
             the return object's data.
-        transaction_monitoring_enabled:
-          type: boolean
-          description: A flag that determines whether a payment order should go through
-            transaction monitoring.
         compliance_rule_metadata:
           type: object
           nullable: true
@@ -16972,7 +16982,7 @@ components:
           description: Additional vendor specific fields for this payment. Data must
             be represented as key-value pairs.
       additionalProperties: false
-      minProperties: 51
+      minProperties: 50
       required:
       - id
       - object
@@ -17018,7 +17028,6 @@ components:
       - transaction_ids
       - ledger_transaction_id
       - current_return
-      - transaction_monitoring_enabled
       - compliance_rule_metadata
       - reference_numbers
       - vendor_failure_reason
