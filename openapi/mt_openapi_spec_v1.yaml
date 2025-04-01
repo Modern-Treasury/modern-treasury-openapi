@@ -1194,7 +1194,6 @@ paths:
         schema:
           type: string
           enum:
-          - cases
           - counterparties
           - expected_payments
           - external_accounts
@@ -1204,8 +1203,8 @@ paths:
           - paper_items
           - payment_orders
           - transactions
-          - decisions
           - connections
+          - conversations
         description: The type of the associated object. Currently can be one of `payment_order`,
           `transaction`, `paper_item`, `expected_payment`, `counterparty`, `organization`,
           `case`, `internal_account`, `decision`, or `external_account`.
@@ -1310,7 +1309,6 @@ paths:
         schema:
           type: string
           enum:
-          - cases
           - counterparties
           - expected_payments
           - external_accounts
@@ -1320,8 +1318,8 @@ paths:
           - paper_items
           - payment_orders
           - transactions
-          - decisions
           - connections
+          - conversations
         description: The type of the associated object. Currently can be one of `payment_order`,
           `transaction`, `paper_item`, `expected_payment`, `counterparty`, `organization`,
           `case`, `internal_account`, `decision`, or `external_account`.
@@ -1385,7 +1383,6 @@ paths:
         schema:
           type: string
           enum:
-          - cases
           - counterparties
           - expected_payments
           - external_accounts
@@ -1395,8 +1392,8 @@ paths:
           - paper_items
           - payment_orders
           - transactions
-          - decisions
           - connections
+          - conversations
         description: The type of the associated object. Currently can be one of `payment_order`,
           `transaction`, `paper_item`, `expected_payment`, `counterparty`, `organization`,
           `case`, `internal_account`, `decision`, or `external_account`.
@@ -1446,7 +1443,6 @@ paths:
       schema:
         type: string
         enum:
-        - cases
         - counterparties
         - expected_payments
         - external_accounts
@@ -1456,8 +1452,8 @@ paths:
         - paper_items
         - payment_orders
         - transactions
-        - decisions
         - connections
+        - conversations
       description: The type of the associated object. Currently can be one of `payment_order`,
         `transaction`, `paper_item`, `expected_payment`, `counterparty`, `organization`,
         `case`, `internal_account`, `decision`, or `external_account`.
@@ -1534,7 +1530,6 @@ paths:
       schema:
         type: string
         enum:
-        - cases
         - counterparties
         - expected_payments
         - external_accounts
@@ -1544,8 +1539,8 @@ paths:
         - paper_items
         - payment_orders
         - transactions
-        - decisions
         - connections
+        - conversations
       description: The type of the associated object. Currently can be one of `payment_order`,
         `transaction`, `paper_item`, `expected_payment`, `counterparty`, `organization`,
         `case`, `internal_account`, `decision`, or `external_account`.
@@ -9977,7 +9972,6 @@ components:
         documentable_type:
           type: string
           enum:
-          - case
           - counterparty
           - expected_payment
           - external_account
@@ -9987,8 +9981,8 @@ components:
           - paper_item
           - payment_order
           - transaction
-          - decision
           - connection
+          - conversation
           description: The type of the associated object. Currently can be one of
             `payment_order`, `transaction`, `paper_item`, `expected_payment`, `counterparty`,
             `organization`, `case`, `internal_account`, `decision`, or `external_account`.
@@ -10034,7 +10028,6 @@ components:
         documentable_type:
           type: string
           enum:
-          - cases
           - counterparties
           - expected_payments
           - external_accounts
@@ -10044,8 +10037,8 @@ components:
           - paper_items
           - payment_orders
           - transactions
-          - decisions
           - connections
+          - conversations
         document_type:
           type: string
           description: A category given to the document, can be `null`.
