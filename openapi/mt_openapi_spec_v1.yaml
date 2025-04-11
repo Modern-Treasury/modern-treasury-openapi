@@ -1194,18 +1194,18 @@ paths:
         schema:
           type: string
           enum:
-          - cases
           - counterparties
           - expected_payments
           - external_accounts
+          - identifications
           - incoming_payment_details
           - internal_accounts
           - organizations
           - paper_items
           - payment_orders
           - transactions
-          - decisions
           - connections
+          - conversations
         description: The type of the associated object. Currently can be one of `payment_order`,
           `transaction`, `paper_item`, `expected_payment`, `counterparty`, `organization`,
           `case`, `internal_account`, `decision`, or `external_account`.
@@ -1310,18 +1310,18 @@ paths:
         schema:
           type: string
           enum:
-          - cases
           - counterparties
           - expected_payments
           - external_accounts
+          - identifications
           - incoming_payment_details
           - internal_accounts
           - organizations
           - paper_items
           - payment_orders
           - transactions
-          - decisions
           - connections
+          - conversations
         description: The type of the associated object. Currently can be one of `payment_order`,
           `transaction`, `paper_item`, `expected_payment`, `counterparty`, `organization`,
           `case`, `internal_account`, `decision`, or `external_account`.
@@ -1385,18 +1385,18 @@ paths:
         schema:
           type: string
           enum:
-          - cases
           - counterparties
           - expected_payments
           - external_accounts
+          - identifications
           - incoming_payment_details
           - internal_accounts
           - organizations
           - paper_items
           - payment_orders
           - transactions
-          - decisions
           - connections
+          - conversations
         description: The type of the associated object. Currently can be one of `payment_order`,
           `transaction`, `paper_item`, `expected_payment`, `counterparty`, `organization`,
           `case`, `internal_account`, `decision`, or `external_account`.
@@ -1446,18 +1446,18 @@ paths:
       schema:
         type: string
         enum:
-        - cases
         - counterparties
         - expected_payments
         - external_accounts
+        - identifications
         - incoming_payment_details
         - internal_accounts
         - organizations
         - paper_items
         - payment_orders
         - transactions
-        - decisions
         - connections
+        - conversations
       description: The type of the associated object. Currently can be one of `payment_order`,
         `transaction`, `paper_item`, `expected_payment`, `counterparty`, `organization`,
         `case`, `internal_account`, `decision`, or `external_account`.
@@ -1534,18 +1534,18 @@ paths:
       schema:
         type: string
         enum:
-        - cases
         - counterparties
         - expected_payments
         - external_accounts
+        - identifications
         - incoming_payment_details
         - internal_accounts
         - organizations
         - paper_items
         - payment_orders
         - transactions
-        - decisions
         - connections
+        - conversations
       description: The type of the associated object. Currently can be one of `payment_order`,
         `transaction`, `paper_item`, `expected_payment`, `counterparty`, `organization`,
         `case`, `internal_account`, `decision`, or `external_account`.
@@ -1768,6 +1768,7 @@ paths:
           - ach
           - au_becs
           - bacs
+          - base
           - book
           - card
           - chats
@@ -1775,6 +1776,7 @@ paths:
           - cross_border
           - dk_nets
           - eft
+          - ethereum
           - hu_ics
           - interac
           - masav
@@ -1783,6 +1785,7 @@ paths:
           - nics
           - nz_becs
           - pl_elixir
+          - polygon
           - provxchange
           - ro_sent
           - rtp
@@ -1793,6 +1796,7 @@ paths:
           - sic
           - signet
           - sknbi
+          - solana
           - wire
           - zengin
         required: false
@@ -2588,6 +2592,7 @@ paths:
           - ach
           - au_becs
           - bacs
+          - base
           - book
           - card
           - chats
@@ -2595,6 +2600,7 @@ paths:
           - cross_border
           - dk_nets
           - eft
+          - ethereum
           - hu_ics
           - interac
           - masav
@@ -2603,6 +2609,7 @@ paths:
           - nics
           - nz_becs
           - pl_elixir
+          - polygon
           - provxchange
           - ro_sent
           - rtp
@@ -2613,6 +2620,7 @@ paths:
           - sic
           - signet
           - sknbi
+          - solana
           - wire
           - zengin
         required: false
@@ -6156,6 +6164,7 @@ paths:
           - ach
           - au_becs
           - bacs
+          - base
           - book
           - card
           - chats
@@ -6163,6 +6172,7 @@ paths:
           - cross_border
           - dk_nets
           - eft
+          - ethereum
           - hu_ics
           - interac
           - masav
@@ -6171,6 +6181,7 @@ paths:
           - nics
           - nz_becs
           - pl_elixir
+          - polygon
           - provxchange
           - ro_sent
           - rtp
@@ -6181,6 +6192,7 @@ paths:
           - sic
           - signet
           - sknbi
+          - solana
           - wire
           - zengin
         required: false
@@ -8304,14 +8316,18 @@ components:
           type: string
           enum:
           - au_number
+          - base_address
           - clabe
+          - ethereum_address
           - hk_number
           - iban
           - id_number
           - nz_number
           - other
           - pan
+          - polygon_address
           - sg_number
+          - solana_address
           - wallet_address
           description: One of `iban`, `clabe`, `wallet_address`, or `other`. Use `other`
             if the bank account number is in a generic format.
@@ -8340,14 +8356,18 @@ components:
           type: string
           enum:
           - au_number
+          - base_address
           - clabe
+          - ethereum_address
           - hk_number
           - iban
           - id_number
           - nz_number
           - other
           - pan
+          - polygon_address
           - sg_number
+          - solana_address
           - wallet_address
           description: One of `iban`, `clabe`, `wallet_address`, or `other`. Use `other`
             if the bank account number is in a generic format.
@@ -9294,6 +9314,7 @@ components:
                 enum:
                 - cash
                 - checking
+                - crypto_wallet
                 - general_ledger
                 - loan
                 - non_resident
@@ -9518,6 +9539,7 @@ components:
                 enum:
                 - cash
                 - checking
+                - crypto_wallet
                 - general_ledger
                 - loan
                 - non_resident
@@ -9551,14 +9573,18 @@ components:
                       type: string
                       enum:
                       - au_number
+                      - base_address
                       - clabe
+                      - ethereum_address
                       - hk_number
                       - iban
                       - id_number
                       - nz_number
                       - other
                       - pan
+                      - polygon_address
                       - sg_number
+                      - solana_address
                       - wallet_address
                   required:
                   - account_number
@@ -9599,6 +9625,7 @@ components:
                       - ach
                       - au_becs
                       - bacs
+                      - base
                       - book
                       - card
                       - chats
@@ -9606,6 +9633,7 @@ components:
                       - cross_border
                       - dk_nets
                       - eft
+                      - ethereum
                       - hu_ics
                       - interac
                       - masav
@@ -9614,6 +9642,7 @@ components:
                       - nics
                       - nz_becs
                       - pl_elixir
+                      - polygon
                       - provxchange
                       - ro_sent
                       - rtp
@@ -9624,6 +9653,7 @@ components:
                       - sic
                       - signet
                       - sknbi
+                      - solana
                       - wire
                       - zengin
                   required:
@@ -9800,6 +9830,7 @@ components:
       - ERN
       - ETB
       - EUR
+      - EURC
       - FJD
       - FKP
       - GBP
@@ -9875,6 +9906,7 @@ components:
       - PKR
       - PLN
       - PYG
+      - PYUSD
       - QAR
       - RON
       - RSD
@@ -9909,6 +9941,10 @@ components:
       - UAH
       - UGX
       - USD
+      - USDB
+      - USDC
+      - USDP
+      - USDT
       - UYU
       - UZS
       - VEF
@@ -9977,18 +10013,18 @@ components:
         documentable_type:
           type: string
           enum:
-          - case
           - counterparty
           - expected_payment
           - external_account
+          - identification
           - incoming_payment_detail
           - internal_account
           - organization
           - paper_item
           - payment_order
           - transaction
-          - decision
           - connection
+          - conversation
           description: The type of the associated object. Currently can be one of
             `payment_order`, `transaction`, `paper_item`, `expected_payment`, `counterparty`,
             `organization`, `case`, `internal_account`, `decision`, or `external_account`.
@@ -10034,18 +10070,18 @@ components:
         documentable_type:
           type: string
           enum:
-          - cases
           - counterparties
           - expected_payments
           - external_accounts
+          - identifications
           - incoming_payment_details
           - internal_accounts
           - organizations
           - paper_items
           - payment_orders
           - transactions
-          - decisions
           - connections
+          - conversations
         document_type:
           type: string
           description: A category given to the document, can be `null`.
@@ -10226,6 +10262,7 @@ components:
           - ach
           - au_becs
           - bacs
+          - base
           - book
           - card
           - chats
@@ -10233,6 +10270,7 @@ components:
           - cross_border
           - dk_nets
           - eft
+          - ethereum
           - hu_ics
           - interac
           - masav
@@ -10241,6 +10279,7 @@ components:
           - nics
           - nz_becs
           - pl_elixir
+          - polygon
           - provxchange
           - ro_sent
           - rtp
@@ -10251,6 +10290,7 @@ components:
           - sic
           - signet
           - sknbi
+          - solana
           - wire
           - zengin
           nullable: true
@@ -10414,6 +10454,7 @@ components:
           - ach
           - au_becs
           - bacs
+          - base
           - book
           - card
           - chats
@@ -10421,6 +10462,7 @@ components:
           - cross_border
           - dk_nets
           - eft
+          - ethereum
           - hu_ics
           - interac
           - masav
@@ -10429,6 +10471,7 @@ components:
           - nics
           - nz_becs
           - pl_elixir
+          - polygon
           - provxchange
           - ro_sent
           - rtp
@@ -10439,6 +10482,7 @@ components:
           - sic
           - signet
           - sknbi
+          - solana
           - wire
           - zengin
           nullable: true
@@ -10556,6 +10600,7 @@ components:
           - ach
           - au_becs
           - bacs
+          - base
           - book
           - card
           - chats
@@ -10563,6 +10608,7 @@ components:
           - cross_border
           - dk_nets
           - eft
+          - ethereum
           - hu_ics
           - interac
           - masav
@@ -10571,6 +10617,7 @@ components:
           - nics
           - nz_becs
           - pl_elixir
+          - polygon
           - provxchange
           - ro_sent
           - rtp
@@ -10581,6 +10628,7 @@ components:
           - sic
           - signet
           - sknbi
+          - solana
           - wire
           - zengin
           nullable: true
@@ -10681,6 +10729,7 @@ components:
           enum:
           - cash
           - checking
+          - crypto_wallet
           - general_ledger
           - loan
           - non_resident
@@ -10792,6 +10841,7 @@ components:
           enum:
           - cash
           - checking
+          - crypto_wallet
           - general_ledger
           - loan
           - non_resident
@@ -10829,14 +10879,18 @@ components:
                 type: string
                 enum:
                 - au_number
+                - base_address
                 - clabe
+                - ethereum_address
                 - hk_number
                 - iban
                 - id_number
                 - nz_number
                 - other
                 - pan
+                - polygon_address
                 - sg_number
+                - solana_address
                 - wallet_address
             required:
             - account_number
@@ -10877,6 +10931,7 @@ components:
                 - ach
                 - au_becs
                 - bacs
+                - base
                 - book
                 - card
                 - chats
@@ -10884,6 +10939,7 @@ components:
                 - cross_border
                 - dk_nets
                 - eft
+                - ethereum
                 - hu_ics
                 - interac
                 - masav
@@ -10892,6 +10948,7 @@ components:
                 - nics
                 - nz_becs
                 - pl_elixir
+                - polygon
                 - provxchange
                 - ro_sent
                 - rtp
@@ -10902,6 +10959,7 @@ components:
                 - sic
                 - signet
                 - sknbi
+                - solana
                 - wire
                 - zengin
             required:
@@ -10954,6 +11012,7 @@ components:
           enum:
           - cash
           - checking
+          - crypto_wallet
           - general_ledger
           - loan
           - non_resident
@@ -11015,6 +11074,7 @@ components:
           - ach
           - au_becs
           - bacs
+          - base
           - book
           - card
           - chats
@@ -11022,6 +11082,7 @@ components:
           - cross_border
           - dk_nets
           - eft
+          - ethereum
           - hu_ics
           - interac
           - masav
@@ -11030,6 +11091,7 @@ components:
           - nics
           - nz_becs
           - pl_elixir
+          - polygon
           - provxchange
           - ro_sent
           - rtp
@@ -11040,6 +11102,7 @@ components:
           - sic
           - signet
           - sknbi
+          - solana
           - wire
           - zengin
           description: The type of payment that can be made to this account. Can be
@@ -11087,6 +11150,7 @@ components:
           - ach
           - au_becs
           - bacs
+          - base
           - book
           - card
           - chats
@@ -11094,6 +11158,7 @@ components:
           - cross_border
           - dk_nets
           - eft
+          - ethereum
           - hu_ics
           - interac
           - masav
@@ -11102,6 +11167,7 @@ components:
           - nics
           - nz_becs
           - pl_elixir
+          - polygon
           - provxchange
           - ro_sent
           - rtp
@@ -11112,6 +11178,7 @@ components:
           - sic
           - signet
           - sknbi
+          - solana
           - wire
           - zengin
           description: Can be `ach`, `eft`, or `rtp`.
@@ -11536,14 +11603,18 @@ components:
           type: string
           enum:
           - au_number
+          - base_address
           - clabe
+          - ethereum_address
           - hk_number
           - iban
           - id_number
           - nz_number
           - other
           - pan
+          - polygon_address
           - sg_number
+          - solana_address
           - wallet_address
           description: The type of the originating account number for the incoming
             payment detail.
@@ -11598,6 +11669,7 @@ components:
           enum:
           - cash
           - checking
+          - crypto_wallet
           - general_ledger
           - loan
           - non_resident
@@ -12231,6 +12303,7 @@ components:
           - ach
           - au_becs
           - bacs
+          - base
           - book
           - card
           - chats
@@ -12238,6 +12311,7 @@ components:
           - cross_border
           - dk_nets
           - eft
+          - ethereum
           - hu_ics
           - interac
           - masav
@@ -12246,6 +12320,7 @@ components:
           - nics
           - nz_becs
           - pl_elixir
+          - polygon
           - provxchange
           - ro_sent
           - rtp
@@ -12256,6 +12331,7 @@ components:
           - sic
           - signet
           - sknbi
+          - solana
           - wire
           - zengin
           description: One of `ach`, `se_bankgirot`, `eft`, `wire`, `check`, `sen`,
@@ -12479,6 +12555,7 @@ components:
           - ach
           - au_becs
           - bacs
+          - base
           - book
           - card
           - chats
@@ -12486,6 +12563,7 @@ components:
           - cross_border
           - dk_nets
           - eft
+          - ethereum
           - hu_ics
           - interac
           - masav
@@ -12494,6 +12572,7 @@ components:
           - nics
           - nz_becs
           - pl_elixir
+          - polygon
           - provxchange
           - ro_sent
           - rtp
@@ -12504,6 +12583,7 @@ components:
           - sic
           - signet
           - sknbi
+          - solana
           - wire
           - zengin
           description: One of `ach`, `se_bankgirot`, `eft`, `wire`, `check`, `sen`,
@@ -16355,8 +16435,12 @@ components:
           type: string
           description: The memo field on the paper item.
           nullable: true
+        metadata:
+          type: object
+          description: Additional data represented as key-value pairs. Both the key
+            and value must be strings.
       additionalProperties: false
-      minProperties: 18
+      minProperties: 19
       required:
       - id
       - object
@@ -16376,6 +16460,7 @@ components:
       - check_number
       - remitter_name
       - memo_field
+      - metadata
     payment_flow:
       type: object
       properties:
@@ -16557,6 +16642,7 @@ components:
           - ach
           - au_becs
           - bacs
+          - base
           - book
           - card
           - chats
@@ -16564,6 +16650,7 @@ components:
           - cross_border
           - dk_nets
           - eft
+          - ethereum
           - hu_ics
           - interac
           - masav
@@ -16572,6 +16659,7 @@ components:
           - nics
           - nz_becs
           - pl_elixir
+          - polygon
           - provxchange
           - ro_sent
           - rtp
@@ -16582,6 +16670,7 @@ components:
           - sic
           - signet
           - sknbi
+          - solana
           - wire
           - zengin
           description: One of `ach`, `se_bankgirot`, `eft`, `wire`, `check`, `sen`,
@@ -16830,6 +16919,7 @@ components:
                 enum:
                 - cash
                 - checking
+                - crypto_wallet
                 - general_ledger
                 - loan
                 - non_resident
@@ -17030,6 +17120,7 @@ components:
           - ach
           - au_becs
           - bacs
+          - base
           - book
           - card
           - chats
@@ -17037,6 +17128,7 @@ components:
           - cross_border
           - dk_nets
           - eft
+          - ethereum
           - hu_ics
           - interac
           - masav
@@ -17045,6 +17137,7 @@ components:
           - nics
           - nz_becs
           - pl_elixir
+          - polygon
           - provxchange
           - ro_sent
           - rtp
@@ -17055,6 +17148,7 @@ components:
           - sic
           - signet
           - sknbi
+          - solana
           - wire
           - zengin
           description: One of `ach`, `se_bankgirot`, `eft`, `wire`, `check`, `sen`,
@@ -17279,6 +17373,7 @@ components:
               enum:
               - cash
               - checking
+              - crypto_wallet
               - general_ledger
               - loan
               - non_resident
@@ -17312,14 +17407,18 @@ components:
                     type: string
                     enum:
                     - au_number
+                    - base_address
                     - clabe
+                    - ethereum_address
                     - hk_number
                     - iban
                     - id_number
                     - nz_number
                     - other
                     - pan
+                    - polygon_address
                     - sg_number
+                    - solana_address
                     - wallet_address
                 required:
                 - account_number
@@ -17360,6 +17459,7 @@ components:
                     - ach
                     - au_becs
                     - bacs
+                    - base
                     - book
                     - card
                     - chats
@@ -17367,6 +17467,7 @@ components:
                     - cross_border
                     - dk_nets
                     - eft
+                    - ethereum
                     - hu_ics
                     - interac
                     - masav
@@ -17375,6 +17476,7 @@ components:
                     - nics
                     - nz_becs
                     - pl_elixir
+                    - polygon
                     - provxchange
                     - ro_sent
                     - rtp
@@ -17385,6 +17487,7 @@ components:
                     - sic
                     - signet
                     - sknbi
+                    - solana
                     - wire
                     - zengin
                 required:
@@ -17467,6 +17570,7 @@ components:
           - ach
           - au_becs
           - bacs
+          - base
           - book
           - card
           - chats
@@ -17474,6 +17578,7 @@ components:
           - cross_border
           - dk_nets
           - eft
+          - ethereum
           - hu_ics
           - interac
           - masav
@@ -17482,6 +17587,7 @@ components:
           - nics
           - nz_becs
           - pl_elixir
+          - polygon
           - provxchange
           - ro_sent
           - rtp
@@ -17492,6 +17598,7 @@ components:
           - sic
           - signet
           - sknbi
+          - solana
           - wire
           - zengin
           description: One of `ach`, `se_bankgirot`, `eft`, `wire`, `check`, `sen`,
@@ -17716,6 +17823,7 @@ components:
               enum:
               - cash
               - checking
+              - crypto_wallet
               - general_ledger
               - loan
               - non_resident
@@ -17749,14 +17857,18 @@ components:
                     type: string
                     enum:
                     - au_number
+                    - base_address
                     - clabe
+                    - ethereum_address
                     - hk_number
                     - iban
                     - id_number
                     - nz_number
                     - other
                     - pan
+                    - polygon_address
                     - sg_number
+                    - solana_address
                     - wallet_address
                 required:
                 - account_number
@@ -17797,6 +17909,7 @@ components:
                     - ach
                     - au_becs
                     - bacs
+                    - base
                     - book
                     - card
                     - chats
@@ -17804,6 +17917,7 @@ components:
                     - cross_border
                     - dk_nets
                     - eft
+                    - ethereum
                     - hu_ics
                     - interac
                     - masav
@@ -17812,6 +17926,7 @@ components:
                     - nics
                     - nz_becs
                     - pl_elixir
+                    - polygon
                     - provxchange
                     - ro_sent
                     - rtp
@@ -17822,6 +17937,7 @@ components:
                     - sic
                     - signet
                     - sknbi
+                    - solana
                     - wire
                     - zengin
                 required:
@@ -17897,6 +18013,7 @@ components:
           - ach
           - au_becs
           - bacs
+          - base
           - book
           - card
           - chats
@@ -17904,6 +18021,7 @@ components:
           - cross_border
           - dk_nets
           - eft
+          - ethereum
           - hu_ics
           - interac
           - masav
@@ -17912,6 +18030,7 @@ components:
           - nics
           - nz_becs
           - pl_elixir
+          - polygon
           - provxchange
           - ro_sent
           - rtp
@@ -17922,6 +18041,7 @@ components:
           - sic
           - signet
           - sknbi
+          - solana
           - wire
           - zengin
           description: One of `ach`, `se_bankgirot`, `eft`, `wire`, `check`, `sen`,
@@ -18181,6 +18301,7 @@ components:
               enum:
               - cash
               - checking
+              - crypto_wallet
               - general_ledger
               - loan
               - non_resident
@@ -18214,14 +18335,18 @@ components:
                     type: string
                     enum:
                     - au_number
+                    - base_address
                     - clabe
+                    - ethereum_address
                     - hk_number
                     - iban
                     - id_number
                     - nz_number
                     - other
                     - pan
+                    - polygon_address
                     - sg_number
+                    - solana_address
                     - wallet_address
                 required:
                 - account_number
@@ -18262,6 +18387,7 @@ components:
                     - ach
                     - au_becs
                     - bacs
+                    - base
                     - book
                     - card
                     - chats
@@ -18269,6 +18395,7 @@ components:
                     - cross_border
                     - dk_nets
                     - eft
+                    - ethereum
                     - hu_ics
                     - interac
                     - masav
@@ -18277,6 +18404,7 @@ components:
                     - nics
                     - nz_becs
                     - pl_elixir
+                    - polygon
                     - provxchange
                     - ro_sent
                     - rtp
@@ -18287,6 +18415,7 @@ components:
                     - sic
                     - signet
                     - sknbi
+                    - solana
                     - wire
                     - zengin
                 required:
@@ -19048,6 +19177,7 @@ components:
           - ach
           - au_becs
           - bacs
+          - base
           - book
           - card
           - chats
@@ -19055,6 +19185,7 @@ components:
           - cross_border
           - dk_nets
           - eft
+          - ethereum
           - hu_ics
           - interac
           - masav
@@ -19063,6 +19194,7 @@ components:
           - nics
           - nz_becs
           - pl_elixir
+          - polygon
           - provxchange
           - ro_sent
           - rtp
@@ -19073,6 +19205,7 @@ components:
           - sic
           - signet
           - sknbi
+          - solana
           - wire
           - zengin
           nullable: true
@@ -19135,6 +19268,7 @@ components:
           - ach
           - au_becs
           - bacs
+          - base
           - book
           - card
           - chats
@@ -19142,6 +19276,7 @@ components:
           - cross_border
           - dk_nets
           - eft
+          - ethereum
           - hu_ics
           - interac
           - masav
@@ -19150,6 +19285,7 @@ components:
           - nics
           - nz_becs
           - pl_elixir
+          - polygon
           - provxchange
           - ro_sent
           - rtp
@@ -19160,6 +19296,7 @@ components:
           - sic
           - signet
           - sknbi
+          - solana
           - wire
           - zengin
           nullable: true
@@ -19197,6 +19334,7 @@ components:
             - ach
             - au_becs
             - bacs
+            - base
             - book
             - card
             - chats
@@ -19204,6 +19342,7 @@ components:
             - cross_border
             - dk_nets
             - eft
+            - ethereum
             - hu_ics
             - interac
             - masav
@@ -19212,6 +19351,7 @@ components:
             - nics
             - nz_becs
             - pl_elixir
+            - polygon
             - provxchange
             - ro_sent
             - rtp
@@ -19222,13 +19362,15 @@ components:
             - sic
             - signet
             - sknbi
+            - solana
             - wire
             - zengin
-          maxItems: 30
+          maxItems: 34
           example:
           - ach
           - au_becs
           - bacs
+          - base
           - book
           - card
           - chats
@@ -19236,6 +19378,7 @@ components:
           - cross_border
           - dk_nets
           - eft
+          - ethereum
           - hu_ics
           - interac
           - masav
@@ -19244,6 +19387,7 @@ components:
           - nics
           - nz_becs
           - pl_elixir
+          - polygon
           - provxchange
           - ro_sent
           - rtp
@@ -19254,6 +19398,7 @@ components:
           - sic
           - signet
           - sknbi
+          - solana
           - wire
           - zengin
           description: An array of payment types that are supported for this routing
@@ -19471,6 +19616,7 @@ components:
           - ach
           - au_becs
           - bacs
+          - base
           - book
           - card
           - chats
@@ -19478,6 +19624,7 @@ components:
           - cross_border
           - dk_nets
           - eft
+          - ethereum
           - hu_ics
           - interac
           - masav
@@ -19486,6 +19633,7 @@ components:
           - nics
           - nz_becs
           - pl_elixir
+          - polygon
           - provxchange
           - ro_sent
           - rtp
@@ -19496,6 +19644,7 @@ components:
           - sic
           - signet
           - sknbi
+          - solana
           - wire
           - zengin
           - other
@@ -19606,6 +19755,7 @@ components:
           - ach
           - au_becs
           - bacs
+          - base
           - book
           - card
           - chats
@@ -19613,6 +19763,7 @@ components:
           - cross_border
           - dk_nets
           - eft
+          - ethereum
           - hu_ics
           - interac
           - masav
@@ -19621,6 +19772,7 @@ components:
           - nics
           - nz_becs
           - pl_elixir
+          - polygon
           - provxchange
           - ro_sent
           - rtp
@@ -19631,6 +19783,7 @@ components:
           - sic
           - signet
           - sknbi
+          - solana
           - wire
           - zengin
           - other
@@ -19958,6 +20111,7 @@ components:
           - ach
           - au_becs
           - bacs
+          - base
           - book
           - card
           - chats
@@ -19965,6 +20119,7 @@ components:
           - cross_border
           - dk_nets
           - eft
+          - ethereum
           - hu_ics
           - interac
           - masav
@@ -19973,6 +20128,7 @@ components:
           - nics
           - nz_becs
           - pl_elixir
+          - polygon
           - provxchange
           - ro_sent
           - rtp
@@ -19983,6 +20139,7 @@ components:
           - sic
           - signet
           - sknbi
+          - solana
           - wire
           - zengin
           description: One of ach, au_becs, bacs, book, check, eft, interac, provxchange,
