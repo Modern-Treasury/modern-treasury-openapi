@@ -19605,6 +19605,7 @@ components:
           - banking_circle
           - bankprov
           - bnk_dev
+          - bridge
           - cleartouch
           - column
           - cross_river
