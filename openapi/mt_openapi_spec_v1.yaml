@@ -9830,6 +9830,7 @@ components:
       - ERN
       - ETB
       - EUR
+      - EURC
       - FJD
       - FKP
       - GBP
@@ -9905,6 +9906,7 @@ components:
       - PKR
       - PLN
       - PYG
+      - PYUSD
       - QAR
       - RON
       - RSD
@@ -9939,6 +9941,10 @@ components:
       - UAH
       - UGX
       - USD
+      - USDB
+      - USDC
+      - USDP
+      - USDT
       - UYU
       - UZS
       - VEF
