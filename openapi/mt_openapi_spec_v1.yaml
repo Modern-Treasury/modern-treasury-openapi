@@ -12707,8 +12707,11 @@ components:
           type: integer
           description: The total amount for this line item specified in the invoice
             currency's smallest unit.
+        invoice_id:
+          type: string
+          description: The ID of the invoice for this line item.
       additionalProperties: false
-      minProperties: 13
+      minProperties: 14
       required:
       - id
       - object
@@ -12723,6 +12726,7 @@ components:
       - direction
       - metadata
       - amount
+      - invoice_id
     invoice_line_item_create_request:
       type: object
       properties:
@@ -18727,6 +18731,10 @@ components:
         updated_at:
           type: string
           format: date-time
+        discarded_at:
+          type: string
+          format: date-time
+          nullable: true
         returnable_id:
           type: string
           format: uuid
@@ -18938,13 +18946,14 @@ components:
           nullable: true
           description: The ID of the ledger transaction linked to the return.
       additionalProperties: false
-      minProperties: 22
+      minProperties: 23
       required:
       - id
       - object
       - live_mode
       - created_at
       - updated_at
+      - discarded_at
       - returnable_id
       - returnable_type
       - code
@@ -20263,3 +20272,29 @@ components:
       - amount_lower_bound
       - direction
       - internal_account_id
+    reconciliation_group:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        object:
+          type: string
+        live_mode:
+          type: boolean
+          description: This field will be true if this object exists in the live environment
+            or false if it exists in the test environment.
+        created_at:
+          type: string
+          format: date-time
+        updated_at:
+          type: string
+          format: date-time
+      additionalProperties: false
+      minProperties: 5
+      required:
+      - id
+      - object
+      - live_mode
+      - created_at
+      - updated_at
