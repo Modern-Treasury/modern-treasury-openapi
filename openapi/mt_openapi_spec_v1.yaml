@@ -11367,6 +11367,7 @@ components:
           - cl_rut
           - co_cedulas
           - co_nit
+          - drivers_license
           - hn_id
           - hn_rtn
           - in_lei
@@ -11381,13 +11382,23 @@ components:
           - us_ssn
           - vn_tin
           description: The type of ID number.
+        expiration_date:
+          type: string
+          format: date
+          nullable: true
+          description: The date when the Identification is no longer considered valid
+            by the issuing authority.
         issuing_country:
           type: string
           nullable: true
           description: The ISO 3166-1 alpha-2 country code of the country that issued
             the identification
+        issuing_region:
+          type: string
+          nullable: true
+          description: The region in which the identifcation was issued.
       additionalProperties: false
-      minProperties: 8
+      minProperties: 10
       required:
       - id
       - object
@@ -11396,7 +11407,9 @@ components:
       - updated_at
       - discarded_at
       - id_type
+      - expiration_date
       - issuing_country
+      - issuing_region
     identification_create_request:
       type: object
       properties:
@@ -11414,6 +11427,7 @@ components:
           - cl_rut
           - co_cedulas
           - co_nit
+          - drivers_license
           - hn_id
           - hn_rtn
           - in_lei
@@ -11428,11 +11442,21 @@ components:
           - us_ssn
           - vn_tin
           description: The type of ID number.
+        expiration_date:
+          type: string
+          format: date
+          nullable: true
+          description: The date when the Identification is no longer considered valid
+            by the issuing authority.
         issuing_country:
           type: string
           nullable: true
           description: The ISO 3166-1 alpha-2 country code of the country that issued
             the identification
+        issuing_region:
+          type: string
+          nullable: true
+          description: The region in which the identifcation was issued.
       required:
       - id_number
       - id_type
