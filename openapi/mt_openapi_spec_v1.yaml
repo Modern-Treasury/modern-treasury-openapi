@@ -11367,6 +11367,7 @@ components:
           - cl_rut
           - co_cedulas
           - co_nit
+          - drivers_license
           - hn_id
           - hn_rtn
           - in_lei
@@ -11414,6 +11415,7 @@ components:
           - cl_rut
           - co_cedulas
           - co_nit
+          - drivers_license
           - hn_id
           - hn_rtn
           - in_lei
