@@ -9312,15 +9312,19 @@ components:
               account_type:
                 type: string
                 enum:
+                - base_wallet
                 - cash
                 - checking
                 - crypto_wallet
+                - ethereum_wallet
                 - general_ledger
                 - loan
                 - non_resident
                 - other
                 - overdraft
+                - polygon_wallet
                 - savings
+                - solana_wallet
                 description: Can be `checking`, `savings` or `other`.
               party_type:
                 type: string
@@ -9537,15 +9541,19 @@ components:
               account_type:
                 type: string
                 enum:
+                - base_wallet
                 - cash
                 - checking
                 - crypto_wallet
+                - ethereum_wallet
                 - general_ledger
                 - loan
                 - non_resident
                 - other
                 - overdraft
+                - polygon_wallet
                 - savings
+                - solana_wallet
                 description: Can be `checking`, `savings` or `other`.
               party_type:
                 type: string
@@ -9913,6 +9921,7 @@ components:
       - RUB
       - RWF
       - SAR
+      - SBC
       - SBD
       - SCR
       - SDG
@@ -10727,15 +10736,19 @@ components:
         account_type:
           type: string
           enum:
+          - base_wallet
           - cash
           - checking
           - crypto_wallet
+          - ethereum_wallet
           - general_ledger
           - loan
           - non_resident
           - other
           - overdraft
+          - polygon_wallet
           - savings
+          - solana_wallet
           description: Can be `checking`, `savings` or `other`.
         party_type:
           type: string
@@ -10839,15 +10852,19 @@ components:
         account_type:
           type: string
           enum:
+          - base_wallet
           - cash
           - checking
           - crypto_wallet
+          - ethereum_wallet
           - general_ledger
           - loan
           - non_resident
           - other
           - overdraft
+          - polygon_wallet
           - savings
+          - solana_wallet
           description: Can be `checking`, `savings` or `other`.
         party_type:
           type: string
@@ -11010,15 +11027,19 @@ components:
         account_type:
           type: string
           enum:
+          - base_wallet
           - cash
           - checking
           - crypto_wallet
+          - ethereum_wallet
           - general_ledger
           - loan
           - non_resident
           - other
           - overdraft
+          - polygon_wallet
           - savings
+          - solana_wallet
           description: Can be `checking`, `savings` or `other`.
         counterparty_id:
           type: string
@@ -11367,6 +11388,7 @@ components:
           - cl_rut
           - co_cedulas
           - co_nit
+          - drivers_license
           - hn_id
           - hn_rtn
           - in_lei
@@ -11381,13 +11403,23 @@ components:
           - us_ssn
           - vn_tin
           description: The type of ID number.
+        expiration_date:
+          type: string
+          format: date
+          nullable: true
+          description: The date when the Identification is no longer considered valid
+            by the issuing authority.
         issuing_country:
           type: string
           nullable: true
           description: The ISO 3166-1 alpha-2 country code of the country that issued
             the identification
+        issuing_region:
+          type: string
+          nullable: true
+          description: The region in which the identifcation was issued.
       additionalProperties: false
-      minProperties: 8
+      minProperties: 10
       required:
       - id
       - object
@@ -11396,7 +11428,9 @@ components:
       - updated_at
       - discarded_at
       - id_type
+      - expiration_date
       - issuing_country
+      - issuing_region
     identification_create_request:
       type: object
       properties:
@@ -11414,6 +11448,7 @@ components:
           - cl_rut
           - co_cedulas
           - co_nit
+          - drivers_license
           - hn_id
           - hn_rtn
           - in_lei
@@ -11428,11 +11463,21 @@ components:
           - us_ssn
           - vn_tin
           description: The type of ID number.
+        expiration_date:
+          type: string
+          format: date
+          nullable: true
+          description: The date when the Identification is no longer considered valid
+            by the issuing authority.
         issuing_country:
           type: string
           nullable: true
           description: The ISO 3166-1 alpha-2 country code of the country that issued
             the identification
+        issuing_region:
+          type: string
+          nullable: true
+          description: The region in which the identifcation was issued.
       required:
       - id_number
       - id_type
@@ -11667,15 +11712,19 @@ components:
         account_type:
           type: string
           enum:
+          - base_wallet
           - cash
           - checking
           - crypto_wallet
+          - ethereum_wallet
           - general_ledger
           - loan
           - non_resident
           - other
           - overdraft
+          - polygon_wallet
           - savings
+          - solana_wallet
           nullable: true
           description: Can be checking, savings or other.
         party_name:
@@ -11811,6 +11860,25 @@ components:
           example: USD
           description: Either "USD" or "CAD". Internal accounts created at Increase
             only supports "USD".
+        account_type:
+          type: string
+          enum:
+          - base_wallet
+          - cash
+          - checking
+          - crypto_wallet
+          - ethereum_wallet
+          - general_ledger
+          - loan
+          - non_resident
+          - other
+          - overdraft
+          - polygon_wallet
+          - savings
+          - solana_wallet
+          example: checking
+          description: The account type, used to provision the appropriate account
+            at the financial institution.
         vendor_attributes:
           type: object
           additionalProperties:
@@ -11954,7 +12022,7 @@ components:
             if not provided.
         description:
           type: string
-          description: A free-form description of the invoice.
+          description: An optional free-form description of the invoice.
         due_date:
           type: string
           format: date-time
@@ -16921,15 +16989,19 @@ components:
               account_type:
                 type: string
                 enum:
+                - base_wallet
                 - cash
                 - checking
                 - crypto_wallet
+                - ethereum_wallet
                 - general_ledger
                 - loan
                 - non_resident
                 - other
                 - overdraft
+                - polygon_wallet
                 - savings
+                - solana_wallet
                 description: Can be `checking`, `savings` or `other`.
               party_type:
                 type: string
@@ -17375,15 +17447,19 @@ components:
             account_type:
               type: string
               enum:
+              - base_wallet
               - cash
               - checking
               - crypto_wallet
+              - ethereum_wallet
               - general_ledger
               - loan
               - non_resident
               - other
               - overdraft
+              - polygon_wallet
               - savings
+              - solana_wallet
               description: Can be `checking`, `savings` or `other`.
             party_type:
               type: string
@@ -17825,15 +17901,19 @@ components:
             account_type:
               type: string
               enum:
+              - base_wallet
               - cash
               - checking
               - crypto_wallet
+              - ethereum_wallet
               - general_ledger
               - loan
               - non_resident
               - other
               - overdraft
+              - polygon_wallet
               - savings
+              - solana_wallet
               description: Can be `checking`, `savings` or `other`.
             party_type:
               type: string
@@ -18303,15 +18383,19 @@ components:
             account_type:
               type: string
               enum:
+              - base_wallet
               - cash
               - checking
               - crypto_wallet
+              - ethereum_wallet
               - general_ledger
               - loan
               - non_resident
               - other
               - overdraft
+              - polygon_wallet
               - savings
+              - solana_wallet
               description: Can be `checking`, `savings` or `other`.
             party_type:
               type: string
@@ -18496,6 +18580,7 @@ components:
           - bnk_dev_transfer_id
           - bofa_end_to_end_id
           - bofa_transaction_id
+          - brale_transfer_id
           - bridge_destination_transaction_hash
           - bridge_source_transaction_hash
           - bridge_transfer_id
@@ -18621,6 +18706,7 @@ components:
           - bnk_dev_transfer_id
           - bofa_end_to_end_id
           - bofa_transaction_id
+          - brale_transfer_id
           - bridge_destination_transaction_hash
           - bridge_source_transaction_hash
           - bridge_transfer_id
