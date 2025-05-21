@@ -6102,6 +6102,218 @@ paths:
             application/json:
               schema:
                 "$ref": "#/components/schemas/error_message"
+  "/api/payment_actions":
+    get:
+      summary: list payment_actions
+      tags:
+      - PaymentAction
+      description: 'Translation missing: en.openapi.descriptions.payment_action.operations.get_payment_actions'
+      security:
+      - basic_auth: []
+      parameters:
+      - name: type
+        in: query
+        schema:
+          type: string
+          enum:
+          - stop
+          - issue
+        description: The type of payment action.
+        required: false
+      - name: status
+        in: query
+        schema:
+          type: string
+          enum:
+          - pending
+          - processable
+          - processing
+          - sent
+          - failed
+          - cancelled
+        description: Filter by payment actions of a specific status.
+        required: false
+      - name: statuses
+        in: query
+        schema:
+          type: array
+          items:
+            type: string
+            enum:
+            - pending
+            - processable
+            - processing
+            - sent
+            - failed
+            - cancelled
+        description: Filter by payment actions of a set of statuses.
+        required: false
+      - name: actionable_id
+        in: query
+        schema:
+          type: string
+          format: uuid
+        description: The ID of the associated actionable object.
+        required: false
+      - name: actionable_type
+        in: query
+        schema:
+          type: string
+        description: The type of the associated actionable object. One of `payment_order`.
+        required: false
+      - name: internal_account_id
+        in: query
+        schema:
+          type: string
+          format: uuid
+        description: The ID of one of your internal accounts.
+        required: false
+      - name: created_at
+        in: query
+        style: deepObject
+        explode: true
+        required: false
+        schema:
+          type: object
+          properties:
+            gt:
+              type: string
+              format: date-time
+            gte:
+              type: string
+              format: date-time
+            lt:
+              type: string
+              format: date-time
+            lte:
+              type: string
+              format: date-time
+            eq:
+              type: string
+              format: date-time
+        description: Filter by `created_at` using comparison operators like `gt` (>),
+          `gte` (>=), `lt` (<), `lte` (<=), or `eq` (=) to filter by the created at
+          timestamp. For example, `created_at[gte]=2024-01-01T00:00:00Z`
+      - "$ref": "#/components/parameters/metadata_query"
+      - name: after_cursor
+        in: query
+        schema:
+          type: string
+          nullable: true
+        required: false
+      - name: per_page
+        in: query
+        required: false
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: successful
+          headers:
+            X-After-Cursor:
+              schema:
+                type: string
+                nullable: true
+              description: The cursor for the next page. Including this in a call
+                as `after_cursor` will return the next page.
+            X-Per-Page:
+              schema:
+                type: integer
+                nullable: true
+              description: The current `per_page`.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  "$ref": "#/components/schemas/payment_action"
+    post:
+      summary: create payment_action
+      tags:
+      - PaymentAction
+      description: Create a payment action.
+      security:
+      - basic_auth: []
+      parameters:
+      - name: Idempotency-Key
+        in: header
+        required: false
+        description: This key should be something unique, preferably something like
+          an UUID.
+        schema:
+          type: string
+      responses:
+        '201':
+          description: successful
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/payment_action"
+        '422':
+          description: bad request
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/error_message"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              "$ref": "#/components/schemas/payment_action_create_request"
+  "/api/payment_actions/{id}":
+    parameters:
+    - name: id
+      in: path
+      description: id
+      required: true
+      schema:
+        type: string
+    get:
+      summary: get payment_action
+      tags:
+      - PaymentAction
+      description: Get details on a single payment action.
+      security:
+      - basic_auth: []
+      responses:
+        '200':
+          description: successful
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/payment_action"
+        '404':
+          description: not found
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/error_message"
+    patch:
+      summary: update payment_action
+      tags:
+      - PaymentAction
+      description: Update a single payment action.
+      security:
+      - basic_auth: []
+      parameters: []
+      responses:
+        '200':
+          description: successful
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/payment_action"
+        '422':
+          description: missing status
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/error_message"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              "$ref": "#/components/schemas/payment_action_update_request"
   "/api/payment_orders/create_async":
     post:
       summary: create async payment order
@@ -16538,6 +16750,106 @@ components:
       - remitter_name
       - memo_field
       - metadata
+    payment_action:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        object:
+          type: string
+        live_mode:
+          type: boolean
+          description: This field will be true if this object exists in the live environment
+            or false if it exists in the test environment.
+        created_at:
+          type: string
+          format: date-time
+        updated_at:
+          type: string
+          format: date-time
+        type:
+          type: string
+          description: The type of the payment action. Determines the action to be
+            taken.
+        status:
+          type: string
+          description: The current status of the payment action. One of `pending`,
+            `processing`, `sent`, `cancelled`, or `failed`.
+        actionable_id:
+          type: string
+          format: uuid
+          nullable: true
+          description: The ID of the associated actionable object.
+        actionable_type:
+          type: string
+          nullable: true
+          description: The type of the associated actionable object. One of `payment_order`.
+        internal_account_id:
+          type: string
+          format: uuid
+          description: The ID of the internal account associated with the payment
+            action.
+        details:
+          type: object
+          description: The specifc details of the payment action based on type.
+      additionalProperties: false
+      minProperties: 11
+      required:
+      - id
+      - object
+      - live_mode
+      - created_at
+      - updated_at
+      - type
+      - status
+      - actionable_id
+      - actionable_type
+      - internal_account_id
+      - details
+    payment_action_create_request:
+      type: object
+      properties:
+        type:
+          type: string
+          description: Required. The type of the payment action. Determines the action
+            to be taken.
+        actionable_id:
+          type: string
+          format: uuid
+          description: Optional. The ID of the associated actionable object.
+        actionable_type:
+          type: string
+          description: Optional. The type of the associated actionable object. One
+            of `payment_order`. Required if `actionable_id` is passed.
+        internal_account_id:
+          type: string
+          format: uuid
+          description: Optional. The ID of one of your organization's internal accounts.
+            Required if `actionable_id` is not passed.
+        details:
+          type: object
+          description: Optional. The specifc details of the payment action based on
+            type.
+      required:
+      - type
+    payment_action_update_request:
+      type: object
+      properties:
+        status:
+          type: string
+          enum:
+          - pending
+          - processable
+          - processing
+          - sent
+          - failed
+          - cancelled
+          description: Optional. Set the status of the payment action to `cancelled`
+            to cancel the payment action. This will only work if the payment action
+            is in a `pending` state.
+      required:
+      - status
     payment_flow:
       type: object
       properties:
