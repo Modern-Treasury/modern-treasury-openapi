@@ -6443,6 +6443,7 @@ paths:
           - returned
           - reversed
           - sent
+          - stopped
         required: false
       - name: direction
         in: query
@@ -17267,6 +17268,7 @@ components:
           - returned
           - reversed
           - sent
+          - stopped
           description: The current status of the payment order.
         receiving_account:
           oneOf:
@@ -18666,6 +18668,7 @@ components:
           - returned
           - reversed
           - sent
+          - stopped
           description: To cancel a payment order, use `cancelled`. To redraft a returned
             payment order, use `approved`. To undo approval on a denied or approved
             payment order, use `needs_approval`.
@@ -18901,7 +18904,6 @@ components:
           - currencycloud_conversion_id
           - currencycloud_payment_id
           - dc_bank_transaction_id
-          - dwolla_transaction_id
           - eft_trace_number
           - evolve_transaction_id
           - fedwire_imad
@@ -19027,7 +19029,6 @@ components:
           - currencycloud_conversion_id
           - currencycloud_payment_id
           - dc_bank_transaction_id
-          - dwolla_transaction_id
           - eft_trace_number
           - evolve_transaction_id
           - fedwire_imad
