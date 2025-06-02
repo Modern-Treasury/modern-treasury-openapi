@@ -4064,6 +4064,11 @@ paths:
           type: string
           format: uuid
         required: false
+      - name: external_id
+        in: query
+        schema:
+          type: string
+        required: false
       - name: currency
         in: query
         required: false
@@ -6443,6 +6448,7 @@ paths:
           - returned
           - reversed
           - sent
+          - stopped
         required: false
       - name: direction
         in: query
@@ -13224,6 +13230,10 @@ components:
           nullable: true
           description: If the ledger account links to another object in Modern Treasury,
             the id will be populated here, otherwise null.
+        external_id:
+          type: string
+          nullable: true
+          description: An optional user-defined 180 character unique identifier.
         ledgerable_type:
           type: string
           enum:
@@ -13246,7 +13256,7 @@ components:
             foo: bar
             modern: treasury
       additionalProperties: false
-      minProperties: 15
+      minProperties: 16
       required:
       - id
       - object
@@ -13261,6 +13271,7 @@ components:
       - lock_version
       - ledger_id
       - ledgerable_id
+      - external_id
       - ledgerable_type
       - metadata
     ledger_account_create_request:
@@ -17267,6 +17278,7 @@ components:
           - returned
           - reversed
           - sent
+          - stopped
           description: The current status of the payment order.
         receiving_account:
           oneOf:
@@ -18666,6 +18678,7 @@ components:
           - returned
           - reversed
           - sent
+          - stopped
           description: To cancel a payment order, use `cancelled`. To redraft a returned
             payment order, use `approved`. To undo approval on a denied or approved
             payment order, use `needs_approval`.
@@ -18901,7 +18914,6 @@ components:
           - currencycloud_conversion_id
           - currencycloud_payment_id
           - dc_bank_transaction_id
-          - dwolla_transaction_id
           - eft_trace_number
           - evolve_transaction_id
           - fedwire_imad
@@ -19027,7 +19039,6 @@ components:
           - currencycloud_conversion_id
           - currencycloud_payment_id
           - dc_bank_transaction_id
-          - dwolla_transaction_id
           - eft_trace_number
           - evolve_transaction_id
           - fedwire_imad
