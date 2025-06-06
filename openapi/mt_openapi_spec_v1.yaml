@@ -329,12 +329,16 @@ paths:
         required: true
       - name: id
         in: path
-        schema:
-          type: string
-          format: uuid
         required: true
-        description: Either the unique identifier of the balance report or latest
+        description: Either the unique identifier of the balance report or 'latest'
           for the latest balance report.
+        schema:
+          anyOf:
+          - type: string
+            format: uuid
+          - type: string
+            enum:
+            - latest
       responses:
         '200':
           description: successful
@@ -369,7 +373,7 @@ paths:
           type: string
           format: uuid
         required: true
-        description: Either the unique identifier of the balance report or latest
+        description: Either the unique identifier of the balance report or 'latest'
           for the latest balance report.
       responses:
         '204':
@@ -3327,6 +3331,11 @@ paths:
         required: false
         schema:
           type: string
+      - name: external_id
+        in: query
+        schema:
+          type: string
+        required: false
       - name: parent_ledger_account_category_id
         in: query
         schema:
@@ -4064,6 +4073,11 @@ paths:
           type: string
           format: uuid
         required: false
+      - name: external_id
+        in: query
+        schema:
+          type: string
+        required: false
       - name: currency
         in: query
         required: false
@@ -4661,159 +4675,6 @@ paths:
             application/json:
               schema:
                 "$ref": "#/components/schemas/error_message"
-  "/api/ledger_event_handlers":
-    get:
-      summary: list ledger_event_handlers
-      tags:
-      - LedgerEventHandler
-      operationId: listLedgerEventHandlers
-      description: Get a list of ledger event handlers.
-      security:
-      - basic_auth: []
-      parameters:
-      - name: after_cursor
-        in: query
-        schema:
-          type: string
-          nullable: true
-        required: false
-      - name: per_page
-        in: query
-        schema:
-          type: integer
-        required: false
-      - "$ref": "#/components/parameters/metadata_query"
-      - name: name
-        in: query
-        required: false
-        schema:
-          type: string
-      - name: created_at
-        in: query
-        schema:
-          type: object
-          additionalProperties:
-            type: string
-            format: date-time
-        style: deepObject
-        required: false
-        description: Use `gt` (>), `gte` (>=), `lt` (<), `lte` (<=), or `eq` (=) to
-          filter by the posted at timestamp. For example, for all times after Jan
-          1 2000 12:00 UTC, use created_at%5Bgt%5D=2000-01-01T12:00:00Z.
-      responses:
-        '200':
-          description: successful
-          headers:
-            X-After-Cursor:
-              schema:
-                type: string
-                nullable: true
-              required: false
-              description: The cursor for the next page. Including this in a call
-                as `after_cursor` will return the next page.
-            X-Per-Page:
-              schema:
-                type: integer
-                nullable: true
-              description: The current `per_page`.
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  "$ref": "#/components/schemas/ledger_event_handler"
-    post:
-      summary: create ledger_event_handler
-      tags:
-      - LedgerEventHandler
-      operationId: createLedgerEventHandler
-      security:
-      - basic_auth: []
-      parameters:
-      - name: Idempotency-Key
-        in: header
-        required: false
-        description: This key should be something unique, preferably something like
-          an UUID.
-        schema:
-          type: string
-      responses:
-        '201':
-          description: successful
-          content:
-            application/json:
-              schema:
-                "$ref": "#/components/schemas/ledger_event_handler"
-        '422':
-          description: unsuccessful
-          content:
-            application/json:
-              schema:
-                "$ref": "#/components/schemas/error_message"
-        '403':
-          description: forbidden
-          content:
-            application/json:
-              schema:
-                "$ref": "#/components/schemas/error_message"
-        '400':
-          description: parameter_invalid
-      requestBody:
-        content:
-          application/json:
-            schema:
-              "$ref": "#/components/schemas/ledger_event_handler_create_request"
-  "/api/ledger_event_handlers/{id}":
-    parameters:
-    - name: id
-      in: path
-      schema:
-        type: string
-        format: uuid
-      description: id
-      required: true
-    get:
-      summary: get ledger_event_handler
-      tags:
-      - LedgerEventHandler
-      operationId: getLedgerEventHandler
-      description: Get details on a single ledger event handler.
-      security:
-      - basic_auth: []
-      responses:
-        '200':
-          description: successful
-          content:
-            application/json:
-              schema:
-                "$ref": "#/components/schemas/ledger_event_handler"
-        '404':
-          description: not found
-          content:
-            application/json:
-              schema:
-                "$ref": "#/components/schemas/error_message"
-    delete:
-      summary: delete ledger_event_handler
-      tags:
-      - LedgerEventHandler
-      operationId: deleteLedgerEventHandler
-      description: Archive a ledger event handler.
-      security:
-      - basic_auth: []
-      responses:
-        '200':
-          description: successful
-          content:
-            application/json:
-              schema:
-                "$ref": "#/components/schemas/ledger_event_handler"
-        '404':
-          description: not found
-          content:
-            application/json:
-              schema:
-                "$ref": "#/components/schemas/error_message"
   "/api/ledger_transactions/{id}/partial_post":
     post:
       summary: create ledger_transaction partial post
@@ -5387,77 +5248,6 @@ paths:
                 "$ref": "#/components/schemas/error_message"
         '422':
           description: unsuccessful
-          content:
-            application/json:
-              schema:
-                "$ref": "#/components/schemas/error_message"
-  "/api/ledgerable_events":
-    post:
-      summary: create ledgerable event
-      tags:
-      - LedgerableEvent
-      operationId: createLedgerableEvent
-      description: Create a ledgerable event.
-      security:
-      - basic_auth: []
-      parameters:
-      - name: Idempotency-Key
-        in: header
-        required: false
-        description: This key should be something unique, preferably something like
-          an UUID.
-        schema:
-          type: string
-      responses:
-        '201':
-          description: successful
-          content:
-            application/json:
-              schema:
-                "$ref": "#/components/schemas/ledgerable_event"
-        '403':
-          description: forbidden
-          content:
-            application/json:
-              schema:
-                "$ref": "#/components/schemas/error_message"
-        '422':
-          description: unsuccessful
-          content:
-            application/json:
-              schema:
-                "$ref": "#/components/schemas/error_message"
-      requestBody:
-        content:
-          application/json:
-            schema:
-              "$ref": "#/components/schemas/ledgerable_event_create_request"
-  "/api/ledgerable_events/{id}":
-    parameters:
-    - name: id
-      in: path
-      schema:
-        type: string
-        format: uuid
-      description: id
-      required: true
-    get:
-      summary: get ledgerable_event
-      tags:
-      - LedgerableEvent
-      operationId: getLedgerableEvent
-      description: Get details on a single ledgerable event.
-      security:
-      - basic_auth: []
-      responses:
-        '200':
-          description: successful
-          content:
-            application/json:
-              schema:
-                "$ref": "#/components/schemas/ledgerable_event"
-        '404':
-          description: not found
           content:
             application/json:
               schema:
@@ -6443,6 +6233,7 @@ paths:
           - returned
           - reversed
           - sent
+          - stopped
         required: false
       - name: direction
         in: query
@@ -8992,6 +8783,7 @@ components:
             - "$ref": "#/components/schemas/payment_order_async_create_request"
             - "$ref": "#/components/schemas/expected_payment_create_request"
             - "$ref": "#/components/schemas/ledger_transaction_create_request"
+            - "$ref": "#/components/schemas/ledger_account_create_request"
             - "$ref": "#/components/schemas/transaction_create_request"
             - type: object
               properties:
@@ -9100,6 +8892,7 @@ components:
           - "$ref": "#/components/schemas/payment_order"
           - "$ref": "#/components/schemas/expected_payment"
           - "$ref": "#/components/schemas/ledger_transaction"
+          - "$ref": "#/components/schemas/ledger_account"
           - "$ref": "#/components/schemas/transaction"
           - "$ref": "#/components/schemas/bulk_error"
       additionalProperties: false
@@ -13224,6 +13017,10 @@ components:
           nullable: true
           description: If the ledger account links to another object in Modern Treasury,
             the id will be populated here, otherwise null.
+        external_id:
+          type: string
+          nullable: true
+          description: An optional user-defined 180 character unique identifier.
         ledgerable_type:
           type: string
           enum:
@@ -13246,7 +13043,7 @@ components:
             foo: bar
             modern: treasury
       additionalProperties: false
-      minProperties: 15
+      minProperties: 16
       required:
       - id
       - object
@@ -13261,6 +13058,7 @@ components:
       - lock_version
       - ledger_id
       - ledgerable_id
+      - external_id
       - ledgerable_type
       - metadata
     ledger_account_create_request:
@@ -13561,6 +13359,10 @@ components:
           - credit
           - debit
           description: The normal balance of the ledger account category.
+        external_id:
+          type: string
+          nullable: true
+          description: An optional user-defined 180 character unique identifier.
         balances:
           "$ref": "#/components/schemas/ledger_balances"
           description: The pending, posted, and available balances for this ledger
@@ -13569,7 +13371,7 @@ components:
             entries on the account. The available balance is the posted incoming entries
             minus the sum of the pending and posted outgoing amounts.
       additionalProperties: false
-      minProperties: 12
+      minProperties: 13
       required:
       - id
       - object
@@ -13582,6 +13384,7 @@ components:
       - metadata
       - ledger_id
       - normal_balance
+      - external_id
       - balances
     ledger_account_category_create_request:
       type: object
@@ -14389,226 +14192,6 @@ components:
       - amount
       - direction
       - ledger_account_id
-    ledger_event_handler:
-      type: object
-      properties:
-        id:
-          type: string
-          format: uuid
-        object:
-          type: string
-        live_mode:
-          type: boolean
-          description: This field will be true if this object exists in the live environment
-            or false if it exists in the test environment.
-        created_at:
-          type: string
-          format: date-time
-        updated_at:
-          type: string
-          format: date-time
-        discarded_at:
-          type: string
-          format: date-time
-          nullable: true
-        name:
-          type: string
-          description: Name of the ledger event handler.
-          example: My Event Handler
-        description:
-          type: string
-          description: An optional description.
-          example: My Description
-          nullable: true
-        ledger_id:
-          type: string
-          description: The id of the ledger that this event handler belongs to.
-          nullable: true
-        variables:
-          "$ref": "#/components/schemas/ledger_event_handler_variables"
-          nullable: true
-        ledger_transaction_template:
-          "$ref": "#/components/schemas/ledger_event_handler_ledger_transaction_template"
-        conditions:
-          "$ref": "#/components/schemas/ledger_event_handler_conditions"
-          nullable: true
-        metadata:
-          type: object
-          description: Additional data represented as key-value pairs. Both the key
-            and value must be strings.
-          additionalProperties:
-            type: string
-          example:
-            key: value
-            foo: bar
-            modern: treasury
-          nullable: true
-      additionalProperties: false
-      deprecated: true
-      minProperties: 13
-      required:
-      - id
-      - object
-      - live_mode
-      - created_at
-      - updated_at
-      - discarded_at
-      - name
-      - description
-      - ledger_id
-      - variables
-      - ledger_transaction_template
-      - conditions
-      - metadata
-    ledger_event_handler_conditions:
-      type: object
-      properties:
-        field:
-          type: string
-          description: The LHS of the conditional.
-        operator:
-          type: string
-          description: What the operator between the `field` and `value` is.
-        value:
-          type: string
-          description: The RHS of the conditional.
-      additionalProperties: false
-      deprecated: true
-      minProperties: 3
-      example:
-        field: ledgerable_event.name
-        operator: equals
-        value: credit_card_swipe
-      required:
-      - field
-      - operator
-      - value
-    ledger_event_handler_create_request:
-      type: object
-      properties:
-        name:
-          type: string
-          description: Name of the ledger event handler.
-        description:
-          type: string
-          description: An optional description.
-          nullable: true
-        ledger_id:
-          type: string
-          format: uuid
-          description: The id of the ledger that this account belongs to.
-        variables:
-          "$ref": "#/components/schemas/ledger_event_handler_variables"
-          nullable: true
-        ledger_transaction_template:
-          "$ref": "#/components/schemas/ledger_event_handler_ledger_transaction_template"
-        conditions:
-          "$ref": "#/components/schemas/ledger_event_handler_conditions"
-          nullable: true
-        metadata:
-          type: object
-          description: Additional data represented as key-value pairs. Both the key
-            and value must be strings.
-          additionalProperties:
-            type: string
-          example:
-            key: value
-            foo: bar
-            modern: treasury
-          nullable: true
-      required:
-      - name
-      - ledger_transaction_template
-    ledger_event_handler_ledger_entries:
-      type: object
-      properties:
-        amount:
-          type: string
-          description: The LHS of the conditional.
-        direction:
-          type: string
-          description: What the operator between the `field` and `value` is.
-        ledger_account_id:
-          type: string
-          description: The RHS of the conditional.
-      additionalProperties: false
-      deprecated: true
-      minProperties: 3
-      required:
-      - amount
-      - direction
-      - ledger_account_id
-    ledger_event_handler_ledger_transaction_template:
-      type: object
-      properties:
-        description:
-          type: string
-          description: An optional description for internal use.
-          example: My Ledger Transaction Template Description
-          nullable: true
-        effective_at:
-          type: string
-          description: The timestamp (ISO8601 format) at which the ledger transaction
-            happened for reporting purposes.
-          example: "{{ledgerable_event.custom_data.effective_at}}"
-          nullable: true
-        status:
-          type: string
-          description: To post a ledger transaction at creation, use `posted`.
-          example: posted
-          nullable: true
-        ledger_entries:
-          type: array
-          items:
-            "$ref": "#/components/schemas/ledger_event_handler_ledger_entries"
-          description: An array of ledger entry objects.
-      additionalProperties: false
-      deprecated: true
-      minProperties: 4
-      required:
-      - description
-      - effective_at
-      - status
-      - ledger_entries
-    ledger_event_handler_variable:
-      type: object
-      properties:
-        type:
-          type: string
-          description: The type of object this variable is. Currently, only "ledger_account"
-            is supported.
-        query:
-          "$ref": "#/components/schemas/ledger_event_handler_conditions"
-          nullable: false
-      additionalProperties: false
-      deprecated: true
-      minProperties: 2
-      example:
-        type: ledger_account
-        query:
-          field: name
-          operator: equals
-          value: my_credit_account
-      required:
-      - type
-      - query
-    ledger_event_handler_variables:
-      type: object
-      properties: {}
-      additionalProperties:
-        "$ref": "#/components/schemas/ledger_event_handler_variable"
-        description: Each variable may be named using alphabetic, numeric, underscore,
-          or dash characters. Variable names are how you refer to objects from the
-          ledger_transaction_template. There can only be a maximum of 10 variables
-          in this map.
-      deprecated: true
-      example:
-        credit_account:
-          type: ledger_account
-          query:
-            field: name
-            operator: equals
-            value: my_credit_account
     ledger_transaction:
       type: object
       properties:
@@ -15063,93 +14646,6 @@ components:
             modern: treasury
       required:
       - posted_ledger_entries
-    ledgerable_event:
-      type: object
-      properties:
-        id:
-          type: string
-          format: uuid
-        object:
-          type: string
-        live_mode:
-          type: boolean
-          description: This field will be true if this object exists in the live environment
-            or false if it exists in the test environment.
-        created_at:
-          type: string
-          format: date-time
-        updated_at:
-          type: string
-          format: date-time
-        name:
-          type: string
-          description: Name of the ledgerable event.
-        description:
-          type: string
-          description: Description of the ledgerable event.
-          nullable: true
-        custom_data:
-          type: object
-          description: Additionally data to be used by the Ledger Event Handler.
-          nullable: true
-        ledger_event_handler_id:
-          type: string
-          format: uuid
-          description: Id of the ledger event handler that is used to create a ledger
-            transaction.
-        metadata:
-          type: object
-          description: Additional data represented as key-value pairs. Both the key
-            and value must be strings.
-          additionalProperties:
-            type: string
-          example:
-            key: value
-            foo: bar
-            modern: treasury
-          nullable: true
-      additionalProperties: false
-      deprecated: true
-      minProperties: 10
-      required:
-      - id
-      - object
-      - live_mode
-      - created_at
-      - updated_at
-      - name
-      - description
-      - custom_data
-      - ledger_event_handler_id
-      - metadata
-    ledgerable_event_create_request:
-      type: object
-      properties:
-        name:
-          type: string
-          description: Name of the ledgerable event.
-        description:
-          type: string
-          description: Description of the ledgerable event.
-          nullable: true
-        custom_data:
-          type: object
-          description: Additionally data to be used by the Ledger Event Handler.
-          nullable: true
-        metadata:
-          type: object
-          description: Additional data represented as key-value pairs. Both the key
-            and value must be strings.
-          additionalProperties:
-            type: string
-          example:
-            key: value
-            foo: bar
-            modern: treasury
-      deprecated: true
-      required:
-      - name
-      - amount
     child_legal_entity:
       type: object
       properties:
@@ -17267,6 +16763,7 @@ components:
           - returned
           - reversed
           - sent
+          - stopped
           description: The current status of the payment order.
         receiving_account:
           oneOf:
@@ -18666,6 +18163,7 @@ components:
           - returned
           - reversed
           - sent
+          - stopped
           description: To cancel a payment order, use `cancelled`. To redraft a returned
             payment order, use `approved`. To undo approval on a denied or approved
             payment order, use `needs_approval`.
@@ -18895,13 +18393,13 @@ components:
           - column_fx_quote_id
           - column_reversal_pair_transfer_id
           - column_transfer_id
+          - cross_river_fed_batch_id
           - cross_river_payment_id
           - cross_river_service_message
           - cross_river_transaction_id
           - currencycloud_conversion_id
           - currencycloud_payment_id
           - dc_bank_transaction_id
-          - dwolla_transaction_id
           - eft_trace_number
           - evolve_transaction_id
           - fedwire_imad
@@ -19021,13 +18519,13 @@ components:
           - column_fx_quote_id
           - column_reversal_pair_transfer_id
           - column_transfer_id
+          - cross_river_fed_batch_id
           - cross_river_payment_id
           - cross_river_service_message
           - cross_river_transaction_id
           - currencycloud_conversion_id
           - currencycloud_payment_id
           - dc_bank_transaction_id
-          - dwolla_transaction_id
           - eft_trace_number
           - evolve_transaction_id
           - fedwire_imad
