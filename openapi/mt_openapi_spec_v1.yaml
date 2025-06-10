@@ -18393,6 +18393,7 @@ components:
           - column_fx_quote_id
           - column_reversal_pair_transfer_id
           - column_transfer_id
+          - cross_river_core_transaction_id
           - cross_river_fed_batch_id
           - cross_river_payment_id
           - cross_river_service_message
@@ -18519,6 +18520,7 @@ components:
           - column_fx_quote_id
           - column_reversal_pair_transfer_id
           - column_transfer_id
+          - cross_river_core_transaction_id
           - cross_river_fed_batch_id
           - cross_river_payment_id
           - cross_river_service_message
@@ -19852,12 +19854,17 @@ components:
         transaction_id:
           type: string
           description: The ID of the parent transaction.
+        reconciliation_group_id:
+          type: string
+          nullable: true
+          description: The ID of the reconciliation group this line item belongs to,
+            otherwise `null`.
         reconcilable:
           type: boolean
           description: Describes whether this line item should be counted towards
             the corresponding transaction’s reconciliation.
       additionalProperties: false
-      minProperties: 15
+      minProperties: 16
       required:
       - id
       - object
@@ -19873,6 +19880,7 @@ components:
       - counterparty_id
       - expected_payment_id
       - transaction_id
+      - reconciliation_group_id
       - reconcilable
     transaction_line_item_create_request:
       type: object
