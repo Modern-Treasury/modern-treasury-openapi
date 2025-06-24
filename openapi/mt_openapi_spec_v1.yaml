@@ -9,6 +9,2491 @@ info:
   description: The Modern Treasury REST API. Please see https://docs.moderntreasury.com
     for more details.
 paths:
+  "/api/ledger_account_balance_monitors":
+    get:
+      summary: list ledger_account_balance_monitors
+      tags:
+      - LedgerAccountBalanceMonitor
+      operationId: listLedgerAccountBalanceMonitors
+      description: Get a list of ledger account balance monitors.
+      security:
+      - basic_auth: []
+      parameters:
+      - name: after_cursor
+        in: query
+        schema:
+          type: string
+          nullable: true
+        required: false
+      - name: per_page
+        in: query
+        schema:
+          type: integer
+        required: false
+      - "$ref": "#/components/parameters/metadata_query"
+      - "$ref": "#/components/parameters/bulk_id"
+      - name: ledger_account_id
+        in: query
+        schema:
+          type: string
+          format: uuid
+        description: Query the balance monitors for a single ledger account.
+        required: false
+      responses:
+        '200':
+          description: successful
+          headers:
+            X-After-Cursor:
+              schema:
+                type: string
+                nullable: true
+              required: false
+              description: The cursor for the next page. Including this in a call
+                as `after_cursor` will return the next page.
+            X-Per-Page:
+              schema:
+                type: integer
+                nullable: true
+              description: The current `per_page`.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  "$ref": "#/components/schemas/ledger_account_balance_monitor"
+    post:
+      summary: create ledger_account_balance_monitor
+      tags:
+      - LedgerAccountBalanceMonitor
+      operationId: createLedgerAccountBalanceMonitor
+      description: Create a ledger account balance monitor.
+      security:
+      - basic_auth: []
+      parameters:
+      - name: Idempotency-Key
+        in: header
+        required: false
+        description: This key should be something unique, preferably something like
+          an UUID.
+        schema:
+          type: string
+      responses:
+        '201':
+          description: successful
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/ledger_account_balance_monitor"
+        '403':
+          description: forbidden
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/error_message"
+        '422':
+          description: unsuccessful
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/error_message"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              "$ref": "#/components/schemas/ledger_account_balance_monitor_create_request"
+  "/api/ledger_account_balance_monitors/{id}":
+    parameters:
+    - name: id
+      in: path
+      schema:
+        type: string
+        format: uuid
+      description: id
+      required: true
+    get:
+      summary: get ledger_account_balance_monitor
+      tags:
+      - LedgerAccountBalanceMonitor
+      operationId: getLedgerAccountBalanceMonitor
+      description: Get details on a single ledger account balance monitor.
+      security:
+      - basic_auth: []
+      responses:
+        '200':
+          description: successful
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/ledger_account_balance_monitor"
+        '404':
+          description: not found
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/error_message"
+    patch:
+      summary: update ledger_account_balance_monitor
+      tags:
+      - LedgerAccountBalanceMonitor
+      operationId: updateLedgerAccountBalanceMonitor
+      description: Update a ledger account balance monitor.
+      security:
+      - basic_auth: []
+      parameters: []
+      responses:
+        '200':
+          description: successful
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/ledger_account_balance_monitor"
+        '403':
+          description: forbidden
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/error_message"
+        '404':
+          description: not found
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/error_message"
+        '422':
+          description: unsuccessful
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/error_message"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              "$ref": "#/components/schemas/ledger_account_balance_monitor_update_request"
+    delete:
+      summary: delete ledger_account_balance_monitor
+      tags:
+      - LedgerAccountBalanceMonitor
+      operationId: deleteLedgerAccountBalanceMonitor
+      description: Delete a ledger account balance monitor.
+      security:
+      - basic_auth: []
+      responses:
+        '200':
+          description: successful
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/ledger_account_balance_monitor"
+        '403':
+          description: forbidden
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/error_message"
+        '404':
+          description: not found
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/error_message"
+  "/api/ledger_account_categories":
+    get:
+      summary: list ledger_account_categories
+      tags:
+      - LedgerAccountCategory
+      operationId: listLedgerAccountCategories
+      description: Get a list of ledger account categories.
+      security:
+      - basic_auth: []
+      parameters:
+      - name: after_cursor
+        in: query
+        schema:
+          type: string
+          nullable: true
+        required: false
+      - name: per_page
+        in: query
+        schema:
+          type: integer
+        required: false
+      - "$ref": "#/components/parameters/metadata_query"
+      - "$ref": "#/components/parameters/bulk_id"
+      - name: name
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: ledger_id
+        in: query
+        schema:
+          type: string
+          format: uuid
+        required: false
+      - name: currency
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: external_id
+        in: query
+        schema:
+          type: string
+        required: false
+      - name: parent_ledger_account_category_id
+        in: query
+        schema:
+          type: string
+          format: uuid
+        required: false
+        description: Query categories that are nested underneath a parent category
+      - name: ledger_account_id
+        in: query
+        schema:
+          type: string
+          format: uuid
+        required: false
+        description: Query categories which contain a ledger account directly or through
+          child categories.
+      - name: balances
+        in: query
+        schema:
+          type: object
+          properties:
+            effective_at:
+              type: string
+              format: date-time
+          additionalProperties: false
+        style: deepObject
+        required: false
+        description: For example, if you want the balances as of a particular time
+          (ISO8601), the encoded query string would be `balances%5Beffective_at%5D=2000-12-31T12:00:00Z`.
+          The balances as of a time are inclusive of entries with that exact time.
+      responses:
+        '200':
+          description: successful
+          headers:
+            X-After-Cursor:
+              schema:
+                type: string
+                nullable: true
+              required: false
+              description: The cursor for the next page. Including this in a call
+                as `after_cursor` will return the next page.
+            X-Per-Page:
+              schema:
+                type: integer
+                nullable: true
+              description: The current `per_page`.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  "$ref": "#/components/schemas/ledger_account_category"
+    post:
+      summary: create ledger_account_category
+      tags:
+      - LedgerAccountCategory
+      operationId: createLedgerAccountCategory
+      description: Create a ledger account category.
+      security:
+      - basic_auth: []
+      parameters:
+      - name: Idempotency-Key
+        in: header
+        required: false
+        description: This key should be something unique, preferably something like
+          an UUID.
+        schema:
+          type: string
+      responses:
+        '201':
+          description: successful
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/ledger_account_category"
+        '403':
+          description: forbidden
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/error_message"
+        '404':
+          description: not found
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/error_message"
+        '422':
+          description: unsuccessful
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/error_message"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              "$ref": "#/components/schemas/ledger_account_category_create_request"
+  "/api/ledger_account_categories/{id}":
+    parameters:
+    - name: id
+      in: path
+      schema:
+        type: string
+        format: uuid
+      description: id
+      required: true
+    get:
+      summary: get ledger_account_category
+      tags:
+      - LedgerAccountCategory
+      operationId: getLedgerAccountCategory
+      description: Get the details on a single ledger account category.
+      security:
+      - basic_auth: []
+      parameters:
+      - name: balances
+        in: query
+        schema:
+          type: object
+          properties:
+            as_of_date:
+              type: string
+              format: date
+            effective_at:
+              type: string
+              format: date-time
+          additionalProperties: false
+        style: deepObject
+        required: false
+        description: For example, if you want the balances as of a particular time
+          (ISO8601), the encoded query string would be `balances%5Beffective_at%5D=2000-12-31T12:00:00Z`.
+          The balances as of a time are inclusive of entries with that exact time.
+      responses:
+        '200':
+          description: successful
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/ledger_account_category"
+        '422':
+          description: unsuccessful
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/error_message"
+        '404':
+          description: not found
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/error_message"
+    patch:
+      summary: update ledger_account_category
+      tags:
+      - LedgerAccountCategory
+      operationId: updateLedgerAccountCategory
+      description: Update the details of a ledger account category.
+      security:
+      - basic_auth: []
+      parameters: []
+      responses:
+        '200':
+          description: successful
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/ledger_account_category"
+        '403':
+          description: forbidden
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/error_message"
+        '404':
+          description: not found
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/error_message"
+        '422':
+          description: unsuccessful
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/error_message"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              "$ref": "#/components/schemas/ledger_account_category_update_request"
+    delete:
+      summary: delete ledger_account_category
+      tags:
+      - LedgerAccountCategory
+      operationId: deleteLedgerAccountCategory
+      description: Delete a ledger account category.
+      security:
+      - basic_auth: []
+      responses:
+        '200':
+          description: successful
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/ledger_account_category"
+        '403':
+          description: forbidden
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/error_message"
+        '404':
+          description: not found
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/error_message"
+  "/api/ledger_account_categories/{id}/ledger_accounts/{ledger_account_id}":
+    parameters:
+    - name: id
+      in: path
+      schema:
+        type: string
+        format: uuid
+      description: id
+      required: true
+    - name: ledger_account_id
+      in: path
+      schema:
+        type: string
+        format: uuid
+      description: ledger_account_id
+      required: true
+    put:
+      summary: add ledger_account to ledger_account_category
+      tags:
+      - LedgerAccountCategory
+      operationId: addLedgerAccountToLedgerAccountCategory
+      description: Add a ledger account to a ledger account category.
+      security:
+      - basic_auth: []
+      responses:
+        '200':
+          description: successful
+        '403':
+          description: forbidden
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/error_message"
+        '404':
+          description: not found
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/error_message"
+        '422':
+          description: unsuccessful
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/error_message"
+    delete:
+      summary: remove ledger_account from ledger_account_category
+      tags:
+      - LedgerAccountCategory
+      operationId: removeLedgerAccountFromLedgerAccountCategory
+      description: Remove a ledger account from a ledger account category.
+      security:
+      - basic_auth: []
+      responses:
+        '200':
+          description: successful
+        '403':
+          description: forbidden
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/error_message"
+        '404':
+          description: not found
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/error_message"
+        '422':
+          description: unsuccessful
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/error_message"
+  "/api/ledger_account_categories/{id}/ledger_account_categories/{sub_category_id}":
+    parameters:
+    - name: id
+      in: path
+      schema:
+        type: string
+        format: uuid
+      description: id
+      required: true
+    - name: sub_category_id
+      in: path
+      schema:
+        type: string
+        format: uuid
+      description: sub_category_id
+      required: true
+    put:
+      summary: add ledger_account_category to ledger_account_category
+      tags:
+      - LedgerAccountCategory
+      operationId: addLedgerAccountCategoryToLedgerAccountCategory
+      description: Add a ledger account category to a ledger account category.
+      security:
+      - basic_auth: []
+      responses:
+        '200':
+          description: successful
+        '403':
+          description: forbidden
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/error_message"
+        '404':
+          description: not found
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/error_message"
+        '422':
+          description: unsuccessful
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/error_message"
+    delete:
+      summary: delete ledger_account_category from ledger_account_category
+      tags:
+      - LedgerAccountCategory
+      operationId: deleteLedgerAccountCategoryFromLedgerAccountCategory
+      description: Delete a ledger account category from a ledger account category.
+      security:
+      - basic_auth: []
+      responses:
+        '200':
+          description: successful
+        '403':
+          description: forbidden
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/error_message"
+        '404':
+          description: not found
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/error_message"
+        '422':
+          description: unsuccessful
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/error_message"
+  "/api/ledger_account_settlements/{id}/ledger_entries":
+    parameters:
+    - name: id
+      in: path
+      description: id
+      required: true
+      schema:
+        type: string
+    patch:
+      summary: patch ledger_account_settlement_entries
+      tags:
+      - LedgerAccountSettlement
+      operationId: patchLedgerAccountSettlementEntries
+      description: Add ledger entries to a draft ledger account settlement.
+      security:
+      - basic_auth: []
+      parameters: []
+      responses:
+        '200':
+          description: successful
+        '403':
+          description: forbidden
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/error_message"
+        '404':
+          description: not found
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/error_message"
+        '422':
+          description: unsuccessful
+      requestBody:
+        content:
+          application/json:
+            schema:
+              "$ref": "#/components/schemas/ledger_account_settlement_entries_patch_request"
+    delete:
+      summary: delete ledger_account_settlement_entries
+      tags:
+      - LedgerAccountSettlement
+      operationId: deleteLedgerAccountSettlementEntries
+      description: Remove ledger entries from a draft ledger account settlement.
+      security:
+      - basic_auth: []
+      parameters: []
+      responses:
+        '200':
+          description: successful
+        '403':
+          description: forbidden
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/error_message"
+        '404':
+          description: not found
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/error_message"
+        '422':
+          description: unsuccessful
+      requestBody:
+        content:
+          application/json:
+            schema:
+              "$ref": "#/components/schemas/ledger_account_settlement_entries_delete_request"
+  "/api/ledger_account_settlements":
+    post:
+      summary: create ledger_account_settlement
+      tags:
+      - LedgerAccountSettlement
+      operationId: createLedgerAccountSettlement
+      description: Create a ledger account settlement.
+      security:
+      - basic_auth: []
+      parameters:
+      - name: Idempotency-Key
+        in: header
+        required: false
+        description: This key should be something unique, preferably something like
+          an UUID.
+        schema:
+          type: string
+      responses:
+        '201':
+          description: successful
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/ledger_account_settlement"
+        '403':
+          description: forbidden
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/error_message"
+        '422':
+          description: unsuccessful
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/error_message"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              "$ref": "#/components/schemas/ledger_account_settlement_create_request"
+    get:
+      summary: list ledger_account_settlements
+      tags:
+      - LedgerAccountSettlement
+      operationId: listLedgerAccountSettlements
+      description: Get a list of ledger account settlements.
+      security:
+      - basic_auth: []
+      parameters:
+      - name: after_cursor
+        in: query
+        schema:
+          type: string
+          nullable: true
+        required: false
+      - name: per_page
+        in: query
+        schema:
+          type: integer
+        required: false
+      - "$ref": "#/components/parameters/metadata_query"
+      - "$ref": "#/components/parameters/bulk_id"
+      - name: settled_ledger_account_id
+        in: query
+        schema:
+          type: string
+          format: uuid
+        required: false
+      - name: settlement_entry_direction
+        in: query
+        schema:
+          type: string
+        required: false
+      - name: ledger_transaction_id
+        in: query
+        schema:
+          type: string
+          format: uuid
+        required: false
+      - name: ledger_id
+        in: query
+        schema:
+          type: string
+          format: uuid
+        required: false
+      - name: created_at
+        in: query
+        schema:
+          type: object
+          additionalProperties:
+            type: string
+            format: date-time
+        style: deepObject
+        required: false
+        description: Use `gt` (>), `gte` (>=), `lt` (<), `lte` (<=), or `eq` (=) to
+          filter by the created at timestamp. For example, for all times after Jan
+          1 2000 12:00 UTC, use created_at%5Bgt%5D=2000-01-01T12:00:00Z.
+      - name: updated_at
+        in: query
+        schema:
+          type: object
+          additionalProperties:
+            type: string
+            format: date-time
+        style: deepObject
+        required: false
+        description: Use `gt` (>), `gte` (>=), `lt` (<), `lte` (<=), or `eq` (=) to
+          filter by the updated at timestamp. For example, for all times after Jan
+          1 2000 12:00 UTC, use updated_at%5Bgt%5D=2000-01-01T12:00:00Z.
+      responses:
+        '200':
+          description: successful
+          headers:
+            X-After-Cursor:
+              schema:
+                type: string
+                nullable: true
+              required: false
+              description: The cursor for the next page. Including this in a call
+                as `after_cursor` will return the next page.
+            X-Per-Page:
+              schema:
+                type: integer
+                nullable: true
+              description: The current `per_page`.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  "$ref": "#/components/schemas/ledger_account_settlement"
+  "/api/ledger_account_settlements/{id}":
+    parameters:
+    - name: id
+      in: path
+      schema:
+        type: string
+        format: uuid
+      description: id
+      required: true
+    get:
+      summary: get ledger_account_settlement
+      tags:
+      - LedgerAccountSettlement
+      operationId: getLedgerAccountSettlement
+      description: Get details on a single ledger account settlement.
+      security:
+      - basic_auth: []
+      responses:
+        '200':
+          description: successful
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/ledger_account_settlement"
+        '404':
+          description: not found
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/error_message"
+    patch:
+      summary: update ledger_account_settlement
+      tags:
+      - LedgerAccountSettlement
+      operationId: updateLedgerAccountSettlement
+      description: Update the details of a ledger account settlement.
+      security:
+      - basic_auth: []
+      parameters: []
+      responses:
+        '200':
+          description: successful
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/ledger_account_settlement"
+        '403':
+          description: forbidden
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/error_message"
+        '404':
+          description: not found
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/error_message"
+        '422':
+          description: unsuccessful
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/error_message"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              "$ref": "#/components/schemas/ledger_account_settlement_update_request"
+  "/api/ledger_account_statements":
+    post:
+      summary: create ledger_account_statement
+      tags:
+      - LedgerAccountStatement
+      operationId: createLedgerAccountStatement
+      description: Create a ledger account statement.
+      security:
+      - basic_auth: []
+      parameters:
+      - name: Idempotency-Key
+        in: header
+        required: false
+        description: This key should be something unique, preferably something like
+          an UUID.
+        schema:
+          type: string
+      responses:
+        '201':
+          description: successful
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/ledger_account_statement"
+        '403':
+          description: forbidden
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/error_message"
+        '422':
+          description: unsuccessful
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/error_message"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              "$ref": "#/components/schemas/ledger_account_statement_create_request"
+  "/api/ledger_account_statements/{id}":
+    parameters:
+    - name: id
+      in: path
+      schema:
+        type: string
+        format: uuid
+      description: id
+      required: true
+    get:
+      summary: get ledger_account_statement
+      tags:
+      - LedgerAccountStatement
+      operationId: getLedgerAccountStatement
+      description: Get details on a single ledger account statement.
+      security:
+      - basic_auth: []
+      responses:
+        '200':
+          description: successful
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/ledger_account_statement"
+        '404':
+          description: not found
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/error_message"
+  "/api/ledger_accounts":
+    get:
+      summary: list ledger_accounts
+      tags:
+      - LedgerAccount
+      operationId: listLedgerAccounts
+      description: Get a list of ledger accounts.
+      security:
+      - basic_auth: []
+      parameters:
+      - name: after_cursor
+        in: query
+        schema:
+          type: string
+          nullable: true
+        required: false
+      - name: per_page
+        in: query
+        schema:
+          type: integer
+        required: false
+      - "$ref": "#/components/parameters/metadata_query"
+      - "$ref": "#/components/parameters/bulk_id"
+      - "$ref": "#/components/parameters/bulk_name"
+      - name: ledger_id
+        in: query
+        schema:
+          type: string
+          format: uuid
+        required: false
+      - name: external_id
+        in: query
+        schema:
+          type: string
+        required: false
+      - name: currency
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: balances
+        in: query
+        schema:
+          type: object
+          properties:
+            as_of_date:
+              type: string
+              format: date
+            effective_at:
+              type: string
+              format: date-time
+            effective_at_lower_bound:
+              type: string
+              format: date-time
+            effective_at_upper_bound:
+              type: string
+              format: date-time
+          additionalProperties: false
+        style: deepObject
+        required: false
+        description: Use `balances[effective_at_lower_bound]` and `balances[effective_at_upper_bound]`
+          to get the balances change between the two timestamps. The lower bound is
+          inclusive while the upper bound is exclusive of the provided timestamps.
+          If no value is supplied the balances will be retrieved not including that
+          bound.
+      - name: pending_balance_amount
+        in: query
+        schema:
+          type: object
+          properties:
+            gt:
+              type: integer
+            lt:
+              type: integer
+            gte:
+              type: integer
+            lte:
+              type: integer
+            eq:
+              type: integer
+            not_eq:
+              type: integer
+          additionalProperties: false
+        style: deepObject
+        required: false
+        description: Use `gt` (>), `gte` (>=), `lt` (<), `lte` (<=), `eq` (=), or
+          `not_eq` (!=) to filter by balance amount.
+      - name: posted_balance_amount
+        in: query
+        schema:
+          type: object
+          properties:
+            gt:
+              type: integer
+            lt:
+              type: integer
+            gte:
+              type: integer
+            lte:
+              type: integer
+            eq:
+              type: integer
+            not_eq:
+              type: integer
+          additionalProperties: false
+        style: deepObject
+        required: false
+        description: Use `gt` (>), `gte` (>=), `lt` (<), `lte` (<=), `eq` (=), or
+          `not_eq` (!=) to filter by balance amount.
+      - name: available_balance_amount
+        in: query
+        schema:
+          type: object
+          properties:
+            gt:
+              type: integer
+            lt:
+              type: integer
+            gte:
+              type: integer
+            lte:
+              type: integer
+            eq:
+              type: integer
+            not_eq:
+              type: integer
+          additionalProperties: false
+        style: deepObject
+        required: false
+        description: Use `gt` (>), `gte` (>=), `lt` (<), `lte` (<=), `eq` (=), or
+          `not_eq` (!=) to filter by balance amount.
+      - name: created_at
+        in: query
+        schema:
+          type: object
+          additionalProperties:
+            type: string
+            format: date-time
+        style: deepObject
+        required: false
+        description: Use `gt` (>), `gte` (>=), `lt` (<), `lte` (<=), or `eq` (=) to
+          filter by the created at timestamp. For example, for all times after Jan
+          1 2000 12:00 UTC, use created_at%5Bgt%5D=2000-01-01T12:00:00Z.
+      - name: updated_at
+        in: query
+        schema:
+          type: object
+          additionalProperties:
+            type: string
+            format: date-time
+        style: deepObject
+        required: false
+        description: Use `gt` (>), `gte` (>=), `lt` (<), `lte` (<=), or `eq` (=) to
+          filter by the updated at timestamp. For example, for all times after Jan
+          1 2000 12:00 UTC, use updated_at%5Bgt%5D=2000-01-01T12:00:00Z.
+      - name: ledger_account_category_id
+        in: query
+        schema:
+          type: string
+          format: uuid
+        required: false
+      responses:
+        '200':
+          description: successful
+          headers:
+            X-After-Cursor:
+              schema:
+                type: string
+                nullable: true
+              required: false
+              description: The cursor for the next page. Including this in a call
+                as `after_cursor` will return the next page.
+            X-Per-Page:
+              schema:
+                type: integer
+                nullable: true
+              description: The current `per_page`.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  "$ref": "#/components/schemas/ledger_account"
+        '422':
+          description: unsuccessful
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/error_message"
+    post:
+      summary: create ledger_account
+      tags:
+      - LedgerAccount
+      operationId: createLedgerAccount
+      description: Create a ledger account.
+      security:
+      - basic_auth: []
+      parameters:
+      - name: Idempotency-Key
+        in: header
+        required: false
+        description: This key should be something unique, preferably something like
+          an UUID.
+        schema:
+          type: string
+      responses:
+        '201':
+          description: successful
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/ledger_account"
+        '403':
+          description: forbidden
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/error_message"
+        '404':
+          description: not found
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/error_message"
+        '422':
+          description: unsuccessful
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/error_message"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              "$ref": "#/components/schemas/ledger_account_create_request"
+  "/api/ledger_accounts/{id}":
+    parameters:
+    - name: id
+      in: path
+      schema:
+        type: string
+        format: uuid
+      description: id
+      required: true
+    get:
+      summary: get ledger_account
+      tags:
+      - LedgerAccount
+      operationId: getLedgerAccount
+      description: Get details on a single ledger account.
+      security:
+      - basic_auth: []
+      parameters:
+      - name: balances
+        in: query
+        schema:
+          type: object
+          properties:
+            as_of_date:
+              type: string
+              format: date
+            effective_at:
+              type: string
+              format: date-time
+            effective_at_lower_bound:
+              type: string
+              format: date-time
+            effective_at_upper_bound:
+              type: string
+              format: date-time
+            as_of_lock_version:
+              type: integer
+          additionalProperties: false
+        style: deepObject
+        required: false
+        description: Use `balances[effective_at_lower_bound]` and `balances[effective_at_upper_bound]`
+          to get the balances change between the two timestamps. The lower bound is
+          inclusive while the upper bound is exclusive of the provided timestamps.
+          If no value is supplied the balances will be retrieved not including that
+          bound. Use `balances[as_of_lock_version]` to retrieve a balance as of a
+          specific Ledger Account `lock_version`.
+      responses:
+        '200':
+          description: successful
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/ledger_account"
+        '404':
+          description: not found
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/error_message"
+        '422':
+          description: unsuccessful
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/error_message"
+    patch:
+      summary: update ledger_account
+      tags:
+      - LedgerAccount
+      operationId: updateLedgerAccount
+      description: Update the details of a ledger account.
+      security:
+      - basic_auth: []
+      parameters: []
+      responses:
+        '200':
+          description: successful
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/ledger_account"
+        '403':
+          description: forbidden
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/error_message"
+        '404':
+          description: not found
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/error_message"
+        '422':
+          description: unsuccessful
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/error_message"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              "$ref": "#/components/schemas/ledger_account_update_request"
+    delete:
+      summary: delete ledger_account
+      tags:
+      - LedgerAccount
+      operationId: deleteLedgerAccount
+      description: Delete a ledger account.
+      security:
+      - basic_auth: []
+      responses:
+        '200':
+          description: successful
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/ledger_account"
+        '403':
+          description: forbidden
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/error_message"
+        '404':
+          description: not found
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/error_message"
+  "/api/ledger_entries":
+    get:
+      summary: list ledger_entries
+      tags:
+      - LedgerEntry
+      operationId: listLedgerEntries
+      description: Get a list of all ledger entries.
+      security:
+      - basic_auth: []
+      parameters:
+      - name: after_cursor
+        in: query
+        schema:
+          type: string
+          nullable: true
+        required: false
+      - name: per_page
+        in: query
+        schema:
+          type: integer
+        required: false
+      - "$ref": "#/components/parameters/bulk_id"
+      - name: ledger_account_id
+        in: query
+        schema:
+          type: string
+          format: uuid
+        required: false
+      - name: ledger_transaction_id
+        in: query
+        schema:
+          type: string
+          format: uuid
+        required: false
+      - name: ledger_account_payout_id
+        in: query
+        schema:
+          type: string
+          format: uuid
+        required: false
+      - name: ledger_account_settlement_id
+        in: query
+        schema:
+          type: string
+          format: uuid
+        required: false
+      - name: effective_date
+        in: query
+        schema:
+          type: object
+          additionalProperties:
+            type: string
+            format: date
+        style: deepObject
+        required: false
+        description: Use `gt` (>), `gte` (>=), `lt` (<), `lte` (<=), or `eq` (=) to
+          filter by the transaction's effective date. Format YYYY-MM-DD
+      - name: effective_at
+        in: query
+        schema:
+          type: object
+          additionalProperties:
+            type: string
+            format: date-time
+        style: deepObject
+        required: false
+        description: Use `gt` (>), `gte` (>=), `lt` (<), `lte` (<=), or `eq` (=) to
+          filter by the transaction's effective time. Format ISO8601
+      - name: updated_at
+        in: query
+        schema:
+          type: object
+          additionalProperties:
+            type: string
+            format: date-time
+        style: deepObject
+        required: false
+        description: Use `gt` (>), `gte` (>=), `lt` (<), `lte` (<=), or `eq` (=) to
+          filter by the posted at timestamp. For example, for all times after Jan
+          1 2000 12:00 UTC, use updated_at%5Bgt%5D=2000-01-01T12:00:00Z.
+      - name: as_of_lock_version
+        in: query
+        schema:
+          type: integer
+        required: false
+        description: Shows all ledger entries that were present on a ledger account
+          at a particular `lock_version`. You must also specify `ledger_account_id`.
+      - name: ledger_account_lock_version
+        in: query
+        schema:
+          type: object
+          additionalProperties:
+            type: integer
+        style: deepObject
+        required: false
+        description: Use `gt` (>), `gte` (>=), `lt` (<), `lte` (<=), or `eq` (=) to
+          filter by the lock_version of a ledger account. For example, for all entries
+          created at or before before lock_version 1000 of a ledger account, use `ledger_account_lock_version%5Blte%5D=1000`.
+      - name: ledger_account_category_id
+        in: query
+        schema:
+          type: string
+          format: uuid
+        required: false
+        description: Get all ledger entries that match the direction specified. One
+          of `credit`, `debit`.
+      - name: ledger_account_statement_id
+        in: query
+        schema:
+          type: string
+          format: uuid
+        required: false
+        description: Get all ledger entries that are included in the ledger account
+          statement.
+      - name: show_deleted
+        in: query
+        required: false
+        description: If true, response will include ledger entries that were deleted.
+          When you update a ledger transaction to specify a new set of entries, the
+          previous entries are deleted.
+        schema:
+          type: boolean
+      - name: direction
+        in: query
+        schema:
+          type: string
+          enum:
+          - credit
+          - debit
+        required: false
+        description: If true, response will include ledger entries that were deleted.
+          When you update a ledger transaction to specify a new set of entries, the
+          previous entries are deleted.
+      - name: status
+        in: query
+        schema:
+          type: string
+          enum:
+          - pending
+          - posted
+          - archived
+        required: false
+        description: Get all ledger entries that match the status specified. One of
+          `pending`, `posted`, or `archived`.
+      - name: order_by
+        in: query
+        schema:
+          type: object
+          properties:
+            created_at:
+              type: string
+              enum:
+              - asc
+              - desc
+            effective_at:
+              type: string
+              enum:
+              - asc
+              - desc
+          additionalProperties: false
+        style: deepObject
+        required: false
+        description: Order by `created_at` or `effective_at` in `asc` or `desc` order.
+          For example, to order by `effective_at asc`, use `order_by%5Beffective_at%5D=asc`.
+          Ordering by only one field at a time is supported.
+      - name: show_balances
+        in: query
+        required: false
+        description: If true, response will include the balances attached to the ledger
+          entry. If there is no balance available, null will be returned instead.
+        schema:
+          type: boolean
+      - "$ref": "#/components/parameters/metadata_query"
+      responses:
+        '200':
+          description: successful
+          headers:
+            X-After-Cursor:
+              schema:
+                type: string
+                nullable: true
+              required: false
+              description: The cursor for the next page. Including this in a call
+                as `after_cursor` will return the next page.
+            X-Per-Page:
+              schema:
+                type: integer
+                nullable: true
+              description: The current `per_page`.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  "$ref": "#/components/schemas/ledger_entry"
+        '422':
+          description: unsuccessful
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/error_message"
+        '403':
+          description: forbidden
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/error_message"
+  "/api/ledger_entries/{id}":
+    parameters:
+    - name: id
+      in: path
+      schema:
+        type: string
+        format: uuid
+      description: id
+      required: true
+    patch:
+      summary: update ledger_entry
+      tags:
+      - LedgerEntry
+      operationId: updateLedgerEntry
+      description: Update the details of a ledger entry.
+      security:
+      - basic_auth: []
+      parameters: []
+      responses:
+        '200':
+          description: successful
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/ledger_entry"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              "$ref": "#/components/schemas/ledger_entry_update_request"
+    get:
+      summary: get ledger_entry
+      tags:
+      - LedgerEntry
+      operationId: getLedgerEntry
+      description: Get details on a single ledger entry.
+      security:
+      - basic_auth: []
+      parameters:
+      - name: show_balances
+        in: query
+        required: false
+        description: If true, response will include the balances attached to the ledger
+          entry. If there is no balance available, null will be returned instead.
+        schema:
+          type: boolean
+      responses:
+        '200':
+          description: successful
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/ledger_entry"
+        '404':
+          description: not found
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/error_message"
+  "/api/ledger_transactions/{id}/partial_post":
+    post:
+      summary: create ledger_transaction partial post
+      tags:
+      - LedgerTransaction
+      operationId: CreateLedgerTransactionPartialPost
+      description: Create a ledger transaction that partially posts another ledger
+        transaction.
+      security:
+      - basic_auth: []
+      parameters:
+      - name: id
+        in: path
+        schema:
+          type: string
+          format: uuid
+        description: The ID of the ledger transaction to partially post.
+        required: true
+      responses:
+        '201':
+          description: successful
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/ledger_transaction"
+        '404':
+          description: not found
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/error_message"
+        '422':
+          description: unsuccessful
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/error_message"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              "$ref": "#/components/schemas/ledger_transaction_partial_post_create_request"
+  "/api/ledger_transactions/{id}/reversal":
+    post:
+      summary: create ledger_transaction reversal
+      tags:
+      - LedgerTransaction
+      operationId: CreateLedgerTransactionReversal
+      description: Create a ledger transaction reversal.
+      security:
+      - basic_auth: []
+      parameters:
+      - name: id
+        in: path
+        schema:
+          type: string
+          format: uuid
+        description: The id of ledger transaction to reverse.
+        required: true
+      responses:
+        '201':
+          description: successful
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/ledger_transaction"
+        '404':
+          description: not found
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/error_message"
+        '422':
+          description: unsuccessful
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/error_message"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              "$ref": "#/components/schemas/ledger_transaction_reversal_create_request"
+  "/api/ledger_transaction_versions":
+    get:
+      summary: list ledger_transaction_versions
+      tags:
+      - LedgerTransaction
+      operationId: listLedgerTransactionVersions
+      description: Get a list of ledger transaction versions.
+      security:
+      - basic_auth: []
+      parameters:
+      - name: after_cursor
+        in: query
+        schema:
+          type: string
+          nullable: true
+        required: false
+      - name: per_page
+        in: query
+        schema:
+          type: integer
+        required: false
+      - name: created_at
+        in: query
+        schema:
+          type: object
+          additionalProperties:
+            type: string
+            format: date-time
+        style: deepObject
+        required: false
+        description: Use `gt` (>), `gte` (>=), `lt` (<), `lte` (<=), or `eq` (=) to
+          filter by the created_at timestamp. For example, for all dates after Jan
+          1 2000 12:00 UTC, use created_at%5Bgt%5D=2000-01-01T12:00:00Z.
+      - name: version
+        in: query
+        schema:
+          type: object
+          additionalProperties:
+            type: integer
+        style: deepObject
+        required: false
+        description: Use `gt` (>), `gte` (>=), `lt` (<), `lte` (<=), or `eq` (=) to
+          filter by the version. For example, for all versions after 2, use version%5Bgt%5D=2.
+      - name: ledger_transaction_id
+        in: query
+        schema:
+          type: string
+          format: uuid
+        required: false
+        description: Get all the ledger transaction versions corresponding to the
+          ID of a ledger transaction.
+      - name: ledger_account_statement_id
+        in: query
+        schema:
+          type: string
+          format: uuid
+        required: false
+        description: Get all ledger transaction versions that are included in the
+          ledger account statement.
+      responses:
+        '200':
+          description: successful
+          headers:
+            X-After-Cursor:
+              schema:
+                type: string
+                nullable: true
+              required: false
+              description: The cursor for the next page. Including this in a call
+                as `after_cursor` will return the next page.
+            X-Per-Page:
+              schema:
+                type: integer
+                nullable: true
+              description: The current `per_page`.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  "$ref": "#/components/schemas/ledger_transaction_version"
+        '404':
+          description: not found
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/error_message"
+  "/api/ledger_transactions":
+    get:
+      summary: list ledger_transactions
+      tags:
+      - LedgerTransaction
+      operationId: listLedgerTransactions
+      description: Get a list of ledger transactions.
+      security:
+      - basic_auth: []
+      parameters:
+      - name: after_cursor
+        in: query
+        schema:
+          type: string
+          nullable: true
+        required: false
+      - name: per_page
+        in: query
+        schema:
+          type: integer
+        required: false
+      - "$ref": "#/components/parameters/metadata_query"
+      - "$ref": "#/components/parameters/bulk_id"
+      - name: ledger_id
+        in: query
+        schema:
+          type: string
+          format: uuid
+        required: false
+      - name: ledger_account_id
+        in: query
+        schema:
+          type: string
+          format: uuid
+        required: false
+      - name: effective_at
+        in: query
+        schema:
+          type: object
+          additionalProperties:
+            type: string
+            format: date-time
+        style: deepObject
+        required: false
+        description: Use "gt" (>), "gte" (>=), "lt" (<), "lte" (<=), or "eq" (=) to
+          filter by effective at. For example, for all transactions after Jan 1 2000,
+          use effective_at%5Bgt%5D=2000-01-01T00:00:00:00.000Z.
+      - name: effective_date
+        in: query
+        schema:
+          type: object
+          additionalProperties:
+            type: string
+            format: date-time
+        style: deepObject
+        required: false
+        description: Use `gt` (>), `gte` (>=), `lt` (<), `lte` (<=), or `eq` (=) to
+          filter by effective date. For example, for all dates after Jan 1 2000, use
+          effective_date%5Bgt%5D=2000-01-01.
+      - name: posted_at
+        in: query
+        schema:
+          type: object
+          additionalProperties:
+            type: string
+            format: date-time
+        style: deepObject
+        required: false
+        description: Use `gt` (>), `gte` (>=), `lt` (<), `lte` (<=), or `eq` (=) to
+          filter by the posted at timestamp. For example, for all times after Jan
+          1 2000 12:00 UTC, use posted_at%5Bgt%5D=2000-01-01T12:00:00Z.
+      - name: updated_at
+        in: query
+        schema:
+          type: object
+          additionalProperties:
+            type: string
+            format: date-time
+        style: deepObject
+        required: false
+        description: Use `gt` (>), `gte` (>=), `lt` (<), `lte` (<=), or `eq` (=) to
+          filter by the posted at timestamp. For example, for all times after Jan
+          1 2000 12:00 UTC, use updated_at%5Bgt%5D=2000-01-01T12:00:00Z.
+      - name: order_by
+        in: query
+        schema:
+          type: object
+          properties:
+            created_at:
+              type: string
+              enum:
+              - asc
+              - desc
+            effective_at:
+              type: string
+              enum:
+              - asc
+              - desc
+          additionalProperties: false
+        style: deepObject
+        required: false
+        description: Order by `created_at` or `effective_at` in `asc` or `desc` order.
+          For example, to order by `effective_at asc`, use `order_by%5Beffective_at%5D=asc`.
+          Ordering by only one field at a time is supported.
+      - name: status
+        in: query
+        schema:
+          type: string
+          enum:
+          - pending
+          - posted
+          - archived
+        required: false
+      - name: external_id
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: ledger_account_category_id
+        in: query
+        schema:
+          type: string
+          format: uuid
+        required: false
+      - name: ledger_account_settlement_id
+        in: query
+        schema:
+          type: string
+          format: uuid
+        required: false
+      - name: reverses_ledger_transaction_id
+        in: query
+        schema:
+          type: string
+          format: uuid
+        required: false
+      - name: partially_posts_ledger_transaction_id
+        in: query
+        schema:
+          type: string
+          format: uuid
+        required: false
+      - name: ledgerable_id
+        in: query
+        schema:
+          type: string
+          format: uuid
+        required: false
+      - name: ledgerable_type
+        in: query
+        schema:
+          type: string
+          enum:
+          - expected_payment
+          - incoming_payment_detail
+          - paper_item
+          - payment_order
+          - return
+          - reversal
+        required: false
+      responses:
+        '200':
+          description: successful
+          headers:
+            X-After-Cursor:
+              schema:
+                type: string
+                nullable: true
+              required: false
+              description: The cursor for the next page. Including this in a call
+                as `after_cursor` will return the next page.
+            X-Per-Page:
+              schema:
+                type: integer
+                nullable: true
+              description: The current `per_page`.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  "$ref": "#/components/schemas/ledger_transaction"
+        '422':
+          description: parameter invalid
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/error_message"
+        '403':
+          description: forbidden
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/error_message"
+    post:
+      summary: create ledger_transaction
+      tags:
+      - LedgerTransaction
+      operationId: createLedgerTransaction
+      description: Create a ledger transaction.
+      security:
+      - basic_auth: []
+      parameters:
+      - name: Idempotency-Key
+        in: header
+        required: false
+        description: This key should be something unique, preferably something like
+          an UUID.
+        schema:
+          type: string
+      responses:
+        '201':
+          description: successful
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/ledger_transaction"
+        '403':
+          description: forbidden
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/error_message"
+        '404':
+          description: not found
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/error_message"
+        '422':
+          description: unsuccessful
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/error_message"
+        '429':
+          description: too many requests
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/error_message"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              "$ref": "#/components/schemas/ledger_transaction_create_request"
+  "/api/ledger_transactions/{id}":
+    parameters:
+    - name: id
+      in: path
+      schema:
+        type: string
+        format: uuid
+      description: id
+      required: true
+    get:
+      summary: get ledger_transaction
+      tags:
+      - LedgerTransaction
+      operationId: getLedgerTransaction
+      description: Get details on a single ledger transaction.
+      security:
+      - basic_auth: []
+      responses:
+        '200':
+          description: successful
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/ledger_transaction"
+        '404':
+          description: not found
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/error_message"
+    patch:
+      summary: update ledger_transaction
+      tags:
+      - LedgerTransaction
+      operationId: updateLedgerTransaction
+      description: Update the details of a ledger transaction.
+      security:
+      - basic_auth: []
+      parameters: []
+      responses:
+        '200':
+          description: successful
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/ledger_transaction"
+        '403':
+          description: forbidden
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/error_message"
+        '404':
+          description: not found
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/error_message"
+        '422':
+          description: unsuccessful
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/error_message"
+        '429':
+          description: too many requests
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/error_message"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              "$ref": "#/components/schemas/ledger_transaction_update_request"
+  "/api/ledger_transactions/{id}/versions":
+    parameters:
+    - name: id
+      in: path
+      schema:
+        type: string
+        format: uuid
+      description: id
+      required: true
+    get:
+      summary: list ledger_transaction versions
+      tags:
+      - LedgerTransaction
+      operationId: listLedgerTransactionVersionsNested
+      description: Get a list of ledger transaction versions.
+      security:
+      - basic_auth: []
+      parameters:
+      - name: after_cursor
+        in: query
+        schema:
+          type: string
+          nullable: true
+        required: false
+      - name: per_page
+        in: query
+        schema:
+          type: integer
+        required: false
+      - "$ref": "#/components/parameters/bulk_id"
+      - name: created_at
+        in: query
+        schema:
+          type: object
+          additionalProperties:
+            type: string
+            format: date-time
+        style: deepObject
+        required: false
+        description: Use `gt` (>), `gte` (>=), `lt` (<), `lte` (<=), or `eq` (=) to
+          filter by the created_at timestamp. For example, for all dates after Jan
+          1 2000 12:00 UTC, use created_at%5Bgt%5D=2000-01-01T12:00:00Z.
+      - name: version
+        in: query
+        schema:
+          type: object
+          additionalProperties:
+            type: integer
+        style: deepObject
+        required: false
+        description: Use `gt` (>), `gte` (>=), `lt` (<), `lte` (<=), or `eq` (=) to
+          filter by the version. For example, for all versions after 2, use version%5Bgt%5D=2.
+      responses:
+        '200':
+          description: successful
+          headers:
+            X-After-Cursor:
+              schema:
+                type: string
+                nullable: true
+              required: false
+              description: The cursor for the next page. Including this in a call
+                as `after_cursor` will return the next page.
+            X-Per-Page:
+              schema:
+                type: integer
+                nullable: true
+              description: The current `per_page`.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  "$ref": "#/components/schemas/ledger_transaction_version"
+        '404':
+          description: not found
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/error_message"
+        '422':
+          description: unsuccessful
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/error_message"
+  "/api/ledgers":
+    get:
+      summary: list ledgers
+      tags:
+      - Ledger
+      operationId: listLedgers
+      description: Get a list of ledgers.
+      security:
+      - basic_auth: []
+      parameters:
+      - name: after_cursor
+        in: query
+        schema:
+          type: string
+          nullable: true
+        required: false
+      - name: per_page
+        in: query
+        schema:
+          type: integer
+        required: false
+      - "$ref": "#/components/parameters/metadata_query"
+      - "$ref": "#/components/parameters/bulk_id"
+      - name: updated_at
+        in: query
+        schema:
+          type: object
+          additionalProperties:
+            type: string
+            format: date-time
+        style: deepObject
+        required: false
+        description: Use `gt` (>), `gte` (>=), `lt` (<), `lte` (<=), or `eq` (=) to
+          filter by the posted at timestamp. For example, for all times after Jan
+          1 2000 12:00 UTC, use updated_at%5Bgt%5D=2000-01-01T12:00:00Z.
+      responses:
+        '200':
+          description: successful
+          headers:
+            X-After-Cursor:
+              schema:
+                type: string
+                nullable: true
+              required: false
+              description: The cursor for the next page. Including this in a call
+                as `after_cursor` will return the next page.
+            X-Per-Page:
+              schema:
+                type: integer
+                nullable: true
+              description: The current `per_page`.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  "$ref": "#/components/schemas/ledger"
+    post:
+      summary: create ledger
+      tags:
+      - Ledger
+      operationId: createLedger
+      description: Create a ledger.
+      security:
+      - basic_auth: []
+      parameters:
+      - name: Idempotency-Key
+        in: header
+        required: false
+        description: This key should be something unique, preferably something like
+          an UUID.
+        schema:
+          type: string
+      responses:
+        '201':
+          description: successful
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/ledger"
+        '403':
+          description: forbidden
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/error_message"
+        '422':
+          description: unsuccessful
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/error_message"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              "$ref": "#/components/schemas/ledger_create_request"
+  "/api/ledgers/{id}":
+    parameters:
+    - name: id
+      in: path
+      schema:
+        type: string
+        format: uuid
+      description: id
+      required: true
+    get:
+      summary: get ledger
+      tags:
+      - Ledger
+      operationId: getLedger
+      description: Get details on a single ledger.
+      security:
+      - basic_auth: []
+      responses:
+        '200':
+          description: successful
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/ledger"
+        '404':
+          description: not found
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/error_message"
+        '403':
+          description: forbidden
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/error_message"
+    patch:
+      summary: update ledger
+      tags:
+      - Ledger
+      operationId: updateLedger
+      description: Update the details of a ledger.
+      security:
+      - basic_auth: []
+      parameters: []
+      responses:
+        '200':
+          description: successful
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/ledger"
+        '403':
+          description: forbidden
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/error_message"
+        '404':
+          description: not found
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/error_message"
+        '422':
+          description: unsuccessful
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/error_message"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              "$ref": "#/components/schemas/ledger_update_request"
+    delete:
+      summary: delete ledger
+      tags:
+      - Ledger
+      operationId: deleteLedger
+      description: Delete a ledger.
+      security:
+      - basic_auth: []
+      responses:
+        '200':
+          description: successful
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/ledger"
+        '403':
+          description: forbidden
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/error_message"
+        '404':
+          description: not found
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/error_message"
+  "/api/internal_accounts/{internal_account_id}/account_capabilities/{id}":
+    parameters:
+    - name: internal_account_id
+      in: path
+      description: Unique identifier for the internal account.
+      required: true
+      schema:
+        type: string
+    - name: id
+      in: path
+      description: Unique identifier for the account capability.
+      required: true
+      schema:
+        type: string
+    patch:
+      summary: update account_capability
+      tags:
+      - AccountCapability
+      operationId: updateAccountCapability
+      security:
+      - basic_auth: []
+      parameters: []
+      responses:
+        '200':
+          description: successful
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: string
+                    format: uuid
+                  object:
+                    type: string
+                  live_mode:
+                    type: boolean
+                    description: This field will be true if this object exists in
+                      the live environment or false if it exists in the test environment.
+                  created_at:
+                    type: string
+                    format: date-time
+                  updated_at:
+                    type: string
+                    format: date-time
+                  discarded_at:
+                    type: string
+                    format: date-time
+                    nullable: true
+                  direction:
+                    type: string
+                    enum:
+                    - credit
+                    - debit
+                    description: One of `debit` or `credit`. Indicates the direction
+                      of money movement this capability is responsible for.
+                  identifier:
+                    type: string
+                    nullable: true
+                    description: A unique reference assigned by your bank for tracking
+                      and recognizing payment files. It is important this is formatted
+                      exactly how the bank assigned it.
+                  payment_type:
+                    type: string
+                    enum:
+                    - ach
+                    - au_becs
+                    - bacs
+                    - base
+                    - book
+                    - card
+                    - chats
+                    - check
+                    - cross_border
+                    - dk_nets
+                    - eft
+                    - ethereum
+                    - hu_ics
+                    - interac
+                    - masav
+                    - mx_ccen
+                    - neft
+                    - nics
+                    - nz_becs
+                    - pl_elixir
+                    - polygon
+                    - provxchange
+                    - ro_sent
+                    - rtp
+                    - se_bankgirot
+                    - sen
+                    - sepa
+                    - sg_giro
+                    - sic
+                    - signet
+                    - sknbi
+                    - solana
+                    - wire
+                    - zengin
+                    description: Indicates the the type of payment this capability
+                      is responsible for originating.
+                additionalProperties: true
+                minProperties: 9
+                maxProperties: 9
+                required:
+                - id
+                - object
+                - live_mode
+                - created_at
+                - updated_at
+                - discarded_at
+                - direction
+                - identifier
+                - payment_type
+        '404':
+          description: not found
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/error_message"
+        '422':
+          description: unsuccessful
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                identifier:
+                  type: string
+                  description: A unique reference assigned by your bank for tracking
+                    and recognizing payment files. It is important this is formatted
+                    exactly how the bank assigned it.
+              required:
+              - identifier
+              additionalProperties: false
+              minProperties: 1
+              maxProperties: 1
   "/api/{accounts_type}/{account_id}/account_details":
     get:
       summary: list account_details
@@ -3104,2353 +5589,6 @@ paths:
           application/json:
             schema:
               "$ref": "#/components/schemas/invoice_update_request"
-  "/api/ledger_account_balance_monitors":
-    get:
-      summary: list ledger_account_balance_monitors
-      tags:
-      - LedgerAccountBalanceMonitor
-      operationId: listLedgerAccountBalanceMonitors
-      description: Get a list of ledger account balance monitors.
-      security:
-      - basic_auth: []
-      parameters:
-      - name: after_cursor
-        in: query
-        schema:
-          type: string
-          nullable: true
-        required: false
-      - name: per_page
-        in: query
-        schema:
-          type: integer
-        required: false
-      - "$ref": "#/components/parameters/metadata_query"
-      - "$ref": "#/components/parameters/bulk_id"
-      - name: ledger_account_id
-        in: query
-        schema:
-          type: string
-          format: uuid
-        description: Query the balance monitors for a single ledger account.
-        required: false
-      responses:
-        '200':
-          description: successful
-          headers:
-            X-After-Cursor:
-              schema:
-                type: string
-                nullable: true
-              required: false
-              description: The cursor for the next page. Including this in a call
-                as `after_cursor` will return the next page.
-            X-Per-Page:
-              schema:
-                type: integer
-                nullable: true
-              description: The current `per_page`.
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  "$ref": "#/components/schemas/ledger_account_balance_monitor"
-    post:
-      summary: create ledger_account_balance_monitor
-      tags:
-      - LedgerAccountBalanceMonitor
-      operationId: createLedgerAccountBalanceMonitor
-      description: Create a ledger account balance monitor.
-      security:
-      - basic_auth: []
-      parameters:
-      - name: Idempotency-Key
-        in: header
-        required: false
-        description: This key should be something unique, preferably something like
-          an UUID.
-        schema:
-          type: string
-      responses:
-        '201':
-          description: successful
-          content:
-            application/json:
-              schema:
-                "$ref": "#/components/schemas/ledger_account_balance_monitor"
-        '403':
-          description: forbidden
-          content:
-            application/json:
-              schema:
-                "$ref": "#/components/schemas/error_message"
-        '422':
-          description: unsuccessful
-          content:
-            application/json:
-              schema:
-                "$ref": "#/components/schemas/error_message"
-      requestBody:
-        content:
-          application/json:
-            schema:
-              "$ref": "#/components/schemas/ledger_account_balance_monitor_create_request"
-  "/api/ledger_account_balance_monitors/{id}":
-    parameters:
-    - name: id
-      in: path
-      schema:
-        type: string
-        format: uuid
-      description: id
-      required: true
-    get:
-      summary: get ledger_account_balance_monitor
-      tags:
-      - LedgerAccountBalanceMonitor
-      operationId: getLedgerAccountBalanceMonitor
-      description: Get details on a single ledger account balance monitor.
-      security:
-      - basic_auth: []
-      responses:
-        '200':
-          description: successful
-          content:
-            application/json:
-              schema:
-                "$ref": "#/components/schemas/ledger_account_balance_monitor"
-        '404':
-          description: not found
-          content:
-            application/json:
-              schema:
-                "$ref": "#/components/schemas/error_message"
-    patch:
-      summary: update ledger_account_balance_monitor
-      tags:
-      - LedgerAccountBalanceMonitor
-      operationId: updateLedgerAccountBalanceMonitor
-      description: Update a ledger account balance monitor.
-      security:
-      - basic_auth: []
-      parameters: []
-      responses:
-        '200':
-          description: successful
-          content:
-            application/json:
-              schema:
-                "$ref": "#/components/schemas/ledger_account_balance_monitor"
-        '403':
-          description: forbidden
-          content:
-            application/json:
-              schema:
-                "$ref": "#/components/schemas/error_message"
-        '404':
-          description: not found
-          content:
-            application/json:
-              schema:
-                "$ref": "#/components/schemas/error_message"
-        '422':
-          description: unsuccessful
-          content:
-            application/json:
-              schema:
-                "$ref": "#/components/schemas/error_message"
-      requestBody:
-        content:
-          application/json:
-            schema:
-              "$ref": "#/components/schemas/ledger_account_balance_monitor_update_request"
-    delete:
-      summary: delete ledger_account_balance_monitor
-      tags:
-      - LedgerAccountBalanceMonitor
-      operationId: deleteLedgerAccountBalanceMonitor
-      description: Delete a ledger account balance monitor.
-      security:
-      - basic_auth: []
-      responses:
-        '200':
-          description: successful
-          content:
-            application/json:
-              schema:
-                "$ref": "#/components/schemas/ledger_account_balance_monitor"
-        '403':
-          description: forbidden
-          content:
-            application/json:
-              schema:
-                "$ref": "#/components/schemas/error_message"
-        '404':
-          description: not found
-          content:
-            application/json:
-              schema:
-                "$ref": "#/components/schemas/error_message"
-  "/api/ledger_account_categories":
-    get:
-      summary: list ledger_account_categories
-      tags:
-      - LedgerAccountCategory
-      operationId: listLedgerAccountCategories
-      description: Get a list of ledger account categories.
-      security:
-      - basic_auth: []
-      parameters:
-      - name: after_cursor
-        in: query
-        schema:
-          type: string
-          nullable: true
-        required: false
-      - name: per_page
-        in: query
-        schema:
-          type: integer
-        required: false
-      - "$ref": "#/components/parameters/metadata_query"
-      - "$ref": "#/components/parameters/bulk_id"
-      - name: name
-        in: query
-        required: false
-        schema:
-          type: string
-      - name: ledger_id
-        in: query
-        schema:
-          type: string
-          format: uuid
-        required: false
-      - name: currency
-        in: query
-        required: false
-        schema:
-          type: string
-      - name: external_id
-        in: query
-        schema:
-          type: string
-        required: false
-      - name: parent_ledger_account_category_id
-        in: query
-        schema:
-          type: string
-          format: uuid
-        required: false
-        description: Query categories that are nested underneath a parent category
-      - name: ledger_account_id
-        in: query
-        schema:
-          type: string
-          format: uuid
-        required: false
-        description: Query categories which contain a ledger account directly or through
-          child categories.
-      - name: balances
-        in: query
-        schema:
-          type: object
-          properties:
-            effective_at:
-              type: string
-              format: date-time
-          additionalProperties: false
-        style: deepObject
-        required: false
-        description: For example, if you want the balances as of a particular time
-          (ISO8601), the encoded query string would be `balances%5Beffective_at%5D=2000-12-31T12:00:00Z`.
-          The balances as of a time are inclusive of entries with that exact time.
-      responses:
-        '200':
-          description: successful
-          headers:
-            X-After-Cursor:
-              schema:
-                type: string
-                nullable: true
-              required: false
-              description: The cursor for the next page. Including this in a call
-                as `after_cursor` will return the next page.
-            X-Per-Page:
-              schema:
-                type: integer
-                nullable: true
-              description: The current `per_page`.
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  "$ref": "#/components/schemas/ledger_account_category"
-    post:
-      summary: create ledger_account_category
-      tags:
-      - LedgerAccountCategory
-      operationId: createLedgerAccountCategory
-      description: Create a ledger account category.
-      security:
-      - basic_auth: []
-      parameters:
-      - name: Idempotency-Key
-        in: header
-        required: false
-        description: This key should be something unique, preferably something like
-          an UUID.
-        schema:
-          type: string
-      responses:
-        '201':
-          description: successful
-          content:
-            application/json:
-              schema:
-                "$ref": "#/components/schemas/ledger_account_category"
-        '403':
-          description: forbidden
-          content:
-            application/json:
-              schema:
-                "$ref": "#/components/schemas/error_message"
-        '404':
-          description: not found
-          content:
-            application/json:
-              schema:
-                "$ref": "#/components/schemas/error_message"
-        '422':
-          description: unsuccessful
-          content:
-            application/json:
-              schema:
-                "$ref": "#/components/schemas/error_message"
-      requestBody:
-        content:
-          application/json:
-            schema:
-              "$ref": "#/components/schemas/ledger_account_category_create_request"
-  "/api/ledger_account_categories/{id}":
-    parameters:
-    - name: id
-      in: path
-      schema:
-        type: string
-        format: uuid
-      description: id
-      required: true
-    get:
-      summary: get ledger_account_category
-      tags:
-      - LedgerAccountCategory
-      operationId: getLedgerAccountCategory
-      description: Get the details on a single ledger account category.
-      security:
-      - basic_auth: []
-      parameters:
-      - name: balances
-        in: query
-        schema:
-          type: object
-          properties:
-            as_of_date:
-              type: string
-              format: date
-            effective_at:
-              type: string
-              format: date-time
-          additionalProperties: false
-        style: deepObject
-        required: false
-        description: For example, if you want the balances as of a particular time
-          (ISO8601), the encoded query string would be `balances%5Beffective_at%5D=2000-12-31T12:00:00Z`.
-          The balances as of a time are inclusive of entries with that exact time.
-      responses:
-        '200':
-          description: successful
-          content:
-            application/json:
-              schema:
-                "$ref": "#/components/schemas/ledger_account_category"
-        '422':
-          description: unsuccessful
-          content:
-            application/json:
-              schema:
-                "$ref": "#/components/schemas/error_message"
-        '404':
-          description: not found
-          content:
-            application/json:
-              schema:
-                "$ref": "#/components/schemas/error_message"
-    patch:
-      summary: update ledger_account_category
-      tags:
-      - LedgerAccountCategory
-      operationId: updateLedgerAccountCategory
-      description: Update the details of a ledger account category.
-      security:
-      - basic_auth: []
-      parameters: []
-      responses:
-        '200':
-          description: successful
-          content:
-            application/json:
-              schema:
-                "$ref": "#/components/schemas/ledger_account_category"
-        '403':
-          description: forbidden
-          content:
-            application/json:
-              schema:
-                "$ref": "#/components/schemas/error_message"
-        '404':
-          description: not found
-          content:
-            application/json:
-              schema:
-                "$ref": "#/components/schemas/error_message"
-        '422':
-          description: unsuccessful
-          content:
-            application/json:
-              schema:
-                "$ref": "#/components/schemas/error_message"
-      requestBody:
-        content:
-          application/json:
-            schema:
-              "$ref": "#/components/schemas/ledger_account_category_update_request"
-    delete:
-      summary: delete ledger_account_category
-      tags:
-      - LedgerAccountCategory
-      operationId: deleteLedgerAccountCategory
-      description: Delete a ledger account category.
-      security:
-      - basic_auth: []
-      responses:
-        '200':
-          description: successful
-          content:
-            application/json:
-              schema:
-                "$ref": "#/components/schemas/ledger_account_category"
-        '403':
-          description: forbidden
-          content:
-            application/json:
-              schema:
-                "$ref": "#/components/schemas/error_message"
-        '404':
-          description: not found
-          content:
-            application/json:
-              schema:
-                "$ref": "#/components/schemas/error_message"
-  "/api/ledger_account_categories/{id}/ledger_accounts/{ledger_account_id}":
-    parameters:
-    - name: id
-      in: path
-      schema:
-        type: string
-        format: uuid
-      description: id
-      required: true
-    - name: ledger_account_id
-      in: path
-      schema:
-        type: string
-        format: uuid
-      description: ledger_account_id
-      required: true
-    put:
-      summary: add ledger_account to ledger_account_category
-      tags:
-      - LedgerAccountCategory
-      operationId: addLedgerAccountToLedgerAccountCategory
-      description: Add a ledger account to a ledger account category.
-      security:
-      - basic_auth: []
-      responses:
-        '200':
-          description: successful
-        '403':
-          description: forbidden
-          content:
-            application/json:
-              schema:
-                "$ref": "#/components/schemas/error_message"
-        '404':
-          description: not found
-          content:
-            application/json:
-              schema:
-                "$ref": "#/components/schemas/error_message"
-        '422':
-          description: unsuccessful
-          content:
-            application/json:
-              schema:
-                "$ref": "#/components/schemas/error_message"
-    delete:
-      summary: remove ledger_account from ledger_account_category
-      tags:
-      - LedgerAccountCategory
-      operationId: removeLedgerAccountFromLedgerAccountCategory
-      description: Remove a ledger account from a ledger account category.
-      security:
-      - basic_auth: []
-      responses:
-        '200':
-          description: successful
-        '403':
-          description: forbidden
-          content:
-            application/json:
-              schema:
-                "$ref": "#/components/schemas/error_message"
-        '404':
-          description: not found
-          content:
-            application/json:
-              schema:
-                "$ref": "#/components/schemas/error_message"
-        '422':
-          description: unsuccessful
-          content:
-            application/json:
-              schema:
-                "$ref": "#/components/schemas/error_message"
-  "/api/ledger_account_categories/{id}/ledger_account_categories/{sub_category_id}":
-    parameters:
-    - name: id
-      in: path
-      schema:
-        type: string
-        format: uuid
-      description: id
-      required: true
-    - name: sub_category_id
-      in: path
-      schema:
-        type: string
-        format: uuid
-      description: sub_category_id
-      required: true
-    put:
-      summary: add ledger_account_category to ledger_account_category
-      tags:
-      - LedgerAccountCategory
-      operationId: addLedgerAccountCategoryToLedgerAccountCategory
-      description: Add a ledger account category to a ledger account category.
-      security:
-      - basic_auth: []
-      responses:
-        '200':
-          description: successful
-        '403':
-          description: forbidden
-          content:
-            application/json:
-              schema:
-                "$ref": "#/components/schemas/error_message"
-        '404':
-          description: not found
-          content:
-            application/json:
-              schema:
-                "$ref": "#/components/schemas/error_message"
-        '422':
-          description: unsuccessful
-          content:
-            application/json:
-              schema:
-                "$ref": "#/components/schemas/error_message"
-    delete:
-      summary: delete ledger_account_category from ledger_account_category
-      tags:
-      - LedgerAccountCategory
-      operationId: deleteLedgerAccountCategoryFromLedgerAccountCategory
-      description: Delete a ledger account category from a ledger account category.
-      security:
-      - basic_auth: []
-      responses:
-        '200':
-          description: successful
-        '403':
-          description: forbidden
-          content:
-            application/json:
-              schema:
-                "$ref": "#/components/schemas/error_message"
-        '404':
-          description: not found
-          content:
-            application/json:
-              schema:
-                "$ref": "#/components/schemas/error_message"
-        '422':
-          description: unsuccessful
-          content:
-            application/json:
-              schema:
-                "$ref": "#/components/schemas/error_message"
-  "/api/ledger_account_settlements/{id}/ledger_entries":
-    parameters:
-    - name: id
-      in: path
-      description: id
-      required: true
-      schema:
-        type: string
-    patch:
-      summary: patch ledger_account_settlement_entries
-      tags:
-      - LedgerAccountSettlement
-      operationId: patchLedgerAccountSettlementEntries
-      description: Add ledger entries to a draft ledger account settlement.
-      security:
-      - basic_auth: []
-      parameters: []
-      responses:
-        '200':
-          description: successful
-        '403':
-          description: forbidden
-          content:
-            application/json:
-              schema:
-                "$ref": "#/components/schemas/error_message"
-        '404':
-          description: not found
-          content:
-            application/json:
-              schema:
-                "$ref": "#/components/schemas/error_message"
-        '422':
-          description: unsuccessful
-      requestBody:
-        content:
-          application/json:
-            schema:
-              "$ref": "#/components/schemas/ledger_account_settlement_entries_patch_request"
-    delete:
-      summary: delete ledger_account_settlement_entries
-      tags:
-      - LedgerAccountSettlement
-      operationId: deleteLedgerAccountSettlementEntries
-      description: Remove ledger entries from a draft ledger account settlement.
-      security:
-      - basic_auth: []
-      parameters: []
-      responses:
-        '200':
-          description: successful
-        '403':
-          description: forbidden
-          content:
-            application/json:
-              schema:
-                "$ref": "#/components/schemas/error_message"
-        '404':
-          description: not found
-          content:
-            application/json:
-              schema:
-                "$ref": "#/components/schemas/error_message"
-        '422':
-          description: unsuccessful
-      requestBody:
-        content:
-          application/json:
-            schema:
-              "$ref": "#/components/schemas/ledger_account_settlement_entries_delete_request"
-  "/api/ledger_account_settlements":
-    post:
-      summary: create ledger_account_settlement
-      tags:
-      - LedgerAccountSettlement
-      operationId: createLedgerAccountSettlement
-      description: Create a ledger account settlement.
-      security:
-      - basic_auth: []
-      parameters:
-      - name: Idempotency-Key
-        in: header
-        required: false
-        description: This key should be something unique, preferably something like
-          an UUID.
-        schema:
-          type: string
-      responses:
-        '201':
-          description: successful
-          content:
-            application/json:
-              schema:
-                "$ref": "#/components/schemas/ledger_account_settlement"
-        '403':
-          description: forbidden
-          content:
-            application/json:
-              schema:
-                "$ref": "#/components/schemas/error_message"
-        '422':
-          description: unsuccessful
-          content:
-            application/json:
-              schema:
-                "$ref": "#/components/schemas/error_message"
-      requestBody:
-        content:
-          application/json:
-            schema:
-              "$ref": "#/components/schemas/ledger_account_settlement_create_request"
-    get:
-      summary: list ledger_account_settlements
-      tags:
-      - LedgerAccountSettlement
-      operationId: listLedgerAccountSettlements
-      description: Get a list of ledger account settlements.
-      security:
-      - basic_auth: []
-      parameters:
-      - name: after_cursor
-        in: query
-        schema:
-          type: string
-          nullable: true
-        required: false
-      - name: per_page
-        in: query
-        schema:
-          type: integer
-        required: false
-      - "$ref": "#/components/parameters/metadata_query"
-      - "$ref": "#/components/parameters/bulk_id"
-      - name: settled_ledger_account_id
-        in: query
-        schema:
-          type: string
-          format: uuid
-        required: false
-      - name: settlement_entry_direction
-        in: query
-        schema:
-          type: string
-        required: false
-      - name: ledger_transaction_id
-        in: query
-        schema:
-          type: string
-          format: uuid
-        required: false
-      - name: ledger_id
-        in: query
-        schema:
-          type: string
-          format: uuid
-        required: false
-      - name: created_at
-        in: query
-        schema:
-          type: object
-          additionalProperties:
-            type: string
-            format: date-time
-        style: deepObject
-        required: false
-        description: Use `gt` (>), `gte` (>=), `lt` (<), `lte` (<=), or `eq` (=) to
-          filter by the created at timestamp. For example, for all times after Jan
-          1 2000 12:00 UTC, use created_at%5Bgt%5D=2000-01-01T12:00:00Z.
-      - name: updated_at
-        in: query
-        schema:
-          type: object
-          additionalProperties:
-            type: string
-            format: date-time
-        style: deepObject
-        required: false
-        description: Use `gt` (>), `gte` (>=), `lt` (<), `lte` (<=), or `eq` (=) to
-          filter by the updated at timestamp. For example, for all times after Jan
-          1 2000 12:00 UTC, use updated_at%5Bgt%5D=2000-01-01T12:00:00Z.
-      responses:
-        '200':
-          description: successful
-          headers:
-            X-After-Cursor:
-              schema:
-                type: string
-                nullable: true
-              required: false
-              description: The cursor for the next page. Including this in a call
-                as `after_cursor` will return the next page.
-            X-Per-Page:
-              schema:
-                type: integer
-                nullable: true
-              description: The current `per_page`.
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  "$ref": "#/components/schemas/ledger_account_settlement"
-  "/api/ledger_account_settlements/{id}":
-    parameters:
-    - name: id
-      in: path
-      schema:
-        type: string
-        format: uuid
-      description: id
-      required: true
-    get:
-      summary: get ledger_account_settlement
-      tags:
-      - LedgerAccountSettlement
-      operationId: getLedgerAccountSettlement
-      description: Get details on a single ledger account settlement.
-      security:
-      - basic_auth: []
-      responses:
-        '200':
-          description: successful
-          content:
-            application/json:
-              schema:
-                "$ref": "#/components/schemas/ledger_account_settlement"
-        '404':
-          description: not found
-          content:
-            application/json:
-              schema:
-                "$ref": "#/components/schemas/error_message"
-    patch:
-      summary: update ledger_account_settlement
-      tags:
-      - LedgerAccountSettlement
-      operationId: updateLedgerAccountSettlement
-      description: Update the details of a ledger account settlement.
-      security:
-      - basic_auth: []
-      parameters: []
-      responses:
-        '200':
-          description: successful
-          content:
-            application/json:
-              schema:
-                "$ref": "#/components/schemas/ledger_account_settlement"
-        '403':
-          description: forbidden
-          content:
-            application/json:
-              schema:
-                "$ref": "#/components/schemas/error_message"
-        '404':
-          description: not found
-          content:
-            application/json:
-              schema:
-                "$ref": "#/components/schemas/error_message"
-        '422':
-          description: unsuccessful
-          content:
-            application/json:
-              schema:
-                "$ref": "#/components/schemas/error_message"
-      requestBody:
-        content:
-          application/json:
-            schema:
-              "$ref": "#/components/schemas/ledger_account_settlement_update_request"
-  "/api/ledger_account_statements":
-    post:
-      summary: create ledger_account_statement
-      tags:
-      - LedgerAccountStatement
-      operationId: createLedgerAccountStatement
-      description: Create a ledger account statement.
-      security:
-      - basic_auth: []
-      parameters:
-      - name: Idempotency-Key
-        in: header
-        required: false
-        description: This key should be something unique, preferably something like
-          an UUID.
-        schema:
-          type: string
-      responses:
-        '201':
-          description: successful
-          content:
-            application/json:
-              schema:
-                "$ref": "#/components/schemas/ledger_account_statement"
-        '403':
-          description: forbidden
-          content:
-            application/json:
-              schema:
-                "$ref": "#/components/schemas/error_message"
-        '422':
-          description: unsuccessful
-          content:
-            application/json:
-              schema:
-                "$ref": "#/components/schemas/error_message"
-      requestBody:
-        content:
-          application/json:
-            schema:
-              "$ref": "#/components/schemas/ledger_account_statement_create_request"
-  "/api/ledger_account_statements/{id}":
-    parameters:
-    - name: id
-      in: path
-      schema:
-        type: string
-        format: uuid
-      description: id
-      required: true
-    get:
-      summary: get ledger_account_statement
-      tags:
-      - LedgerAccountStatement
-      operationId: getLedgerAccountStatement
-      description: Get details on a single ledger account statement.
-      security:
-      - basic_auth: []
-      responses:
-        '200':
-          description: successful
-          content:
-            application/json:
-              schema:
-                "$ref": "#/components/schemas/ledger_account_statement"
-        '404':
-          description: not found
-          content:
-            application/json:
-              schema:
-                "$ref": "#/components/schemas/error_message"
-  "/api/ledger_accounts":
-    get:
-      summary: list ledger_accounts
-      tags:
-      - LedgerAccount
-      operationId: listLedgerAccounts
-      description: Get a list of ledger accounts.
-      security:
-      - basic_auth: []
-      parameters:
-      - name: after_cursor
-        in: query
-        schema:
-          type: string
-          nullable: true
-        required: false
-      - name: per_page
-        in: query
-        schema:
-          type: integer
-        required: false
-      - "$ref": "#/components/parameters/metadata_query"
-      - "$ref": "#/components/parameters/bulk_id"
-      - "$ref": "#/components/parameters/bulk_name"
-      - name: ledger_id
-        in: query
-        schema:
-          type: string
-          format: uuid
-        required: false
-      - name: external_id
-        in: query
-        schema:
-          type: string
-        required: false
-      - name: currency
-        in: query
-        required: false
-        schema:
-          type: string
-      - name: balances
-        in: query
-        schema:
-          type: object
-          properties:
-            as_of_date:
-              type: string
-              format: date
-            effective_at:
-              type: string
-              format: date-time
-            effective_at_lower_bound:
-              type: string
-              format: date-time
-            effective_at_upper_bound:
-              type: string
-              format: date-time
-          additionalProperties: false
-        style: deepObject
-        required: false
-        description: Use `balances[effective_at_lower_bound]` and `balances[effective_at_upper_bound]`
-          to get the balances change between the two timestamps. The lower bound is
-          inclusive while the upper bound is exclusive of the provided timestamps.
-          If no value is supplied the balances will be retrieved not including that
-          bound.
-      - name: pending_balance_amount
-        in: query
-        schema:
-          type: object
-          properties:
-            gt:
-              type: integer
-            lt:
-              type: integer
-            gte:
-              type: integer
-            lte:
-              type: integer
-            eq:
-              type: integer
-            not_eq:
-              type: integer
-          additionalProperties: false
-        style: deepObject
-        required: false
-        description: Use `gt` (>), `gte` (>=), `lt` (<), `lte` (<=), `eq` (=), or
-          `not_eq` (!=) to filter by balance amount.
-      - name: posted_balance_amount
-        in: query
-        schema:
-          type: object
-          properties:
-            gt:
-              type: integer
-            lt:
-              type: integer
-            gte:
-              type: integer
-            lte:
-              type: integer
-            eq:
-              type: integer
-            not_eq:
-              type: integer
-          additionalProperties: false
-        style: deepObject
-        required: false
-        description: Use `gt` (>), `gte` (>=), `lt` (<), `lte` (<=), `eq` (=), or
-          `not_eq` (!=) to filter by balance amount.
-      - name: available_balance_amount
-        in: query
-        schema:
-          type: object
-          properties:
-            gt:
-              type: integer
-            lt:
-              type: integer
-            gte:
-              type: integer
-            lte:
-              type: integer
-            eq:
-              type: integer
-            not_eq:
-              type: integer
-          additionalProperties: false
-        style: deepObject
-        required: false
-        description: Use `gt` (>), `gte` (>=), `lt` (<), `lte` (<=), `eq` (=), or
-          `not_eq` (!=) to filter by balance amount.
-      - name: created_at
-        in: query
-        schema:
-          type: object
-          additionalProperties:
-            type: string
-            format: date-time
-        style: deepObject
-        required: false
-        description: Use `gt` (>), `gte` (>=), `lt` (<), `lte` (<=), or `eq` (=) to
-          filter by the created at timestamp. For example, for all times after Jan
-          1 2000 12:00 UTC, use created_at%5Bgt%5D=2000-01-01T12:00:00Z.
-      - name: updated_at
-        in: query
-        schema:
-          type: object
-          additionalProperties:
-            type: string
-            format: date-time
-        style: deepObject
-        required: false
-        description: Use `gt` (>), `gte` (>=), `lt` (<), `lte` (<=), or `eq` (=) to
-          filter by the updated at timestamp. For example, for all times after Jan
-          1 2000 12:00 UTC, use updated_at%5Bgt%5D=2000-01-01T12:00:00Z.
-      - name: ledger_account_category_id
-        in: query
-        schema:
-          type: string
-          format: uuid
-        required: false
-      responses:
-        '200':
-          description: successful
-          headers:
-            X-After-Cursor:
-              schema:
-                type: string
-                nullable: true
-              required: false
-              description: The cursor for the next page. Including this in a call
-                as `after_cursor` will return the next page.
-            X-Per-Page:
-              schema:
-                type: integer
-                nullable: true
-              description: The current `per_page`.
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  "$ref": "#/components/schemas/ledger_account"
-        '422':
-          description: unsuccessful
-          content:
-            application/json:
-              schema:
-                "$ref": "#/components/schemas/error_message"
-    post:
-      summary: create ledger_account
-      tags:
-      - LedgerAccount
-      operationId: createLedgerAccount
-      description: Create a ledger account.
-      security:
-      - basic_auth: []
-      parameters:
-      - name: Idempotency-Key
-        in: header
-        required: false
-        description: This key should be something unique, preferably something like
-          an UUID.
-        schema:
-          type: string
-      responses:
-        '201':
-          description: successful
-          content:
-            application/json:
-              schema:
-                "$ref": "#/components/schemas/ledger_account"
-        '403':
-          description: forbidden
-          content:
-            application/json:
-              schema:
-                "$ref": "#/components/schemas/error_message"
-        '404':
-          description: not found
-          content:
-            application/json:
-              schema:
-                "$ref": "#/components/schemas/error_message"
-        '422':
-          description: unsuccessful
-          content:
-            application/json:
-              schema:
-                "$ref": "#/components/schemas/error_message"
-      requestBody:
-        content:
-          application/json:
-            schema:
-              "$ref": "#/components/schemas/ledger_account_create_request"
-  "/api/ledger_accounts/{id}":
-    parameters:
-    - name: id
-      in: path
-      schema:
-        type: string
-        format: uuid
-      description: id
-      required: true
-    get:
-      summary: get ledger_account
-      tags:
-      - LedgerAccount
-      operationId: getLedgerAccount
-      description: Get details on a single ledger account.
-      security:
-      - basic_auth: []
-      parameters:
-      - name: balances
-        in: query
-        schema:
-          type: object
-          properties:
-            as_of_date:
-              type: string
-              format: date
-            effective_at:
-              type: string
-              format: date-time
-            effective_at_lower_bound:
-              type: string
-              format: date-time
-            effective_at_upper_bound:
-              type: string
-              format: date-time
-            as_of_lock_version:
-              type: integer
-          additionalProperties: false
-        style: deepObject
-        required: false
-        description: Use `balances[effective_at_lower_bound]` and `balances[effective_at_upper_bound]`
-          to get the balances change between the two timestamps. The lower bound is
-          inclusive while the upper bound is exclusive of the provided timestamps.
-          If no value is supplied the balances will be retrieved not including that
-          bound. Use `balances[as_of_lock_version]` to retrieve a balance as of a
-          specific Ledger Account `lock_version`.
-      responses:
-        '200':
-          description: successful
-          content:
-            application/json:
-              schema:
-                "$ref": "#/components/schemas/ledger_account"
-        '404':
-          description: not found
-          content:
-            application/json:
-              schema:
-                "$ref": "#/components/schemas/error_message"
-        '422':
-          description: unsuccessful
-          content:
-            application/json:
-              schema:
-                "$ref": "#/components/schemas/error_message"
-    patch:
-      summary: update ledger_account
-      tags:
-      - LedgerAccount
-      operationId: updateLedgerAccount
-      description: Update the details of a ledger account.
-      security:
-      - basic_auth: []
-      parameters: []
-      responses:
-        '200':
-          description: successful
-          content:
-            application/json:
-              schema:
-                "$ref": "#/components/schemas/ledger_account"
-        '403':
-          description: forbidden
-          content:
-            application/json:
-              schema:
-                "$ref": "#/components/schemas/error_message"
-        '404':
-          description: not found
-          content:
-            application/json:
-              schema:
-                "$ref": "#/components/schemas/error_message"
-        '422':
-          description: unsuccessful
-          content:
-            application/json:
-              schema:
-                "$ref": "#/components/schemas/error_message"
-      requestBody:
-        content:
-          application/json:
-            schema:
-              "$ref": "#/components/schemas/ledger_account_update_request"
-    delete:
-      summary: delete ledger_account
-      tags:
-      - LedgerAccount
-      operationId: deleteLedgerAccount
-      description: Delete a ledger account.
-      security:
-      - basic_auth: []
-      responses:
-        '200':
-          description: successful
-          content:
-            application/json:
-              schema:
-                "$ref": "#/components/schemas/ledger_account"
-        '403':
-          description: forbidden
-          content:
-            application/json:
-              schema:
-                "$ref": "#/components/schemas/error_message"
-        '404':
-          description: not found
-          content:
-            application/json:
-              schema:
-                "$ref": "#/components/schemas/error_message"
-  "/api/ledger_entries":
-    get:
-      summary: list ledger_entries
-      tags:
-      - LedgerEntry
-      operationId: listLedgerEntries
-      description: Get a list of all ledger entries.
-      security:
-      - basic_auth: []
-      parameters:
-      - name: after_cursor
-        in: query
-        schema:
-          type: string
-          nullable: true
-        required: false
-      - name: per_page
-        in: query
-        schema:
-          type: integer
-        required: false
-      - "$ref": "#/components/parameters/bulk_id"
-      - name: ledger_account_id
-        in: query
-        schema:
-          type: string
-          format: uuid
-        required: false
-      - name: ledger_transaction_id
-        in: query
-        schema:
-          type: string
-          format: uuid
-        required: false
-      - name: ledger_account_payout_id
-        in: query
-        schema:
-          type: string
-          format: uuid
-        required: false
-      - name: ledger_account_settlement_id
-        in: query
-        schema:
-          type: string
-          format: uuid
-        required: false
-      - name: effective_date
-        in: query
-        schema:
-          type: object
-          additionalProperties:
-            type: string
-            format: date
-        style: deepObject
-        required: false
-        description: Use `gt` (>), `gte` (>=), `lt` (<), `lte` (<=), or `eq` (=) to
-          filter by the transaction's effective date. Format YYYY-MM-DD
-      - name: effective_at
-        in: query
-        schema:
-          type: object
-          additionalProperties:
-            type: string
-            format: date-time
-        style: deepObject
-        required: false
-        description: Use `gt` (>), `gte` (>=), `lt` (<), `lte` (<=), or `eq` (=) to
-          filter by the transaction's effective time. Format ISO8601
-      - name: updated_at
-        in: query
-        schema:
-          type: object
-          additionalProperties:
-            type: string
-            format: date-time
-        style: deepObject
-        required: false
-        description: Use `gt` (>), `gte` (>=), `lt` (<), `lte` (<=), or `eq` (=) to
-          filter by the posted at timestamp. For example, for all times after Jan
-          1 2000 12:00 UTC, use updated_at%5Bgt%5D=2000-01-01T12:00:00Z.
-      - name: as_of_lock_version
-        in: query
-        schema:
-          type: integer
-        required: false
-        description: Shows all ledger entries that were present on a ledger account
-          at a particular `lock_version`. You must also specify `ledger_account_id`.
-      - name: ledger_account_lock_version
-        in: query
-        schema:
-          type: object
-          additionalProperties:
-            type: integer
-        style: deepObject
-        required: false
-        description: Use `gt` (>), `gte` (>=), `lt` (<), `lte` (<=), or `eq` (=) to
-          filter by the lock_version of a ledger account. For example, for all entries
-          created at or before before lock_version 1000 of a ledger account, use `ledger_account_lock_version%5Blte%5D=1000`.
-      - name: ledger_account_category_id
-        in: query
-        schema:
-          type: string
-          format: uuid
-        required: false
-        description: Get all ledger entries that match the direction specified. One
-          of `credit`, `debit`.
-      - name: ledger_account_statement_id
-        in: query
-        schema:
-          type: string
-          format: uuid
-        required: false
-        description: Get all ledger entries that are included in the ledger account
-          statement.
-      - name: show_deleted
-        in: query
-        required: false
-        description: If true, response will include ledger entries that were deleted.
-          When you update a ledger transaction to specify a new set of entries, the
-          previous entries are deleted.
-        schema:
-          type: boolean
-      - name: direction
-        in: query
-        schema:
-          type: string
-          enum:
-          - credit
-          - debit
-        required: false
-        description: If true, response will include ledger entries that were deleted.
-          When you update a ledger transaction to specify a new set of entries, the
-          previous entries are deleted.
-      - name: status
-        in: query
-        schema:
-          type: string
-          enum:
-          - pending
-          - posted
-          - archived
-        required: false
-        description: Get all ledger entries that match the status specified. One of
-          `pending`, `posted`, or `archived`.
-      - name: order_by
-        in: query
-        schema:
-          type: object
-          properties:
-            created_at:
-              type: string
-              enum:
-              - asc
-              - desc
-            effective_at:
-              type: string
-              enum:
-              - asc
-              - desc
-          additionalProperties: false
-        style: deepObject
-        required: false
-        description: Order by `created_at` or `effective_at` in `asc` or `desc` order.
-          For example, to order by `effective_at asc`, use `order_by%5Beffective_at%5D=asc`.
-          Ordering by only one field at a time is supported.
-      - name: show_balances
-        in: query
-        required: false
-        description: If true, response will include the balances attached to the ledger
-          entry. If there is no balance available, null will be returned instead.
-        schema:
-          type: boolean
-      - "$ref": "#/components/parameters/metadata_query"
-      responses:
-        '200':
-          description: successful
-          headers:
-            X-After-Cursor:
-              schema:
-                type: string
-                nullable: true
-              required: false
-              description: The cursor for the next page. Including this in a call
-                as `after_cursor` will return the next page.
-            X-Per-Page:
-              schema:
-                type: integer
-                nullable: true
-              description: The current `per_page`.
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  "$ref": "#/components/schemas/ledger_entry"
-        '422':
-          description: unsuccessful
-          content:
-            application/json:
-              schema:
-                "$ref": "#/components/schemas/error_message"
-        '403':
-          description: forbidden
-          content:
-            application/json:
-              schema:
-                "$ref": "#/components/schemas/error_message"
-  "/api/ledger_entries/{id}":
-    parameters:
-    - name: id
-      in: path
-      schema:
-        type: string
-        format: uuid
-      description: id
-      required: true
-    patch:
-      summary: update ledger_entry
-      tags:
-      - LedgerEntry
-      operationId: updateLedgerEntry
-      description: Update the details of a ledger entry.
-      security:
-      - basic_auth: []
-      parameters: []
-      responses:
-        '200':
-          description: successful
-          content:
-            application/json:
-              schema:
-                "$ref": "#/components/schemas/ledger_entry"
-      requestBody:
-        content:
-          application/json:
-            schema:
-              "$ref": "#/components/schemas/ledger_entry_update_request"
-    get:
-      summary: get ledger_entry
-      tags:
-      - LedgerEntry
-      operationId: getLedgerEntry
-      description: Get details on a single ledger entry.
-      security:
-      - basic_auth: []
-      parameters:
-      - name: show_balances
-        in: query
-        required: false
-        description: If true, response will include the balances attached to the ledger
-          entry. If there is no balance available, null will be returned instead.
-        schema:
-          type: boolean
-      responses:
-        '200':
-          description: successful
-          content:
-            application/json:
-              schema:
-                "$ref": "#/components/schemas/ledger_entry"
-        '404':
-          description: not found
-          content:
-            application/json:
-              schema:
-                "$ref": "#/components/schemas/error_message"
-  "/api/ledger_transactions/{id}/partial_post":
-    post:
-      summary: create ledger_transaction partial post
-      tags:
-      - LedgerTransaction
-      operationId: CreateLedgerTransactionPartialPost
-      description: Create a ledger transaction that partially posts another ledger
-        transaction.
-      security:
-      - basic_auth: []
-      parameters:
-      - name: id
-        in: path
-        schema:
-          type: string
-          format: uuid
-        description: The ID of the ledger transaction to partially post.
-        required: true
-      responses:
-        '201':
-          description: successful
-          content:
-            application/json:
-              schema:
-                "$ref": "#/components/schemas/ledger_transaction"
-        '404':
-          description: not found
-          content:
-            application/json:
-              schema:
-                "$ref": "#/components/schemas/error_message"
-        '422':
-          description: unsuccessful
-          content:
-            application/json:
-              schema:
-                "$ref": "#/components/schemas/error_message"
-      requestBody:
-        content:
-          application/json:
-            schema:
-              "$ref": "#/components/schemas/ledger_transaction_partial_post_create_request"
-  "/api/ledger_transactions/{id}/reversal":
-    post:
-      summary: create ledger_transaction reversal
-      tags:
-      - LedgerTransaction
-      operationId: CreateLedgerTransactionReversal
-      description: Create a ledger transaction reversal.
-      security:
-      - basic_auth: []
-      parameters:
-      - name: id
-        in: path
-        schema:
-          type: string
-          format: uuid
-        description: The id of ledger transaction to reverse.
-        required: true
-      responses:
-        '201':
-          description: successful
-          content:
-            application/json:
-              schema:
-                "$ref": "#/components/schemas/ledger_transaction"
-        '404':
-          description: not found
-          content:
-            application/json:
-              schema:
-                "$ref": "#/components/schemas/error_message"
-        '422':
-          description: unsuccessful
-          content:
-            application/json:
-              schema:
-                "$ref": "#/components/schemas/error_message"
-      requestBody:
-        content:
-          application/json:
-            schema:
-              "$ref": "#/components/schemas/ledger_transaction_reversal_create_request"
-  "/api/ledger_transaction_versions":
-    get:
-      summary: list ledger_transaction_versions
-      tags:
-      - LedgerTransaction
-      operationId: listLedgerTransactionVersions
-      description: Get a list of ledger transaction versions.
-      security:
-      - basic_auth: []
-      parameters:
-      - name: after_cursor
-        in: query
-        schema:
-          type: string
-          nullable: true
-        required: false
-      - name: per_page
-        in: query
-        schema:
-          type: integer
-        required: false
-      - name: created_at
-        in: query
-        schema:
-          type: object
-          additionalProperties:
-            type: string
-            format: date-time
-        style: deepObject
-        required: false
-        description: Use `gt` (>), `gte` (>=), `lt` (<), `lte` (<=), or `eq` (=) to
-          filter by the created_at timestamp. For example, for all dates after Jan
-          1 2000 12:00 UTC, use created_at%5Bgt%5D=2000-01-01T12:00:00Z.
-      - name: version
-        in: query
-        schema:
-          type: object
-          additionalProperties:
-            type: integer
-        style: deepObject
-        required: false
-        description: Use `gt` (>), `gte` (>=), `lt` (<), `lte` (<=), or `eq` (=) to
-          filter by the version. For example, for all versions after 2, use version%5Bgt%5D=2.
-      - name: ledger_transaction_id
-        in: query
-        schema:
-          type: string
-          format: uuid
-        required: false
-        description: Get all the ledger transaction versions corresponding to the
-          ID of a ledger transaction.
-      - name: ledger_account_statement_id
-        in: query
-        schema:
-          type: string
-          format: uuid
-        required: false
-        description: Get all ledger transaction versions that are included in the
-          ledger account statement.
-      responses:
-        '200':
-          description: successful
-          headers:
-            X-After-Cursor:
-              schema:
-                type: string
-                nullable: true
-              required: false
-              description: The cursor for the next page. Including this in a call
-                as `after_cursor` will return the next page.
-            X-Per-Page:
-              schema:
-                type: integer
-                nullable: true
-              description: The current `per_page`.
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  "$ref": "#/components/schemas/ledger_transaction_version"
-        '404':
-          description: not found
-          content:
-            application/json:
-              schema:
-                "$ref": "#/components/schemas/error_message"
-  "/api/ledger_transactions":
-    get:
-      summary: list ledger_transactions
-      tags:
-      - LedgerTransaction
-      operationId: listLedgerTransactions
-      description: Get a list of ledger transactions.
-      security:
-      - basic_auth: []
-      parameters:
-      - name: after_cursor
-        in: query
-        schema:
-          type: string
-          nullable: true
-        required: false
-      - name: per_page
-        in: query
-        schema:
-          type: integer
-        required: false
-      - "$ref": "#/components/parameters/metadata_query"
-      - "$ref": "#/components/parameters/bulk_id"
-      - name: ledger_id
-        in: query
-        schema:
-          type: string
-          format: uuid
-        required: false
-      - name: ledger_account_id
-        in: query
-        schema:
-          type: string
-          format: uuid
-        required: false
-      - name: effective_at
-        in: query
-        schema:
-          type: object
-          additionalProperties:
-            type: string
-            format: date-time
-        style: deepObject
-        required: false
-        description: Use "gt" (>), "gte" (>=), "lt" (<), "lte" (<=), or "eq" (=) to
-          filter by effective at. For example, for all transactions after Jan 1 2000,
-          use effective_at%5Bgt%5D=2000-01-01T00:00:00:00.000Z.
-      - name: effective_date
-        in: query
-        schema:
-          type: object
-          additionalProperties:
-            type: string
-            format: date-time
-        style: deepObject
-        required: false
-        description: Use `gt` (>), `gte` (>=), `lt` (<), `lte` (<=), or `eq` (=) to
-          filter by effective date. For example, for all dates after Jan 1 2000, use
-          effective_date%5Bgt%5D=2000-01-01.
-      - name: posted_at
-        in: query
-        schema:
-          type: object
-          additionalProperties:
-            type: string
-            format: date-time
-        style: deepObject
-        required: false
-        description: Use `gt` (>), `gte` (>=), `lt` (<), `lte` (<=), or `eq` (=) to
-          filter by the posted at timestamp. For example, for all times after Jan
-          1 2000 12:00 UTC, use posted_at%5Bgt%5D=2000-01-01T12:00:00Z.
-      - name: updated_at
-        in: query
-        schema:
-          type: object
-          additionalProperties:
-            type: string
-            format: date-time
-        style: deepObject
-        required: false
-        description: Use `gt` (>), `gte` (>=), `lt` (<), `lte` (<=), or `eq` (=) to
-          filter by the posted at timestamp. For example, for all times after Jan
-          1 2000 12:00 UTC, use updated_at%5Bgt%5D=2000-01-01T12:00:00Z.
-      - name: order_by
-        in: query
-        schema:
-          type: object
-          properties:
-            created_at:
-              type: string
-              enum:
-              - asc
-              - desc
-            effective_at:
-              type: string
-              enum:
-              - asc
-              - desc
-          additionalProperties: false
-        style: deepObject
-        required: false
-        description: Order by `created_at` or `effective_at` in `asc` or `desc` order.
-          For example, to order by `effective_at asc`, use `order_by%5Beffective_at%5D=asc`.
-          Ordering by only one field at a time is supported.
-      - name: status
-        in: query
-        schema:
-          type: string
-          enum:
-          - pending
-          - posted
-          - archived
-        required: false
-      - name: external_id
-        in: query
-        required: false
-        schema:
-          type: string
-      - name: ledger_account_category_id
-        in: query
-        schema:
-          type: string
-          format: uuid
-        required: false
-      - name: ledger_account_settlement_id
-        in: query
-        schema:
-          type: string
-          format: uuid
-        required: false
-      - name: reverses_ledger_transaction_id
-        in: query
-        schema:
-          type: string
-          format: uuid
-        required: false
-      - name: partially_posts_ledger_transaction_id
-        in: query
-        schema:
-          type: string
-          format: uuid
-        required: false
-      - name: ledgerable_id
-        in: query
-        schema:
-          type: string
-          format: uuid
-        required: false
-      - name: ledgerable_type
-        in: query
-        schema:
-          type: string
-          enum:
-          - expected_payment
-          - incoming_payment_detail
-          - paper_item
-          - payment_order
-          - return
-          - reversal
-        required: false
-      responses:
-        '200':
-          description: successful
-          headers:
-            X-After-Cursor:
-              schema:
-                type: string
-                nullable: true
-              required: false
-              description: The cursor for the next page. Including this in a call
-                as `after_cursor` will return the next page.
-            X-Per-Page:
-              schema:
-                type: integer
-                nullable: true
-              description: The current `per_page`.
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  "$ref": "#/components/schemas/ledger_transaction"
-        '422':
-          description: parameter invalid
-          content:
-            application/json:
-              schema:
-                "$ref": "#/components/schemas/error_message"
-        '403':
-          description: forbidden
-          content:
-            application/json:
-              schema:
-                "$ref": "#/components/schemas/error_message"
-    post:
-      summary: create ledger_transaction
-      tags:
-      - LedgerTransaction
-      operationId: createLedgerTransaction
-      description: Create a ledger transaction.
-      security:
-      - basic_auth: []
-      parameters:
-      - name: Idempotency-Key
-        in: header
-        required: false
-        description: This key should be something unique, preferably something like
-          an UUID.
-        schema:
-          type: string
-      responses:
-        '201':
-          description: successful
-          content:
-            application/json:
-              schema:
-                "$ref": "#/components/schemas/ledger_transaction"
-        '403':
-          description: forbidden
-          content:
-            application/json:
-              schema:
-                "$ref": "#/components/schemas/error_message"
-        '404':
-          description: not found
-          content:
-            application/json:
-              schema:
-                "$ref": "#/components/schemas/error_message"
-        '422':
-          description: unsuccessful
-          content:
-            application/json:
-              schema:
-                "$ref": "#/components/schemas/error_message"
-        '429':
-          description: too many requests
-          content:
-            application/json:
-              schema:
-                "$ref": "#/components/schemas/error_message"
-      requestBody:
-        content:
-          application/json:
-            schema:
-              "$ref": "#/components/schemas/ledger_transaction_create_request"
-  "/api/ledger_transactions/{id}":
-    parameters:
-    - name: id
-      in: path
-      schema:
-        type: string
-        format: uuid
-      description: id
-      required: true
-    get:
-      summary: get ledger_transaction
-      tags:
-      - LedgerTransaction
-      operationId: getLedgerTransaction
-      description: Get details on a single ledger transaction.
-      security:
-      - basic_auth: []
-      responses:
-        '200':
-          description: successful
-          content:
-            application/json:
-              schema:
-                "$ref": "#/components/schemas/ledger_transaction"
-        '404':
-          description: not found
-          content:
-            application/json:
-              schema:
-                "$ref": "#/components/schemas/error_message"
-    patch:
-      summary: update ledger_transaction
-      tags:
-      - LedgerTransaction
-      operationId: updateLedgerTransaction
-      description: Update the details of a ledger transaction.
-      security:
-      - basic_auth: []
-      parameters: []
-      responses:
-        '200':
-          description: successful
-          content:
-            application/json:
-              schema:
-                "$ref": "#/components/schemas/ledger_transaction"
-        '403':
-          description: forbidden
-          content:
-            application/json:
-              schema:
-                "$ref": "#/components/schemas/error_message"
-        '404':
-          description: not found
-          content:
-            application/json:
-              schema:
-                "$ref": "#/components/schemas/error_message"
-        '422':
-          description: unsuccessful
-          content:
-            application/json:
-              schema:
-                "$ref": "#/components/schemas/error_message"
-        '429':
-          description: too many requests
-          content:
-            application/json:
-              schema:
-                "$ref": "#/components/schemas/error_message"
-      requestBody:
-        content:
-          application/json:
-            schema:
-              "$ref": "#/components/schemas/ledger_transaction_update_request"
-  "/api/ledger_transactions/{id}/versions":
-    parameters:
-    - name: id
-      in: path
-      schema:
-        type: string
-        format: uuid
-      description: id
-      required: true
-    get:
-      summary: list ledger_transaction versions
-      tags:
-      - LedgerTransaction
-      operationId: listLedgerTransactionVersionsNested
-      description: Get a list of ledger transaction versions.
-      security:
-      - basic_auth: []
-      parameters:
-      - name: after_cursor
-        in: query
-        schema:
-          type: string
-          nullable: true
-        required: false
-      - name: per_page
-        in: query
-        schema:
-          type: integer
-        required: false
-      - "$ref": "#/components/parameters/bulk_id"
-      - name: created_at
-        in: query
-        schema:
-          type: object
-          additionalProperties:
-            type: string
-            format: date-time
-        style: deepObject
-        required: false
-        description: Use `gt` (>), `gte` (>=), `lt` (<), `lte` (<=), or `eq` (=) to
-          filter by the created_at timestamp. For example, for all dates after Jan
-          1 2000 12:00 UTC, use created_at%5Bgt%5D=2000-01-01T12:00:00Z.
-      - name: version
-        in: query
-        schema:
-          type: object
-          additionalProperties:
-            type: integer
-        style: deepObject
-        required: false
-        description: Use `gt` (>), `gte` (>=), `lt` (<), `lte` (<=), or `eq` (=) to
-          filter by the version. For example, for all versions after 2, use version%5Bgt%5D=2.
-      responses:
-        '200':
-          description: successful
-          headers:
-            X-After-Cursor:
-              schema:
-                type: string
-                nullable: true
-              required: false
-              description: The cursor for the next page. Including this in a call
-                as `after_cursor` will return the next page.
-            X-Per-Page:
-              schema:
-                type: integer
-                nullable: true
-              description: The current `per_page`.
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  "$ref": "#/components/schemas/ledger_transaction_version"
-        '404':
-          description: not found
-          content:
-            application/json:
-              schema:
-                "$ref": "#/components/schemas/error_message"
-        '422':
-          description: unsuccessful
-          content:
-            application/json:
-              schema:
-                "$ref": "#/components/schemas/error_message"
-  "/api/ledgers":
-    get:
-      summary: list ledgers
-      tags:
-      - Ledger
-      operationId: listLedgers
-      description: Get a list of ledgers.
-      security:
-      - basic_auth: []
-      parameters:
-      - name: after_cursor
-        in: query
-        schema:
-          type: string
-          nullable: true
-        required: false
-      - name: per_page
-        in: query
-        schema:
-          type: integer
-        required: false
-      - "$ref": "#/components/parameters/metadata_query"
-      - "$ref": "#/components/parameters/bulk_id"
-      - name: updated_at
-        in: query
-        schema:
-          type: object
-          additionalProperties:
-            type: string
-            format: date-time
-        style: deepObject
-        required: false
-        description: Use `gt` (>), `gte` (>=), `lt` (<), `lte` (<=), or `eq` (=) to
-          filter by the posted at timestamp. For example, for all times after Jan
-          1 2000 12:00 UTC, use updated_at%5Bgt%5D=2000-01-01T12:00:00Z.
-      responses:
-        '200':
-          description: successful
-          headers:
-            X-After-Cursor:
-              schema:
-                type: string
-                nullable: true
-              required: false
-              description: The cursor for the next page. Including this in a call
-                as `after_cursor` will return the next page.
-            X-Per-Page:
-              schema:
-                type: integer
-                nullable: true
-              description: The current `per_page`.
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  "$ref": "#/components/schemas/ledger"
-    post:
-      summary: create ledger
-      tags:
-      - Ledger
-      operationId: createLedger
-      description: Create a ledger.
-      security:
-      - basic_auth: []
-      parameters:
-      - name: Idempotency-Key
-        in: header
-        required: false
-        description: This key should be something unique, preferably something like
-          an UUID.
-        schema:
-          type: string
-      responses:
-        '201':
-          description: successful
-          content:
-            application/json:
-              schema:
-                "$ref": "#/components/schemas/ledger"
-        '403':
-          description: forbidden
-          content:
-            application/json:
-              schema:
-                "$ref": "#/components/schemas/error_message"
-        '422':
-          description: unsuccessful
-          content:
-            application/json:
-              schema:
-                "$ref": "#/components/schemas/error_message"
-      requestBody:
-        content:
-          application/json:
-            schema:
-              "$ref": "#/components/schemas/ledger_create_request"
-  "/api/ledgers/{id}":
-    parameters:
-    - name: id
-      in: path
-      schema:
-        type: string
-        format: uuid
-      description: id
-      required: true
-    get:
-      summary: get ledger
-      tags:
-      - Ledger
-      operationId: getLedger
-      description: Get details on a single ledger.
-      security:
-      - basic_auth: []
-      responses:
-        '200':
-          description: successful
-          content:
-            application/json:
-              schema:
-                "$ref": "#/components/schemas/ledger"
-        '404':
-          description: not found
-          content:
-            application/json:
-              schema:
-                "$ref": "#/components/schemas/error_message"
-        '403':
-          description: forbidden
-          content:
-            application/json:
-              schema:
-                "$ref": "#/components/schemas/error_message"
-    patch:
-      summary: update ledger
-      tags:
-      - Ledger
-      operationId: updateLedger
-      description: Update the details of a ledger.
-      security:
-      - basic_auth: []
-      parameters: []
-      responses:
-        '200':
-          description: successful
-          content:
-            application/json:
-              schema:
-                "$ref": "#/components/schemas/ledger"
-        '403':
-          description: forbidden
-          content:
-            application/json:
-              schema:
-                "$ref": "#/components/schemas/error_message"
-        '404':
-          description: not found
-          content:
-            application/json:
-              schema:
-                "$ref": "#/components/schemas/error_message"
-        '422':
-          description: unsuccessful
-          content:
-            application/json:
-              schema:
-                "$ref": "#/components/schemas/error_message"
-      requestBody:
-        content:
-          application/json:
-            schema:
-              "$ref": "#/components/schemas/ledger_update_request"
-    delete:
-      summary: delete ledger
-      tags:
-      - Ledger
-      operationId: deleteLedger
-      description: Delete a ledger.
-      security:
-      - basic_auth: []
-      responses:
-        '200':
-          description: successful
-          content:
-            application/json:
-              schema:
-                "$ref": "#/components/schemas/ledger"
-        '403':
-          description: forbidden
-          content:
-            application/json:
-              schema:
-                "$ref": "#/components/schemas/error_message"
-        '404':
-          description: not found
-          content:
-            application/json:
-              schema:
-                "$ref": "#/components/schemas/error_message"
   "/api/legal_entities":
     get:
       summary: list legal_entities
@@ -7546,6 +7684,7 @@ paths:
           - hk_interbank_clearing_code
           - hu_interbank_clearing_code
           - id_sknbi_code
+          - il_bank_code
           - in_ifsc
           - jp_zengin_code
           - mx_bank_identifier
@@ -8158,6 +8297,106 @@ components:
             Class objects track segments of your business independent of client or
             project. Note that these will only be accessible if your accounting system
             has been connected.
+    account_capability:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        object:
+          type: string
+        live_mode:
+          type: boolean
+          description: This field will be true if this object exists in the live environment
+            or false if it exists in the test environment.
+        created_at:
+          type: string
+          format: date-time
+        updated_at:
+          type: string
+          format: date-time
+        discarded_at:
+          type: string
+          format: date-time
+          nullable: true
+        direction:
+          type: string
+          enum:
+          - credit
+          - debit
+          description: One of `debit` or `credit`. Indicates the direction of money
+            movement this capability is responsible for.
+        identifier:
+          type: string
+          nullable: true
+          description: A unique reference assigned by your bank for tracking and recognizing
+            payment files. It is important this is formatted exactly how the bank
+            assigned it.
+        payment_type:
+          type: string
+          enum:
+          - ach
+          - au_becs
+          - bacs
+          - base
+          - book
+          - card
+          - chats
+          - check
+          - cross_border
+          - dk_nets
+          - eft
+          - ethereum
+          - hu_ics
+          - interac
+          - masav
+          - mx_ccen
+          - neft
+          - nics
+          - nz_becs
+          - pl_elixir
+          - polygon
+          - provxchange
+          - ro_sent
+          - rtp
+          - se_bankgirot
+          - sen
+          - sepa
+          - sg_giro
+          - sic
+          - signet
+          - sknbi
+          - solana
+          - wire
+          - zengin
+          description: Indicates the the type of payment this capability is responsible
+            for originating.
+      additionalProperties: true
+      minProperties: 9
+      maxProperties: 9
+      required:
+      - id
+      - object
+      - live_mode
+      - created_at
+      - updated_at
+      - discarded_at
+      - direction
+      - identifier
+      - payment_type
+    account_capability_update_request:
+      type: object
+      properties:
+        identifier:
+          type: string
+          description: A unique reference assigned by your bank for tracking and recognizing
+            payment files. It is important this is formatted exactly how the bank
+            assigned it.
+      required:
+      - identifier
+      additionalProperties: false
+      minProperties: 1
+      maxProperties: 1
     account_collection_flow:
       type: object
       properties:
@@ -9624,6 +9863,7 @@ components:
                       - hk_interbank_clearing_code
                       - hu_interbank_clearing_code
                       - id_sknbi_code
+                      - il_bank_code
                       - in_ifsc
                       - jp_zengin_code
                       - my_branch_code
@@ -10939,6 +11179,7 @@ components:
                 - hk_interbank_clearing_code
                 - hu_interbank_clearing_code
                 - id_sknbi_code
+                - il_bank_code
                 - in_ifsc
                 - jp_zengin_code
                 - my_branch_code
@@ -11628,6 +11869,7 @@ components:
           - hk_interbank_clearing_code
           - hu_interbank_clearing_code
           - id_sknbi_code
+          - il_bank_code
           - in_ifsc
           - jp_zengin_code
           - mx_bank_identifier
@@ -11756,6 +11998,12 @@ components:
           items:
             "$ref": "#/components/schemas/account_detail"
           description: An array of account detail objects.
+        account_capabilities:
+          type: array
+          description: An array of AccountCapability objects that list the originating
+            abilities of the internal account and any relevant information for them.
+          items:
+            "$ref": "#/components/schemas/account_capability"
         routing_details:
           type: array
           items:
@@ -11799,7 +12047,7 @@ components:
           description: If the internal account links to a ledger account in Modern
             Treasury, the id of the ledger account will be populated here.
       additionalProperties: false
-      minProperties: 19
+      minProperties: 20
       required:
       - id
       - object
@@ -11812,6 +12060,7 @@ components:
       - party_address
       - name
       - account_details
+      - account_capabilities
       - routing_details
       - connection
       - currency
@@ -11886,6 +12135,12 @@ components:
           example: checking
           description: The account type, used to provision the appropriate account
             at the financial institution.
+        account_capabilities:
+          type: array
+          description: An array of AccountCapability objects that list the originating
+            abilities of the internal account and any relevant information for them.
+          items:
+            "$ref": "#/components/schemas/account_capability"
         vendor_attributes:
           type: object
           additionalProperties:
@@ -12181,6 +12436,11 @@ components:
           type: integer
           description: Amount paid on the invoice in specified currency's smallest
             unit, e.g., $10 USD would be represented as 1000.
+        invoicer_name:
+          type: string
+          nullable: true
+          description: The name of the issuer for the invoice. Defaults to the name
+            of the Organization.
         transaction_line_item_ids:
           type: array
           items:
@@ -12188,7 +12448,7 @@ components:
             format: uuid
           description: IDs of transaction line items associated with an invoice.
       additionalProperties: false
-      minProperties: 37
+      minProperties: 38
       required:
       - id
       - object
@@ -12226,6 +12486,7 @@ components:
       - total_amount
       - amount_remaining
       - amount_paid
+      - invoicer_name
       - transaction_line_item_ids
     invoice_create_request:
       type: object
@@ -16704,10 +16965,9 @@ components:
           - sender
           - receiver
           nullable: true
-          description: The party that will pay the fees for the payment order. Only
-            applies to wire payment orders. Can be one of shared, sender, or receiver,
-            which correspond respectively with the SWIFT 71A values `SHA`, `OUR`,
-            `BEN`.
+          description: The party that will pay the fees for the payment order. See
+            https://docs.moderntreasury.com/payments/docs/charge-bearer to understand
+            the differences between the options.
         foreign_exchange_indicator:
           type: string
           enum:
@@ -17194,10 +17454,9 @@ components:
           - sender
           - receiver
           nullable: true
-          description: The party that will pay the fees for the payment order. Only
-            applies to wire payment orders. Can be one of shared, sender, or receiver,
-            which correspond respectively with the SWIFT 71A values `SHA`, `OUR`,
-            `BEN`.
+          description: The party that will pay the fees for the payment order. See
+            https://docs.moderntreasury.com/payments/docs/charge-bearer to understand
+            the differences between the options.
         foreign_exchange_indicator:
           type: string
           enum:
@@ -17341,6 +17600,7 @@ components:
                     - hk_interbank_clearing_code
                     - hu_interbank_clearing_code
                     - id_sknbi_code
+                    - il_bank_code
                     - in_ifsc
                     - jp_zengin_code
                     - my_branch_code
@@ -17648,10 +17908,9 @@ components:
           - sender
           - receiver
           nullable: true
-          description: The party that will pay the fees for the payment order. Only
-            applies to wire payment orders. Can be one of shared, sender, or receiver,
-            which correspond respectively with the SWIFT 71A values `SHA`, `OUR`,
-            `BEN`.
+          description: The party that will pay the fees for the payment order. See
+            https://docs.moderntreasury.com/payments/docs/charge-bearer to understand
+            the differences between the options.
         foreign_exchange_indicator:
           type: string
           enum:
@@ -17795,6 +18054,7 @@ components:
                     - hk_interbank_clearing_code
                     - hu_interbank_clearing_code
                     - id_sknbi_code
+                    - il_bank_code
                     - in_ifsc
                     - jp_zengin_code
                     - my_branch_code
@@ -18095,10 +18355,9 @@ components:
           - sender
           - receiver
           nullable: true
-          description: The party that will pay the fees for the payment order. Only
-            applies to wire payment orders. Can be one of shared, sender, or receiver,
-            which correspond respectively with the SWIFT 71A values `SHA`, `OUR`,
-            `BEN`.
+          description: The party that will pay the fees for the payment order. See
+            https://docs.moderntreasury.com/payments/docs/charge-bearer to understand
+            the differences between the options.
         foreign_exchange_indicator:
           type: string
           enum:
@@ -18278,6 +18537,7 @@ components:
                     - hk_interbank_clearing_code
                     - hu_interbank_clearing_code
                     - id_sknbi_code
+                    - il_bank_code
                     - in_ifsc
                     - jp_zengin_code
                     - my_branch_code
@@ -18776,6 +19036,43 @@ components:
           type: object
           nullable: true
           description: The raw data from the return file that we get from the bank.
+        corrections:
+          type: object
+          nullable: true
+          properties:
+            account_number:
+              type: string
+              nullable: true
+              description: The updated account number that should replace the one
+                originally used on the outgoing payment.
+            company_id:
+              type: string
+              nullable: true
+              description: The updated company ID that should replace the one originally
+                used on the outgoing payment.
+            company_name:
+              type: string
+              nullable: true
+              description: The updated company name that should replace the one originally
+                used on the outgoing payment.
+            individual_identification_number:
+              type: string
+              nullable: true
+              description: The updated individual identification number that should
+                replace the one originally used on the outgoing payment.
+            routing_number:
+              type: string
+              nullable: true
+              description: The updated routing number that should replace the one
+                originally used on the outgoing payment.
+            transaction_code:
+              type: string
+              nullable: true
+              description: The updated account type code that should replace the one
+                originally used on the outgoing payment.
+          description: Only relevant for ACH NOC returns. This is an object containing
+            all of the new and corrected information provided by the bank that was
+            previously incorrect on the original outgoing payment.
         status:
           type: string
           enum:
@@ -18853,7 +19150,7 @@ components:
           nullable: true
           description: The ID of the ledger transaction linked to the return.
       additionalProperties: false
-      minProperties: 23
+      minProperties: 24
       required:
       - id
       - object
@@ -18866,6 +19163,7 @@ components:
       - code
       - reason
       - date_of_death
+      - corrections
       - status
       - transaction_line_item_id
       - transaction_id
@@ -19005,6 +19303,43 @@ components:
           type: object
           nullable: true
           description: The raw data from the return file that we get from the bank.
+        corrections:
+          type: object
+          nullable: true
+          properties:
+            account_number:
+              type: string
+              nullable: true
+              description: The updated account number that should replace the one
+                originally used on the outgoing payment.
+            company_id:
+              type: string
+              nullable: true
+              description: The updated company ID that should replace the one originally
+                used on the outgoing payment.
+            company_name:
+              type: string
+              nullable: true
+              description: The updated company name that should replace the one originally
+                used on the outgoing payment.
+            individual_identification_number:
+              type: string
+              nullable: true
+              description: The updated individual identification number that should
+                replace the one originally used on the outgoing payment.
+            routing_number:
+              type: string
+              nullable: true
+              description: The updated routing number that should replace the one
+                originally used on the outgoing payment.
+            transaction_code:
+              type: string
+              nullable: true
+              description: The updated account type code that should replace the one
+                originally used on the outgoing payment.
+          description: Only relevant for ACH NOC returns. This is an object containing
+            all of the new and corrected information provided by the bank that was
+            previously incorrect on the original outgoing payment.
         returnable_type:
           type: string
           enum:
@@ -19161,6 +19496,7 @@ components:
           - hk_interbank_clearing_code
           - hu_interbank_clearing_code
           - id_sknbi_code
+          - il_bank_code
           - in_ifsc
           - jp_zengin_code
           - mx_bank_identifier
@@ -19252,6 +19588,7 @@ components:
           - hk_interbank_clearing_code
           - hu_interbank_clearing_code
           - id_sknbi_code
+          - il_bank_code
           - in_ifsc
           - jp_zengin_code
           - mx_bank_identifier
@@ -19729,6 +20066,11 @@ components:
             `bankprov`, `bnk_dev`, `cleartouch`, `currencycloud`, `cross_river`, `dc_bank`,
             `dwolla`, `evolve`, `goldman_sachs`, `iso20022`, `jpmc`, `mx`, `signet`,
             `silvergate`, `swift`, `us_bank`, or others.
+          nullable: true
+        vendor_customer_id:
+          type: string
+          description: An identifier given to this transaction by the bank, often
+            `null`.
           nullable: true
         as_of_date:
           type: string
