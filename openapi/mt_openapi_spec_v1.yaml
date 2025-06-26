@@ -12035,16 +12035,11 @@ components:
           format: uuid
           nullable: true
           description: The Counterparty associated to this account.
-        vendor_id:
-          type: string
-          format: string
-          nullable: true
-          description: The vendor ID associated with this account.
         legal_entity_id:
           type: string
           format: uuid
           nullable: true
-          description: The Legal Entity associated to this account.
+          description: The Legal Entity associated to this account
         ledger_account_id:
           type: string
           format: uuid
@@ -12052,7 +12047,7 @@ components:
           description: If the internal account links to a ledger account in Modern
             Treasury, the id of the ledger account will be populated here.
       additionalProperties: false
-      minProperties: 21
+      minProperties: 20
       required:
       - id
       - object
@@ -12072,7 +12067,6 @@ components:
       - metadata
       - parent_account_id
       - counterparty_id
-      - vendor_id
       - legal_entity_id
       - ledger_account_id
     internal_account_create_request:
@@ -18693,8 +18687,6 @@ components:
           - goldman_sachs_payment_request_id
           - goldman_sachs_request_id
           - goldman_sachs_unique_payment_id
-          - hifi_offramp_id
-          - hifi_transfer_id
           - interac_message_id
           - jpmc_ccn
           - jpmc_clearing_system_reference
@@ -18822,8 +18814,6 @@ components:
           - goldman_sachs_payment_request_id
           - goldman_sachs_request_id
           - goldman_sachs_unique_payment_id
-          - hifi_offramp_id
-          - hifi_transfer_id
           - interac_message_id
           - jpmc_ccn
           - jpmc_clearing_system_reference
