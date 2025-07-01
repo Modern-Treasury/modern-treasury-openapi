@@ -1079,6 +1079,13 @@ paths:
         required: false
         description: Use `gt` (>), `gte` (>=), `lt` (<), `lte` (<=), `eq` (=), or
           `not_eq` (!=) to filter by balance amount.
+      - name: normal_balance
+        in: query
+        schema:
+          type: string
+          enum:
+          - credit
+          - debit
       - name: created_at
         in: query
         schema:
