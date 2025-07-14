@@ -18711,6 +18711,9 @@ components:
           - currencycloud_payment_id
           - dc_bank_transaction_id
           - eft_trace_number
+          - evolve_core_batch
+          - evolve_core_file_key
+          - evolve_core_seq
           - evolve_transaction_id
           - fedwire_imad
           - fedwire_omad
@@ -18765,6 +18768,9 @@ components:
           - wells_fargo_payment_id
           - wells_fargo_trace_number
           - wells_fargo_uetr
+          - western_alliance_payment_id
+          - western_alliance_transaction_id
+          - western_alliance_wire_confirmation_number
           description: The type of the reference number. Referring to the vendor payment
             id.
       additionalProperties: false
@@ -18840,6 +18846,9 @@ components:
           - currencycloud_payment_id
           - dc_bank_transaction_id
           - eft_trace_number
+          - evolve_core_batch
+          - evolve_core_file_key
+          - evolve_core_seq
           - evolve_transaction_id
           - fedwire_imad
           - fedwire_omad
@@ -18894,6 +18903,9 @@ components:
           - wells_fargo_payment_id
           - wells_fargo_trace_number
           - wells_fargo_uetr
+          - western_alliance_payment_id
+          - western_alliance_transaction_id
+          - western_alliance_wire_confirmation_number
           description: The type of reference number.
       additionalProperties: false
       minProperties: 9
