@@ -18715,6 +18715,7 @@ components:
           - evolve_core_file_key
           - evolve_core_seq
           - evolve_transaction_id
+          - fake_vendor_payment_id
           - fedwire_imad
           - fedwire_omad
           - first_republic_internal_id
@@ -18747,7 +18748,6 @@ components:
           - pnc_request_for_payment_id
           - pnc_transaction_reference_number
           - rbc_wire_reference_id
-          - rspec_vendor_payment_id
           - rtp_instruction_id
           - signet_api_reference_id
           - signet_confirmation_id
@@ -18768,6 +18768,9 @@ components:
           - wells_fargo_payment_id
           - wells_fargo_trace_number
           - wells_fargo_uetr
+          - western_alliance_payment_id
+          - western_alliance_transaction_id
+          - western_alliance_wire_confirmation_number
           description: The type of the reference number. Referring to the vendor payment
             id.
       additionalProperties: false
@@ -18847,6 +18850,7 @@ components:
           - evolve_core_file_key
           - evolve_core_seq
           - evolve_transaction_id
+          - fake_vendor_payment_id
           - fedwire_imad
           - fedwire_omad
           - first_republic_internal_id
@@ -18879,7 +18883,6 @@ components:
           - pnc_request_for_payment_id
           - pnc_transaction_reference_number
           - rbc_wire_reference_id
-          - rspec_vendor_payment_id
           - rtp_instruction_id
           - signet_api_reference_id
           - signet_confirmation_id
@@ -18900,6 +18903,9 @@ components:
           - wells_fargo_payment_id
           - wells_fargo_trace_number
           - wells_fargo_uetr
+          - western_alliance_payment_id
+          - western_alliance_transaction_id
+          - western_alliance_wire_confirmation_number
           description: The type of reference number.
       additionalProperties: false
       minProperties: 9
@@ -19916,6 +19922,7 @@ components:
           - dc_bank
           - dwolla
           - evolve
+          - fake_vendor
           - goldman_sachs
           - hifi
           - iso20022
@@ -19924,12 +19931,12 @@ components:
           - paypal
           - plaid
           - pnc
-          - rspec_vendor
           - signet
           - silvergate
           - swift
           - us_bank
           - user
+          - western_alliance
           nullable: true
           description: The type of `vendor_code` being reported. Can be one of `bai2`,
             `bankprov`, `bnk_dev`, `cleartouch`, `currencycloud`, `cross_river`, `dc_bank`,
