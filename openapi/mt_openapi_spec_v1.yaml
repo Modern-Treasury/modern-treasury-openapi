@@ -18715,6 +18715,7 @@ components:
           - evolve_core_file_key
           - evolve_core_seq
           - evolve_transaction_id
+          - fake_vendor_payment_id
           - fedwire_imad
           - fedwire_omad
           - first_republic_internal_id
@@ -18747,7 +18748,6 @@ components:
           - pnc_request_for_payment_id
           - pnc_transaction_reference_number
           - rbc_wire_reference_id
-          - rspec_vendor_payment_id
           - rtp_instruction_id
           - signet_api_reference_id
           - signet_confirmation_id
@@ -18850,6 +18850,7 @@ components:
           - evolve_core_file_key
           - evolve_core_seq
           - evolve_transaction_id
+          - fake_vendor_payment_id
           - fedwire_imad
           - fedwire_omad
           - first_republic_internal_id
@@ -18882,7 +18883,6 @@ components:
           - pnc_request_for_payment_id
           - pnc_transaction_reference_number
           - rbc_wire_reference_id
-          - rspec_vendor_payment_id
           - rtp_instruction_id
           - signet_api_reference_id
           - signet_confirmation_id
@@ -19922,6 +19922,7 @@ components:
           - dc_bank
           - dwolla
           - evolve
+          - fake_vendor
           - goldman_sachs
           - hifi
           - iso20022
@@ -19930,12 +19931,12 @@ components:
           - paypal
           - plaid
           - pnc
-          - rspec_vendor
           - signet
           - silvergate
           - swift
           - us_bank
           - user
+          - western_alliance
           nullable: true
           description: The type of `vendor_code` being reported. Can be one of `bai2`,
             `bankprov`, `bnk_dev`, `cleartouch`, `currencycloud`, `cross_river`, `dc_bank`,
