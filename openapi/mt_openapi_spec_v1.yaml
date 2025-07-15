@@ -6071,6 +6071,7 @@ paths:
         schema:
           type: string
           enum:
+          - evolve_non_processing_transaction
           - stop
           - issue
         description: The type of payment action.
@@ -6191,7 +6192,7 @@ paths:
               schema:
                 "$ref": "#/components/schemas/payment_action"
         '422':
-          description: bad request
+          description: invalid type
           content:
             application/json:
               schema:
@@ -6246,6 +6247,12 @@ paths:
                 "$ref": "#/components/schemas/payment_action"
         '422':
           description: missing status
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/error_message"
+        '404':
+          description: not found
           content:
             application/json:
               schema:
