@@ -225,6 +225,7 @@ paths:
         required: false
         schema:
           type: string
+      - "$ref": "#/components/parameters/bulk_name"
       - name: ledger_id
         in: query
         schema:
