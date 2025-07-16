@@ -15872,6 +15872,7 @@ components:
           items:
             type: string
             enum:
+            - authorized_signer
             - beneficial_owner
             - control_person
             description: A list of relationship types for how the child entity relates
@@ -15914,6 +15915,7 @@ components:
           items:
             type: string
             enum:
+            - authorized_signer
             - beneficial_owner
             - control_person
             description: A list of relationship types for how the child entity relates
@@ -15944,6 +15946,7 @@ components:
           items:
             type: string
             enum:
+            - authorized_signer
             - beneficial_owner
             - control_person
             description: A list of relationship types for how the child entity relates
