@@ -4270,6 +4270,11 @@ paths:
         required: false
         description: Specify internal_account_id to see expected_payments for a specific
           account.
+      - name: external_id
+        in: query
+        schema:
+          type: string
+        required: false
       - name: direction
         in: query
         schema:
@@ -4407,6 +4412,12 @@ paths:
             application/json:
               schema:
                 "$ref": "#/components/schemas/expected_payment"
+        '409':
+          description: conflict
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/error_message"
         '422':
           description: unsuccessful
           content:
@@ -10522,6 +10533,10 @@ components:
         updated_at:
           type: string
           format: date-time
+        external_id:
+          type: string
+          nullable: true
+          description: An optional user-defined 180 character unique identifier.
         amount_upper_bound:
           type: integer
           nullable: true
@@ -10683,13 +10698,14 @@ components:
           nullable: true
           description: The ID of the ledger transaction linked to the expected payment.
       additionalProperties: false
-      minProperties: 26
+      minProperties: 27
       required:
       - id
       - object
       - live_mode
       - created_at
       - updated_at
+      - external_id
       - amount_upper_bound
       - amount_lower_bound
       - direction
@@ -10714,6 +10730,10 @@ components:
     expected_payment_create_request:
       type: object
       properties:
+        external_id:
+          type: string
+          nullable: true
+          description: An optional user-defined 180 character unique identifier.
         amount_upper_bound:
           type: integer
           nullable: true
@@ -10860,6 +10880,10 @@ components:
     expected_payment_update_request:
       type: object
       properties:
+        external_id:
+          type: string
+          nullable: true
+          description: An optional user-defined 180 character unique identifier.
         amount_upper_bound:
           type: integer
           nullable: true
