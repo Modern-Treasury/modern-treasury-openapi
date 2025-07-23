@@ -3526,6 +3526,12 @@ paths:
         required: false
         description: Performs a partial string match of the email field. This is also
           case insensitive.
+      - name: external_id
+        in: query
+        schema:
+          type: string
+        required: false
+        description: An optional user-defined 180 character unique identifier.
       - name: legal_entity_id
         in: query
         schema:
@@ -3593,6 +3599,12 @@ paths:
           an UUID.
         schema:
           type: string
+      - name: external_id
+        in: query
+        schema:
+          type: string
+        required: false
+        description: An optional user-defined 180 character unique identifier.
       responses:
         '201':
           description: successful
@@ -4615,6 +4627,12 @@ paths:
           type: string
           format: uuid
         required: false
+      - name: external_id
+        in: query
+        schema:
+          type: string
+        required: false
+        description: An optional user-defined 180 character unique identifier.
       - "$ref": "#/components/parameters/metadata_query"
       responses:
         '200':
@@ -4658,6 +4676,12 @@ paths:
           an UUID.
         schema:
           type: string
+      - name: external_id
+        in: query
+        schema:
+          type: string
+        required: false
+        description: An optional user-defined 180 character unique identifier.
       responses:
         '201':
           description: successful
@@ -9641,6 +9665,10 @@ components:
                 type: array
                 items:
                   "$ref": "#/components/schemas/routing_detail"
+              external_id:
+                type: string
+                nullable: true
+                description: An optional user-defined 180 character unique identifier.
               metadata:
                 type: object
                 additionalProperties:
@@ -9679,7 +9707,7 @@ components:
                 - plaid
                 nullable: true
             additionalProperties: false
-            minProperties: 18
+            minProperties: 19
           description: The accounts for this counterparty.
         email:
           type: string
@@ -9701,6 +9729,10 @@ components:
             modern: treasury
           description: Additional data represented as key-value pairs. Both the key
             and value must be strings.
+        external_id:
+          type: string
+          nullable: true
+          description: An optional user-defined 180 character unique identifier.
         send_remittance_advice:
           type: boolean
           description: Send an email to the counterparty whenever an associated payment
@@ -9714,7 +9746,7 @@ components:
           - verified
           description: The verification status of the counterparty.
       additionalProperties: false
-      minProperties: 13
+      minProperties: 14
       required:
       - id
       - object
@@ -9727,6 +9759,7 @@ components:
       - email
       - legal_entity_id
       - metadata
+      - external_id
       - send_remittance_advice
       - verification_status
     counterparty_collect_account_request:
@@ -9960,6 +9993,10 @@ components:
                   required:
                   - routing_number
                   - routing_number_type
+              external_id:
+                type: string
+                nullable: true
+                description: An optional user-defined 180 character unique identifier.
               metadata:
                 type: object
                 additionalProperties:
@@ -10013,6 +10050,10 @@ components:
             modern: treasury
           description: Additional data represented as key-value pairs. Both the key
             and value must be strings.
+        external_id:
+          type: string
+          nullable: true
+          description: An optional user-defined 180 character unique identifier.
         send_remittance_advice:
           type: boolean
           description: Send an email to the counterparty whenever an associated payment
@@ -11083,6 +11124,10 @@ components:
           type: array
           items:
             "$ref": "#/components/schemas/routing_detail"
+        external_id:
+          type: string
+          nullable: true
+          description: An optional user-defined 180 character unique identifier.
         metadata:
           type: object
           additionalProperties:
@@ -11120,7 +11165,7 @@ components:
           - plaid
           nullable: true
       additionalProperties: false
-      minProperties: 19
+      minProperties: 20
       required:
       - id
       - object
@@ -11135,6 +11180,7 @@ components:
       - counterparty_id
       - account_details
       - routing_details
+      - external_id
       - metadata
       - party_name
       - contact_details
@@ -11289,6 +11335,10 @@ components:
             required:
             - routing_number
             - routing_number_type
+        external_id:
+          type: string
+          nullable: true
+          description: An optional user-defined 180 character unique identifier.
         metadata:
           type: object
           additionalProperties:
@@ -17171,6 +17221,10 @@ components:
                 type: array
                 items:
                   "$ref": "#/components/schemas/routing_detail"
+              external_id:
+                type: string
+                nullable: true
+                description: An optional user-defined 180 character unique identifier.
               metadata:
                 type: object
                 additionalProperties:
@@ -17209,7 +17263,7 @@ components:
                 - plaid
                 nullable: true
             additionalProperties: false
-            minProperties: 18
+            minProperties: 19
           - "$ref": "#/components/schemas/internal_account"
           description: The receiving account. Can be an `external_account` or `internal_account`.
           nullable: true
@@ -17719,6 +17773,10 @@ components:
                 required:
                 - routing_number
                 - routing_number_type
+            external_id:
+              type: string
+              nullable: true
+              description: An optional user-defined 180 character unique identifier.
             metadata:
               type: object
               additionalProperties:
@@ -18173,6 +18231,10 @@ components:
                 required:
                 - routing_number
                 - routing_number_type
+            external_id:
+              type: string
+              nullable: true
+              description: An optional user-defined 180 character unique identifier.
             metadata:
               type: object
               additionalProperties:
@@ -18656,6 +18718,10 @@ components:
                 required:
                 - routing_number
                 - routing_number_type
+            external_id:
+              type: string
+              nullable: true
+              description: An optional user-defined 180 character unique identifier.
             metadata:
               type: object
               additionalProperties:
