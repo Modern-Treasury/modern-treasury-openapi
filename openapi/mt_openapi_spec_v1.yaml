@@ -4615,6 +4615,12 @@ paths:
           type: string
           format: uuid
         required: false
+      - name: external_id
+        in: query
+        schema:
+          type: string
+        required: false
+        description: An optional user-defined 180 character unique identifier.
       - "$ref": "#/components/parameters/metadata_query"
       responses:
         '200':
@@ -4658,6 +4664,12 @@ paths:
           an UUID.
         schema:
           type: string
+      - name: external_id
+        in: query
+        schema:
+          type: string
+        required: false
+        description: An optional user-defined 180 character unique identifier.
       responses:
         '201':
           description: successful
@@ -9641,6 +9653,10 @@ components:
                 type: array
                 items:
                   "$ref": "#/components/schemas/routing_detail"
+              external_id:
+                type: string
+                nullable: true
+                description: An optional user-defined 180 character unique identifier.
               metadata:
                 type: object
                 additionalProperties:
@@ -9679,7 +9695,7 @@ components:
                 - plaid
                 nullable: true
             additionalProperties: false
-            minProperties: 18
+            minProperties: 19
           description: The accounts for this counterparty.
         email:
           type: string
@@ -9960,6 +9976,10 @@ components:
                   required:
                   - routing_number
                   - routing_number_type
+              external_id:
+                type: string
+                nullable: true
+                description: An optional user-defined 180 character unique identifier.
               metadata:
                 type: object
                 additionalProperties:
@@ -11083,6 +11103,10 @@ components:
           type: array
           items:
             "$ref": "#/components/schemas/routing_detail"
+        external_id:
+          type: string
+          nullable: true
+          description: An optional user-defined 180 character unique identifier.
         metadata:
           type: object
           additionalProperties:
@@ -11120,7 +11144,7 @@ components:
           - plaid
           nullable: true
       additionalProperties: false
-      minProperties: 19
+      minProperties: 20
       required:
       - id
       - object
@@ -11135,6 +11159,7 @@ components:
       - counterparty_id
       - account_details
       - routing_details
+      - external_id
       - metadata
       - party_name
       - contact_details
@@ -11289,6 +11314,10 @@ components:
             required:
             - routing_number
             - routing_number_type
+        external_id:
+          type: string
+          nullable: true
+          description: An optional user-defined 180 character unique identifier.
         metadata:
           type: object
           additionalProperties:
@@ -17171,6 +17200,10 @@ components:
                 type: array
                 items:
                   "$ref": "#/components/schemas/routing_detail"
+              external_id:
+                type: string
+                nullable: true
+                description: An optional user-defined 180 character unique identifier.
               metadata:
                 type: object
                 additionalProperties:
@@ -17209,7 +17242,7 @@ components:
                 - plaid
                 nullable: true
             additionalProperties: false
-            minProperties: 18
+            minProperties: 19
           - "$ref": "#/components/schemas/internal_account"
           description: The receiving account. Can be an `external_account` or `internal_account`.
           nullable: true
@@ -17719,6 +17752,10 @@ components:
                 required:
                 - routing_number
                 - routing_number_type
+            external_id:
+              type: string
+              nullable: true
+              description: An optional user-defined 180 character unique identifier.
             metadata:
               type: object
               additionalProperties:
@@ -18173,6 +18210,10 @@ components:
                 required:
                 - routing_number
                 - routing_number_type
+            external_id:
+              type: string
+              nullable: true
+              description: An optional user-defined 180 character unique identifier.
             metadata:
               type: object
               additionalProperties:
@@ -18656,6 +18697,10 @@ components:
                 required:
                 - routing_number
                 - routing_number_type
+            external_id:
+              type: string
+              nullable: true
+              description: An optional user-defined 180 character unique identifier.
             metadata:
               type: object
               additionalProperties:
