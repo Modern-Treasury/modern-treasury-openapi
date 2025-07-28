@@ -3736,7 +3736,6 @@ paths:
           - payment_orders
           - transactions
           - connections
-          - conversations
         description: The type of the associated object. Currently can be one of `payment_order`,
           `transaction`, `paper_item`, `expected_payment`, `counterparty`, `organization`,
           `case`, `internal_account`, `decision`, or `external_account`.
@@ -3852,7 +3851,6 @@ paths:
           - payment_orders
           - transactions
           - connections
-          - conversations
         description: The type of the associated object. Currently can be one of `payment_order`,
           `transaction`, `paper_item`, `expected_payment`, `counterparty`, `organization`,
           `case`, `internal_account`, `decision`, or `external_account`.
@@ -3927,7 +3925,6 @@ paths:
           - payment_orders
           - transactions
           - connections
-          - conversations
         description: The type of the associated object. Currently can be one of `payment_order`,
           `transaction`, `paper_item`, `expected_payment`, `counterparty`, `organization`,
           `case`, `internal_account`, `decision`, or `external_account`.
@@ -3988,7 +3985,6 @@ paths:
         - payment_orders
         - transactions
         - connections
-        - conversations
       description: The type of the associated object. Currently can be one of `payment_order`,
         `transaction`, `paper_item`, `expected_payment`, `counterparty`, `organization`,
         `case`, `internal_account`, `decision`, or `external_account`.
@@ -4076,7 +4072,6 @@ paths:
         - payment_orders
         - transactions
         - connections
-        - conversations
       description: The type of the associated object. Currently can be one of `payment_order`,
         `transaction`, `paper_item`, `expected_payment`, `counterparty`, `organization`,
         `case`, `internal_account`, `decision`, or `external_account`.
@@ -10367,7 +10362,6 @@ components:
           - payment_order
           - transaction
           - connection
-          - conversation
           description: The type of the associated object. Currently can be one of
             `payment_order`, `transaction`, `paper_item`, `expected_payment`, `counterparty`,
             `organization`, `case`, `internal_account`, `decision`, or `external_account`.
@@ -10424,7 +10418,6 @@ components:
           - payment_orders
           - transactions
           - connections
-          - conversations
         document_type:
           type: string
           description: A category given to the document, can be `null`.
@@ -14685,9 +14678,10 @@ components:
           nullable: true
         archived_reason:
           type: string
-          description: Reason for why a ledger transaction was automatically archived,
-            typically due to a balance lock failure. This is a system-generated field
-            and is only populated when applicable.
+          description: System-set reason why the ledger transaction was archived;
+            currently only 'balance_lock_failure' for transactions that violated balance
+            constraints. Only populated when archive_on_balance_lock_failure is true
+            and a balance lock violation occurs, otherwise null.
           nullable: true
       additionalProperties: false
       minProperties: 20
@@ -14820,8 +14814,15 @@ components:
           description: The ID of the ledger transaction that this ledger transaction
             partially posts.
           nullable: true
+        archived_reason:
+          type: string
+          description: System-set reason why the ledger transaction was archived;
+            currently only 'balance_lock_failure' for transactions that violated balance
+            constraints. Only populated when archive_on_balance_lock_failure is true
+            and a balance lock violation occurs, otherwise null.
+          nullable: true
       additionalProperties: false
-      minProperties: 20
+      minProperties: 21
       required:
       - id
       - object
@@ -14843,6 +14844,7 @@ components:
       - reverses_ledger_transaction_id
       - reversed_by_ledger_transaction_id
       - partially_posts_ledger_transaction_id
+      - archived_reason
     ledger_transaction_create_request:
       type: object
       properties:
