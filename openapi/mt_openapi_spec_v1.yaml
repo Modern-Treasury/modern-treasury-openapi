@@ -3735,8 +3735,8 @@ paths:
           - transactions
           - connections
         description: The type of the associated object. Currently can be one of `payment_order`,
-          `transaction`, `paper_item`, `expected_payment`, `counterparty`, `organization`,
-          `case`, `internal_account`, `decision`, or `external_account`.
+          `transaction`, `expected_payment`, `counterparty`, `organization`, `case`,
+          `internal_account`, `decision`, or `external_account`.
         required: false
       - name: after_cursor
         in: query
@@ -3849,8 +3849,8 @@ paths:
           - transactions
           - connections
         description: The type of the associated object. Currently can be one of `payment_order`,
-          `transaction`, `paper_item`, `expected_payment`, `counterparty`, `organization`,
-          `case`, `internal_account`, `decision`, or `external_account`.
+          `transaction`, `expected_payment`, `counterparty`, `organization`, `case`,
+          `internal_account`, `decision`, or `external_account`.
         required: true
       - name: document_type
         in: query
@@ -3922,8 +3922,8 @@ paths:
           - transactions
           - connections
         description: The type of the associated object. Currently can be one of `payment_order`,
-          `transaction`, `paper_item`, `expected_payment`, `counterparty`, `organization`,
-          `case`, `internal_account`, `decision`, or `external_account`.
+          `transaction`, `expected_payment`, `counterparty`, `organization`, `case`,
+          `internal_account`, `decision`, or `external_account`.
         required: true
       - name: Idempotency-Key
         in: header
@@ -3981,8 +3981,8 @@ paths:
         - transactions
         - connections
       description: The type of the associated object. Currently can be one of `payment_order`,
-        `transaction`, `paper_item`, `expected_payment`, `counterparty`, `organization`,
-        `case`, `internal_account`, `decision`, or `external_account`.
+        `transaction`, `expected_payment`, `counterparty`, `organization`, `case`,
+        `internal_account`, `decision`, or `external_account`.
       required: true
     - name: id
       in: path
@@ -4067,8 +4067,8 @@ paths:
         - transactions
         - connections
       description: The type of the associated object. Currently can be one of `payment_order`,
-        `transaction`, `paper_item`, `expected_payment`, `counterparty`, `organization`,
-        `case`, `internal_account`, `decision`, or `external_account`.
+        `transaction`, `expected_payment`, `counterparty`, `organization`, `case`,
+        `internal_account`, `decision`, or `external_account`.
       required: true
     - name: id
       in: path
@@ -6717,7 +6717,7 @@ paths:
           - return
           - reversal
         required: false
-        description: One of `payment_order`, `paper_item`, `reversal`, or `incoming_payment_detail`.
+        description: One of `payment_order`, `reversal`, or `incoming_payment_detail`.
           Must be accompanied by `returnable_id`.
       responses:
         '200':
@@ -10254,8 +10254,8 @@ components:
           - transaction
           - connection
           description: The type of the associated object. Currently can be one of
-            `payment_order`, `transaction`, `paper_item`, `expected_payment`, `counterparty`,
-            `organization`, `case`, `internal_account`, `decision`, or `external_account`.
+            `payment_order`, `transaction`, `expected_payment`, `counterparty`, `organization`,
+            `case`, `internal_account`, `decision`, or `external_account`.
         document_details:
           type: array
           items:
@@ -14538,7 +14538,7 @@ components:
           description: If the ledger transaction can be reconciled to another object
             in Modern Treasury, the type will be populated here, otherwise null. This
             can be one of payment_order, incoming_payment_detail, expected_payment,
-            return, paper_item, or reversal.
+            return, or reversal.
         ledgerable_id:
           type: string
           format: uuid
@@ -14787,7 +14787,7 @@ components:
           description: If the ledger transaction can be reconciled to another object
             in Modern Treasury, the type will be populated here, otherwise null. This
             can be one of payment_order, incoming_payment_detail, expected_payment,
-            return, paper_item, or reversal.
+            return, or reversal.
         ledgerable_id:
           type: string
           format: uuid
@@ -14840,7 +14840,7 @@ components:
           description: If the ledger transaction can be reconciled to another object
             in Modern Treasury, the type will be populated here, otherwise null. This
             can be one of payment_order, incoming_payment_detail, expected_payment,
-            return, paper_item, or reversal.
+            return, or reversal.
         ledgerable_id:
           type: string
           format: uuid
