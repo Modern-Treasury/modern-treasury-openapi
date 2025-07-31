@@ -1933,7 +1933,6 @@ paths:
           enum:
           - expected_payment
           - incoming_payment_detail
-          - paper_item
           - payment_order
           - return
           - reversal
@@ -3732,7 +3731,6 @@ paths:
           - incoming_payment_details
           - internal_accounts
           - organizations
-          - paper_items
           - payment_orders
           - transactions
           - connections
@@ -3847,7 +3845,6 @@ paths:
           - incoming_payment_details
           - internal_accounts
           - organizations
-          - paper_items
           - payment_orders
           - transactions
           - connections
@@ -3921,7 +3918,6 @@ paths:
           - incoming_payment_details
           - internal_accounts
           - organizations
-          - paper_items
           - payment_orders
           - transactions
           - connections
@@ -3981,7 +3977,6 @@ paths:
         - incoming_payment_details
         - internal_accounts
         - organizations
-        - paper_items
         - payment_orders
         - transactions
         - connections
@@ -4068,7 +4063,6 @@ paths:
         - incoming_payment_details
         - internal_accounts
         - organizations
-        - paper_items
         - payment_orders
         - transactions
         - connections
@@ -5987,107 +5981,6 @@ paths:
           application/json:
             schema:
               "$ref": "#/components/schemas/line_item_update_request"
-  "/api/paper_items":
-    get:
-      summary: list paper items
-      tags:
-      - PaperItem
-      description: Get a list of all paper items.
-      operationId: listPaperItems
-      security:
-      - basic_auth: []
-      parameters:
-      - name: lockbox_number
-        in: query
-        schema:
-          type: string
-        description: Specify `lockbox_number` if you wish to see paper items that
-          are associated with a specific lockbox number.
-        required: false
-      - name: deposit_date_start
-        in: query
-        schema:
-          type: string
-          format: date
-        required: false
-        description: Specify an inclusive start date (YYYY-MM-DD) when filtering by
-          deposit_date
-      - name: deposit_date_end
-        in: query
-        schema:
-          type: string
-          format: date
-        required: false
-        description: Specify an inclusive end date (YYYY-MM-DD) when filtering by
-          deposit_date
-      - name: after_cursor
-        in: query
-        schema:
-          type: string
-          nullable: true
-        required: false
-      - name: per_page
-        in: query
-        required: false
-        schema:
-          type: integer
-      responses:
-        '200':
-          description: successful
-          headers:
-            X-After-Cursor:
-              schema:
-                type: string
-                nullable: true
-              description: The cursor for the next page. Including this in a call
-                as `after_cursor` will return the next page.
-            X-Per-Page:
-              schema:
-                type: integer
-                nullable: true
-              description: The current `per_page`.
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  "$ref": "#/components/schemas/paper_item"
-  "/api/paper_items/{id}":
-    parameters:
-    - name: id
-      in: path
-      schema:
-        type: string
-        format: uuid
-      description: id
-      required: true
-    get:
-      summary: get paper item
-      tags:
-      - PaperItem
-      description: Get details on a single paper item.
-      operationId: getPaperItem
-      security:
-      - basic_auth: []
-      responses:
-        '200':
-          description: successful
-          content:
-            application/json:
-              schema:
-                "$ref": "#/components/schemas/paper_item"
-        '403':
-          description: forbidden
-          content:
-            application/json:
-              schema:
-                "$ref": "#/components/schemas/error_message"
-        '404':
-          description: not found
-          content:
-            application/json:
-              schema:
-                "$ref": "#/components/schemas/error_message"
   "/api/payment_actions":
     get:
       summary: list payment_actions
@@ -6820,7 +6713,6 @@ paths:
           type: string
           enum:
           - incoming_payment_detail
-          - paper_item
           - payment_order
           - return
           - reversal
@@ -10358,7 +10250,6 @@ components:
           - incoming_payment_detail
           - internal_account
           - organization
-          - paper_item
           - payment_order
           - transaction
           - connection
@@ -10414,7 +10305,6 @@ components:
           - incoming_payment_details
           - internal_accounts
           - organizations
-          - paper_items
           - payment_orders
           - transactions
           - connections
@@ -14641,7 +14531,6 @@ components:
           enum:
           - expected_payment
           - incoming_payment_detail
-          - paper_item
           - payment_order
           - return
           - reversal
@@ -14776,7 +14665,6 @@ components:
           enum:
           - expected_payment
           - incoming_payment_detail
-          - paper_item
           - payment_order
           - return
           - reversal
@@ -14893,7 +14781,6 @@ components:
           enum:
           - expected_payment
           - incoming_payment_detail
-          - paper_item
           - payment_order
           - return
           - reversal
@@ -14947,7 +14834,6 @@ components:
           enum:
           - expected_payment
           - incoming_payment_detail
-          - paper_item
           - payment_order
           - return
           - reversal
@@ -15000,7 +14886,6 @@ components:
           enum:
           - expected_payment
           - incoming_payment_detail
-          - paper_item
           - payment_order
           - return
           - reversal
@@ -16531,106 +16416,6 @@ components:
             key: value
             foo: bar
             modern: treasury
-    paper_item:
-      type: object
-      properties:
-        id:
-          type: string
-          format: uuid
-        object:
-          type: string
-        live_mode:
-          type: boolean
-          description: This field will be true if this object exists in the live environment
-            or false if it exists in the test environment.
-        created_at:
-          type: string
-          format: date-time
-        updated_at:
-          type: string
-          format: date-time
-        transaction_line_item_id:
-          type: string
-          format: uuid
-          description: The ID of the reconciled Transaction Line Item or `null`.
-          nullable: true
-        transaction_id:
-          type: string
-          format: uuid
-          description: The ID of the reconciled Transaction or `null`.
-          nullable: true
-        status:
-          type: string
-          description: The current status of the paper item. One of `pending`, `completed`,
-            or `returned`.
-          enum:
-          - completed
-          - pending
-          - returned
-        lockbox_number:
-          type: string
-          description: The identifier for the lockbox assigned by the bank.
-        deposit_date:
-          type: string
-          format: date
-          description: The date the paper item was deposited into your organization's
-            bank account.
-        amount:
-          type: integer
-          description: The amount of the paper item.
-        currency:
-          "$ref": "#/components/schemas/currency"
-          description: The currency of the paper item.
-        account_number:
-          type: string
-          description: The account number on the paper item.
-          nullable: true
-        account_number_safe:
-          type: string
-          description: The last 4 digits of the account_number.
-          nullable: true
-        routing_number:
-          type: string
-          description: The routing number on the paper item.
-          nullable: true
-        check_number:
-          type: string
-          description: The check number on the paper item.
-          nullable: true
-        remitter_name:
-          type: string
-          description: The name of the remitter on the paper item.
-          nullable: true
-        memo_field:
-          type: string
-          description: The memo field on the paper item.
-          nullable: true
-        metadata:
-          type: object
-          description: Additional data represented as key-value pairs. Both the key
-            and value must be strings.
-      additionalProperties: false
-      minProperties: 19
-      required:
-      - id
-      - object
-      - live_mode
-      - created_at
-      - updated_at
-      - transaction_line_item_id
-      - transaction_id
-      - status
-      - lockbox_number
-      - deposit_date
-      - amount
-      - currency
-      - account_number
-      - account_number_safe
-      - routing_number
-      - check_number
-      - remitter_name
-      - memo_field
-      - metadata
     payment_action:
       type: object
       properties:
@@ -19070,7 +18855,6 @@ components:
           type: string
           enum:
           - incoming_payment_detail
-          - paper_item
           - payment_order
           - return
           - reversal
@@ -19270,7 +19054,6 @@ components:
           - eft
           - interac
           - manual
-          - paper_item
           - sepa
           - wire
           description: 'The type of return. Can be one of: `ach`, `ach_noc`, `au_becs`,
@@ -20338,7 +20121,6 @@ components:
           type: string
           enum:
           - incoming_payment_detail
-          - paper_item
           - payment_order
           - payment_order_attempt
           - return
