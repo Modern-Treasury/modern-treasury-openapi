@@ -5996,6 +5996,7 @@ paths:
           type: string
           enum:
           - evolve_non_processing_transaction
+          - control_file
           - stop
           - issue
         description: The type of payment action.
