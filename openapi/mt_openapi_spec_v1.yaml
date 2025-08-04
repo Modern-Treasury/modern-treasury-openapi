@@ -1462,19 +1462,24 @@ paths:
       - name: status
         in: query
         schema:
-          oneOf:
-          - type: string
+          type: string
+          enum:
+          - pending
+          - posted
+          - archived
+        required: false
+        description: Get all ledger entries that match the status specified. One of
+          `pending`, `posted`, or `archived`. For multiple statuses, use `status[]=pending&status[]=posted`.
+      - name: status[]
+        in: query
+        schema:
+          type: array
+          items:
+            type: string
             enum:
             - pending
             - posted
             - archived
-          - type: array
-            items:
-              type: string
-              enum:
-              - pending
-              - posted
-              - archived
         required: false
         description: Get all ledger entries that match the status specified. One of
           `pending`, `posted`, or `archived`. For multiple statuses, use `status[]=pending&status[]=posted`.
