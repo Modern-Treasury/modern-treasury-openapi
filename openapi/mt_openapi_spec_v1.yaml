@@ -5989,6 +5989,7 @@ paths:
   "/api/payment_actions":
     get:
       summary: list payment_actions
+      operationId: listPaymentActions
       tags:
       - PaymentAction
       description: Get a list of all payment actions.
@@ -6101,6 +6102,7 @@ paths:
                   "$ref": "#/components/schemas/payment_action"
     post:
       summary: create payment_action
+      operationId: createPaymentAction
       tags:
       - PaymentAction
       description: Create a payment action.
@@ -6142,6 +6144,7 @@ paths:
         type: string
     get:
       summary: get payment_action
+      operationId: getPaymentAction
       tags:
       - PaymentAction
       description: Get details on a single payment action.
@@ -6162,6 +6165,7 @@ paths:
                 "$ref": "#/components/schemas/error_message"
     patch:
       summary: update payment_action
+      operationId: updatePaymentAction
       tags:
       - PaymentAction
       description: Update a single payment action.
@@ -16959,6 +16963,7 @@ components:
           nullable: true
           description: An optional user-defined 180 character unique identifier.
         receiving_account:
+          type: object
           oneOf:
           - type: object
             properties:
@@ -17074,6 +17079,7 @@ components:
           - internal_account
           - external_account
         ultimate_originating_account:
+          type: object
           oneOf:
           - "$ref": "#/components/schemas/virtual_account"
           - "$ref": "#/components/schemas/internal_account"
@@ -19333,6 +19339,7 @@ components:
         transaction_ids:
           type: array
           items:
+            type: string
             format: uuid
             nullable: true
             description: The ID of the relevant Transaction or `null`.
