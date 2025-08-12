@@ -1504,6 +1504,25 @@ paths:
         description: Order by `created_at` or `effective_at` in `asc` or `desc` order.
           For example, to order by `effective_at asc`, use `order_by%5Beffective_at%5D=asc`.
           Ordering by only one field at a time is supported.
+      - name: amount
+        in: query
+        schema:
+          type: object
+          properties:
+            gte:
+              type: integer
+            lte:
+              type: integer
+            gt:
+              type: integer
+            lt:
+              type: integer
+            eq:
+              type: integer
+        style: deepObject
+        required: false
+        description: Use `gt` (>), `gte` (>=), `lt` (<), `lte` (<=), or `eq` (=) to
+          filter by amount.
       - name: show_balances
         in: query
         required: false
