@@ -6039,8 +6039,6 @@ paths:
         schema:
           type: string
           enum:
-          - evolve_non_processing_transaction
-          - control_file
           - stop
           - issue
         description: The type of payment action.
@@ -6054,6 +6052,7 @@ paths:
           - processable
           - processing
           - sent
+          - acknowledged
           - failed
           - cancelled
         description: Filter by payment actions of a specific status.
@@ -16490,7 +16489,7 @@ components:
         status:
           type: string
           description: The current status of the payment action. One of `pending`,
-            `processing`, `sent`, `cancelled`, or `failed`.
+            `processing`, `sent`, `acknowledged`, `cancelled`, or `failed`.
         actionable_id:
           type: string
           format: uuid
@@ -16560,6 +16559,7 @@ components:
           - processable
           - processing
           - sent
+          - acknowledged
           - failed
           - cancelled
           description: Optional. Set the status of the payment action to `cancelled`
