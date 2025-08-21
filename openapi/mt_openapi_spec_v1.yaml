@@ -13826,6 +13826,7 @@ components:
           description: The exclusive upper bound of the effective_at timestamp of
             the ledger entries to be included in the ledger account settlement. The
             default value is the created_at timestamp of the ledger account settlement.
+          nullable: true
         ledger_transaction_id:
           type: string
           format: uuid
