@@ -2503,6 +2503,7 @@ paths:
                     - dk_nets
                     - eft
                     - ethereum
+                    - gb_fps
                     - hu_ics
                     - interac
                     - masav
@@ -4345,6 +4346,7 @@ paths:
           - dk_nets
           - eft
           - ethereum
+          - gb_fps
           - hu_ics
           - interac
           - masav
@@ -5187,6 +5189,7 @@ paths:
           - dk_nets
           - eft
           - ethereum
+          - gb_fps
           - hu_ics
           - interac
           - masav
@@ -6306,6 +6309,7 @@ paths:
           - dk_nets
           - eft
           - ethereum
+          - gb_fps
           - hu_ics
           - interac
           - masav
@@ -8351,6 +8355,7 @@ components:
           - dk_nets
           - eft
           - ethereum
+          - gb_fps
           - hu_ics
           - interac
           - masav
@@ -9902,6 +9907,7 @@ components:
                       - dk_nets
                       - eft
                       - ethereum
+                      - gb_fps
                       - hu_ics
                       - interac
                       - masav
@@ -10548,6 +10554,7 @@ components:
           - dk_nets
           - eft
           - ethereum
+          - gb_fps
           - hu_ics
           - interac
           - masav
@@ -10745,6 +10752,7 @@ components:
           - dk_nets
           - eft
           - ethereum
+          - gb_fps
           - hu_ics
           - interac
           - masav
@@ -10895,6 +10903,7 @@ components:
           - dk_nets
           - eft
           - ethereum
+          - gb_fps
           - hu_ics
           - interac
           - masav
@@ -11240,6 +11249,7 @@ components:
                 - dk_nets
                 - eft
                 - ethereum
+                - gb_fps
                 - hu_ics
                 - interac
                 - masav
@@ -11391,6 +11401,7 @@ components:
           - dk_nets
           - eft
           - ethereum
+          - gb_fps
           - hu_ics
           - interac
           - masav
@@ -11467,6 +11478,7 @@ components:
           - dk_nets
           - eft
           - ethereum
+          - gb_fps
           - hu_ics
           - interac
           - masav
@@ -12693,6 +12705,7 @@ components:
           - dk_nets
           - eft
           - ethereum
+          - gb_fps
           - hu_ics
           - interac
           - masav
@@ -12945,6 +12958,7 @@ components:
           - dk_nets
           - eft
           - ethereum
+          - gb_fps
           - hu_ics
           - interac
           - masav
@@ -16758,6 +16772,7 @@ components:
           - dk_nets
           - eft
           - ethereum
+          - gb_fps
           - hu_ics
           - interac
           - masav
@@ -17251,6 +17266,7 @@ components:
           - dk_nets
           - eft
           - ethereum
+          - gb_fps
           - hu_ics
           - interac
           - masav
@@ -17594,6 +17610,7 @@ components:
                     - dk_nets
                     - eft
                     - ethereum
+                    - gb_fps
                     - hu_ics
                     - interac
                     - masav
@@ -17709,6 +17726,7 @@ components:
           - dk_nets
           - eft
           - ethereum
+          - gb_fps
           - hu_ics
           - interac
           - masav
@@ -18052,6 +18070,7 @@ components:
                     - dk_nets
                     - eft
                     - ethereum
+                    - gb_fps
                     - hu_ics
                     - interac
                     - masav
@@ -18160,6 +18179,7 @@ components:
           - dk_nets
           - eft
           - ethereum
+          - gb_fps
           - hu_ics
           - interac
           - masav
@@ -18539,6 +18559,7 @@ components:
                     - dk_nets
                     - eft
                     - ethereum
+                    - gb_fps
                     - hu_ics
                     - interac
                     - masav
@@ -19519,6 +19540,7 @@ components:
           - dk_nets
           - eft
           - ethereum
+          - gb_fps
           - hu_ics
           - interac
           - masav
@@ -19611,6 +19633,7 @@ components:
           - dk_nets
           - eft
           - ethereum
+          - gb_fps
           - hu_ics
           - interac
           - masav
@@ -19677,6 +19700,7 @@ components:
             - dk_nets
             - eft
             - ethereum
+            - gb_fps
             - hu_ics
             - interac
             - masav
@@ -19699,7 +19723,7 @@ components:
             - solana
             - wire
             - zengin
-          maxItems: 34
+          maxItems: 35
           example:
           - ach
           - au_becs
@@ -19713,6 +19737,7 @@ components:
           - dk_nets
           - eft
           - ethereum
+          - gb_fps
           - hu_ics
           - interac
           - masav
@@ -19963,6 +19988,7 @@ components:
           - dk_nets
           - eft
           - ethereum
+          - gb_fps
           - hu_ics
           - interac
           - masav
@@ -20107,6 +20133,7 @@ components:
           - dk_nets
           - eft
           - ethereum
+          - gb_fps
           - hu_ics
           - interac
           - masav
@@ -20468,6 +20495,7 @@ components:
           - dk_nets
           - eft
           - ethereum
+          - gb_fps
           - hu_ics
           - interac
           - masav
