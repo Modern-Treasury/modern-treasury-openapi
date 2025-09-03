@@ -10437,6 +10437,7 @@ components:
               - invalid_key
               - header_invalid
               - expired_key
+              - conflict
               - too_many_requests
             message:
               type: string
