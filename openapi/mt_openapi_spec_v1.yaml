@@ -8288,23 +8288,6 @@ components:
       description: If you have specific names to retrieve in bulk, you can pass them
         as query parameters delimited with `name[]=`, for example `?name[]=123&name[]=abc`.
   schemas:
-    accounting:
-      type: object
-      properties:
-        account_id:
-          type: string
-          format: uuid
-          nullable: true
-          description: The ID of one of your accounting categories. Note that these
-            will only be accessible if your accounting system has been connected.
-        class_id:
-          type: string
-          format: uuid
-          nullable: true
-          description: The ID of one of the class objects in your accounting system.
-            Class objects track segments of your business independent of client or
-            project. Note that these will only be accessible if your accounting system
-            has been connected.
     account_capability:
       type: object
       properties:
@@ -16407,24 +16390,14 @@ components:
             key: value
             foo: bar
             modern: treasury
-        accounting:
-          "$ref": "#/components/schemas/accounting"
         accounting_category_id:
           type: string
           format: uuid
           description: The ID of one of your accounting categories. Note that these
             will only be accessible if your accounting system has been connected.
           nullable: true
-        accounting_ledger_class_id:
-          type: string
-          format: uuid
-          description: The ID of one of the class objects in your accounting system.
-            Class objects track segments of your business independent of client or
-            project. Note that these will only be accessible if your accounting system
-            has been connected.
-          nullable: true
       additionalProperties: false
-      minProperties: 13
+      minProperties: 11
       required:
       - id
       - object
@@ -16436,9 +16409,7 @@ components:
       - amount
       - description
       - metadata
-      - accounting
       - accounting_category_id
-      - accounting_ledger_class_id
     line_item_request:
       type: object
       properties:
@@ -16867,8 +16838,9 @@ components:
           type: string
           format: uuid
           description: The receiving account ID. Can be an `external_account` or `internal_account`.
-        accounting:
-          "$ref": "#/components/schemas/accounting"
+        currency:
+          "$ref": "#/components/schemas/currency"
+          description: Defaults to the currency of the originating account.
         accounting_category_id:
           type: string
           format: uuid
@@ -16876,16 +16848,6 @@ components:
           description: The ID of one of your accounting categories. Note that these
             will only be accessible if your accounting system has been connected.
           deprecated: true
-        accounting_ledger_class_id:
-          type: string
-          format: uuid
-          nullable: true
-          description: The ID of one of your accounting ledger classes. Note that
-            these will only be accessible if your accounting system has been connected.
-          deprecated: true
-        currency:
-          "$ref": "#/components/schemas/currency"
-          description: Defaults to the currency of the originating account.
         effective_date:
           type: string
           format: date
@@ -17198,7 +17160,7 @@ components:
           description: Additional vendor specific fields for this payment. Data must
             be represented as key-value pairs.
       additionalProperties: false
-      minProperties: 49
+      minProperties: 47
       required:
       - id
       - object
@@ -17212,10 +17174,8 @@ components:
       - priority
       - originating_account_id
       - receiving_account_id
-      - accounting
-      - accounting_category_id
-      - accounting_ledger_class_id
       - currency
+      - accounting_category_id
       - effective_date
       - description
       - statement_descriptor
@@ -17363,8 +17323,9 @@ components:
           description: Either `receiving_account` or `receiving_account_id` must be
             present. When using `receiving_account_id`, you may pass the id of an
             external account or an internal account.
-        accounting:
-          "$ref": "#/components/schemas/accounting"
+        currency:
+          "$ref": "#/components/schemas/currency"
+          description: Defaults to the currency of the originating account.
         accounting_category_id:
           type: string
           format: uuid
@@ -17372,16 +17333,6 @@ components:
           description: The ID of one of your accounting categories. Note that these
             will only be accessible if your accounting system has been connected.
           deprecated: true
-        accounting_ledger_class_id:
-          type: string
-          format: uuid
-          nullable: true
-          description: The ID of one of your accounting ledger classes. Note that
-            these will only be accessible if your accounting system has been connected.
-          deprecated: true
-        currency:
-          "$ref": "#/components/schemas/currency"
-          description: Defaults to the currency of the originating account.
         effective_date:
           type: string
           format: date
@@ -17823,8 +17774,9 @@ components:
           description: Either `receiving_account` or `receiving_account_id` must be
             present. When using `receiving_account_id`, you may pass the id of an
             external account or an internal account.
-        accounting:
-          "$ref": "#/components/schemas/accounting"
+        currency:
+          "$ref": "#/components/schemas/currency"
+          description: Defaults to the currency of the originating account.
         accounting_category_id:
           type: string
           format: uuid
@@ -17832,16 +17784,6 @@ components:
           description: The ID of one of your accounting categories. Note that these
             will only be accessible if your accounting system has been connected.
           deprecated: true
-        accounting_ledger_class_id:
-          type: string
-          format: uuid
-          nullable: true
-          description: The ID of one of your accounting ledger classes. Note that
-            these will only be accessible if your accounting system has been connected.
-          deprecated: true
-        currency:
-          "$ref": "#/components/schemas/currency"
-          description: Defaults to the currency of the originating account.
         effective_date:
           type: string
           format: date
@@ -18276,8 +18218,9 @@ components:
           description: Either `receiving_account` or `receiving_account_id` must be
             present. When using `receiving_account_id`, you may pass the id of an
             external account or an internal account.
-        accounting:
-          "$ref": "#/components/schemas/accounting"
+        currency:
+          "$ref": "#/components/schemas/currency"
+          description: Defaults to the currency of the originating account.
         accounting_category_id:
           type: string
           format: uuid
@@ -18285,16 +18228,6 @@ components:
           description: The ID of one of your accounting categories. Note that these
             will only be accessible if your accounting system has been connected.
           deprecated: true
-        accounting_ledger_class_id:
-          type: string
-          format: uuid
-          nullable: true
-          description: The ID of one of your accounting ledger classes. Note that
-            these will only be accessible if your accounting system has been connected.
-          deprecated: true
-        currency:
-          "$ref": "#/components/schemas/currency"
-          description: Defaults to the currency of the originating account.
         effective_date:
           type: string
           format: date
