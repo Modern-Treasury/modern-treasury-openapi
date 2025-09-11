@@ -8288,6 +8288,26 @@ components:
       description: If you have specific names to retrieve in bulk, you can pass them
         as query parameters delimited with `name[]=`, for example `?name[]=123&name[]=abc`.
   schemas:
+    accounting:
+      type: object
+      deprecated: true
+      properties:
+        account_id:
+          type: string
+          format: uuid
+          nullable: true
+          deprecated: true
+          description: The ID of one of your accounting categories. Note that these
+            will only be accessible if your accounting system has been connected.
+        class_id:
+          type: string
+          format: uuid
+          nullable: true
+          deprecated: true
+          description: The ID of one of the class objects in your accounting system.
+            Class objects track segments of your business independent of client or
+            project. Note that these will only be accessible if your accounting system
+            has been connected.
     account_capability:
       type: object
       properties:
@@ -9991,6 +10011,7 @@ components:
           description: The verification status of the counterparty.
         accounting:
           type: object
+          deprecated: true
           properties:
             type:
               type: string
@@ -16390,14 +16411,26 @@ components:
             key: value
             foo: bar
             modern: treasury
+        accounting:
+          "$ref": "#/components/schemas/accounting"
         accounting_category_id:
           type: string
           format: uuid
+          deprecated: true
           description: The ID of one of your accounting categories. Note that these
             will only be accessible if your accounting system has been connected.
           nullable: true
+        accounting_ledger_class_id:
+          type: string
+          format: uuid
+          deprecated: true
+          description: The ID of one of the class objects in your accounting system.
+            Class objects track segments of your business independent of client or
+            project. Note that these will only be accessible if your accounting system
+            has been connected.
+          nullable: true
       additionalProperties: false
-      minProperties: 11
+      minProperties: 13
       required:
       - id
       - object
@@ -16409,7 +16442,9 @@ components:
       - amount
       - description
       - metadata
+      - accounting
       - accounting_category_id
+      - accounting_ledger_class_id
     line_item_request:
       type: object
       properties:
@@ -16841,12 +16876,21 @@ components:
         currency:
           "$ref": "#/components/schemas/currency"
           description: Defaults to the currency of the originating account.
+        accounting:
+          "$ref": "#/components/schemas/accounting"
         accounting_category_id:
           type: string
           format: uuid
           nullable: true
           description: The ID of one of your accounting categories. Note that these
             will only be accessible if your accounting system has been connected.
+          deprecated: true
+        accounting_ledger_class_id:
+          type: string
+          format: uuid
+          nullable: true
+          description: The ID of one of your accounting ledger classes. Note that
+            these will only be accessible if your accounting system has been connected.
           deprecated: true
         effective_date:
           type: string
@@ -17160,7 +17204,7 @@ components:
           description: Additional vendor specific fields for this payment. Data must
             be represented as key-value pairs.
       additionalProperties: false
-      minProperties: 47
+      minProperties: 49
       required:
       - id
       - object
@@ -17175,7 +17219,9 @@ components:
       - originating_account_id
       - receiving_account_id
       - currency
+      - accounting
       - accounting_category_id
+      - accounting_ledger_class_id
       - effective_date
       - description
       - statement_descriptor
@@ -17326,12 +17372,21 @@ components:
         currency:
           "$ref": "#/components/schemas/currency"
           description: Defaults to the currency of the originating account.
+        accounting:
+          "$ref": "#/components/schemas/accounting"
         accounting_category_id:
           type: string
           format: uuid
           nullable: true
           description: The ID of one of your accounting categories. Note that these
             will only be accessible if your accounting system has been connected.
+          deprecated: true
+        accounting_ledger_class_id:
+          type: string
+          format: uuid
+          nullable: true
+          description: The ID of one of your accounting ledger classes. Note that
+            these will only be accessible if your accounting system has been connected.
           deprecated: true
         effective_date:
           type: string
@@ -17777,12 +17832,21 @@ components:
         currency:
           "$ref": "#/components/schemas/currency"
           description: Defaults to the currency of the originating account.
+        accounting:
+          "$ref": "#/components/schemas/accounting"
         accounting_category_id:
           type: string
           format: uuid
           nullable: true
           description: The ID of one of your accounting categories. Note that these
             will only be accessible if your accounting system has been connected.
+          deprecated: true
+        accounting_ledger_class_id:
+          type: string
+          format: uuid
+          nullable: true
+          description: The ID of one of your accounting ledger classes. Note that
+            these will only be accessible if your accounting system has been connected.
           deprecated: true
         effective_date:
           type: string
@@ -18221,12 +18285,21 @@ components:
         currency:
           "$ref": "#/components/schemas/currency"
           description: Defaults to the currency of the originating account.
+        accounting:
+          "$ref": "#/components/schemas/accounting"
         accounting_category_id:
           type: string
           format: uuid
           nullable: true
           description: The ID of one of your accounting categories. Note that these
             will only be accessible if your accounting system has been connected.
+          deprecated: true
+        accounting_ledger_class_id:
+          type: string
+          format: uuid
+          nullable: true
+          description: The ID of one of your accounting ledger classes. Note that
+            these will only be accessible if your accounting system has been connected.
           deprecated: true
         effective_date:
           type: string
