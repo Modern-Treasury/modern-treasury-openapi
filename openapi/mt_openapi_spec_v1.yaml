@@ -6379,6 +6379,7 @@ paths:
           - completed
           - denied
           - failed
+          - held
           - needs_approval
           - pending
           - processing
@@ -17018,6 +17019,7 @@ components:
           - completed
           - denied
           - failed
+          - held
           - needs_approval
           - pending
           - processing
@@ -18441,6 +18443,7 @@ components:
           - completed
           - denied
           - failed
+          - held
           - needs_approval
           - pending
           - processing
