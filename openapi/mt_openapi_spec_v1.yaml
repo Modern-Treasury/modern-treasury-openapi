@@ -9682,12 +9682,9 @@ components:
             order is sent to the bank.
         verification_status:
           type: string
-          enum:
-          - denied
-          - needs_approval
-          - unverified
-          - verified
+          deprecated: true
           description: The verification status of the counterparty.
+          nullable: true
       additionalProperties: false
       minProperties: 14
       required:
@@ -10004,12 +10001,9 @@ components:
             order is sent to the bank.
         verification_status:
           type: string
-          enum:
-          - denied
-          - needs_approval
-          - unverified
-          - verified
+          deprecated: true
           description: The verification status of the counterparty.
+          nullable: true
         accounting:
           type: object
           deprecated: true
