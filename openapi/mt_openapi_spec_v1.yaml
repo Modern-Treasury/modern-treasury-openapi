@@ -9684,7 +9684,6 @@ components:
           type: string
           deprecated: true
           description: The verification status of the counterparty.
-          nullable: true
       additionalProperties: false
       minProperties: 14
       required:
@@ -10003,7 +10002,6 @@ components:
           type: string
           deprecated: true
           description: The verification status of the counterparty.
-          nullable: true
         accounting:
           type: object
           deprecated: true
