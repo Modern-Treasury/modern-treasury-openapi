@@ -5558,6 +5558,20 @@ paths:
           format: date
         description: An inclusive upper bound for searching due_date
         required: false
+      - name: created_at_start
+        in: query
+        schema:
+          type: string
+          format: date-time
+        description: An inclusive lower bound for searching created_at
+        required: false
+      - name: created_at_end
+        in: query
+        schema:
+          type: string
+          format: date-time
+        description: An inclusive upper bound for searching created_at
+        required: false
       - "$ref": "#/components/parameters/metadata_query"
       responses:
         '200':
