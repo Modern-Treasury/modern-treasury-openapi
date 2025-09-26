@@ -4961,6 +4961,239 @@ paths:
             application/json:
               schema:
                 "$ref": "#/components/schemas/error_message"
+  "/api/holds":
+    get:
+      summary: list holds
+      tags:
+      - Hold
+      description: Get a list of holds.
+      operationId: listHolds
+      security:
+      - basic_auth: []
+      parameters:
+      - name: after_cursor
+        in: query
+        schema:
+          type: string
+          nullable: true
+        required: false
+      - name: per_page
+        in: query
+        required: false
+        schema:
+          type: integer
+      - name: target_id
+        in: query
+        schema:
+          type: string
+          format: uuid
+          nullable: true
+        required: false
+        description: 'Translation missing: en.openapi.descriptions.payment_order.query_params.target_id'
+      - name: target_type
+        in: query
+        schema:
+          type: string
+          enum:
+          - payment_order
+          nullable: true
+        required: false
+        description: 'Translation missing: en.openapi.descriptions.payment_order.query_params.target_type'
+      - name: status
+        in: query
+        schema:
+          type: string
+          enum:
+          - active
+          - resolved
+          nullable: true
+        required: false
+        description: 'Translation missing: en.openapi.descriptions.payment_order.query_params.status'
+      - "$ref": "#/components/parameters/metadata_query"
+      responses:
+        '200':
+          description: successful
+          headers:
+            X-After-Cursor:
+              schema:
+                type: string
+                nullable: true
+              description: The cursor for the next page. Including this in a call
+                as `after_cursor` will return the next page.
+            X-Per-Page:
+              schema:
+                type: integer
+                nullable: true
+              description: The current `per_page`.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  "$ref": "#/components/schemas/hold"
+    post:
+      summary: create hold
+      tags:
+      - Hold
+      description: Create a new hold
+      operationId: createHold
+      security:
+      - basic_auth: []
+      parameters:
+      - name: Idempotency-Key
+        in: header
+        required: false
+        description: This key should be something unique, preferably something like
+          an UUID.
+        schema:
+          type: string
+      responses:
+        '201':
+          description: created
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/hold"
+        '400':
+          description: bad request
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/error_message"
+        '403':
+          description: forbidden
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/error_message"
+        '404':
+          description: not found
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/error_message"
+        '422':
+          description: unprocessable entity
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/error_message"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                target_type:
+                  type: string
+                  enum:
+                  - payment_order
+                  description: The type of target to hold
+                target_id:
+                  type: string
+                  format: uuid
+                  description: The ID of the target to hold
+                reason:
+                  type: string
+                  nullable: true
+                  description: The reason for the hold
+                status:
+                  type: string
+                  enum:
+                  - active
+                  description: The status of the hold
+                metadata:
+                  type: object
+                  additionalProperties:
+                    type: string
+                  nullable: true
+                  description: Additional metadata for the hold
+              required:
+              - target_type
+              - target_id
+              - status
+  "/api/holds/{id}":
+    get:
+      summary: show hold
+      tags:
+      - Hold
+      description: Get a specific hold
+      operationId: showHold
+      security:
+      - basic_auth: []
+      parameters:
+      - name: id
+        in: path
+        schema:
+          type: string
+          format: uuid
+        description: hold id
+        required: true
+      responses:
+        '200':
+          description: successful
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/hold"
+        '404':
+          description: not found
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/error_message"
+    patch:
+      summary: update hold
+      tags:
+      - Hold
+      description: Update a hold
+      operationId: updateHold
+      security:
+      - basic_auth: []
+      parameters:
+      - name: id
+        in: path
+        schema:
+          type: string
+          format: uuid
+        description: hold id
+        required: true
+      responses:
+        '200':
+          description: successful
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/hold"
+        '422':
+          description: unprocessable entity
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/error_message"
+        '400':
+          description: bad request
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/error_message"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                status:
+                  type: string
+                  enum:
+                  - resolved
+                  description: The new status of the hold
+                resolution:
+                  type: string
+                  nullable: true
+                  description: The resolution of the hold
+              required:
+              - status
   "/api/incoming_payment_details":
     get:
       summary: list incoming payment_details
@@ -17199,6 +17432,11 @@ components:
           nullable: true
           description: If the payment order's status is `returned`, this will include
             the return object's data.
+        current_hold:
+          "$ref": "#/components/schemas/hold"
+          nullable: true
+          description: If the payment order's status is `held`, this will include
+            the hold object's data.
         reference_numbers:
           type: array
           items:
@@ -17218,7 +17456,7 @@ components:
           description: Additional vendor specific fields for this payment. Data must
             be represented as key-value pairs.
       additionalProperties: false
-      minProperties: 49
+      minProperties: 50
       required:
       - id
       - object
@@ -17265,6 +17503,7 @@ components:
       - transaction_ids
       - ledger_transaction_id
       - current_return
+      - current_hold
       - reference_numbers
       - vendor_failure_reason
       - foreign_exchange_rate
@@ -18650,6 +18889,70 @@ components:
             "$ref": "#/components/schemas/line_item_request"
           description: An array of line items that must sum up to the amount of the
             payment order.
+    hold:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        object:
+          type: string
+          enum:
+          - hold
+          description: The type of object
+        live_mode:
+          type: boolean
+          description: This field will be true if this object exists in the live environment
+            or false if it exists in the test environment.
+        created_at:
+          type: string
+          format: date-time
+        updated_at:
+          type: string
+          format: date-time
+        status:
+          type: string
+          enum:
+          - active
+          - resolved
+          description: The status of the hold
+        target_type:
+          type: string
+          enum:
+          - payment_order
+          description: The type of target being held
+        target_id:
+          type: string
+          format: uuid
+          description: The ID of the target being held
+        reason:
+          type: string
+          nullable: true
+          description: The reason for the hold
+        resolution:
+          type: string
+          nullable: true
+          description: The resolution of the hold
+        resolved_at:
+          type: string
+          format: date-time
+          nullable: true
+          description: When the hold was resolved
+        metadata:
+          type: object
+          additionalProperties:
+            type: string
+          description: Additional metadata for the hold
+          nullable: true
+      required:
+      - id
+      - object
+      - status
+      - target_type
+      - target_id
+      - created_at
+      - updated_at
+      additionalProperties: false
     payment_reference:
       type: object
       properties:
@@ -19151,6 +19454,7 @@ components:
           - check
           - cross_border
           - eft
+          - gb_fps
           - interac
           - manual
           - sepa
