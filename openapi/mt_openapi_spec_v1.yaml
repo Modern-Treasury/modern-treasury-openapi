@@ -5457,6 +5457,18 @@ paths:
         required: false
         description: Only return internal accounts that can originate payments with
           this direction.
+      - name: status
+        in: query
+        schema:
+          type: string
+          enum:
+          - active
+          - pending_activation
+          - suspended
+          - pending_closure
+          - closed
+        required: false
+        description: Only return internal accounts with this status.
       - "$ref": "#/components/parameters/metadata_query"
       responses:
         '200':
@@ -12345,6 +12357,12 @@ components:
           type: string
           format: string
           nullable: true
+          enum:
+          - active
+          - closed
+          - pending_activation
+          - pending_closure
+          - suspended
           description: The internal account status.
         ledger_account_id:
           type: string
