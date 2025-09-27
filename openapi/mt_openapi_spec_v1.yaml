@@ -5457,6 +5457,18 @@ paths:
         required: false
         description: Only return internal accounts that can originate payments with
           this direction.
+      - name: status
+        in: query
+        schema:
+          type: string
+          enum:
+          - active
+          - pending_activation
+          - suspended
+          - pending_closure
+          - closed
+        required: false
+        description: Only return internal accounts with this status.
       - "$ref": "#/components/parameters/metadata_query"
       responses:
         '200':
@@ -5575,6 +5587,47 @@ paths:
           application/json:
             schema:
               "$ref": "#/components/schemas/internal_account_update_request"
+  "/api/internal_accounts/{id}/request_closure":
+    parameters:
+    - name: id
+      in: path
+      schema:
+        type: string
+        format: uuid
+      description: Unique identifier for the account.
+      required: true
+    post:
+      summary: request closure of internal account
+      tags:
+      - InternalAccount
+      operationId: requestInternalAccountClosure
+      security:
+      - basic_auth: []
+      responses:
+        '200':
+          description: successful
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/internal_account"
+        '403':
+          description: forbidden
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/error_message"
+        '404':
+          description: not found
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/error_message"
+        '422':
+          description: unprocessable entity
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/error_message"
   "/api/invoices/{invoice_id}/invoice_line_items":
     parameters:
     - name: invoice_id
@@ -12345,6 +12398,12 @@ components:
           type: string
           format: string
           nullable: true
+          enum:
+          - active
+          - closed
+          - pending_activation
+          - pending_closure
+          - suspended
           description: The internal account status.
         ledger_account_id:
           type: string
