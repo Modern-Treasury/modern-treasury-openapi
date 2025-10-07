@@ -12262,8 +12262,11 @@ components:
           description: The type of the originating account number for the incoming
             payment detail.
           nullable: true
+        reconciled:
+          type: boolean
+          description: True if the object is reconciled, false otherwise.
       additionalProperties: false
-      minProperties: 24
+      minProperties: 25
       required:
       - id
       - object
@@ -12289,6 +12292,7 @@ components:
       - originating_routing_number_type
       - originating_account_number_safe
       - originating_account_number_type
+      - reconciled
     internal_account:
       type: object
       properties:
@@ -17309,6 +17313,9 @@ components:
           nullable: true
           description: RFP payments require an expires_at. This value must be past
             the effective_date.
+        reconciled:
+          type: boolean
+          description: True if the object is reconciled, false otherwise.
         status:
           type: string
           enum:
@@ -17515,7 +17522,7 @@ components:
           description: Additional vendor specific fields for this payment. Data must
             be represented as key-value pairs.
       additionalProperties: false
-      minProperties: 50
+      minProperties: 51
       required:
       - id
       - object
@@ -17551,6 +17558,7 @@ components:
       - ultimate_receiving_party_identifier
       - send_remittance_advice
       - expires_at
+      - reconciled
       - status
       - external_id
       - receiving_account
@@ -17814,6 +17822,9 @@ components:
           nullable: true
           description: RFP payments require an expires_at. This value must be past
             the effective_date.
+        reconciled:
+          type: boolean
+          description: True if the object is reconciled, false otherwise.
         fallback_type:
           type: string
           enum:
@@ -18274,6 +18285,9 @@ components:
           nullable: true
           description: RFP payments require an expires_at. This value must be past
             the effective_date.
+        reconciled:
+          type: boolean
+          description: True if the object is reconciled, false otherwise.
         fallback_type:
           type: string
           enum:
@@ -18739,6 +18753,9 @@ components:
           nullable: true
           description: RFP payments require an expires_at. This value must be past
             the effective_date.
+        reconciled:
+          type: boolean
+          description: True if the object is reconciled, false otherwise.
         status:
           type: string
           enum:
@@ -19477,6 +19494,9 @@ components:
           description: Only relevant for ACH NOC returns. This is an object containing
             all of the new and corrected information provided by the bank that was
             previously incorrect on the original outgoing payment.
+        reconciled:
+          type: boolean
+          description: True if the object is reconciled, false otherwise.
         status:
           type: string
           enum:
@@ -19554,7 +19574,7 @@ components:
           nullable: true
           description: The ID of the ledger transaction linked to the return.
       additionalProperties: false
-      minProperties: 24
+      minProperties: 25
       required:
       - id
       - object
@@ -19568,6 +19588,7 @@ components:
       - reason
       - date_of_death
       - corrections
+      - reconciled
       - status
       - transaction_line_item_id
       - transaction_id
@@ -19744,6 +19765,9 @@ components:
           description: Only relevant for ACH NOC returns. This is an object containing
             all of the new and corrected information provided by the bank that was
             previously incorrect on the original outgoing payment.
+        reconciled:
+          type: boolean
+          description: True if the object is reconciled, false otherwise.
         returnable_type:
           type: string
           enum:
@@ -19817,8 +19841,11 @@ components:
           - date_earlier_than_intended
           - date_later_than_intended
           description: The reason for the reversal.
+        reconciled:
+          type: boolean
+          description: True if the object is reconciled, false otherwise.
       additionalProperties: false
-      minProperties: 11
+      minProperties: 12
       required:
       - id
       - object
@@ -19831,6 +19858,7 @@ components:
       - ledger_transaction_id
       - metadata
       - reason
+      - reconciled
     reversal_create_request:
       type: object
       properties:
