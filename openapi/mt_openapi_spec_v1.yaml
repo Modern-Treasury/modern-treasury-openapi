@@ -12262,9 +12262,13 @@ components:
           description: The type of the originating account number for the incoming
             payment detail.
           nullable: true
-        reconciled:
-          type: boolean
-          description: True if the object is reconciled, false otherwise.
+        reconciliation_status:
+          type: string
+          enum:
+          - reconciled
+          - unreconciled
+          - tentatively_reconciled
+          description: One of `unreconciled`, `tentatively_reconciled` or `reconciled`.
       additionalProperties: false
       minProperties: 25
       required:
@@ -12292,7 +12296,7 @@ components:
       - originating_routing_number_type
       - originating_account_number_safe
       - originating_account_number_type
-      - reconciled
+      - reconciliation_status
     internal_account:
       type: object
       properties:
@@ -17313,9 +17317,13 @@ components:
           nullable: true
           description: RFP payments require an expires_at. This value must be past
             the effective_date.
-        reconciled:
-          type: boolean
-          description: True if the object is reconciled, false otherwise.
+        reconciliation_status:
+          type: string
+          enum:
+          - reconciled
+          - unreconciled
+          - tentatively_reconciled
+          description: One of `unreconciled`, `tentatively_reconciled` or `reconciled`.
         status:
           type: string
           enum:
@@ -17558,7 +17566,7 @@ components:
       - ultimate_receiving_party_identifier
       - send_remittance_advice
       - expires_at
-      - reconciled
+      - reconciliation_status
       - status
       - external_id
       - receiving_account
@@ -17822,9 +17830,13 @@ components:
           nullable: true
           description: RFP payments require an expires_at. This value must be past
             the effective_date.
-        reconciled:
-          type: boolean
-          description: True if the object is reconciled, false otherwise.
+        reconciliation_status:
+          type: string
+          enum:
+          - reconciled
+          - unreconciled
+          - tentatively_reconciled
+          description: One of `unreconciled`, `tentatively_reconciled` or `reconciled`.
         fallback_type:
           type: string
           enum:
@@ -18285,9 +18297,13 @@ components:
           nullable: true
           description: RFP payments require an expires_at. This value must be past
             the effective_date.
-        reconciled:
-          type: boolean
-          description: True if the object is reconciled, false otherwise.
+        reconciliation_status:
+          type: string
+          enum:
+          - reconciled
+          - unreconciled
+          - tentatively_reconciled
+          description: One of `unreconciled`, `tentatively_reconciled` or `reconciled`.
         fallback_type:
           type: string
           enum:
@@ -18753,9 +18769,13 @@ components:
           nullable: true
           description: RFP payments require an expires_at. This value must be past
             the effective_date.
-        reconciled:
-          type: boolean
-          description: True if the object is reconciled, false otherwise.
+        reconciliation_status:
+          type: string
+          enum:
+          - reconciled
+          - unreconciled
+          - tentatively_reconciled
+          description: One of `unreconciled`, `tentatively_reconciled` or `reconciled`.
         status:
           type: string
           enum:
@@ -19494,9 +19514,13 @@ components:
           description: Only relevant for ACH NOC returns. This is an object containing
             all of the new and corrected information provided by the bank that was
             previously incorrect on the original outgoing payment.
-        reconciled:
-          type: boolean
-          description: True if the object is reconciled, false otherwise.
+        reconciliation_status:
+          type: string
+          enum:
+          - reconciled
+          - unreconciled
+          - tentatively_reconciled
+          description: One of `unreconciled`, `tentatively_reconciled` or `reconciled`.
         status:
           type: string
           enum:
@@ -19588,7 +19612,7 @@ components:
       - reason
       - date_of_death
       - corrections
-      - reconciled
+      - reconciliation_status
       - status
       - transaction_line_item_id
       - transaction_id
@@ -19765,9 +19789,13 @@ components:
           description: Only relevant for ACH NOC returns. This is an object containing
             all of the new and corrected information provided by the bank that was
             previously incorrect on the original outgoing payment.
-        reconciled:
-          type: boolean
-          description: True if the object is reconciled, false otherwise.
+        reconciliation_status:
+          type: string
+          enum:
+          - reconciled
+          - unreconciled
+          - tentatively_reconciled
+          description: One of `unreconciled`, `tentatively_reconciled` or `reconciled`.
         returnable_type:
           type: string
           enum:
@@ -19841,9 +19869,13 @@ components:
           - date_earlier_than_intended
           - date_later_than_intended
           description: The reason for the reversal.
-        reconciled:
-          type: boolean
-          description: True if the object is reconciled, false otherwise.
+        reconciliation_status:
+          type: string
+          enum:
+          - reconciled
+          - unreconciled
+          - tentatively_reconciled
+          description: One of `unreconciled`, `tentatively_reconciled` or `reconciled`.
       additionalProperties: false
       minProperties: 12
       required:
@@ -19858,7 +19890,7 @@ components:
       - ledger_transaction_id
       - metadata
       - reason
-      - reconciled
+      - reconciliation_status
     reversal_create_request:
       type: object
       properties:
