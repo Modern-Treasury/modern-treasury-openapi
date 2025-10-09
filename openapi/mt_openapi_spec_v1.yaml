@@ -12265,9 +12265,9 @@ components:
         reconciliation_status:
           type: string
           enum:
-          - reconciled
           - unreconciled
           - tentatively_reconciled
+          - reconciled
           description: One of `unreconciled`, `tentatively_reconciled` or `reconciled`.
       additionalProperties: false
       minProperties: 25
@@ -17320,9 +17320,9 @@ components:
         reconciliation_status:
           type: string
           enum:
-          - reconciled
           - unreconciled
           - tentatively_reconciled
+          - reconciled
           description: One of `unreconciled`, `tentatively_reconciled` or `reconciled`.
         status:
           type: string
@@ -17833,9 +17833,9 @@ components:
         reconciliation_status:
           type: string
           enum:
-          - reconciled
           - unreconciled
           - tentatively_reconciled
+          - reconciled
           description: One of `unreconciled`, `tentatively_reconciled` or `reconciled`.
         fallback_type:
           type: string
@@ -18300,9 +18300,9 @@ components:
         reconciliation_status:
           type: string
           enum:
-          - reconciled
           - unreconciled
           - tentatively_reconciled
+          - reconciled
           description: One of `unreconciled`, `tentatively_reconciled` or `reconciled`.
         fallback_type:
           type: string
@@ -18772,9 +18772,9 @@ components:
         reconciliation_status:
           type: string
           enum:
-          - reconciled
           - unreconciled
           - tentatively_reconciled
+          - reconciled
           description: One of `unreconciled`, `tentatively_reconciled` or `reconciled`.
         status:
           type: string
@@ -19517,9 +19517,9 @@ components:
         reconciliation_status:
           type: string
           enum:
-          - reconciled
           - unreconciled
           - tentatively_reconciled
+          - reconciled
           description: One of `unreconciled`, `tentatively_reconciled` or `reconciled`.
         status:
           type: string
@@ -19792,9 +19792,9 @@ components:
         reconciliation_status:
           type: string
           enum:
-          - reconciled
           - unreconciled
           - tentatively_reconciled
+          - reconciled
           description: One of `unreconciled`, `tentatively_reconciled` or `reconciled`.
         returnable_type:
           type: string
@@ -19872,9 +19872,9 @@ components:
         reconciliation_status:
           type: string
           enum:
-          - reconciled
           - unreconciled
           - tentatively_reconciled
+          - reconciled
           description: One of `unreconciled`, `tentatively_reconciled` or `reconciled`.
       additionalProperties: false
       minProperties: 12
