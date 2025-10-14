@@ -20447,7 +20447,6 @@ components:
           - mt_fof
           - mx
           - paypal
-          - plaid
           - pnc
           - signet
           - silvergate
