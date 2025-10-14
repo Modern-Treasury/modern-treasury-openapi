@@ -2426,6 +2426,110 @@ paths:
             application/json:
               schema:
                 "$ref": "#/components/schemas/error_message"
+  "/api/journal_entries":
+    get:
+      summary: list journal_entries
+      tags:
+      - JournalEntry
+      operationId: listJournalEntries
+      description: Retrieve a list of journal entries
+      security:
+      - basic_auth: []
+      parameters:
+      - name: journal_report_id
+        in: query
+        schema:
+          type: string
+          format: uuid
+        required: true
+        description: The ID of the journal report
+      responses:
+        '200':
+          description: successful - returns list with metadata
+        '422':
+          description: missing journal_report_id - returns validation error
+  "/api/journal_entries/{id}":
+    parameters:
+    - name: id
+      in: path
+      schema:
+        type: string
+        format: uuid
+      description: The ID of the journal entry
+      required: true
+    get:
+      summary: show journal_entry
+      tags:
+      - JournalEntry
+      operationId: getJournalEntry
+      description: Retrieve a specific journal entry
+      security:
+      - basic_auth: []
+      responses:
+        '200':
+          description: successful - returns entry with empty metadata
+        '404':
+          description: not found - non-existent journal entry
+  "/api/journal_reports":
+    get:
+      summary: list journal_reports
+      tags:
+      - JournalReport
+      operationId: listJournalReports
+      description: Retrieve a list of journal reports
+      security:
+      - basic_auth: []
+      responses:
+        '200':
+          description: successful - returns list of journal reports
+  "/api/journal_reports/{id}":
+    parameters:
+    - name: id
+      in: path
+      schema:
+        type: string
+        format: uuid
+      description: The ID of the journal report
+      required: true
+    get:
+      summary: show journal_report
+      tags:
+      - JournalReport
+      operationId: getJournalReport
+      description: Retrieve a specific journal report
+      security:
+      - basic_auth: []
+      responses:
+        '200':
+          description: successful - returns journal report with empty metadata
+        '404':
+          description: not found - returns 404 for non-existent journal report
+    patch:
+      summary: update journal_report
+      tags:
+      - JournalReport
+      operationId: updateJournalReport
+      description: Update a journal report
+      security:
+      - basic_auth: []
+      parameters: []
+      responses:
+        '200':
+          description: successful - updates metadata
+        '422':
+          description: validation error - invalid status
+        '404':
+          description: not found - non-existent journal report
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                status:
+                  type: string
+                metadata:
+                  type: object
   "/api/internal_accounts/{internal_account_id}/account_capabilities/{id}":
     parameters:
     - name: internal_account_id
