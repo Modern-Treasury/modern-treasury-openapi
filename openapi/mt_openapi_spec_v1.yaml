@@ -19187,9 +19187,6 @@ components:
           - bofa_end_to_end_id
           - bofa_transaction_id
           - brale_transfer_id
-          - bridge_destination_transaction_hash
-          - bridge_source_transaction_hash
-          - bridge_transfer_id
           - check_number
           - citibank_reference_number
           - citibank_worldlink_clearing_system_reference_number
@@ -19324,9 +19321,6 @@ components:
           - bofa_end_to_end_id
           - bofa_transaction_id
           - brale_transfer_id
-          - bridge_destination_transaction_hash
-          - bridge_source_transaction_hash
-          - bridge_transfer_id
           - check_number
           - citibank_reference_number
           - citibank_worldlink_clearing_system_reference_number
@@ -20438,7 +20432,6 @@ components:
           - bankprov
           - bnk_dev
           - brale
-          - bridge
           - cleartouch
           - column
           - cross_river
