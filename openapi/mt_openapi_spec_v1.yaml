@@ -7069,6 +7069,17 @@ paths:
                 type: array
                 items:
                   "$ref": "#/components/schemas/payment_reference_object"
+        '422':
+          description: validation error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errors:
+                    type: array
+                    items:
+                      type: string
   "/api/payment_references/{id}":
     parameters:
     - name: id
