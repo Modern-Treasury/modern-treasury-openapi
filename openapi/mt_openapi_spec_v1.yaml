@@ -5714,12 +5714,6 @@ paths:
             application/json:
               schema:
                 "$ref": "#/components/schemas/internal_account"
-        '403':
-          description: forbidden
-          content:
-            application/json:
-              schema:
-                "$ref": "#/components/schemas/error_message"
         '404':
           description: not found
           content:
