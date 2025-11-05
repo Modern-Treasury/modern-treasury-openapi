@@ -3746,12 +3746,6 @@ paths:
           an UUID.
         schema:
           type: string
-      - name: external_id
-        in: query
-        schema:
-          type: string
-        required: false
-        description: An optional user-defined 180 character unique identifier.
       responses:
         '201':
           description: successful
@@ -4814,12 +4808,6 @@ paths:
           an UUID.
         schema:
           type: string
-      - name: external_id
-        in: query
-        schema:
-          type: string
-        required: false
-        description: An optional user-defined 180 character unique identifier.
       responses:
         '201':
           description: successful
