@@ -2443,11 +2443,25 @@ paths:
           format: uuid
         required: true
         description: The ID of the journal report
+      - name: page
+        in: query
+        schema:
+          type: integer
+        required: false
+        description: Page number for pagination
+      - name: per_page
+        in: query
+        schema:
+          type: integer
+        required: false
+        description: Number of items per page
       responses:
         '200':
-          description: successful - returns list with metadata
+          description: successful - only returns entries for current organization
         '422':
-          description: missing journal_report_id - returns validation error
+          description: empty journal_report_id - returns validation error
+        '404':
+          description: page disabled - returns not found
   "/api/journal_entries/{id}":
     parameters:
     - name: id
@@ -2467,9 +2481,9 @@ paths:
       - basic_auth: []
       responses:
         '200':
-          description: successful - returns entry with empty metadata
+          description: successful - returns entry with all attributes
         '404':
-          description: not found - non-existent journal entry
+          description: page disabled - returns not found
   "/api/journal_reports":
     get:
       summary: list journal_reports
@@ -17225,7 +17239,6 @@ components:
           - CIE
           - CTX
           - IAT
-          - POS
           - PPD
           - TEL
           - WEB
@@ -17735,7 +17748,6 @@ components:
           - CIE
           - CTX
           - IAT
-          - POS
           - PPD
           - TEL
           - WEB
@@ -18203,7 +18215,6 @@ components:
           - CIE
           - CTX
           - IAT
-          - POS
           - PPD
           - TEL
           - WEB
@@ -18664,7 +18675,6 @@ components:
           - CIE
           - CTX
           - IAT
-          - POS
           - PPD
           - TEL
           - WEB
@@ -19227,7 +19237,7 @@ components:
           - jpmc_payment_returned_datetime
           - jpmc_transaction_reference_number
           - lob_check_id
-          - mt_fof_transfer_id
+          - mt_flow_transfer_id
           - other
           - partial_swift_mir
           - pnc_clearing_reference
@@ -19361,7 +19371,7 @@ components:
           - jpmc_payment_returned_datetime
           - jpmc_transaction_reference_number
           - lob_check_id
-          - mt_fof_transfer_id
+          - mt_flow_transfer_id
           - other
           - partial_swift_mir
           - pnc_clearing_reference
@@ -20441,7 +20451,7 @@ components:
           - hifi
           - iso20022
           - jpmc
-          - mt_fof
+          - mt_flow
           - mx
           - paypal
           - pnc
