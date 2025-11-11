@@ -11050,6 +11050,33 @@ components:
           items:
             "$ref": "#/components/schemas/reconciliation_rule_variable"
           description: An array of reconciliation rule variables for this payment.
+        amount_reconciled:
+          type: integer
+          nullable: true
+          description: The amount reconciled for this expected payment. Value in specified
+            currency's smallest unit. e.g. $10 would be represented as 1000.
+        amount_reconciled_direction:
+          type: string
+          nullable: true
+          enum:
+          - credit
+          - debit
+          description: One of credit or debit. Indicates whether amount_reconciled
+            is a credit or debit amount.
+        amount_unreconciled:
+          type: integer
+          nullable: true
+          description: The amount that remains unreconciled for this expected payment.
+            Value in specified currency's smallest unit. e.g. $10 would be represented
+            as 1000.
+        amount_unreconciled_direction:
+          type: string
+          nullable: true
+          enum:
+          - credit
+          - debit
+          description: One of credit or debit. Indicates whether amount_unreconciled
+            is a credit or debit amount.
         transaction_id:
           type: string
           format: uuid
@@ -11085,7 +11112,7 @@ components:
           nullable: true
           description: The ID of the ledger transaction linked to the expected payment.
       additionalProperties: false
-      minProperties: 27
+      minProperties: 31
       required:
       - id
       - object
@@ -11109,6 +11136,10 @@ components:
       - reconciliation_groups
       - reconciliation_filters
       - reconciliation_rule_variables
+      - amount_reconciled
+      - amount_reconciled_direction
+      - amount_unreconciled
+      - amount_unreconciled_direction
       - transaction_id
       - transaction_line_item_id
       - status
@@ -11248,6 +11279,33 @@ components:
           items:
             "$ref": "#/components/schemas/reconciliation_rule_variable"
           description: An array of reconciliation rule variables for this payment.
+        amount_reconciled:
+          type: integer
+          nullable: true
+          description: The amount reconciled for this expected payment. Value in specified
+            currency's smallest unit. e.g. $10 would be represented as 1000.
+        amount_reconciled_direction:
+          type: string
+          nullable: true
+          enum:
+          - credit
+          - debit
+          description: One of credit or debit. Indicates whether amount_reconciled
+            is a credit or debit amount.
+        amount_unreconciled:
+          type: integer
+          nullable: true
+          description: The amount that remains unreconciled for this expected payment.
+            Value in specified currency's smallest unit. e.g. $10 would be represented
+            as 1000.
+        amount_unreconciled_direction:
+          type: string
+          nullable: true
+          enum:
+          - credit
+          - debit
+          description: One of credit or debit. Indicates whether amount_unreconciled
+            is a credit or debit amount.
         line_items:
           type: array
           items:
@@ -11399,6 +11457,33 @@ components:
           items:
             "$ref": "#/components/schemas/reconciliation_rule_variable"
           description: An array of reconciliation rule variables for this payment.
+        amount_reconciled:
+          type: integer
+          nullable: true
+          description: The amount reconciled for this expected payment. Value in specified
+            currency's smallest unit. e.g. $10 would be represented as 1000.
+        amount_reconciled_direction:
+          type: string
+          nullable: true
+          enum:
+          - credit
+          - debit
+          description: One of credit or debit. Indicates whether amount_reconciled
+            is a credit or debit amount.
+        amount_unreconciled:
+          type: integer
+          nullable: true
+          description: The amount that remains unreconciled for this expected payment.
+            Value in specified currency's smallest unit. e.g. $10 would be represented
+            as 1000.
+        amount_unreconciled_direction:
+          type: string
+          nullable: true
+          enum:
+          - credit
+          - debit
+          description: One of credit or debit. Indicates whether amount_unreconciled
+            is a credit or debit amount.
         status:
           type: string
           nullable: true
@@ -12815,11 +12900,6 @@ components:
           format: uuid
           nullable: true
           description: The ID of the virtual account the invoice should be paid to.
-        ledger_account_settlement_id:
-          type: string
-          nullable: true
-          format: uuid
-          description: The ledger account settlement object linked to the invoice.
         payment_effective_date:
           type: string
           nullable: true
@@ -12933,6 +13013,12 @@ components:
             type: string
             format: uuid
           description: IDs of transaction line items associated with an invoice.
+        ledger_account_settlement_id:
+          type: string
+          nullable: true
+          format: uuid
+          deprecated: true
+          description: The ledger account settlement object linked to the invoice.
       additionalProperties: false
       minProperties: 38
       required:
@@ -12954,7 +13040,6 @@ components:
       - originating_account_id
       - receiving_account_id
       - virtual_account_id
-      - ledger_account_settlement_id
       - payment_effective_date
       - payment_type
       - payment_method
@@ -12974,6 +13059,7 @@ components:
       - amount_paid
       - invoicer_name
       - transaction_line_item_ids
+      - ledger_account_settlement_id
     invoice_create_request:
       type: object
       properties:
@@ -13101,18 +13187,6 @@ components:
           format: uuid
           nullable: true
           description: The ID of the virtual account the invoice should be paid to.
-        ledger_account_settlement_id:
-          type: string
-          format: uuid
-          nullable: true
-          description: The ID of the virtual account the invoice should be paid to.
-        ingest_ledger_entries:
-          type: boolean
-          nullable: true
-          description: Whether to ingest the ledger_entries to populate the invoice
-            line items. If this is false, then a line item must be provided. If this
-            is true, line_items must be empty. Ignored if ledger_account_settlement_id
-            is empty.
         payment_effective_date:
           type: string
           format: date
@@ -13354,18 +13428,6 @@ components:
           format: uuid
           nullable: true
           description: The ID of the virtual account the invoice should be paid to.
-        ledger_account_settlement_id:
-          type: string
-          format: uuid
-          nullable: true
-          description: The ID of the virtual account the invoice should be paid to.
-        ingest_ledger_entries:
-          type: boolean
-          nullable: true
-          description: Whether to ingest the ledger_entries to populate the invoice
-            line items. If this is false, then a line item must be provided. If this
-            is true, line_items must be empty. Ignored if ledger_account_settlement_id
-            is empty.
         payment_effective_date:
           type: string
           format: date
