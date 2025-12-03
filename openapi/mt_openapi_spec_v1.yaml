@@ -1202,7 +1202,7 @@ paths:
       schema:
         type: string
         format: uuid
-      description: id
+      description: The ledger account id (UUID)
       required: true
     get:
       summary: get ledger_account
@@ -1213,6 +1213,12 @@ paths:
       security:
       - basic_auth: []
       parameters:
+      - name: id
+        in: path
+        schema:
+          type: string
+        description: The ledger account id (UUID) or external_id
+        required: true
       - name: balances
         in: query
         schema:
@@ -2067,14 +2073,6 @@ paths:
             schema:
               "$ref": "#/components/schemas/ledger_transaction_create_request"
   "/api/ledger_transactions/{id}":
-    parameters:
-    - name: id
-      in: path
-      schema:
-        type: string
-        format: uuid
-      description: id
-      required: true
     get:
       summary: get ledger_transaction
       tags:
@@ -2083,6 +2081,14 @@ paths:
       description: Get details on a single ledger transaction.
       security:
       - basic_auth: []
+      parameters:
+      - name: id
+        in: path
+        schema:
+          type: string
+        description: The ledger transaction id (UUID) or external_id. If using external_id,
+          only non-archived Ledger Transactions will be returned.
+        required: true
       responses:
         '200':
           description: successful
@@ -2096,6 +2102,13 @@ paths:
             application/json:
               schema:
                 "$ref": "#/components/schemas/error_message"
+        '409':
+          description: conflict when two ledger transactions in the organization have
+            the same external_id
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/error_message"
     patch:
       summary: update ledger_transaction
       tags:
@@ -2104,7 +2117,14 @@ paths:
       description: Update the details of a ledger transaction.
       security:
       - basic_auth: []
-      parameters: []
+      parameters:
+      - name: id
+        in: path
+        schema:
+          type: string
+          format: uuid
+        description: The ledger transaction id (UUID)
+        required: true
       responses:
         '200':
           description: successful
@@ -3424,10 +3444,12 @@ paths:
         schema:
           type: string
           enum:
+          - closed
           - completed
           - denied
           - failed
           - processing
+          - suspended
         required: false
       responses:
         '200':
@@ -9699,10 +9721,12 @@ components:
         status:
           type: string
           enum:
+          - closed
           - completed
           - denied
           - failed
           - processing
+          - suspended
           description: The status of the connection legal entity.
         vendor_id:
           type: string
@@ -12609,6 +12633,13 @@ components:
           - pending_closure
           - suspended
           description: The internal account status.
+        contra_ledger_account_id:
+          type: string
+          format: uuid
+          nullable: true
+          description: If the internal account links to a contra ledger account in
+            Modern Treasury, the id of the contra ledger account will be populated
+            here.
         ledger_account_id:
           type: string
           format: uuid
@@ -12616,7 +12647,7 @@ components:
           description: If the internal account links to a ledger account in Modern
             Treasury, the id of the ledger account will be populated here.
       additionalProperties: false
-      minProperties: 22
+      minProperties: 23
       required:
       - id
       - object
@@ -12639,6 +12670,7 @@ components:
       - vendor_id
       - legal_entity_id
       - status
+      - contra_ledger_account_id
       - ledger_account_id
     internal_account_create_request:
       type: object
@@ -12757,6 +12789,9 @@ components:
         ledger_account_id:
           type: string
           description: The Ledger Account associated to this account.
+        contra_ledger_account_id:
+          type: string
+          description: The Contra Ledger Account associated to this account.
     invoice:
       type: object
       properties:
@@ -19299,9 +19334,11 @@ components:
           - jpmc_payment_returned_datetime
           - jpmc_transaction_reference_number
           - lob_check_id
+          - mt_flow_ach_noc_id
           - mt_flow_transfer_id
           - other
           - partial_swift_mir
+          - paxos_transfer_id
           - pnc_clearing_reference
           - pnc_instruction_id
           - pnc_multipayment_id
@@ -19433,9 +19470,11 @@ components:
           - jpmc_payment_returned_datetime
           - jpmc_transaction_reference_number
           - lob_check_id
+          - mt_flow_ach_noc_id
           - mt_flow_transfer_id
           - other
           - partial_swift_mir
+          - paxos_transfer_id
           - pnc_clearing_reference
           - pnc_instruction_id
           - pnc_multipayment_id
@@ -19729,6 +19768,7 @@ components:
           - manual
           - sepa
           - wire
+          - zengin
           description: 'The type of return. Can be one of: `ach`, `ach_noc`, `au_becs`,
             `bacs`, `eft`, `interac`, `manual`, `paper_item`, `wire`.'
         amount:
@@ -20515,6 +20555,7 @@ components:
           - jpmc
           - mt_flow
           - mx
+          - paxos
           - paypal
           - pnc
           - signet
