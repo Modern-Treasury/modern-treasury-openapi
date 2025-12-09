@@ -16040,7 +16040,7 @@ components:
             "$ref": "#/components/schemas/legal_entity_association"
           nullable: true
       additionalProperties: false
-      minProperties: 32
+      minProperties: 31
       required:
       - id
       - object
@@ -16073,7 +16073,6 @@ components:
       - addresses
       - identifications
       - industry_classifications
-      - legal_entity_associations
     legal_entity_create_request:
       type: object
       properties:
