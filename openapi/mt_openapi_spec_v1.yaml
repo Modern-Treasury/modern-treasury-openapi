@@ -2748,6 +2748,7 @@ paths:
               schema:
                 type: string
                 nullable: true
+              required: false
               description: The cursor for the next page. Including this in a call
                 as `after_cursor` will return the next page.
             X-Per-Page:
@@ -2947,6 +2948,7 @@ paths:
               schema:
                 type: string
                 nullable: true
+              required: false
               description: The cursor for the next page. Including this in a call
                 as `after_cursor` will return the next page.
             X-Per-Page:
@@ -3153,6 +3155,7 @@ paths:
               schema:
                 type: string
                 nullable: true
+              required: false
               description: The cursor for the next page. Including this in a call
                 as `after_cursor` will return the next page.
             X-Per-Page:
@@ -3341,6 +3344,7 @@ paths:
               schema:
                 type: string
                 nullable: true
+              required: false
               description: The cursor for the next page. Including this in a call
                 as `after_cursor` will return the next page.
             X-Per-Page:
@@ -3459,6 +3463,7 @@ paths:
               schema:
                 type: string
                 nullable: true
+              required: false
               description: The cursor for the next page. Including this in a call
                 as `after_cursor` will return the next page.
             X-Per-Page:
@@ -3618,6 +3623,7 @@ paths:
               schema:
                 type: string
                 nullable: true
+              required: false
               description: The cursor for the next page. Including this in a call
                 as `after_cursor` will return the next page.
             X-Per-Page:
@@ -3745,6 +3751,7 @@ paths:
               schema:
                 type: string
                 nullable: true
+              required: false
               description: The cursor for the next page. Including this in a call
                 as `after_cursor` will return the next page.
             X-Per-Page:
@@ -3935,6 +3942,7 @@ paths:
               schema:
                 type: string
                 nullable: true
+              required: false
               description: The cursor for the next page. Including this in a call
                 as `after_cursor` will return the next page.
             X-Per-Page:
@@ -4055,6 +4063,7 @@ paths:
               schema:
                 type: string
                 nullable: true
+              required: false
               description: The cursor for the next page. Including this in a call
                 as `after_cursor` will return the next page.
             X-Per-Page:
@@ -4368,6 +4377,7 @@ paths:
               schema:
                 type: string
                 nullable: true
+              required: false
               description: The cursor for the next page. Including this in a call
                 as `after_cursor` will return the next page.
             X-Per-Page:
@@ -4551,6 +4561,7 @@ paths:
               schema:
                 type: string
                 nullable: true
+              required: false
               description: The cursor for the next page. Including this in a call
                 as `after_cursor` will return the next page.
             X-Per-Page:
@@ -4810,6 +4821,7 @@ paths:
               schema:
                 type: string
                 nullable: true
+              required: false
               description: The cursor for the next page. Including this in a call
                 as `after_cursor` will return the next page.
             X-Per-Page:
@@ -5003,6 +5015,7 @@ paths:
               schema:
                 type: string
                 nullable: true
+              required: false
               description: The cursor for the next page. Including this in a call
                 as `after_cursor` will return the next page.
             X-Per-Page:
@@ -5146,6 +5159,7 @@ paths:
               schema:
                 type: string
                 nullable: true
+              required: false
               description: The cursor for the next page. Including this in a call
                 as `after_cursor` will return the next page.
             X-Per-Page:
@@ -5371,15 +5385,19 @@ paths:
           - ach
           - au_becs
           - bacs
+          - base
           - book
           - check
           - eft
+          - ethereum
           - interac
           - neft
           - nz_becs
+          - polygon
           - rtp
           - sepa
           - signet
+          - solana
           - wire
         required: false
         description: 'One of: `ach`, `book`, `check`, `eft`, `interac`, `rtp`, `sepa`,
@@ -5417,6 +5435,7 @@ paths:
               schema:
                 type: string
                 nullable: true
+              required: false
               description: The cursor for the next page. Including this in a call
                 as `after_cursor` will return the next page.
             X-Per-Page:
@@ -5606,6 +5625,7 @@ paths:
               schema:
                 type: string
                 nullable: true
+              required: false
               description: The cursor for the next page. Including this in a call
                 as `after_cursor` will return the next page.
             X-Per-Page:
@@ -5786,6 +5806,7 @@ paths:
               schema:
                 type: string
                 nullable: true
+              required: false
               description: The cursor for the next page. Including this in a call
                 as `after_cursor` will return the next page.
             X-Per-Page:
@@ -5989,6 +6010,7 @@ paths:
               schema:
                 type: string
                 nullable: true
+              required: false
               description: The cursor for the next page. Including this in a call
                 as `after_cursor` will return the next page.
             X-Per-Page:
@@ -6152,6 +6174,7 @@ paths:
               schema:
                 type: string
                 nullable: true
+              required: false
               description: The cursor for the next page. Including this in a call
                 as `after_cursor` will return the next page.
             X-Per-Page:
@@ -6347,6 +6370,7 @@ paths:
               schema:
                 type: string
                 nullable: true
+              required: false
               description: The cursor for the next page. Including this in a call
                 as `after_cursor` will return the next page.
             X-Per-Page:
@@ -6549,6 +6573,7 @@ paths:
               schema:
                 type: string
                 nullable: true
+              required: false
               description: The cursor for the next page. Including this in a call
                 as `after_cursor` will return the next page.
             X-Per-Page:
@@ -7212,6 +7237,7 @@ paths:
               schema:
                 type: string
                 nullable: true
+              required: false
               description: The cursor for the next page. Including this in a call
                 as `after_cursor` will return the next page.
             X-Per-Page:
@@ -7337,6 +7363,7 @@ paths:
               schema:
                 type: string
                 nullable: true
+              required: false
               description: The cursor for the next page. Including this in a call
                 as `after_cursor` will return the next page.
             X-Per-Page:
@@ -7480,6 +7507,7 @@ paths:
               schema:
                 type: string
                 nullable: true
+              required: false
               description: The cursor for the next page. Including this in a call
                 as `after_cursor` will return the next page.
             X-Per-Page:
@@ -7724,6 +7752,7 @@ paths:
               schema:
                 type: string
                 nullable: true
+              required: false
               description: The cursor for the next page. Including this in a call
                 as `after_cursor` will return the next page.
             X-Per-Page:
@@ -7789,6 +7818,7 @@ paths:
               schema:
                 type: string
                 nullable: true
+              required: false
               description: The cursor for the next page. Including this in a call
                 as `after_cursor` will return the next page.
             X-Per-Page:
@@ -7974,6 +8004,7 @@ paths:
               schema:
                 type: string
                 nullable: true
+              required: false
               description: The cursor for the next page. Including this in a call
                 as `after_cursor` will return the next page.
             X-Per-Page:
@@ -8202,6 +8233,7 @@ paths:
               schema:
                 type: string
                 nullable: true
+              required: false
               description: The cursor for the next page. Including this in a call
                 as `after_cursor` will return the next page.
             X-Per-Page:
@@ -8379,6 +8411,7 @@ paths:
               schema:
                 type: string
                 nullable: true
+              required: false
               description: The cursor for the next page. Including this in a call
                 as `after_cursor` will return the next page.
             X-Per-Page:
@@ -8557,6 +8590,7 @@ paths:
               schema:
                 type: string
                 nullable: true
+              required: false
               description: The cursor for the next page. Including this in a call
                 as `after_cursor` will return the next page.
             X-Per-Page:
@@ -12363,15 +12397,19 @@ components:
           - ach
           - au_becs
           - bacs
+          - base
           - book
           - check
           - eft
+          - ethereum
           - interac
           - neft
           - nz_becs
+          - polygon
           - rtp
           - sepa
           - signet
+          - solana
           - wire
           description: 'One of: `ach`, `book`, `check`, `eft`, `interac`, `rtp`, `sepa`,
             `signet`, or `wire`.'
@@ -15666,8 +15704,14 @@ components:
           description: A list of industry classifications for the legal entity.
           items:
             "$ref": "#/components/schemas/legal_entity_industry_classification"
+        legal_entity_associations:
+          type: array
+          description: The legal entity associations and its child legal entities.
+          items:
+            "$ref": "#/components/schemas/legal_entity_association"
+          nullable: true
       additionalProperties: false
-      minProperties: 31
+      minProperties: 32
       required:
       - id
       - object
@@ -15700,6 +15744,7 @@ components:
       - addresses
       - identifications
       - industry_classifications
+      - legal_entity_associations
     child_legal_entity_create:
       type: object
       properties:
@@ -15830,8 +15875,14 @@ components:
           description: A list of industry classifications for the legal entity.
           items:
             "$ref": "#/components/schemas/legal_entity_industry_classification"
+        legal_entity_associations:
+          type: array
+          items:
+            "$ref": "#/components/schemas/legal_entity_association_inline_create_request"
+          nullable: true
+          description: The legal entity associations and its child legal entities.
       additionalProperties: false
-      minProperties: 25
+      minProperties: 26
     legal_entity:
       type: object
       properties:
@@ -19285,6 +19336,7 @@ components:
           - ach_trace_number
           - bankprov_payment_activity_date
           - bankprov_payment_id
+          - blockchain_transaction_hash
           - bnk_dev_prenotification_id
           - bnk_dev_transfer_id
           - bny_mellon_transaction_reference_number
@@ -19421,6 +19473,7 @@ components:
           - ach_trace_number
           - bankprov_payment_activity_date
           - bankprov_payment_id
+          - blockchain_transaction_hash
           - bnk_dev_prenotification_id
           - bnk_dev_transfer_id
           - bny_mellon_transaction_reference_number
@@ -20442,15 +20495,19 @@ components:
           - ach
           - au_becs
           - bacs
+          - base
           - book
           - check
           - eft
+          - ethereum
           - interac
           - neft
           - nz_becs
+          - polygon
           - rtp
           - sepa
           - signet
+          - solana
           - wire
           description: One of `ach`, `wire`, `check`.
         direction:
