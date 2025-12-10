@@ -5399,6 +5399,7 @@ paths:
           - signet
           - solana
           - wire
+          - zengin
         required: false
         description: 'One of: `ach`, `book`, `check`, `eft`, `interac`, `rtp`, `sepa`,
           `signet`, or `wire`.'
@@ -9884,6 +9885,34 @@ components:
               type: string
               nullable: true
               description: The entity's primary website URL.
+            business_description:
+              type: string
+              nullable: true
+              description: A description of the business.
+            intended_use:
+              type: string
+              nullable: true
+              description: A description of the intended use of the legal entity.
+            expected_activity_volume:
+              type: integer
+              nullable: true
+              description: Monthly expected transaction volume in entity's local currency.
+            country_of_incorporation:
+              type: string
+              nullable: true
+              description: The country code where the business is incorporated in
+                the ISO 3166-1 alpha-2 or alpha-3 formats.
+            operating_jurisdictions:
+              type: array
+              items:
+                type: string
+              description: A list of countries where the business operates (ISO 3166-1
+                alpha-2 or alpha-3 codes).
+            primary_social_media_sites:
+              type: array
+              items:
+                type: string
+              description: A list of primary social media URLs for the business.
             metadata:
               type: object
               description: Additional data represented as key-value pairs. Both the
@@ -12411,6 +12440,7 @@ components:
           - signet
           - solana
           - wire
+          - zengin
           description: 'One of: `ach`, `book`, `check`, `eft`, `interac`, `rtp`, `sepa`,
             `signet`, or `wire`.'
         data:
@@ -15670,6 +15700,34 @@ components:
           type: string
           nullable: true
           description: The entity's primary website URL.
+        business_description:
+          type: string
+          nullable: true
+          description: A description of the business.
+        intended_use:
+          type: string
+          nullable: true
+          description: A description of the intended use of the legal entity.
+        expected_activity_volume:
+          type: integer
+          nullable: true
+          description: Monthly expected transaction volume in entity's local currency.
+        country_of_incorporation:
+          type: string
+          nullable: true
+          description: The country code where the business is incorporated in the
+            ISO 3166-1 alpha-2 or alpha-3 formats.
+        operating_jurisdictions:
+          type: array
+          items:
+            type: string
+          description: A list of countries where the business operates (ISO 3166-1
+            alpha-2 or alpha-3 codes).
+        primary_social_media_sites:
+          type: array
+          items:
+            type: string
+          description: A list of primary social media URLs for the business.
         metadata:
           type: object
           description: Additional data represented as key-value pairs. Both the key
@@ -15711,7 +15769,7 @@ components:
             "$ref": "#/components/schemas/legal_entity_association"
           nullable: true
       additionalProperties: false
-      minProperties: 32
+      minProperties: 38
       required:
       - id
       - object
@@ -15737,6 +15795,12 @@ components:
       - phone_numbers
       - email
       - website
+      - business_description
+      - intended_use
+      - expected_activity_volume
+      - country_of_incorporation
+      - operating_jurisdictions
+      - primary_social_media_sites
       - metadata
       - bank_settings
       - compliance_details
@@ -15841,6 +15905,34 @@ components:
           type: string
           nullable: true
           description: The entity's primary website URL.
+        business_description:
+          type: string
+          nullable: true
+          description: A description of the business.
+        intended_use:
+          type: string
+          nullable: true
+          description: A description of the intended use of the legal entity.
+        expected_activity_volume:
+          type: integer
+          nullable: true
+          description: Monthly expected transaction volume in entity's local currency.
+        country_of_incorporation:
+          type: string
+          nullable: true
+          description: The country code where the business is incorporated in the
+            ISO 3166-1 alpha-2 or alpha-3 formats.
+        operating_jurisdictions:
+          type: array
+          items:
+            type: string
+          description: A list of countries where the business operates (ISO 3166-1
+            alpha-2 or alpha-3 codes).
+        primary_social_media_sites:
+          type: array
+          items:
+            type: string
+          description: A list of primary social media URLs for the business.
         metadata:
           type: object
           description: Additional data represented as key-value pairs. Both the key
@@ -15882,7 +15974,7 @@ components:
           nullable: true
           description: The legal entity associations and its child legal entities.
       additionalProperties: false
-      minProperties: 26
+      minProperties: 32
     legal_entity:
       type: object
       properties:
@@ -15999,6 +16091,34 @@ components:
           type: string
           nullable: true
           description: The entity's primary website URL.
+        business_description:
+          type: string
+          nullable: true
+          description: A description of the business.
+        intended_use:
+          type: string
+          nullable: true
+          description: A description of the intended use of the legal entity.
+        expected_activity_volume:
+          type: integer
+          nullable: true
+          description: Monthly expected transaction volume in entity's local currency.
+        country_of_incorporation:
+          type: string
+          nullable: true
+          description: The country code where the business is incorporated in the
+            ISO 3166-1 alpha-2 or alpha-3 formats.
+        operating_jurisdictions:
+          type: array
+          items:
+            type: string
+          description: A list of countries where the business operates (ISO 3166-1
+            alpha-2 or alpha-3 codes).
+        primary_social_media_sites:
+          type: array
+          items:
+            type: string
+          description: A list of primary social media URLs for the business.
         metadata:
           type: object
           description: Additional data represented as key-value pairs. Both the key
@@ -16040,7 +16160,7 @@ components:
             "$ref": "#/components/schemas/legal_entity_association"
           nullable: true
       additionalProperties: false
-      minProperties: 32
+      minProperties: 37
       required:
       - id
       - object
@@ -16066,6 +16186,12 @@ components:
       - phone_numbers
       - email
       - website
+      - business_description
+      - intended_use
+      - expected_activity_volume
+      - country_of_incorporation
+      - operating_jurisdictions
+      - primary_social_media_sites
       - metadata
       - bank_settings
       - compliance_details
@@ -16073,7 +16199,6 @@ components:
       - addresses
       - identifications
       - industry_classifications
-      - legal_entity_associations
     legal_entity_create_request:
       type: object
       properties:
@@ -16170,6 +16295,34 @@ components:
           type: string
           nullable: true
           description: The entity's primary website URL.
+        business_description:
+          type: string
+          nullable: true
+          description: A description of the business.
+        intended_use:
+          type: string
+          nullable: true
+          description: A description of the intended use of the legal entity.
+        expected_activity_volume:
+          type: integer
+          nullable: true
+          description: Monthly expected transaction volume in entity's local currency.
+        country_of_incorporation:
+          type: string
+          nullable: true
+          description: The country code where the business is incorporated in the
+            ISO 3166-1 alpha-2 or alpha-3 formats.
+        operating_jurisdictions:
+          type: array
+          items:
+            type: string
+          description: A list of countries where the business operates (ISO 3166-1
+            alpha-2 or alpha-3 codes).
+        primary_social_media_sites:
+          type: array
+          items:
+            type: string
+          description: A list of primary social media URLs for the business.
         metadata:
           type: object
           description: Additional data represented as key-value pairs. Both the key
@@ -16302,6 +16455,34 @@ components:
           type: string
           nullable: true
           description: The entity's primary website URL.
+        business_description:
+          type: string
+          nullable: true
+          description: A description of the business.
+        intended_use:
+          type: string
+          nullable: true
+          description: A description of the intended use of the legal entity.
+        expected_activity_volume:
+          type: integer
+          nullable: true
+          description: Monthly expected transaction volume in entity's local currency.
+        country_of_incorporation:
+          type: string
+          nullable: true
+          description: The country code where the business is incorporated in the
+            ISO 3166-1 alpha-2 or alpha-3 formats.
+        operating_jurisdictions:
+          type: array
+          items:
+            type: string
+          description: A list of countries where the business operates (ISO 3166-1
+            alpha-2 or alpha-3 codes).
+        primary_social_media_sites:
+          type: array
+          items:
+            type: string
+          description: A list of primary social media URLs for the business.
         metadata:
           type: object
           description: Additional data represented as key-value pairs. Both the key
@@ -20509,6 +20690,7 @@ components:
           - signet
           - solana
           - wire
+          - zengin
           description: One of `ach`, `wire`, `check`.
         direction:
           type: string
