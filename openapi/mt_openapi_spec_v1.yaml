@@ -14830,6 +14830,11 @@ components:
           type: integer
           description: Value in specified currency's smallest unit. e.g. $10 would
             be represented as 1000. Can be any integer up to 36 digits.
+        effective_at:
+          type: string
+          format: date-time
+          description: The timestamp (ISO8601 format) at which the ledger transaction
+            happened for reporting purposes.
         direction:
           type: string
           enum:
@@ -14888,7 +14893,7 @@ components:
             foo: bar
             modern: treasury
       additionalProperties: false
-      minProperties: 16
+      minProperties: 17
       required:
       - id
       - object
@@ -14897,6 +14902,7 @@ components:
       - updated_at
       - discarded_at
       - amount
+      - effective_at
       - direction
       - status
       - ledger_account_id
@@ -14913,6 +14919,11 @@ components:
           type: integer
           description: Value in specified currency's smallest unit. e.g. $10 would
             be represented as 1000. Can be any integer up to 36 digits.
+        effective_at:
+          type: string
+          format: date-time
+          description: The timestamp (ISO8601 format) at which the ledger transaction
+            happened for reporting purposes.
         direction:
           type: string
           enum:
@@ -15011,6 +15022,11 @@ components:
           type: integer
           description: Value in specified currency's smallest unit. e.g. $10 would
             be represented as 1000. Can be any integer up to 36 digits.
+        effective_at:
+          type: string
+          format: date-time
+          description: The timestamp (ISO8601 format) at which the ledger transaction
+            happened for reporting purposes.
         direction:
           type: string
           enum:
@@ -15069,13 +15085,14 @@ components:
             for more details.
           nullable: true
       additionalProperties: false
-      minProperties: 14
+      minProperties: 15
       required:
       - id
       - object
       - live_mode
       - created_at
       - amount
+      - effective_at
       - direction
       - status
       - ledger_account_id
@@ -19571,6 +19588,7 @@ components:
           - mt_flow_transfer_id
           - other
           - partial_swift_mir
+          - paxos_orchestration_id
           - paxos_transfer_id
           - pnc_clearing_reference
           - pnc_instruction_id
@@ -19708,6 +19726,7 @@ components:
           - mt_flow_transfer_id
           - other
           - partial_swift_mir
+          - paxos_orchestration_id
           - paxos_transfer_id
           - pnc_clearing_reference
           - pnc_instruction_id
