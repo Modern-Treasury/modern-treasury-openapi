@@ -12701,6 +12701,12 @@ components:
           - pending_closure
           - suspended
           description: The internal account status.
+        ledger_account_id:
+          type: string
+          format: uuid
+          nullable: true
+          description: If the internal account links to a ledger account in Modern
+            Treasury, the id of the ledger account will be populated here.
         contra_ledger_account_id:
           type: string
           format: uuid
@@ -12708,12 +12714,6 @@ components:
           description: If the internal account links to a contra ledger account in
             Modern Treasury, the id of the contra ledger account will be populated
             here.
-        ledger_account_id:
-          type: string
-          format: uuid
-          nullable: true
-          description: If the internal account links to a ledger account in Modern
-            Treasury, the id of the ledger account will be populated here.
       additionalProperties: false
       minProperties: 23
       required:
@@ -12738,8 +12738,8 @@ components:
       - vendor_id
       - legal_entity_id
       - status
-      - contra_ledger_account_id
       - ledger_account_id
+      - contra_ledger_account_id
     internal_account_create_request:
       type: object
       properties:
