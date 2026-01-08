@@ -19983,6 +19983,7 @@ components:
         status:
           type: string
           enum:
+          - cancelled
           - completed
           - failed
           - pending
