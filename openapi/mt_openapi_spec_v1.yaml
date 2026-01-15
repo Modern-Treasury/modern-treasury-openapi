@@ -9901,7 +9901,7 @@ components:
             expected_activity_volume:
               type: integer
               nullable: true
-              description: Monthly expected transaction volume in entity's local currency.
+              description: Monthly expected transaction volume in USD.
             country_of_incorporation:
               type: string
               nullable: true
@@ -12305,8 +12305,12 @@ components:
           type: string
           nullable: true
           description: The region in which the identifcation was issued.
+        documents:
+          type: array
+          items:
+            "$ref": "#/components/schemas/document"
       additionalProperties: false
-      minProperties: 10
+      minProperties: 11
       required:
       - id
       - object
@@ -12318,6 +12322,7 @@ components:
       - expiration_date
       - issuing_country
       - issuing_region
+      - documents
     identification_create_request:
       type: object
       properties:
@@ -15735,7 +15740,7 @@ components:
         expected_activity_volume:
           type: integer
           nullable: true
-          description: Monthly expected transaction volume in entity's local currency.
+          description: Monthly expected transaction volume in USD.
         country_of_incorporation:
           type: string
           nullable: true
@@ -15786,6 +15791,10 @@ components:
           description: A list of industry classifications for the legal entity.
           items:
             "$ref": "#/components/schemas/legal_entity_industry_classification"
+        documents:
+          type: array
+          items:
+            "$ref": "#/components/schemas/document"
         legal_entity_associations:
           type: array
           description: The legal entity associations and its child legal entities.
@@ -15793,7 +15802,7 @@ components:
             "$ref": "#/components/schemas/legal_entity_association"
           nullable: true
       additionalProperties: false
-      minProperties: 38
+      minProperties: 39
       required:
       - id
       - object
@@ -15832,6 +15841,7 @@ components:
       - addresses
       - identifications
       - industry_classifications
+      - documents
       - legal_entity_associations
     child_legal_entity_create:
       type: object
@@ -15940,7 +15950,7 @@ components:
         expected_activity_volume:
           type: integer
           nullable: true
-          description: Monthly expected transaction volume in entity's local currency.
+          description: Monthly expected transaction volume in USD.
         country_of_incorporation:
           type: string
           nullable: true
@@ -16126,7 +16136,7 @@ components:
         expected_activity_volume:
           type: integer
           nullable: true
-          description: Monthly expected transaction volume in entity's local currency.
+          description: Monthly expected transaction volume in USD.
         country_of_incorporation:
           type: string
           nullable: true
@@ -16177,6 +16187,10 @@ components:
           description: A list of industry classifications for the legal entity.
           items:
             "$ref": "#/components/schemas/legal_entity_industry_classification"
+        documents:
+          type: array
+          items:
+            "$ref": "#/components/schemas/document"
         legal_entity_associations:
           type: array
           description: The legal entity associations and its child legal entities.
@@ -16184,7 +16198,7 @@ components:
             "$ref": "#/components/schemas/legal_entity_association"
           nullable: true
       additionalProperties: false
-      minProperties: 37
+      minProperties: 38
       required:
       - id
       - object
@@ -16223,6 +16237,7 @@ components:
       - addresses
       - identifications
       - industry_classifications
+      - documents
     legal_entity_create_request:
       type: object
       properties:
@@ -16330,7 +16345,7 @@ components:
         expected_activity_volume:
           type: integer
           nullable: true
-          description: Monthly expected transaction volume in entity's local currency.
+          description: Monthly expected transaction volume in USD.
         country_of_incorporation:
           type: string
           nullable: true
@@ -16490,7 +16505,7 @@ components:
         expected_activity_volume:
           type: integer
           nullable: true
-          description: Monthly expected transaction volume in entity's local currency.
+          description: Monthly expected transaction volume in USD.
         country_of_incorporation:
           type: string
           nullable: true
@@ -17120,7 +17135,7 @@ components:
         annual_income:
           type: integer
           nullable: true
-          description: The annual income of the individual.
+          description: The annual income of the individual in USD.
       additionalProperties: false
       minProperties: 18
       required:
