@@ -9044,6 +9044,7 @@ components:
           enum:
           - au_number
           - base_address
+          - card_token
           - clabe
           - ethereum_address
           - hk_number
@@ -9084,6 +9085,7 @@ components:
           enum:
           - au_number
           - base_address
+          - card_token
           - clabe
           - ethereum_address
           - hk_number
@@ -9901,7 +9903,7 @@ components:
             expected_activity_volume:
               type: integer
               nullable: true
-              description: Monthly expected transaction volume in entity's local currency.
+              description: Monthly expected transaction volume in USD.
             country_of_incorporation:
               type: string
               nullable: true
@@ -9958,6 +9960,14 @@ components:
                 "$ref": "#/components/schemas/legal_entity_association_inline_create_request"
               nullable: true
               description: The legal entity associations and its child legal entities.
+            connection_id:
+              type: string
+              nullable: true
+              description: The connection ID for the connection the legal entity is
+                associated with. Defaults to the id of the connection designated with
+                an is_default value of true or the id of an existing operational connection
+                if only one is available. Pass in a value of null to prevent the connection
+                from being associated with the legal entity.
           description: The legal entity.
       required:
       - connection_id
@@ -10349,6 +10359,7 @@ components:
                       enum:
                       - au_number
                       - base_address
+                      - card_token
                       - clabe
                       - ethereum_address
                       - hk_number
@@ -11776,6 +11787,7 @@ components:
                 enum:
                 - au_number
                 - base_address
+                - card_token
                 - clabe
                 - ethereum_address
                 - hk_number
@@ -12305,8 +12317,12 @@ components:
           type: string
           nullable: true
           description: The region in which the identifcation was issued.
+        documents:
+          type: array
+          items:
+            "$ref": "#/components/schemas/document"
       additionalProperties: false
-      minProperties: 10
+      minProperties: 11
       required:
       - id
       - object
@@ -12318,6 +12334,7 @@ components:
       - expiration_date
       - issuing_country
       - issuing_region
+      - documents
     identification_create_request:
       type: object
       properties:
@@ -12542,6 +12559,7 @@ components:
           enum:
           - au_number
           - base_address
+          - card_token
           - clabe
           - ethereum_address
           - hk_number
@@ -15735,7 +15753,7 @@ components:
         expected_activity_volume:
           type: integer
           nullable: true
-          description: Monthly expected transaction volume in entity's local currency.
+          description: Monthly expected transaction volume in USD.
         country_of_incorporation:
           type: string
           nullable: true
@@ -15786,6 +15804,10 @@ components:
           description: A list of industry classifications for the legal entity.
           items:
             "$ref": "#/components/schemas/legal_entity_industry_classification"
+        documents:
+          type: array
+          items:
+            "$ref": "#/components/schemas/document"
         legal_entity_associations:
           type: array
           description: The legal entity associations and its child legal entities.
@@ -15793,7 +15815,7 @@ components:
             "$ref": "#/components/schemas/legal_entity_association"
           nullable: true
       additionalProperties: false
-      minProperties: 38
+      minProperties: 39
       required:
       - id
       - object
@@ -15832,6 +15854,7 @@ components:
       - addresses
       - identifications
       - industry_classifications
+      - documents
       - legal_entity_associations
     child_legal_entity_create:
       type: object
@@ -15940,7 +15963,7 @@ components:
         expected_activity_volume:
           type: integer
           nullable: true
-          description: Monthly expected transaction volume in entity's local currency.
+          description: Monthly expected transaction volume in USD.
         country_of_incorporation:
           type: string
           nullable: true
@@ -15997,8 +16020,16 @@ components:
             "$ref": "#/components/schemas/legal_entity_association_inline_create_request"
           nullable: true
           description: The legal entity associations and its child legal entities.
+        connection_id:
+          type: string
+          nullable: true
+          description: The connection ID for the connection the legal entity is associated
+            with. Defaults to the id of the connection designated with an is_default
+            value of true or the id of an existing operational connection if only
+            one is available. Pass in a value of null to prevent the connection from
+            being associated with the legal entity.
       additionalProperties: false
-      minProperties: 32
+      minProperties: 33
     legal_entity:
       type: object
       properties:
@@ -16126,7 +16157,7 @@ components:
         expected_activity_volume:
           type: integer
           nullable: true
-          description: Monthly expected transaction volume in entity's local currency.
+          description: Monthly expected transaction volume in USD.
         country_of_incorporation:
           type: string
           nullable: true
@@ -16177,6 +16208,10 @@ components:
           description: A list of industry classifications for the legal entity.
           items:
             "$ref": "#/components/schemas/legal_entity_industry_classification"
+        documents:
+          type: array
+          items:
+            "$ref": "#/components/schemas/document"
         legal_entity_associations:
           type: array
           description: The legal entity associations and its child legal entities.
@@ -16184,7 +16219,7 @@ components:
             "$ref": "#/components/schemas/legal_entity_association"
           nullable: true
       additionalProperties: false
-      minProperties: 37
+      minProperties: 38
       required:
       - id
       - object
@@ -16223,6 +16258,7 @@ components:
       - addresses
       - identifications
       - industry_classifications
+      - documents
     legal_entity_create_request:
       type: object
       properties:
@@ -16330,7 +16366,7 @@ components:
         expected_activity_volume:
           type: integer
           nullable: true
-          description: Monthly expected transaction volume in entity's local currency.
+          description: Monthly expected transaction volume in USD.
         country_of_incorporation:
           type: string
           nullable: true
@@ -16387,6 +16423,14 @@ components:
             "$ref": "#/components/schemas/legal_entity_association_inline_create_request"
           nullable: true
           description: The legal entity associations and its child legal entities.
+        connection_id:
+          type: string
+          nullable: true
+          description: The connection ID for the connection the legal entity is associated
+            with. Defaults to the id of the connection designated with an is_default
+            value of true or the id of an existing operational connection if only
+            one is available. Pass in a value of null to prevent the connection from
+            being associated with the legal entity.
       required:
       - legal_entity_type
     legal_entity_update_request:
@@ -16490,7 +16534,7 @@ components:
         expected_activity_volume:
           type: integer
           nullable: true
-          description: Monthly expected transaction volume in entity's local currency.
+          description: Monthly expected transaction volume in USD.
         country_of_incorporation:
           type: string
           nullable: true
@@ -17120,7 +17164,7 @@ components:
         annual_income:
           type: integer
           nullable: true
-          description: The annual income of the individual.
+          description: The annual income of the individual in USD.
       additionalProperties: false
       minProperties: 18
       required:
@@ -18355,6 +18399,7 @@ components:
                     enum:
                     - au_number
                     - base_address
+                    - card_token
                     - clabe
                     - ethereum_address
                     - hk_number
@@ -18500,6 +18545,7 @@ components:
             payment order.
         transaction_monitoring_enabled:
           type: boolean
+          deprecated: true
           description: A flag that determines whether a payment order should go through
             transaction monitoring.
         documents:
@@ -18822,6 +18868,7 @@ components:
                     enum:
                     - au_number
                     - base_address
+                    - card_token
                     - clabe
                     - ethereum_address
                     - hk_number
@@ -18967,6 +19014,7 @@ components:
             payment order.
         transaction_monitoring_enabled:
           type: boolean
+          deprecated: true
           description: A flag that determines whether a payment order should go through
             transaction monitoring.
       required:
@@ -19319,6 +19367,7 @@ components:
                     enum:
                     - au_number
                     - base_address
+                    - card_token
                     - clabe
                     - ethereum_address
                     - hk_number
