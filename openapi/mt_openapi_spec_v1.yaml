@@ -9920,6 +9920,25 @@ components:
               items:
                 type: string
               description: A list of primary social media URLs for the business.
+            listed_exchange:
+              type: string
+              nullable: true
+              description: ISO 10383 market identifier code.
+            ticker_symbol:
+              type: string
+              nullable: true
+              description: Stock ticker symbol for publicly traded companies.
+            regulators:
+              type: array
+              nullable: true
+              items:
+                "$ref": "#/components/schemas/legal_entity_regulator"
+              description: Array of regulatory bodies overseeing this institution.
+            third_party_verification:
+              "$ref": "#/components/schemas/third_party_verification"
+              nullable: true
+              description: Information describing a third-party verification run by
+                an external vendor.
             metadata:
               type: object
               description: Additional data represented as key-value pairs. Both the
@@ -15770,6 +15789,25 @@ components:
           items:
             type: string
           description: A list of primary social media URLs for the business.
+        listed_exchange:
+          type: string
+          nullable: true
+          description: ISO 10383 market identifier code.
+        ticker_symbol:
+          type: string
+          nullable: true
+          description: Stock ticker symbol for publicly traded companies.
+        regulators:
+          type: array
+          nullable: true
+          items:
+            "$ref": "#/components/schemas/legal_entity_regulator"
+          description: Array of regulatory bodies overseeing this institution.
+        third_party_verification:
+          "$ref": "#/components/schemas/third_party_verification"
+          nullable: true
+          description: Information describing a third-party verification run by an
+            external vendor.
         metadata:
           type: object
           description: Additional data represented as key-value pairs. Both the key
@@ -15815,7 +15853,7 @@ components:
             "$ref": "#/components/schemas/legal_entity_association"
           nullable: true
       additionalProperties: false
-      minProperties: 39
+      minProperties: 43
       required:
       - id
       - object
@@ -15847,6 +15885,10 @@ components:
       - country_of_incorporation
       - operating_jurisdictions
       - primary_social_media_sites
+      - listed_exchange
+      - ticker_symbol
+      - regulators
+      - third_party_verification
       - metadata
       - bank_settings
       - compliance_details
@@ -15980,6 +16022,25 @@ components:
           items:
             type: string
           description: A list of primary social media URLs for the business.
+        listed_exchange:
+          type: string
+          nullable: true
+          description: ISO 10383 market identifier code.
+        ticker_symbol:
+          type: string
+          nullable: true
+          description: Stock ticker symbol for publicly traded companies.
+        regulators:
+          type: array
+          nullable: true
+          items:
+            "$ref": "#/components/schemas/legal_entity_regulator"
+          description: Array of regulatory bodies overseeing this institution.
+        third_party_verification:
+          "$ref": "#/components/schemas/third_party_verification"
+          nullable: true
+          description: Information describing a third-party verification run by an
+            external vendor.
         metadata:
           type: object
           description: Additional data represented as key-value pairs. Both the key
@@ -16029,7 +16090,7 @@ components:
             one is available. Pass in a value of null to prevent the connection from
             being associated with the legal entity.
       additionalProperties: false
-      minProperties: 33
+      minProperties: 37
     legal_entity:
       type: object
       properties:
@@ -16174,6 +16235,25 @@ components:
           items:
             type: string
           description: A list of primary social media URLs for the business.
+        listed_exchange:
+          type: string
+          nullable: true
+          description: ISO 10383 market identifier code.
+        ticker_symbol:
+          type: string
+          nullable: true
+          description: Stock ticker symbol for publicly traded companies.
+        regulators:
+          type: array
+          nullable: true
+          items:
+            "$ref": "#/components/schemas/legal_entity_regulator"
+          description: Array of regulatory bodies overseeing this institution.
+        third_party_verification:
+          "$ref": "#/components/schemas/third_party_verification"
+          nullable: true
+          description: Information describing a third-party verification run by an
+            external vendor.
         metadata:
           type: object
           description: Additional data represented as key-value pairs. Both the key
@@ -16219,7 +16299,7 @@ components:
             "$ref": "#/components/schemas/legal_entity_association"
           nullable: true
       additionalProperties: false
-      minProperties: 38
+      minProperties: 42
       required:
       - id
       - object
@@ -16251,6 +16331,10 @@ components:
       - country_of_incorporation
       - operating_jurisdictions
       - primary_social_media_sites
+      - listed_exchange
+      - ticker_symbol
+      - regulators
+      - third_party_verification
       - metadata
       - bank_settings
       - compliance_details
@@ -16383,6 +16467,25 @@ components:
           items:
             type: string
           description: A list of primary social media URLs for the business.
+        listed_exchange:
+          type: string
+          nullable: true
+          description: ISO 10383 market identifier code.
+        ticker_symbol:
+          type: string
+          nullable: true
+          description: Stock ticker symbol for publicly traded companies.
+        regulators:
+          type: array
+          nullable: true
+          items:
+            "$ref": "#/components/schemas/legal_entity_regulator"
+          description: Array of regulatory bodies overseeing this institution.
+        third_party_verification:
+          "$ref": "#/components/schemas/third_party_verification"
+          nullable: true
+          description: Information describing a third-party verification run by an
+            external vendor.
         metadata:
           type: object
           description: Additional data represented as key-value pairs. Both the key
@@ -16551,6 +16654,25 @@ components:
           items:
             type: string
           description: A list of primary social media URLs for the business.
+        listed_exchange:
+          type: string
+          nullable: true
+          description: ISO 10383 market identifier code.
+        ticker_symbol:
+          type: string
+          nullable: true
+          description: Stock ticker symbol for publicly traded companies.
+        regulators:
+          type: array
+          nullable: true
+          items:
+            "$ref": "#/components/schemas/legal_entity_regulator"
+          description: Array of regulatory bodies overseeing this institution.
+        third_party_verification:
+          "$ref": "#/components/schemas/third_party_verification"
+          nullable: true
+          description: Information describing a third-party verification run by an
+            external vendor.
         metadata:
           type: object
           description: Additional data represented as key-value pairs. Both the key
@@ -17186,6 +17308,40 @@ components:
       - source_of_funds
       - wealth_source
       - annual_income
+    legal_entity_regulator:
+      type: object
+      properties:
+        name:
+          type: string
+          description: Full name of the regulatory body.
+        jurisdiction:
+          type: string
+          description: The country code where the regulator operates in the ISO 3166-1
+            alpha-2 format (e.g., "US", "CA", "GB").
+        registration_number:
+          type: string
+          description: Registration or identification number with the regulator.
+      required:
+      - name
+      - jurisdiction
+      - registration_number
+      additionalProperties: false
+    third_party_verification:
+      type: object
+      properties:
+        vendor_verification_id:
+          type: string
+          description: The identification of the third party verification in `vendor`'s
+            system.
+        vendor:
+          type: string
+          enum:
+          - persona
+          description: The vendor that performed the verification, e.g. `persona`.
+      required:
+      - vendor_verification_id
+      - vendor
+      additionalProperties: false
     line_item:
       type: object
       properties:
@@ -20868,7 +21024,7 @@ components:
           - hifi
           - iso20022
           - jpmc
-          - mt_flow
+          - modern_treasury
           - mx
           - paxos
           - paypal
