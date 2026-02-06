@@ -14124,6 +14124,10 @@ components:
             key: value
             foo: bar
             modern: treasury
+        external_id:
+          type: string
+          nullable: true
+          description: An optional user-defined 180 character unique identifier.
       required:
       - name
       - normal_balance
@@ -14434,6 +14438,10 @@ components:
             format: uuid
           description: The array of ledger account category ids that this ledger account
             category should be a child of.
+        external_id:
+          type: string
+          nullable: true
+          description: An optional user-defined 180 character unique identifier.
       required:
       - name
       - normal_balance
