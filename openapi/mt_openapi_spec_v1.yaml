@@ -18288,8 +18288,14 @@ components:
           nullable: true
           description: Additional vendor specific fields for this payment. Data must
             be represented as key-value pairs.
+        batch_id:
+          type: string
+          format: uuid
+          nullable: true
+          description: The ID of the batch in which the payment order is included.
+            Only populated after the payment order begins processing.
       additionalProperties: false
-      minProperties: 51
+      minProperties: 52
       required:
       - id
       - object
@@ -18342,6 +18348,7 @@ components:
       - vendor_failure_reason
       - foreign_exchange_rate
       - vendor_attributes
+      - batch_id
     payment_order_create_request:
       type: object
       properties:
