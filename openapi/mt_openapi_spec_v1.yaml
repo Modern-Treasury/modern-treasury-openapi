@@ -9972,9 +9972,6 @@ components:
             bank_settings:
               "$ref": "#/components/schemas/legal_entity_bank_setting"
               nullable: true
-            compliance_details:
-              "$ref": "#/components/schemas/legal_entity_compliance_detail"
-              nullable: true
             wealth_and_employment_details:
               "$ref": "#/components/schemas/legal_entity_wealth_employment_detail"
               nullable: true
@@ -15875,8 +15872,9 @@ components:
           "$ref": "#/components/schemas/legal_entity_bank_setting"
           nullable: true
         compliance_details:
-          "$ref": "#/components/schemas/legal_entity_compliance_detail"
+          type: object
           nullable: true
+          deprecated: true
         wealth_and_employment_details:
           "$ref": "#/components/schemas/legal_entity_wealth_employment_detail"
           nullable: true
@@ -16118,9 +16116,6 @@ components:
         bank_settings:
           "$ref": "#/components/schemas/legal_entity_bank_setting"
           nullable: true
-        compliance_details:
-          "$ref": "#/components/schemas/legal_entity_compliance_detail"
-          nullable: true
         wealth_and_employment_details:
           "$ref": "#/components/schemas/legal_entity_wealth_employment_detail"
           nullable: true
@@ -16154,7 +16149,7 @@ components:
             one is available. Pass in a value of null to prevent the connection from
             being associated with the legal entity.
       additionalProperties: false
-      minProperties: 38
+      minProperties: 37
     legal_entity:
       type: object
       properties:
@@ -16342,8 +16337,9 @@ components:
           "$ref": "#/components/schemas/legal_entity_bank_setting"
           nullable: true
         compliance_details:
-          "$ref": "#/components/schemas/legal_entity_compliance_detail"
+          type: object
           nullable: true
+          deprecated: true
         wealth_and_employment_details:
           "$ref": "#/components/schemas/legal_entity_wealth_employment_detail"
           nullable: true
@@ -16584,9 +16580,6 @@ components:
         bank_settings:
           "$ref": "#/components/schemas/legal_entity_bank_setting"
           nullable: true
-        compliance_details:
-          "$ref": "#/components/schemas/legal_entity_compliance_detail"
-          nullable: true
         wealth_and_employment_details:
           "$ref": "#/components/schemas/legal_entity_wealth_employment_detail"
           nullable: true
@@ -16780,9 +16773,6 @@ components:
             modern: treasury
         bank_settings:
           "$ref": "#/components/schemas/legal_entity_bank_setting"
-          nullable: true
-        compliance_details:
-          "$ref": "#/components/schemas/legal_entity_compliance_detail"
           nullable: true
         wealth_and_employment_details:
           "$ref": "#/components/schemas/legal_entity_wealth_employment_detail"
@@ -17097,71 +17087,6 @@ components:
       - backup_withholding_percentage
       - privacy_opt_out
       - regulation_o
-    legal_entity_compliance_detail:
-      type: object
-      properties:
-        id:
-          type: string
-          format: uuid
-        object:
-          type: string
-        live_mode:
-          type: boolean
-          description: This field will be true if this object exists in the live environment
-            or false if it exists in the test environment.
-        created_at:
-          type: string
-          format: date-time
-        updated_at:
-          type: string
-          format: date-time
-        discarded_at:
-          type: string
-          format: date-time
-          nullable: true
-        issuer:
-          type: string
-          nullable: false
-          description: The issuer of the compliance token.
-        token_url:
-          type: string
-          nullable: true
-          description: The URL to the compliance token. (ex. provider portal URL)
-        token_issued_at:
-          type: string
-          format: date-time
-          nullable: true
-          description: The timestamp when the compliance token was issued.
-        token_expires_at:
-          type: string
-          format: date-time
-          nullable: true
-          description: The timestamp when the compliance token expires.
-        validated:
-          type: boolean
-          nullable: false
-          description: Whether entity corresponding to the compliance token has been
-            validated.
-        validated_at:
-          type: string
-          format: date-time
-          nullable: true
-          description: The timestamp when the entity was validated.
-      additionalProperties: false
-      minProperties: 12
-      required:
-      - id
-      - object
-      - live_mode
-      - created_at
-      - updated_at
-      - discarded_at
-      - issuer
-      - token_url
-      - token_issued_at
-      - token_expires_at
-      - validated
-      - validated_at
     legal_entity_industry_classification:
       type: object
       properties:
@@ -18288,8 +18213,14 @@ components:
           nullable: true
           description: Additional vendor specific fields for this payment. Data must
             be represented as key-value pairs.
+        batch_id:
+          type: string
+          format: uuid
+          nullable: true
+          description: The ID of the batch in which the payment order is included.
+            Only populated after the payment order begins processing.
       additionalProperties: false
-      minProperties: 51
+      minProperties: 52
       required:
       - id
       - object
@@ -18342,6 +18273,7 @@ components:
       - vendor_failure_reason
       - foreign_exchange_rate
       - vendor_attributes
+      - batch_id
     payment_order_create_request:
       type: object
       properties:
