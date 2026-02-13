@@ -413,6 +413,12 @@ paths:
             application/json:
               schema:
                 "$ref": "#/components/schemas/ledger_account_category"
+        '409':
+          description: conflict
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/error_message"
         '403':
           description: forbidden
           content:
@@ -1294,6 +1300,12 @@ paths:
             application/json:
               schema:
                 "$ref": "#/components/schemas/error_message"
+        '409':
+          description: conflict
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/error_message"
         '422':
           description: unsuccessful
           content:
@@ -2055,6 +2067,12 @@ paths:
             application/json:
               schema:
                 "$ref": "#/components/schemas/error_message"
+        '409':
+          description: conflict
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/error_message"
         '422':
           description: unsuccessful
           content:
@@ -2140,6 +2158,12 @@ paths:
                 "$ref": "#/components/schemas/error_message"
         '404':
           description: not found
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/error_message"
+        '409':
+          description: conflict
           content:
             application/json:
               schema:
@@ -3859,6 +3883,12 @@ paths:
             application/json:
               schema:
                 "$ref": "#/components/schemas/counterparty"
+        '409':
+          description: conflict
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/error_message"
         '404':
           description: not found
           content:
@@ -4669,6 +4699,12 @@ paths:
             application/json:
               schema:
                 "$ref": "#/components/schemas/expected_payment"
+        '409':
+          description: conflict
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/error_message"
       requestBody:
         content:
           application/json:
@@ -4923,6 +4959,12 @@ paths:
             application/json:
               schema:
                 "$ref": "#/components/schemas/external_account"
+        '409':
+          description: conflict
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/error_message"
         '404':
           description: not found
           content:
@@ -7044,6 +7086,12 @@ paths:
             application/json:
               schema:
                 "$ref": "#/components/schemas/payment_order"
+        '409':
+          description: conflict
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/error_message"
         '422':
           description: parameter_invalid
           content:
