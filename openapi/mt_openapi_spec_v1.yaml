@@ -2685,6 +2685,12 @@ paths:
         required: false
         schema:
           type: string
+      - name: external_id
+        in: query
+        schema:
+          type: string
+        required: false
+        description: An optional user-defined 180 character unique identifier.
       - "$ref": "#/components/parameters/metadata_query"
       responses:
         '200':
@@ -2794,6 +2800,12 @@ paths:
             application/json:
               schema:
                 "$ref": "#/components/schemas/legal_entity"
+        '409':
+          description: conflict
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/error_message"
         '404':
           description: not found
           content:
@@ -5868,6 +5880,12 @@ paths:
           - closed
         required: false
         description: Only return internal accounts with this status.
+      - name: external_id
+        in: query
+        schema:
+          type: string
+        required: false
+        description: An optional user-defined 180 character unique identifier.
       - "$ref": "#/components/parameters/metadata_query"
       responses:
         '200':
@@ -5974,6 +5992,12 @@ paths:
             application/json:
               schema:
                 "$ref": "#/components/schemas/internal_account"
+        '409':
+          description: conflict
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/error_message"
         '404':
           description: unsuccessful
           content:
@@ -10017,6 +10041,10 @@ components:
                 key: value
                 foo: bar
                 modern: treasury
+            external_id:
+              type: string
+              nullable: true
+              description: An optional user-defined 180 character unique identifier.
             bank_settings:
               "$ref": "#/components/schemas/legal_entity_bank_setting"
               nullable: true
@@ -12838,8 +12866,12 @@ components:
           description: If the internal account links to a contra ledger account in
             Modern Treasury, the id of the contra ledger account will be populated
             here.
+        external_id:
+          type: string
+          nullable: true
+          description: An optional user-defined 180 character unique identifier.
       additionalProperties: false
-      minProperties: 23
+      minProperties: 24
       required:
       - id
       - object
@@ -12864,6 +12896,7 @@ components:
       - status
       - ledger_account_id
       - contra_ledger_account_id
+      - external_id
     internal_account_create_request:
       type: object
       properties:
@@ -12955,6 +12988,10 @@ components:
         legal_entity_id:
           type: string
           description: The LegalEntity associated to this account.
+        external_id:
+          type: string
+          nullable: true
+          description: An optional user-defined 180 character unique identifier.
       required:
       - connection_id
       - name
@@ -12984,6 +13021,10 @@ components:
         contra_ledger_account_id:
           type: string
           description: The Contra Ledger Account associated to this account.
+        external_id:
+          type: string
+          nullable: true
+          description: An optional user-defined 180 character unique identifier.
     invoice:
       type: object
       properties:
@@ -15916,6 +15957,10 @@ components:
             key: value
             foo: bar
             modern: treasury
+        external_id:
+          type: string
+          nullable: true
+          description: An optional user-defined 180 character unique identifier.
         bank_settings:
           "$ref": "#/components/schemas/legal_entity_bank_setting"
           nullable: true
@@ -15952,7 +15997,7 @@ components:
             "$ref": "#/components/schemas/legal_entity_association"
           nullable: true
       additionalProperties: false
-      minProperties: 44
+      minProperties: 45
       required:
       - id
       - object
@@ -15990,6 +16035,7 @@ components:
       - regulators
       - third_party_verification
       - metadata
+      - external_id
       - bank_settings
       - compliance_details
       - wealth_and_employment_details
@@ -16161,6 +16207,10 @@ components:
             key: value
             foo: bar
             modern: treasury
+        external_id:
+          type: string
+          nullable: true
+          description: An optional user-defined 180 character unique identifier.
         bank_settings:
           "$ref": "#/components/schemas/legal_entity_bank_setting"
           nullable: true
@@ -16197,7 +16247,7 @@ components:
             one is available. Pass in a value of null to prevent the connection from
             being associated with the legal entity.
       additionalProperties: false
-      minProperties: 37
+      minProperties: 38
     legal_entity:
       type: object
       properties:
@@ -16381,6 +16431,10 @@ components:
             key: value
             foo: bar
             modern: treasury
+        external_id:
+          type: string
+          nullable: true
+          description: An optional user-defined 180 character unique identifier.
         bank_settings:
           "$ref": "#/components/schemas/legal_entity_bank_setting"
           nullable: true
@@ -16417,7 +16471,7 @@ components:
             "$ref": "#/components/schemas/legal_entity_association"
           nullable: true
       additionalProperties: false
-      minProperties: 43
+      minProperties: 44
       required:
       - id
       - object
@@ -16455,6 +16509,7 @@ components:
       - regulators
       - third_party_verification
       - metadata
+      - external_id
       - bank_settings
       - compliance_details
       - wealth_and_employment_details
@@ -16625,6 +16680,10 @@ components:
             key: value
             foo: bar
             modern: treasury
+        external_id:
+          type: string
+          nullable: true
+          description: An optional user-defined 180 character unique identifier.
         bank_settings:
           "$ref": "#/components/schemas/legal_entity_bank_setting"
           nullable: true
@@ -16819,6 +16878,10 @@ components:
             key: value
             foo: bar
             modern: treasury
+        external_id:
+          type: string
+          nullable: true
+          description: An optional user-defined 180 character unique identifier.
         bank_settings:
           "$ref": "#/components/schemas/legal_entity_bank_setting"
           nullable: true
