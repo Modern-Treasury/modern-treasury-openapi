@@ -20683,6 +20683,11 @@ components:
           - date_earlier_than_intended
           - date_later_than_intended
           description: The reason for the reversal.
+        internal_account_id:
+          type: string
+          format: uuid
+          nullable: true
+          description: The ID of the relevant Internal Account.
         reconciliation_status:
           type: string
           enum:
@@ -20691,7 +20696,7 @@ components:
           - reconciled
           description: One of `unreconciled`, `tentatively_reconciled` or `reconciled`.
       additionalProperties: false
-      minProperties: 12
+      minProperties: 13
       required:
       - id
       - object
@@ -20704,6 +20709,7 @@ components:
       - ledger_transaction_id
       - metadata
       - reason
+      - internal_account_id
       - reconciliation_status
     reversal_create_request:
       type: object
