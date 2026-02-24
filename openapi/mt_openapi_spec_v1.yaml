@@ -2635,6 +2635,62 @@ paths:
           application/json:
             schema:
               "$ref": "#/components/schemas/connection_legal_entity_update_request"
+  "/api/connections":
+    get:
+      summary: list connections
+      tags:
+      - Connection
+      operationId: listConnections
+      description: Get a list of all connections.
+      security:
+      - basic_auth: []
+      parameters:
+      - name: after_cursor
+        in: query
+        schema:
+          type: string
+          nullable: true
+        required: false
+      - name: per_page
+        in: query
+        required: false
+        schema:
+          type: integer
+      - name: vendor_customer_id
+        in: query
+        schema:
+          type: string
+          format: uuid
+        required: false
+        description: An identifier assigned by the vendor to your organization.
+      - name: entity
+        in: query
+        schema:
+          type: string
+        required: false
+        description: A string code representing the vendor (i.e. bank).
+      responses:
+        '200':
+          description: successful
+          headers:
+            X-After-Cursor:
+              schema:
+                type: string
+                nullable: true
+              required: false
+              description: The cursor for the next page. Including this in a call
+                as `after_cursor` will return the next page.
+            X-Per-Page:
+              schema:
+                type: integer
+                nullable: true
+              description: The current `per_page`.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  "$ref": "#/components/schemas/connection"
   "/api/legal_entities":
     get:
       summary: list legal_entities
@@ -3815,62 +3871,6 @@ paths:
             application/json:
               schema:
                 "$ref": "#/components/schemas/error_message"
-  "/api/connections":
-    get:
-      summary: list connections
-      tags:
-      - Connection
-      operationId: listConnections
-      description: Get a list of all connections.
-      security:
-      - basic_auth: []
-      parameters:
-      - name: after_cursor
-        in: query
-        schema:
-          type: string
-          nullable: true
-        required: false
-      - name: per_page
-        in: query
-        required: false
-        schema:
-          type: integer
-      - name: vendor_customer_id
-        in: query
-        schema:
-          type: string
-          format: uuid
-        required: false
-        description: An identifier assigned by the vendor to your organization.
-      - name: entity
-        in: query
-        schema:
-          type: string
-        required: false
-        description: A string code representing the vendor (i.e. bank).
-      responses:
-        '200':
-          description: successful
-          headers:
-            X-After-Cursor:
-              schema:
-                type: string
-                nullable: true
-              required: false
-              description: The cursor for the next page. Including this in a call
-                as `after_cursor` will return the next page.
-            X-Per-Page:
-              schema:
-                type: integer
-                nullable: true
-              description: The current `per_page`.
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  "$ref": "#/components/schemas/connection"
   "/api/counterparties/{id}/collect_account":
     post:
       summary: collect account details
