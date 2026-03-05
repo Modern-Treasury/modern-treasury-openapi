@@ -12702,6 +12702,16 @@ components:
           description: The vendor-assigned identifier for the originating party of
             the incoming payment detail, or `null`.
           nullable: true
+        receiving_account_number:
+          type: string
+          description: The account number of the receiving account for the incoming
+            payment detail, or `null`.
+          nullable: true
+        receiving_account_number_safe:
+          type: string
+          description: The last 4 digits of the receiving account number for the incoming
+            payment detail, or `null`.
+          nullable: true
         reconciliation_status:
           type: string
           enum:
