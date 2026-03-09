@@ -10055,6 +10055,33 @@ components:
               description: A list of identifications for the legal entity.
               items:
                 "$ref": "#/components/schemas/identification_create_request"
+            documents:
+              type: array
+              description: A list of documents to attach to the legal entity (e.g.
+                articles of incorporation, certificate of good standing, proof of
+                address).
+              items:
+                type: object
+                properties:
+                  document_type:
+                    type: string
+                    enum:
+                    - articles_of_incorporation
+                    - certificate_of_good_standing
+                    - ein_letter
+                    - identification_back
+                    - identification_front
+                    - proof_of_address
+                    description: A category given to the document, can be `null`.
+                  file_data:
+                    type: string
+                    description: Base64-encoded file content for the document.
+                  filename:
+                    type: string
+                    description: The original filename of the document.
+                required:
+                - document_type
+                - file_data
             industry_classifications:
               type: array
               description: A list of industry classifications for the legal entity.
@@ -12452,6 +12479,31 @@ components:
         id_number:
           type: string
           description: The ID number of identification document.
+        documents:
+          type: array
+          description: A list of documents to attach to the identification.
+          items:
+            type: object
+            properties:
+              document_type:
+                type: string
+                enum:
+                - articles_of_incorporation
+                - certificate_of_good_standing
+                - ein_letter
+                - identification_back
+                - identification_front
+                - proof_of_address
+                description: A category given to the document, can be `null`.
+              file_data:
+                type: string
+                description: Base64-encoded file content for the document.
+              filename:
+                type: string
+                description: The original filename of the document.
+            required:
+            - document_type
+            - file_data
         id_type:
           type: string
           enum:
@@ -16250,6 +16302,32 @@ components:
           description: A list of identifications for the legal entity.
           items:
             "$ref": "#/components/schemas/identification_create_request"
+        documents:
+          type: array
+          description: A list of documents to attach to the legal entity (e.g. articles
+            of incorporation, certificate of good standing, proof of address).
+          items:
+            type: object
+            properties:
+              document_type:
+                type: string
+                enum:
+                - articles_of_incorporation
+                - certificate_of_good_standing
+                - ein_letter
+                - identification_back
+                - identification_front
+                - proof_of_address
+                description: A category given to the document, can be `null`.
+              file_data:
+                type: string
+                description: Base64-encoded file content for the document.
+              filename:
+                type: string
+                description: The original filename of the document.
+            required:
+            - document_type
+            - file_data
         industry_classifications:
           type: array
           description: A list of industry classifications for the legal entity.
@@ -16270,7 +16348,7 @@ components:
             one is available. Pass in a value of null to prevent the connection from
             being associated with the legal entity.
       additionalProperties: false
-      minProperties: 38
+      minProperties: 39
     legal_entity:
       type: object
       properties:
@@ -16723,6 +16801,32 @@ components:
           description: A list of identifications for the legal entity.
           items:
             "$ref": "#/components/schemas/identification_create_request"
+        documents:
+          type: array
+          description: A list of documents to attach to the legal entity (e.g. articles
+            of incorporation, certificate of good standing, proof of address).
+          items:
+            type: object
+            properties:
+              document_type:
+                type: string
+                enum:
+                - articles_of_incorporation
+                - certificate_of_good_standing
+                - ein_letter
+                - identification_back
+                - identification_front
+                - proof_of_address
+                description: A category given to the document, can be `null`.
+              file_data:
+                type: string
+                description: Base64-encoded file content for the document.
+              filename:
+                type: string
+                description: The original filename of the document.
+            required:
+            - document_type
+            - file_data
         industry_classifications:
           type: array
           description: A list of industry classifications for the legal entity.
