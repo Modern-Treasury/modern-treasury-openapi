@@ -13051,6 +13051,12 @@ components:
         legal_entity_id:
           type: string
           description: The LegalEntity associated to this account.
+        metadata:
+          type: object
+          additionalProperties:
+            type: string
+          description: Additional data represented as key-value pairs. Both the key
+            and value must be strings.
         external_id:
           type: string
           nullable: true
