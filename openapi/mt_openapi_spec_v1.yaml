@@ -10045,6 +10045,10 @@ components:
             wealth_and_employment_details:
               "$ref": "#/components/schemas/legal_entity_wealth_employment_detail"
               nullable: true
+            compliance_details:
+              type: object
+              nullable: true
+              deprecated: true
             addresses:
               type: array
               description: A list of addresses for the entity.
@@ -13197,6 +13201,11 @@ components:
           type: string
           format: date-time
           description: A future date by when the invoice needs to be paid.
+        invoicer_name:
+          type: string
+          nullable: true
+          description: The name of the issuer for the invoice. Defaults to the name
+            of the Organization.
         invoicer_address:
           type: object
           nullable: true
@@ -13339,11 +13348,6 @@ components:
           type: integer
           description: Amount paid on the invoice in specified currency's smallest
             unit, e.g., $10 USD would be represented as 1000.
-        invoicer_name:
-          type: string
-          nullable: true
-          description: The name of the issuer for the invoice. Defaults to the name
-            of the Organization.
         transaction_line_item_ids:
           type: array
           items:
@@ -13373,6 +13377,7 @@ components:
       - currency
       - description
       - due_date
+      - invoicer_name
       - invoicer_address
       - originating_account_id
       - receiving_account_id
@@ -13394,7 +13399,6 @@ components:
       - total_amount
       - amount_remaining
       - amount_paid
-      - invoicer_name
       - transaction_line_item_ids
       - ledger_account_settlement_id
     invoice_create_request:
@@ -13485,6 +13489,11 @@ components:
           type: string
           format: date-time
           description: A future date by when the invoice needs to be paid.
+        invoicer_name:
+          type: string
+          nullable: true
+          description: The name of the issuer for the invoice. Defaults to the name
+            of the Organization.
         invoicer_address:
           type: object
           nullable: true
@@ -13726,6 +13735,11 @@ components:
           type: string
           format: date-time
           description: A future date by when the invoice needs to be paid.
+        invoicer_name:
+          type: string
+          nullable: true
+          description: The name of the issuer for the invoice. Defaults to the name
+            of the Organization.
         invoicer_address:
           type: object
           nullable: true
@@ -16299,6 +16313,10 @@ components:
         wealth_and_employment_details:
           "$ref": "#/components/schemas/legal_entity_wealth_employment_detail"
           nullable: true
+        compliance_details:
+          type: object
+          nullable: true
+          deprecated: true
         addresses:
           type: array
           description: A list of addresses for the entity.
@@ -16355,7 +16373,7 @@ components:
             one is available. Pass in a value of null to prevent the connection from
             being associated with the legal entity.
       additionalProperties: false
-      minProperties: 39
+      minProperties: 40
     legal_entity:
       type: object
       properties:
@@ -16798,6 +16816,10 @@ components:
         wealth_and_employment_details:
           "$ref": "#/components/schemas/legal_entity_wealth_employment_detail"
           nullable: true
+        compliance_details:
+          type: object
+          nullable: true
+          deprecated: true
         addresses:
           type: array
           description: A list of addresses for the entity.
@@ -18987,6 +19009,36 @@ components:
           deprecated: true
           description: A flag that determines whether a payment order should go through
             transaction monitoring.
+        ultimate_originating_account_id:
+          type: string
+          format: uuid
+          description: The ultimate originating account ID. Can be a `virtual_account`
+            or `internal_account`.
+        ultimate_originating_party_address:
+          type: object
+          nullable: true
+          description: Address of the ultimate originator of the payment order.
+          properties:
+            line1:
+              type: string
+            line2:
+              type: string
+            locality:
+              type: string
+              description: Locality or City.
+            region:
+              type: string
+              description: Region or State.
+            postal_code:
+              type: string
+              description: The postal code of the address.
+            country:
+              type: string
+              description: Country code conforms to [ISO 3166-1 alpha-2]
+        vendor_attributes:
+          type: object
+          description: Additional vendor specific fields for this payment. Data must
+            be represented as key-value pairs.
         documents:
           type: array
           items:
@@ -19460,6 +19512,36 @@ components:
           deprecated: true
           description: A flag that determines whether a payment order should go through
             transaction monitoring.
+        ultimate_originating_account_id:
+          type: string
+          format: uuid
+          description: The ultimate originating account ID. Can be a `virtual_account`
+            or `internal_account`.
+        ultimate_originating_party_address:
+          type: object
+          nullable: true
+          description: Address of the ultimate originator of the payment order.
+          properties:
+            line1:
+              type: string
+            line2:
+              type: string
+            locality:
+              type: string
+              description: Locality or City.
+            region:
+              type: string
+              description: Region or State.
+            postal_code:
+              type: string
+              description: The postal code of the address.
+            country:
+              type: string
+              description: Country code conforms to [ISO 3166-1 alpha-2]
+        vendor_attributes:
+          type: object
+          description: Additional vendor specific fields for this payment. Data must
+            be represented as key-value pairs.
       required:
       - type
       - amount
@@ -20766,6 +20848,12 @@ components:
           - incoming_payment_detail
           description: The type of object being returned. Currently, this may only
             be incoming_payment_detail.
+        ledger_transaction:
+          "$ref": "#/components/schemas/ledger_transaction_create_request"
+          description: Specifies a ledger transaction object that will be created
+            with the return. If the ledger transaction cannot be created, then the
+            return creation will fail. The resulting ledger transaction will mirror
+            the status of the return.
       required:
       - returnable_id
       - returnable_type
