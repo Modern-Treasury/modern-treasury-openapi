@@ -2729,6 +2729,7 @@ paths:
           - active
           - suspended
           - closed
+          - denied
         required: false
       - name: show_deleted
         in: query
@@ -9894,6 +9895,7 @@ components:
               enum:
               - active
               - closed
+              - denied
               - pending
               - suspended
               nullable: true
@@ -15912,6 +15914,7 @@ components:
           enum:
           - active
           - closed
+          - denied
           - pending
           - suspended
           nullable: true
@@ -16162,6 +16165,7 @@ components:
           enum:
           - active
           - closed
+          - denied
           - pending
           - suspended
           nullable: true
@@ -16416,6 +16420,7 @@ components:
           enum:
           - active
           - closed
+          - denied
           - pending
           - suspended
           nullable: true
@@ -16665,6 +16670,7 @@ components:
           enum:
           - active
           - closed
+          - denied
           - pending
           - suspended
           nullable: true
@@ -16893,6 +16899,7 @@ components:
           enum:
           - active
           - closed
+          - denied
           - pending
           - suspended
           nullable: true
