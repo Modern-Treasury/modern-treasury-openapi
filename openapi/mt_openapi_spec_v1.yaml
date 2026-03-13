@@ -10857,11 +10857,13 @@ components:
       - SGD
       - SHP
       - SKK
+      - SLE
       - SLL
       - SOS
       - SRD
       - SSP
       - STD
+      - STN
       - SVC
       - SYP
       - SZL
@@ -10898,6 +10900,7 @@ components:
       - XBC
       - XBD
       - XCD
+      - XCG
       - XDR
       - XFU
       - XOF
@@ -10910,6 +10913,7 @@ components:
       - ZMK
       - ZMW
       - ZWD
+      - ZWG
       - ZWL
       - ZWN
       - ZWR
