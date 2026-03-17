@@ -9887,16 +9887,6 @@ components:
               nullable: true
               description: The risk rating of the legal entity. One of low, medium,
                 high.
-            status:
-              type: string
-              enum:
-              - active
-              - denied
-              - pending
-              - suspended
-              nullable: true
-              description: The activation status of the legal entity. One of pending,
-                active, suspended, or closed.
             prefix:
               type: string
               nullable: true
@@ -16159,16 +16149,6 @@ components:
           - high
           nullable: true
           description: The risk rating of the legal entity. One of low, medium, high.
-        status:
-          type: string
-          enum:
-          - active
-          - denied
-          - pending
-          - suspended
-          nullable: true
-          description: The activation status of the legal entity. One of pending,
-            active, suspended, or closed.
         prefix:
           type: string
           nullable: true
@@ -16375,7 +16355,7 @@ components:
             one is available. Pass in a value of null to prevent the connection from
             being associated with the legal entity.
       additionalProperties: false
-      minProperties: 40
+      minProperties: 39
     legal_entity:
       type: object
       properties:
@@ -16662,16 +16642,6 @@ components:
           - high
           nullable: true
           description: The risk rating of the legal entity. One of low, medium, high.
-        status:
-          type: string
-          enum:
-          - active
-          - denied
-          - pending
-          - suspended
-          nullable: true
-          description: The activation status of the legal entity. One of pending,
-            active, suspended, or closed.
         prefix:
           type: string
           nullable: true
@@ -16890,16 +16860,6 @@ components:
           - high
           nullable: true
           description: The risk rating of the legal entity. One of low, medium, high.
-        status:
-          type: string
-          enum:
-          - active
-          - denied
-          - pending
-          - suspended
-          nullable: true
-          description: The activation status of the legal entity. One of pending,
-            active, suspended, or closed.
         prefix:
           type: string
           nullable: true
