@@ -2502,7 +2502,6 @@ paths:
         schema:
           type: string
           enum:
-          - closed
           - completed
           - denied
           - failed
@@ -2728,7 +2727,6 @@ paths:
           - pending
           - active
           - suspended
-          - closed
           - denied
         required: false
       - name: show_deleted
@@ -9840,7 +9838,6 @@ components:
         status:
           type: string
           enum:
-          - closed
           - completed
           - denied
           - failed
@@ -9894,7 +9891,6 @@ components:
               type: string
               enum:
               - active
-              - closed
               - denied
               - pending
               - suspended
@@ -15917,7 +15913,6 @@ components:
           type: string
           enum:
           - active
-          - closed
           - denied
           - pending
           - suspended
@@ -16168,7 +16163,6 @@ components:
           type: string
           enum:
           - active
-          - closed
           - denied
           - pending
           - suspended
@@ -16423,7 +16417,6 @@ components:
           type: string
           enum:
           - active
-          - closed
           - denied
           - pending
           - suspended
@@ -16673,7 +16666,6 @@ components:
           type: string
           enum:
           - active
-          - closed
           - denied
           - pending
           - suspended
@@ -16902,7 +16894,6 @@ components:
           type: string
           enum:
           - active
-          - closed
           - denied
           - pending
           - suspended
