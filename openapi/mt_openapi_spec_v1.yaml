@@ -15908,7 +15908,7 @@ components:
           - suspended
           nullable: true
           description: The activation status of the legal entity. One of pending,
-            active, suspended, or closed.
+            active, suspended, or denied.
         prefix:
           type: string
           nullable: true
@@ -16402,7 +16402,7 @@ components:
           - suspended
           nullable: true
           description: The activation status of the legal entity. One of pending,
-            active, suspended, or closed.
+            active, suspended, or denied.
         prefix:
           type: string
           nullable: true
