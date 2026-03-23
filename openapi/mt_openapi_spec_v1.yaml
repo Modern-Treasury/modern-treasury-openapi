@@ -7863,6 +7863,35 @@ paths:
           application/json:
             schema:
               "$ref": "#/components/schemas/incoming_payment_detail_create_request"
+  "/api/simulations/legal_entities/{id}/update_status":
+    parameters:
+    - name: id
+      in: path
+      description: Legal entity ID
+      required: true
+      schema:
+        type: string
+    patch:
+      summary: update legal entity status
+      tags:
+      - LegalEntity
+      operationId: updateLegalEntityStatus
+      description: Update Legal Entity Status (sandbox only)
+      security:
+      - basic_auth: []
+      parameters: []
+      responses:
+        '202':
+          description: process started
+        '422':
+          description: unprocessable entity
+        '405':
+          description: not allowed in production
+      requestBody:
+        content:
+          application/json:
+            schema:
+              "$ref": "#/components/schemas/legal_entity_update_status_request"
   "/api/transactions/{transaction_id}/line_items":
     parameters:
     - name: transaction_id
@@ -21385,6 +21414,19 @@ components:
           nullable: true
           description: An object passed through to the simulated IPD that could reflect
             what a vendor would pass.
+    legal_entity_update_status_request:
+      type: object
+      required:
+      - status
+      properties:
+        status:
+          type: string
+          enum:
+          - active
+          - suspended
+          - denied
+          description: The target status for the legal entity. One of `active`, `suspended`,
+            or `denied`. Valid transitions depend on the current status.
     transaction:
       type: object
       properties:
