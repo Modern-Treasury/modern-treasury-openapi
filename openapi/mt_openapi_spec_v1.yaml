@@ -3024,6 +3024,82 @@ paths:
                   type: string
                 metadata:
                   type: object
+  "/api/journal_sources":
+    get:
+      summary: list journal_sources
+      tags:
+      - JournalSource
+      operationId: listJournalSources
+      description: Retrieve a list of journal sources
+      security:
+      - basic_auth: []
+      parameters:
+      - name: journal_report_id
+        in: query
+        schema:
+          type: string
+          format: uuid
+        required: false
+        description: The ID of the journal report
+      - name: journal_entry_id
+        in: query
+        schema:
+          type: string
+          format: uuid
+        required: false
+        description: The ID of the journal entry
+      - name: source_id
+        in: query
+        schema:
+          type: string
+          format: uuid
+        required: false
+        description: The ID of the source object
+      - name: source_type
+        in: query
+        schema:
+          type: string
+        required: false
+        description: The type of the source object
+      - name: page
+        in: query
+        schema:
+          type: integer
+        required: false
+        description: Page number for pagination
+      - name: per_page
+        in: query
+        schema:
+          type: integer
+        required: false
+        description: Number of items per page
+      responses:
+        '200':
+          description: successful - only returns sources for current organization
+        '404':
+          description: page disabled - returns not found
+  "/api/journal_sources/{id}":
+    parameters:
+    - name: id
+      in: path
+      schema:
+        type: string
+        format: uuid
+      description: The ID of the journal source
+      required: true
+    get:
+      summary: show journal_source
+      tags:
+      - JournalSource
+      operationId: getJournalSource
+      description: Retrieve a specific journal source
+      security:
+      - basic_auth: []
+      responses:
+        '200':
+          description: successful - returns journal source with all attributes
+        '404':
+          description: page disabled - returns not found
   "/api/internal_accounts/{internal_account_id}/account_capabilities/{id}":
     parameters:
     - name: internal_account_id
