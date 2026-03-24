@@ -10856,6 +10856,7 @@ components:
       - EGP
       - ERN
       - ETB
+      - ETH
       - EUR
       - EURC
       - FJD
@@ -10926,6 +10927,7 @@ components:
       - NPR
       - NZD
       - OMR
+      - OP
       - PAB
       - PEN
       - PGK
