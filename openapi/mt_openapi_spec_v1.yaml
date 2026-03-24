@@ -7833,7 +7833,7 @@ paths:
           content:
             application/json:
               schema:
-                "$ref": "#/components/schemas/async_response"
+                "$ref": "#/components/schemas/incoming_payment_detail"
         '404':
           description: not found
           content:
