@@ -1,0 +1,37 @@
+name: Build Stainless SDKs
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+env:
+  STAINLESS_ORG: modern-treasury
+  STAINLESS_PROJECT: modern-treasury
+  OAS_PATH: ./openapi/mt_openapi_spec_v1.yaml
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pull-requests: write
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v6
+        with:
+          fetch-depth: 2
+
+      - name: Run builds
+        uses: stainless-api/upload-openapi-spec-action/build@v1
+        with:
+          org: ${{ env.STAINLESS_ORG }}
+          project: ${{ env.STAINLESS_PROJECT }}
+          oas_path: ${{ env.OAS_PATH }}
+          stainless_api_key: ${{ secrets.STAINLESS_API_KEY }}
