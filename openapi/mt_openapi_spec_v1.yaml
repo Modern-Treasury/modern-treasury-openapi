@@ -17278,7 +17278,6 @@ components:
             - authorized_signer
             - beneficial_owner
             - control_person
-            - service_customer
             description: A list of relationship types for how the child entity relates
               to parent entity.
         title:
@@ -17322,7 +17321,6 @@ components:
             - authorized_signer
             - beneficial_owner
             - control_person
-            - service_customer
             description: A list of relationship types for how the child entity relates
               to parent entity.
         title:
@@ -17354,7 +17352,6 @@ components:
             - authorized_signer
             - beneficial_owner
             - control_person
-            - service_customer
             description: A list of relationship types for how the child entity relates
               to parent entity.
         title:
