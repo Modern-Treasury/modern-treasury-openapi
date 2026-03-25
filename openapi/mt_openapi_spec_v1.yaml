@@ -2875,6 +2875,9 @@ paths:
   "/api/legal_entity_associations":
     post:
       summary: create legal_entity_association
+      deprecated: true
+      description: Use `POST /api/legal_entities` with inline `legal_entity_associations`
+        instead.
       tags:
       - LegalEntityAssociation
       operationId: createLegalEntityAssociation
