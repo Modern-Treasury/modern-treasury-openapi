@@ -1,5 +1,4 @@
 name: Build Stainless SDKs
-
 on:
   pull_request:
     types: [opened, synchronize, reopened]
@@ -22,6 +21,7 @@ jobs:
     permissions:
       contents: read
       pull-requests: write
+      id-token: write
     steps:
       - name: Checkout repository
         uses: actions/checkout@v6
@@ -34,4 +34,3 @@ jobs:
           org: ${{ env.STAINLESS_ORG }}
           project: ${{ env.STAINLESS_PROJECT }}
           oas_path: ${{ env.OAS_PATH }}
-          stainless_api_key: ${{ secrets.STAINLESS_API_KEY }}
