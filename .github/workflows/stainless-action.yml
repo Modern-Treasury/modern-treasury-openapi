@@ -1,5 +1,4 @@
 name: Build Stainless SDKs
-  
 on:
   pull_request:
     types: [opened, synchronize, reopened]
