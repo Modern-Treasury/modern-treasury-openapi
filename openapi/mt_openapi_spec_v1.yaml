@@ -3201,6 +3201,7 @@ paths:
                     - signet
                     - sknbi
                     - solana
+                    - stablecoin
                     - wire
                     - zengin
                     description: Indicates the the type of payment this capability
@@ -4834,6 +4835,7 @@ paths:
           - signet
           - sknbi
           - solana
+          - stablecoin
           - wire
           - zengin
         required: false
@@ -5926,6 +5928,7 @@ paths:
           - signet
           - sknbi
           - solana
+          - stablecoin
           - wire
           - zengin
         required: false
@@ -6931,6 +6934,7 @@ paths:
           - signet
           - sknbi
           - solana
+          - stablecoin
           - wire
           - zengin
         required: false
@@ -9036,6 +9040,7 @@ components:
           - signet
           - sknbi
           - solana
+          - stablecoin
           - wire
           - zengin
           description: Indicates the the type of payment this capability is responsible
@@ -10675,6 +10680,7 @@ components:
                       - signet
                       - sknbi
                       - solana
+                      - stablecoin
                       - wire
                       - zengin
                   required:
@@ -11333,6 +11339,7 @@ components:
           - signet
           - sknbi
           - solana
+          - stablecoin
           - wire
           - zengin
           nullable: true
@@ -11562,6 +11569,7 @@ components:
           - signet
           - sknbi
           - solana
+          - stablecoin
           - wire
           - zengin
           nullable: true
@@ -11740,6 +11748,7 @@ components:
           - signet
           - sknbi
           - solana
+          - stablecoin
           - wire
           - zengin
           nullable: true
@@ -12114,6 +12123,7 @@ components:
                 - signet
                 - sknbi
                 - solana
+                - stablecoin
                 - wire
                 - zengin
             required:
@@ -12266,6 +12276,7 @@ components:
           - signet
           - sknbi
           - solana
+          - stablecoin
           - wire
           - zengin
           description: The type of payment that can be made to this account. Can be
@@ -12343,6 +12354,7 @@ components:
           - signet
           - sknbi
           - solana
+          - stablecoin
           - wire
           - zengin
           description: Can be `ach`, `eft`, or `rtp`.
@@ -13677,6 +13689,7 @@ components:
           - signet
           - sknbi
           - solana
+          - stablecoin
           - wire
           - zengin
           description: One of `ach`, `se_bankgirot`, `eft`, `wire`, `check`, `sen`,
@@ -13923,6 +13936,7 @@ components:
           - signet
           - sknbi
           - solana
+          - stablecoin
           - wire
           - zengin
           description: One of `ach`, `se_bankgirot`, `eft`, `wire`, `check`, `sen`,
@@ -18143,6 +18157,7 @@ components:
           - signet
           - sknbi
           - solana
+          - stablecoin
           - wire
           - zengin
           description: One of `ach`, `se_bankgirot`, `eft`, `wire`, `check`, `sen`,
@@ -18166,6 +18181,7 @@ components:
           - chats
           - dk_nets
           - eft
+          - ethereum
           - hu_ics
           - masav
           - mx_ccen
@@ -18179,6 +18195,7 @@ components:
           - sg_giro
           - sic
           - sknbi
+          - solana
           - zengin
           nullable: true
           description: An additional layer of classification for the type of payment
@@ -18659,6 +18676,7 @@ components:
           - signet
           - sknbi
           - solana
+          - stablecoin
           - wire
           - zengin
           description: One of `ach`, `se_bankgirot`, `eft`, `wire`, `check`, `sen`,
@@ -18682,6 +18700,7 @@ components:
           - chats
           - dk_nets
           - eft
+          - ethereum
           - hu_ics
           - masav
           - mx_ccen
@@ -18695,6 +18714,7 @@ components:
           - sg_giro
           - sic
           - sknbi
+          - solana
           - zengin
           nullable: true
           description: An additional layer of classification for the type of payment
@@ -19015,6 +19035,7 @@ components:
                     - signet
                     - sknbi
                     - solana
+                    - stablecoin
                     - wire
                     - zengin
                 required:
@@ -19162,6 +19183,7 @@ components:
           - signet
           - sknbi
           - solana
+          - stablecoin
           - wire
           - zengin
           description: One of `ach`, `se_bankgirot`, `eft`, `wire`, `check`, `sen`,
@@ -19185,6 +19207,7 @@ components:
           - chats
           - dk_nets
           - eft
+          - ethereum
           - hu_ics
           - masav
           - mx_ccen
@@ -19198,6 +19221,7 @@ components:
           - sg_giro
           - sic
           - sknbi
+          - solana
           - zengin
           nullable: true
           description: An additional layer of classification for the type of payment
@@ -19518,6 +19542,7 @@ components:
                     - signet
                     - sknbi
                     - solana
+                    - stablecoin
                     - wire
                     - zengin
                 required:
@@ -19658,6 +19683,7 @@ components:
           - signet
           - sknbi
           - solana
+          - stablecoin
           - wire
           - zengin
           description: One of `ach`, `se_bankgirot`, `eft`, `wire`, `check`, `sen`,
@@ -19681,6 +19707,7 @@ components:
           - chats
           - dk_nets
           - eft
+          - ethereum
           - hu_ics
           - masav
           - mx_ccen
@@ -19694,6 +19721,7 @@ components:
           - sg_giro
           - sic
           - sknbi
+          - solana
           - zengin
           nullable: true
           description: An additional layer of classification for the type of payment
@@ -20051,6 +20079,7 @@ components:
                     - signet
                     - sknbi
                     - solana
+                    - stablecoin
                     - wire
                     - zengin
                 required:
@@ -21137,6 +21166,7 @@ components:
           - signet
           - sknbi
           - solana
+          - stablecoin
           - wire
           - zengin
           nullable: true
@@ -21230,6 +21260,7 @@ components:
           - signet
           - sknbi
           - solana
+          - stablecoin
           - wire
           - zengin
           nullable: true
@@ -21297,9 +21328,10 @@ components:
             - signet
             - sknbi
             - solana
+            - stablecoin
             - wire
             - zengin
-          maxItems: 35
+          maxItems: 36
           example:
           - ach
           - au_becs
@@ -21334,6 +21366,7 @@ components:
           - signet
           - sknbi
           - solana
+          - stablecoin
           - wire
           - zengin
           description: An array of payment types that are supported for this routing
@@ -21603,6 +21636,7 @@ components:
           - signet
           - sknbi
           - solana
+          - stablecoin
           - wire
           - zengin
           - other
@@ -21748,6 +21782,7 @@ components:
           - signet
           - sknbi
           - solana
+          - stablecoin
           - wire
           - zengin
           - other
@@ -22110,6 +22145,7 @@ components:
           - signet
           - sknbi
           - solana
+          - stablecoin
           - wire
           - zengin
           description: One of ach, au_becs, bacs, book, check, eft, interac, provxchange,
