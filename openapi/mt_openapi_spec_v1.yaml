@@ -2872,43 +2872,6 @@ paths:
           application/json:
             schema:
               "$ref": "#/components/schemas/legal_entity_update_request"
-  "/api/legal_entity_associations":
-    post:
-      summary: create legal_entity_association
-      deprecated: true
-      description: Use `POST /api/legal_entities` with inline `legal_entity_associations`
-        instead.
-      tags:
-      - LegalEntityAssociation
-      operationId: createLegalEntityAssociation
-      security:
-      - basic_auth: []
-      parameters:
-      - name: Idempotency-Key
-        in: header
-        required: false
-        description: This key should be something unique, preferably something like
-          an UUID.
-        schema:
-          type: string
-      responses:
-        '201':
-          description: successful
-          content:
-            application/json:
-              schema:
-                "$ref": "#/components/schemas/legal_entity_association"
-        '422':
-          description: unsuccessful
-          content:
-            application/json:
-              schema:
-                "$ref": "#/components/schemas/error_message"
-      requestBody:
-        content:
-          application/json:
-            schema:
-              "$ref": "#/components/schemas/legal_entity_association_create_request"
   "/api/journal_entries":
     get:
       summary: list journal_entries
@@ -17320,41 +17283,6 @@ components:
       - title
       - ownership_percentage
       - child_legal_entity
-    legal_entity_association_create_request:
-      type: object
-      properties:
-        parent_legal_entity_id:
-          type: string
-          description: The ID of the parent legal entity. This must be a business
-            or joint legal entity.
-        relationship_types:
-          type: array
-          items:
-            type: string
-            enum:
-            - authorized_signer
-            - beneficial_owner
-            - control_person
-            description: A list of relationship types for how the child entity relates
-              to parent entity.
-        title:
-          type: string
-          nullable: true
-          description: The job title of the child entity at the parent entity.
-        ownership_percentage:
-          type: integer
-          nullable: true
-          description: The child entity's ownership percentage iff they are a beneficial
-            owner.
-        child_legal_entity:
-          "$ref": "#/components/schemas/child_legal_entity_create"
-          description: The child legal entity.
-        child_legal_entity_id:
-          type: string
-          description: The ID of the child legal entity.
-      required:
-      - relationship_types
-      - parent_legal_entity_id
     legal_entity_association_inline_create_request:
       type: object
       properties:
