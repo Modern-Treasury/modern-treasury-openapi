@@ -2939,6 +2939,16 @@ paths:
       description: Retrieve a list of journal reports
       security:
       - basic_auth: []
+      parameters:
+      - name: status
+        in: query
+        schema:
+          type: string
+          enum:
+          - draft
+          - published
+          - ready
+        required: false
       responses:
         '200':
           description: successful - returns list of journal reports
