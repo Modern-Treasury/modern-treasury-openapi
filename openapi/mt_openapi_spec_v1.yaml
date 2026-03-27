@@ -10099,6 +10099,12 @@ components:
               nullable: true
               description: Information describing a third-party verification run by
                 an external vendor.
+            service_provider_legal_entity_id:
+              type: string
+              format: uuid
+              nullable: true
+              description: The UUID of the parent legal entity in the service provider
+                tree.
             metadata:
               type: object
               description: Additional data represented as key-value pairs. Both the
@@ -16132,6 +16138,12 @@ components:
           nullable: true
           description: Information describing a third-party verification run by an
             external vendor.
+        service_provider_legal_entity_id:
+          type: string
+          format: uuid
+          nullable: true
+          description: The UUID of the parent legal entity in the service provider
+            tree.
         metadata:
           type: object
           description: Additional data represented as key-value pairs. Both the key
@@ -16182,7 +16194,7 @@ components:
             "$ref": "#/components/schemas/legal_entity_association"
           nullable: true
       additionalProperties: false
-      minProperties: 45
+      minProperties: 46
       required:
       - id
       - object
@@ -16219,6 +16231,7 @@ components:
       - ticker_symbol
       - regulators
       - third_party_verification
+      - service_provider_legal_entity_id
       - metadata
       - external_id
       - bank_settings
@@ -16372,6 +16385,12 @@ components:
           nullable: true
           description: Information describing a third-party verification run by an
             external vendor.
+        service_provider_legal_entity_id:
+          type: string
+          format: uuid
+          nullable: true
+          description: The UUID of the parent legal entity in the service provider
+            tree.
         metadata:
           type: object
           description: Additional data represented as key-value pairs. Both the key
@@ -16452,7 +16471,7 @@ components:
             one is available. Pass in a value of null to prevent the connection from
             being associated with the legal entity.
       additionalProperties: false
-      minProperties: 39
+      minProperties: 40
     legal_entity:
       type: object
       properties:
@@ -16626,6 +16645,12 @@ components:
           nullable: true
           description: Information describing a third-party verification run by an
             external vendor.
+        service_provider_legal_entity_id:
+          type: string
+          format: uuid
+          nullable: true
+          description: The UUID of the parent legal entity in the service provider
+            tree.
         metadata:
           type: object
           description: Additional data represented as key-value pairs. Both the key
@@ -16676,7 +16701,7 @@ components:
             "$ref": "#/components/schemas/legal_entity_association"
           nullable: true
       additionalProperties: false
-      minProperties: 44
+      minProperties: 45
       required:
       - id
       - object
@@ -16713,6 +16738,7 @@ components:
       - ticker_symbol
       - regulators
       - third_party_verification
+      - service_provider_legal_entity_id
       - metadata
       - external_id
       - bank_settings
@@ -16865,6 +16891,12 @@ components:
           nullable: true
           description: Information describing a third-party verification run by an
             external vendor.
+        service_provider_legal_entity_id:
+          type: string
+          format: uuid
+          nullable: true
+          description: The UUID of the parent legal entity in the service provider
+            tree.
         metadata:
           type: object
           description: Additional data represented as key-value pairs. Both the key
@@ -17083,6 +17115,12 @@ components:
           nullable: true
           description: Information describing a third-party verification run by an
             external vendor.
+        service_provider_legal_entity_id:
+          type: string
+          format: uuid
+          nullable: true
+          description: The UUID of the parent legal entity in the service provider
+            tree.
         metadata:
           type: object
           description: Additional data represented as key-value pairs. Both the key
