@@ -18156,6 +18156,7 @@ components:
           - WEB
           - au_becs
           - bacs
+          - base
           - chats
           - dk_nets
           - eft
@@ -18167,6 +18168,7 @@ components:
           - nics
           - nz_becs
           - pl_elixir
+          - polygon
           - ro_sent
           - se_bankgirot
           - sepa
@@ -18675,6 +18677,7 @@ components:
           - WEB
           - au_becs
           - bacs
+          - base
           - chats
           - dk_nets
           - eft
@@ -18686,6 +18689,7 @@ components:
           - nics
           - nz_becs
           - pl_elixir
+          - polygon
           - ro_sent
           - se_bankgirot
           - sepa
@@ -19182,6 +19186,7 @@ components:
           - WEB
           - au_becs
           - bacs
+          - base
           - chats
           - dk_nets
           - eft
@@ -19193,6 +19198,7 @@ components:
           - nics
           - nz_becs
           - pl_elixir
+          - polygon
           - ro_sent
           - se_bankgirot
           - sepa
@@ -19682,6 +19688,7 @@ components:
           - WEB
           - au_becs
           - bacs
+          - base
           - chats
           - dk_nets
           - eft
@@ -19693,6 +19700,7 @@ components:
           - nics
           - nz_becs
           - pl_elixir
+          - polygon
           - ro_sent
           - se_bankgirot
           - sepa
