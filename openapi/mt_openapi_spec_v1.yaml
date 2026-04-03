@@ -10097,8 +10097,13 @@ components:
             third_party_verification:
               "$ref": "#/components/schemas/third_party_verification"
               nullable: true
-              description: Information describing a third-party verification run by
-                an external vendor.
+              deprecated: true
+              description: Deprecated. Use `third_party_verifications` instead.
+            third_party_verifications:
+              type: array
+              items:
+                "$ref": "#/components/schemas/third_party_verification"
+              description: A list of third-party verifications run by external vendors.
             service_provider_legal_entity_id:
               type: string
               format: uuid
@@ -16138,8 +16143,13 @@ components:
         third_party_verification:
           "$ref": "#/components/schemas/third_party_verification"
           nullable: true
-          description: Information describing a third-party verification run by an
-            external vendor.
+          deprecated: true
+          description: Deprecated. Use `third_party_verifications` instead.
+        third_party_verifications:
+          type: array
+          items:
+            "$ref": "#/components/schemas/third_party_verification"
+          description: A list of third-party verifications run by external vendors.
         service_provider_legal_entity_id:
           type: string
           format: uuid
@@ -16196,7 +16206,7 @@ components:
             "$ref": "#/components/schemas/legal_entity_association"
           nullable: true
       additionalProperties: false
-      minProperties: 46
+      minProperties: 47
       required:
       - id
       - object
@@ -16233,6 +16243,7 @@ components:
       - ticker_symbol
       - regulators
       - third_party_verification
+      - third_party_verifications
       - service_provider_legal_entity_id
       - metadata
       - external_id
@@ -16385,8 +16396,13 @@ components:
         third_party_verification:
           "$ref": "#/components/schemas/third_party_verification"
           nullable: true
-          description: Information describing a third-party verification run by an
-            external vendor.
+          deprecated: true
+          description: Deprecated. Use `third_party_verifications` instead.
+        third_party_verifications:
+          type: array
+          items:
+            "$ref": "#/components/schemas/third_party_verification"
+          description: A list of third-party verifications run by external vendors.
         service_provider_legal_entity_id:
           type: string
           format: uuid
@@ -16473,7 +16489,7 @@ components:
             one is available. Pass in a value of null to prevent the connection from
             being associated with the legal entity.
       additionalProperties: false
-      minProperties: 40
+      minProperties: 41
     legal_entity:
       type: object
       properties:
@@ -16645,8 +16661,13 @@ components:
         third_party_verification:
           "$ref": "#/components/schemas/third_party_verification"
           nullable: true
-          description: Information describing a third-party verification run by an
-            external vendor.
+          deprecated: true
+          description: Deprecated. Use `third_party_verifications` instead.
+        third_party_verifications:
+          type: array
+          items:
+            "$ref": "#/components/schemas/third_party_verification"
+          description: A list of third-party verifications run by external vendors.
         service_provider_legal_entity_id:
           type: string
           format: uuid
@@ -16703,7 +16724,7 @@ components:
             "$ref": "#/components/schemas/legal_entity_association"
           nullable: true
       additionalProperties: false
-      minProperties: 45
+      minProperties: 46
       required:
       - id
       - object
@@ -16740,6 +16761,7 @@ components:
       - ticker_symbol
       - regulators
       - third_party_verification
+      - third_party_verifications
       - service_provider_legal_entity_id
       - metadata
       - external_id
@@ -16891,8 +16913,13 @@ components:
         third_party_verification:
           "$ref": "#/components/schemas/third_party_verification"
           nullable: true
-          description: Information describing a third-party verification run by an
-            external vendor.
+          deprecated: true
+          description: Deprecated. Use `third_party_verifications` instead.
+        third_party_verifications:
+          type: array
+          items:
+            "$ref": "#/components/schemas/third_party_verification"
+          description: A list of third-party verifications run by external vendors.
         service_provider_legal_entity_id:
           type: string
           format: uuid
@@ -17115,8 +17142,13 @@ components:
         third_party_verification:
           "$ref": "#/components/schemas/third_party_verification"
           nullable: true
-          description: Information describing a third-party verification run by an
-            external vendor.
+          deprecated: true
+          description: Deprecated. Use `third_party_verifications` instead.
+        third_party_verifications:
+          type: array
+          items:
+            "$ref": "#/components/schemas/third_party_verification"
+          description: A list of third-party verifications run by external vendors.
         service_provider_legal_entity_id:
           type: string
           format: uuid
@@ -17695,10 +17727,44 @@ components:
           type: string
           enum:
           - persona
+          - middesk
+          - alloy
+          - sumsub
+          - veriff
           description: The vendor that performed the verification, e.g. `persona`.
+        verification_category:
+          type: string
+          enum:
+          - legal_name
+          - date_of_birth
+          - address
+          - government_id_number
+          - adverse_media
+          description: The category of verification performed.
+        verification_method:
+          type: string
+          description: The method used to perform the verification.
+        comment:
+          type: string
+          nullable: true
+          description: An optional comment about the verification.
+        outcome:
+          type: string
+          enum:
+          - passed
+          - failed
+          description: The outcome of the verification. One of `passed` or `failed`.
+        verification_time:
+          type: string
+          format: date-time
+          description: The timestamp when the verification was performed.
       required:
       - vendor_verification_id
       - vendor
+      - verification_category
+      - verification_method
+      - outcome
+      - verification_time
       additionalProperties: false
     line_item:
       type: object
