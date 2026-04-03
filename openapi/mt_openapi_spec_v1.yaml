@@ -17218,6 +17218,7 @@ components:
             type: string
             enum:
             - business
+            - business_registered
             - mailing
             - other
             - po_box
@@ -17270,6 +17271,7 @@ components:
             type: string
             enum:
             - business
+            - business_registered
             - mailing
             - other
             - po_box
