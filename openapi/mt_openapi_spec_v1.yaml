@@ -5738,6 +5738,14 @@ paths:
         required: false
         description: If the incoming payment detail is in a virtual account, the ID
           of the Virtual Account.
+      - name: subtype
+        in: query
+        schema:
+          type: string
+        required: false
+        description: An additional layer of classification for the type of incoming
+          payment detail. For example, a `type` of `stablecoin` may have a `subtype`
+          of `ethereum` or `solana`.
       responses:
         '200':
           description: successful
@@ -12871,6 +12879,12 @@ components:
           description: The last 4 digits of the receiving account number for the incoming
             payment detail, or `null`.
           nullable: true
+        subtype:
+          type: string
+          nullable: true
+          description: An additional layer of classification for the type of incoming
+            payment detail. For example, a `type` of `stablecoin` may have a `subtype`
+            of `ethereum` or `solana`.
         reconciliation_status:
           type: string
           enum:
@@ -12879,7 +12893,7 @@ components:
           - reconciled
           description: One of `unreconciled`, `tentatively_reconciled` or `reconciled`.
       additionalProperties: false
-      minProperties: 25
+      minProperties: 26
       required:
       - id
       - object
@@ -12905,6 +12919,7 @@ components:
       - originating_routing_number_type
       - originating_account_number_safe
       - originating_account_number_type
+      - subtype
       - reconciliation_status
     internal_account:
       type: object
@@ -21504,6 +21519,11 @@ components:
           type: string
           nullable: true
           description: Defaults to a random description.
+        subtype:
+          type: string
+          nullable: true
+          description: An additional layer of classification for the type of incoming
+            payment detail, e.g. `ethereum` for a `stablecoin` type.
         data:
           type: object
           nullable: true
