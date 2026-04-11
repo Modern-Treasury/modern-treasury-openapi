@@ -5708,6 +5708,7 @@ paths:
           - sepa
           - signet
           - solana
+          - stablecoin
           - wire
           - zengin
         required: false
@@ -12742,6 +12743,7 @@ components:
           - sepa
           - signet
           - solana
+          - stablecoin
           - wire
           - zengin
           description: 'One of: `ach`, `book`, `check`, `eft`, `interac`, `rtp`, `sepa`,
@@ -21483,6 +21485,7 @@ components:
           - sepa
           - signet
           - solana
+          - stablecoin
           - wire
           - zengin
           description: One of `ach`, `wire`, `check`.
