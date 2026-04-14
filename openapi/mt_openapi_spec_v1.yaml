@@ -14887,6 +14887,11 @@ components:
             key: value
             foo: bar
             modern: treasury
+        skip_settlement_ledger_transaction:
+          type: boolean
+          description: It is set to `false` by default. It should be set to `true`
+            when migrating existing settlements.
+          nullable: true
     ledger_account_settlement_entries_patch_request:
       type: object
       properties:
