@@ -3144,7 +3144,6 @@ paths:
                     - ach
                     - au_becs
                     - bacs
-                    - base
                     - book
                     - card
                     - chats
@@ -3152,7 +3151,6 @@ paths:
                     - cross_border
                     - dk_nets
                     - eft
-                    - ethereum
                     - gb_fps
                     - hu_ics
                     - interac
@@ -3162,7 +3160,6 @@ paths:
                     - nics
                     - nz_becs
                     - pl_elixir
-                    - polygon
                     - provxchange
                     - ro_sent
                     - rtp
@@ -3173,7 +3170,6 @@ paths:
                     - sic
                     - signet
                     - sknbi
-                    - solana
                     - stablecoin
                     - wire
                     - zengin
@@ -4778,7 +4774,6 @@ paths:
           - ach
           - au_becs
           - bacs
-          - base
           - book
           - card
           - chats
@@ -4786,7 +4781,6 @@ paths:
           - cross_border
           - dk_nets
           - eft
-          - ethereum
           - gb_fps
           - hu_ics
           - interac
@@ -4796,7 +4790,6 @@ paths:
           - nics
           - nz_becs
           - pl_elixir
-          - polygon
           - provxchange
           - ro_sent
           - rtp
@@ -4807,7 +4800,6 @@ paths:
           - sic
           - signet
           - sknbi
-          - solana
           - stablecoin
           - wire
           - zengin
@@ -5695,19 +5687,15 @@ paths:
           - ach
           - au_becs
           - bacs
-          - base
           - book
           - check
           - eft
-          - ethereum
           - interac
           - neft
           - nz_becs
-          - polygon
           - rtp
           - sepa
           - signet
-          - solana
           - stablecoin
           - wire
           - zengin
@@ -5880,7 +5868,6 @@ paths:
           - ach
           - au_becs
           - bacs
-          - base
           - book
           - card
           - chats
@@ -5888,7 +5875,6 @@ paths:
           - cross_border
           - dk_nets
           - eft
-          - ethereum
           - gb_fps
           - hu_ics
           - interac
@@ -5898,7 +5884,6 @@ paths:
           - nics
           - nz_becs
           - pl_elixir
-          - polygon
           - provxchange
           - ro_sent
           - rtp
@@ -5909,7 +5894,6 @@ paths:
           - sic
           - signet
           - sknbi
-          - solana
           - stablecoin
           - wire
           - zengin
@@ -6886,7 +6870,6 @@ paths:
           - ach
           - au_becs
           - bacs
-          - base
           - book
           - card
           - chats
@@ -6894,7 +6877,6 @@ paths:
           - cross_border
           - dk_nets
           - eft
-          - ethereum
           - gb_fps
           - hu_ics
           - interac
@@ -6904,7 +6886,6 @@ paths:
           - nics
           - nz_becs
           - pl_elixir
-          - polygon
           - provxchange
           - ro_sent
           - rtp
@@ -6915,7 +6896,6 @@ paths:
           - sic
           - signet
           - sknbi
-          - solana
           - stablecoin
           - wire
           - zengin
@@ -8992,7 +8972,6 @@ components:
           - ach
           - au_becs
           - bacs
-          - base
           - book
           - card
           - chats
@@ -9000,7 +8979,6 @@ components:
           - cross_border
           - dk_nets
           - eft
-          - ethereum
           - gb_fps
           - hu_ics
           - interac
@@ -9010,7 +8988,6 @@ components:
           - nics
           - nz_becs
           - pl_elixir
-          - polygon
           - provxchange
           - ro_sent
           - rtp
@@ -9021,7 +8998,6 @@ components:
           - sic
           - signet
           - sknbi
-          - solana
           - stablecoin
           - wire
           - zengin
@@ -10644,7 +10620,6 @@ components:
                       - ach
                       - au_becs
                       - bacs
-                      - base
                       - book
                       - card
                       - chats
@@ -10652,7 +10627,6 @@ components:
                       - cross_border
                       - dk_nets
                       - eft
-                      - ethereum
                       - gb_fps
                       - hu_ics
                       - interac
@@ -10662,7 +10636,6 @@ components:
                       - nics
                       - nz_becs
                       - pl_elixir
-                      - polygon
                       - provxchange
                       - ro_sent
                       - rtp
@@ -10673,7 +10646,6 @@ components:
                       - sic
                       - signet
                       - sknbi
-                      - solana
                       - stablecoin
                       - wire
                       - zengin
@@ -11302,7 +11274,6 @@ components:
           - ach
           - au_becs
           - bacs
-          - base
           - book
           - card
           - chats
@@ -11310,7 +11281,6 @@ components:
           - cross_border
           - dk_nets
           - eft
-          - ethereum
           - gb_fps
           - hu_ics
           - interac
@@ -11320,7 +11290,6 @@ components:
           - nics
           - nz_becs
           - pl_elixir
-          - polygon
           - provxchange
           - ro_sent
           - rtp
@@ -11331,7 +11300,6 @@ components:
           - sic
           - signet
           - sknbi
-          - solana
           - stablecoin
           - wire
           - zengin
@@ -11532,7 +11500,6 @@ components:
           - ach
           - au_becs
           - bacs
-          - base
           - book
           - card
           - chats
@@ -11540,7 +11507,6 @@ components:
           - cross_border
           - dk_nets
           - eft
-          - ethereum
           - gb_fps
           - hu_ics
           - interac
@@ -11550,7 +11516,6 @@ components:
           - nics
           - nz_becs
           - pl_elixir
-          - polygon
           - provxchange
           - ro_sent
           - rtp
@@ -11561,7 +11526,6 @@ components:
           - sic
           - signet
           - sknbi
-          - solana
           - stablecoin
           - wire
           - zengin
@@ -11711,7 +11675,6 @@ components:
           - ach
           - au_becs
           - bacs
-          - base
           - book
           - card
           - chats
@@ -11719,7 +11682,6 @@ components:
           - cross_border
           - dk_nets
           - eft
-          - ethereum
           - gb_fps
           - hu_ics
           - interac
@@ -11729,7 +11691,6 @@ components:
           - nics
           - nz_becs
           - pl_elixir
-          - polygon
           - provxchange
           - ro_sent
           - rtp
@@ -11740,7 +11701,6 @@ components:
           - sic
           - signet
           - sknbi
-          - solana
           - stablecoin
           - wire
           - zengin
@@ -12086,7 +12046,6 @@ components:
                 - ach
                 - au_becs
                 - bacs
-                - base
                 - book
                 - card
                 - chats
@@ -12094,7 +12053,6 @@ components:
                 - cross_border
                 - dk_nets
                 - eft
-                - ethereum
                 - gb_fps
                 - hu_ics
                 - interac
@@ -12104,7 +12062,6 @@ components:
                 - nics
                 - nz_becs
                 - pl_elixir
-                - polygon
                 - provxchange
                 - ro_sent
                 - rtp
@@ -12115,7 +12072,6 @@ components:
                 - sic
                 - signet
                 - sknbi
-                - solana
                 - stablecoin
                 - wire
                 - zengin
@@ -12239,7 +12195,6 @@ components:
           - ach
           - au_becs
           - bacs
-          - base
           - book
           - card
           - chats
@@ -12247,7 +12202,6 @@ components:
           - cross_border
           - dk_nets
           - eft
-          - ethereum
           - gb_fps
           - hu_ics
           - interac
@@ -12257,7 +12211,6 @@ components:
           - nics
           - nz_becs
           - pl_elixir
-          - polygon
           - provxchange
           - ro_sent
           - rtp
@@ -12268,7 +12221,6 @@ components:
           - sic
           - signet
           - sknbi
-          - solana
           - stablecoin
           - wire
           - zengin
@@ -12317,7 +12269,6 @@ components:
           - ach
           - au_becs
           - bacs
-          - base
           - book
           - card
           - chats
@@ -12325,7 +12276,6 @@ components:
           - cross_border
           - dk_nets
           - eft
-          - ethereum
           - gb_fps
           - hu_ics
           - interac
@@ -12335,7 +12285,6 @@ components:
           - nics
           - nz_becs
           - pl_elixir
-          - polygon
           - provxchange
           - ro_sent
           - rtp
@@ -12346,7 +12295,6 @@ components:
           - sic
           - signet
           - sknbi
-          - solana
           - stablecoin
           - wire
           - zengin
@@ -12729,19 +12677,15 @@ components:
           - ach
           - au_becs
           - bacs
-          - base
           - book
           - check
           - eft
-          - ethereum
           - interac
           - neft
           - nz_becs
-          - polygon
           - rtp
           - sepa
           - signet
-          - solana
           - stablecoin
           - wire
           - zengin
@@ -13663,7 +13607,6 @@ components:
           - ach
           - au_becs
           - bacs
-          - base
           - book
           - card
           - chats
@@ -13671,7 +13614,6 @@ components:
           - cross_border
           - dk_nets
           - eft
-          - ethereum
           - gb_fps
           - hu_ics
           - interac
@@ -13681,7 +13623,6 @@ components:
           - nics
           - nz_becs
           - pl_elixir
-          - polygon
           - provxchange
           - ro_sent
           - rtp
@@ -13692,7 +13633,6 @@ components:
           - sic
           - signet
           - sknbi
-          - solana
           - stablecoin
           - wire
           - zengin
@@ -13910,7 +13850,6 @@ components:
           - ach
           - au_becs
           - bacs
-          - base
           - book
           - card
           - chats
@@ -13918,7 +13857,6 @@ components:
           - cross_border
           - dk_nets
           - eft
-          - ethereum
           - gb_fps
           - hu_ics
           - interac
@@ -13928,7 +13866,6 @@ components:
           - nics
           - nz_becs
           - pl_elixir
-          - polygon
           - provxchange
           - ro_sent
           - rtp
@@ -13939,7 +13876,6 @@ components:
           - sic
           - signet
           - sknbi
-          - solana
           - stablecoin
           - wire
           - zengin
@@ -18193,7 +18129,6 @@ components:
           - ach
           - au_becs
           - bacs
-          - base
           - book
           - card
           - chats
@@ -18201,7 +18136,6 @@ components:
           - cross_border
           - dk_nets
           - eft
-          - ethereum
           - gb_fps
           - hu_ics
           - interac
@@ -18211,7 +18145,6 @@ components:
           - nics
           - nz_becs
           - pl_elixir
-          - polygon
           - provxchange
           - ro_sent
           - rtp
@@ -18222,7 +18155,6 @@ components:
           - sic
           - signet
           - sknbi
-          - solana
           - stablecoin
           - wire
           - zengin
@@ -18714,7 +18646,6 @@ components:
           - ach
           - au_becs
           - bacs
-          - base
           - book
           - card
           - chats
@@ -18722,7 +18653,6 @@ components:
           - cross_border
           - dk_nets
           - eft
-          - ethereum
           - gb_fps
           - hu_ics
           - interac
@@ -18732,7 +18662,6 @@ components:
           - nics
           - nz_becs
           - pl_elixir
-          - polygon
           - provxchange
           - ro_sent
           - rtp
@@ -18743,7 +18672,6 @@ components:
           - sic
           - signet
           - sknbi
-          - solana
           - stablecoin
           - wire
           - zengin
@@ -19075,7 +19003,6 @@ components:
                     - ach
                     - au_becs
                     - bacs
-                    - base
                     - book
                     - card
                     - chats
@@ -19083,7 +19010,6 @@ components:
                     - cross_border
                     - dk_nets
                     - eft
-                    - ethereum
                     - gb_fps
                     - hu_ics
                     - interac
@@ -19093,7 +19019,6 @@ components:
                     - nics
                     - nz_becs
                     - pl_elixir
-                    - polygon
                     - provxchange
                     - ro_sent
                     - rtp
@@ -19104,7 +19029,6 @@ components:
                     - sic
                     - signet
                     - sknbi
-                    - solana
                     - stablecoin
                     - wire
                     - zengin
@@ -19223,7 +19147,6 @@ components:
           - ach
           - au_becs
           - bacs
-          - base
           - book
           - card
           - chats
@@ -19231,7 +19154,6 @@ components:
           - cross_border
           - dk_nets
           - eft
-          - ethereum
           - gb_fps
           - hu_ics
           - interac
@@ -19241,7 +19163,6 @@ components:
           - nics
           - nz_becs
           - pl_elixir
-          - polygon
           - provxchange
           - ro_sent
           - rtp
@@ -19252,7 +19173,6 @@ components:
           - sic
           - signet
           - sknbi
-          - solana
           - stablecoin
           - wire
           - zengin
@@ -19584,7 +19504,6 @@ components:
                     - ach
                     - au_becs
                     - bacs
-                    - base
                     - book
                     - card
                     - chats
@@ -19592,7 +19511,6 @@ components:
                     - cross_border
                     - dk_nets
                     - eft
-                    - ethereum
                     - gb_fps
                     - hu_ics
                     - interac
@@ -19602,7 +19520,6 @@ components:
                     - nics
                     - nz_becs
                     - pl_elixir
-                    - polygon
                     - provxchange
                     - ro_sent
                     - rtp
@@ -19613,7 +19530,6 @@ components:
                     - sic
                     - signet
                     - sknbi
-                    - solana
                     - stablecoin
                     - wire
                     - zengin
@@ -19725,7 +19641,6 @@ components:
           - ach
           - au_becs
           - bacs
-          - base
           - book
           - card
           - chats
@@ -19733,7 +19648,6 @@ components:
           - cross_border
           - dk_nets
           - eft
-          - ethereum
           - gb_fps
           - hu_ics
           - interac
@@ -19743,7 +19657,6 @@ components:
           - nics
           - nz_becs
           - pl_elixir
-          - polygon
           - provxchange
           - ro_sent
           - rtp
@@ -19754,7 +19667,6 @@ components:
           - sic
           - signet
           - sknbi
-          - solana
           - stablecoin
           - wire
           - zengin
@@ -20123,7 +20035,6 @@ components:
                     - ach
                     - au_becs
                     - bacs
-                    - base
                     - book
                     - card
                     - chats
@@ -20131,7 +20042,6 @@ components:
                     - cross_border
                     - dk_nets
                     - eft
-                    - ethereum
                     - gb_fps
                     - hu_ics
                     - interac
@@ -20141,7 +20051,6 @@ components:
                     - nics
                     - nz_becs
                     - pl_elixir
-                    - polygon
                     - provxchange
                     - ro_sent
                     - rtp
@@ -20152,7 +20061,6 @@ components:
                     - sic
                     - signet
                     - sknbi
-                    - solana
                     - stablecoin
                     - wire
                     - zengin
@@ -21210,7 +21118,6 @@ components:
           - ach
           - au_becs
           - bacs
-          - base
           - book
           - card
           - chats
@@ -21218,7 +21125,6 @@ components:
           - cross_border
           - dk_nets
           - eft
-          - ethereum
           - gb_fps
           - hu_ics
           - interac
@@ -21228,7 +21134,6 @@ components:
           - nics
           - nz_becs
           - pl_elixir
-          - polygon
           - provxchange
           - ro_sent
           - rtp
@@ -21239,7 +21144,6 @@ components:
           - sic
           - signet
           - sknbi
-          - solana
           - stablecoin
           - wire
           - zengin
@@ -21304,7 +21208,6 @@ components:
           - ach
           - au_becs
           - bacs
-          - base
           - book
           - card
           - chats
@@ -21312,7 +21215,6 @@ components:
           - cross_border
           - dk_nets
           - eft
-          - ethereum
           - gb_fps
           - hu_ics
           - interac
@@ -21322,7 +21224,6 @@ components:
           - nics
           - nz_becs
           - pl_elixir
-          - polygon
           - provxchange
           - ro_sent
           - rtp
@@ -21333,7 +21234,6 @@ components:
           - sic
           - signet
           - sknbi
-          - solana
           - stablecoin
           - wire
           - zengin
@@ -21372,7 +21272,6 @@ components:
             - ach
             - au_becs
             - bacs
-            - base
             - book
             - card
             - chats
@@ -21380,7 +21279,6 @@ components:
             - cross_border
             - dk_nets
             - eft
-            - ethereum
             - gb_fps
             - hu_ics
             - interac
@@ -21390,7 +21288,6 @@ components:
             - nics
             - nz_becs
             - pl_elixir
-            - polygon
             - provxchange
             - ro_sent
             - rtp
@@ -21401,16 +21298,14 @@ components:
             - sic
             - signet
             - sknbi
-            - solana
             - stablecoin
             - wire
             - zengin
-          maxItems: 36
+          maxItems: 32
           example:
           - ach
           - au_becs
           - bacs
-          - base
           - book
           - card
           - chats
@@ -21418,7 +21313,6 @@ components:
           - cross_border
           - dk_nets
           - eft
-          - ethereum
           - gb_fps
           - hu_ics
           - interac
@@ -21428,7 +21322,6 @@ components:
           - nics
           - nz_becs
           - pl_elixir
-          - polygon
           - provxchange
           - ro_sent
           - rtp
@@ -21439,7 +21332,6 @@ components:
           - sic
           - signet
           - sknbi
-          - solana
           - stablecoin
           - wire
           - zengin
@@ -21469,19 +21361,15 @@ components:
           - ach
           - au_becs
           - bacs
-          - base
           - book
           - check
           - eft
-          - ethereum
           - interac
           - neft
           - nz_becs
-          - polygon
           - rtp
           - sepa
           - signet
-          - solana
           - stablecoin
           - wire
           - zengin
@@ -21685,7 +21573,6 @@ components:
           - ach
           - au_becs
           - bacs
-          - base
           - book
           - card
           - chats
@@ -21693,7 +21580,6 @@ components:
           - cross_border
           - dk_nets
           - eft
-          - ethereum
           - gb_fps
           - hu_ics
           - interac
@@ -21703,7 +21589,6 @@ components:
           - nics
           - nz_becs
           - pl_elixir
-          - polygon
           - provxchange
           - ro_sent
           - rtp
@@ -21714,7 +21599,6 @@ components:
           - sic
           - signet
           - sknbi
-          - solana
           - stablecoin
           - wire
           - zengin
@@ -21831,7 +21715,6 @@ components:
           - ach
           - au_becs
           - bacs
-          - base
           - book
           - card
           - chats
@@ -21839,7 +21722,6 @@ components:
           - cross_border
           - dk_nets
           - eft
-          - ethereum
           - gb_fps
           - hu_ics
           - interac
@@ -21849,7 +21731,6 @@ components:
           - nics
           - nz_becs
           - pl_elixir
-          - polygon
           - provxchange
           - ro_sent
           - rtp
@@ -21860,7 +21741,6 @@ components:
           - sic
           - signet
           - sknbi
-          - solana
           - stablecoin
           - wire
           - zengin
@@ -22194,7 +22074,6 @@ components:
           - ach
           - au_becs
           - bacs
-          - base
           - book
           - card
           - chats
@@ -22202,7 +22081,6 @@ components:
           - cross_border
           - dk_nets
           - eft
-          - ethereum
           - gb_fps
           - hu_ics
           - interac
@@ -22212,7 +22090,6 @@ components:
           - nics
           - nz_becs
           - pl_elixir
-          - polygon
           - provxchange
           - ro_sent
           - rtp
@@ -22223,7 +22100,6 @@ components:
           - sic
           - signet
           - sknbi
-          - solana
           - stablecoin
           - wire
           - zengin
