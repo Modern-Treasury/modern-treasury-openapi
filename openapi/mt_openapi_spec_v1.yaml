@@ -13422,8 +13422,23 @@ components:
           format: uuid
           deprecated: true
           description: The ledger account settlement object linked to the invoice.
+        issued_at:
+          type: string
+          nullable: true
+          format: date-time
+          description: 'Translation missing: en.openapi.descriptions.invoice.schema.issued_at'
+        paid_at:
+          type: string
+          nullable: true
+          format: date-time
+          description: 'Translation missing: en.openapi.descriptions.invoice.schema.paid_at'
+        voided_at:
+          type: string
+          nullable: true
+          format: date-time
+          description: 'Translation missing: en.openapi.descriptions.invoice.schema.voided_at'
       additionalProperties: false
-      minProperties: 38
+      minProperties: 41
       required:
       - id
       - object
@@ -13463,6 +13478,9 @@ components:
       - amount_paid
       - transaction_line_item_ids
       - ledger_account_settlement_id
+      - issued_at
+      - paid_at
+      - voided_at
     invoice_create_request:
       type: object
       properties:
