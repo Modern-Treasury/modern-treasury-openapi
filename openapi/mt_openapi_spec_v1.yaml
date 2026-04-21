@@ -13070,9 +13070,12 @@ components:
           enum:
           - USD
           - CAD
+          - USDC
+          - USDG
+          - PYUSD
           example: USD
-          description: Either "USD" or "CAD". Internal accounts created at Increase
-            only supports "USD".
+          description: The currency of the internal account. Supports "USD" and "CAD"
+            for fiat, and "USDC", "USDG", and "PYUSD" for stablecoin accounts.
         account_type:
           type: string
           enum:
