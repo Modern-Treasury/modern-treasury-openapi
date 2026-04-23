@@ -12493,6 +12493,9 @@ components:
           - kr_brn
           - kr_crn
           - kr_rrn
+          - mx_curp
+          - mx_ine
+          - mx_rfc
           - passport
           - sa_tin
           - sa_vat
@@ -12587,6 +12590,9 @@ components:
           - kr_brn
           - kr_crn
           - kr_rrn
+          - mx_curp
+          - mx_ine
+          - mx_rfc
           - passport
           - sa_tin
           - sa_vat
