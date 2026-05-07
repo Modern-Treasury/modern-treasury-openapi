@@ -15184,6 +15184,10 @@ components:
           type: integer
           description: Value in specified currency's smallest unit. e.g. $10 would
             be represented as 1000. Can be any integer up to 36 digits.
+        amount_string:
+          type: string
+          description: The amount of the ledger entry as a string, preserving full
+            precision for values that may exceed safe integer limits in some languages.
         effective_at:
           type: string
           format: date-time
@@ -15247,7 +15251,7 @@ components:
             foo: bar
             modern: treasury
       additionalProperties: false
-      minProperties: 17
+      minProperties: 18
       required:
       - id
       - object
@@ -15256,6 +15260,7 @@ components:
       - updated_at
       - discarded_at
       - amount
+      - amount_string
       - effective_at
       - direction
       - status
@@ -15376,6 +15381,10 @@ components:
           type: integer
           description: Value in specified currency's smallest unit. e.g. $10 would
             be represented as 1000. Can be any integer up to 36 digits.
+        amount_string:
+          type: string
+          description: The amount of the ledger entry as a string, preserving full
+            precision for values that may exceed safe integer limits in some languages.
         effective_at:
           type: string
           format: date-time
@@ -15439,13 +15448,14 @@ components:
             for more details.
           nullable: true
       additionalProperties: false
-      minProperties: 15
+      minProperties: 16
       required:
       - id
       - object
       - live_mode
       - created_at
       - amount
+      - amount_string
       - effective_at
       - direction
       - status
