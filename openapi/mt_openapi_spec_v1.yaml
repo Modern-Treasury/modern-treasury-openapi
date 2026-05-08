@@ -15486,6 +15486,45 @@ components:
           type: string
           format: uuid
           description: The ledger account that this ledger entry is associated with.
+        lock_version:
+          type: integer
+          description: Lock version of the ledger account. This can be passed when
+            creating a ledger transaction to only succeed if no ledger transactions
+            have posted since the given version. See our post about Designing the
+            Ledgers API with Optimistic Locking for more details.
+          nullable: true
+        pending_balance_amount:
+          type: object
+          additionalProperties:
+            type: integer
+          description: Use `gt` (>), `gte` (>=), `lt` (<), `lte` (<=), or `eq` (=)
+            to lock on the account’s pending balance. If any of these conditions would
+            be false after the transaction is created, the entire call will fail with
+            error code 422.
+          nullable: true
+        posted_balance_amount:
+          type: object
+          additionalProperties:
+            type: integer
+          description: Use `gt` (>), `gte` (>=), `lt` (<), `lte` (<=), or `eq` (=)
+            to lock on the account’s posted balance. If any of these conditions would
+            be false after the transaction is created, the entire call will fail with
+            error code 422.
+          nullable: true
+        available_balance_amount:
+          type: object
+          additionalProperties:
+            type: integer
+          description: Use `gt` (>), `gte` (>=), `lt` (<), `lte` (<=), or `eq` (=)
+            to lock on the account’s available balance. If any of these conditions
+            would be false after the transaction is created, the entire call will
+            fail with error code 422.
+          nullable: true
+        show_resulting_ledger_account_balances:
+          type: boolean
+          description: If true, response will include the balance of the associated
+            ledger account for the entry.
+          nullable: true
         metadata:
           type: object
           description: Additional data represented as key-value pairs. Both the key
