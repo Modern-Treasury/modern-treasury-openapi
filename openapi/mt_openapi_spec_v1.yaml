@@ -15278,6 +15278,10 @@ components:
           type: integer
           description: Value in specified currency's smallest unit. e.g. $10 would
             be represented as 1000. Can be any integer up to 36 digits.
+        amount_string:
+          type: string
+          description: The amount of the ledger entry as a string, preserving full
+            precision for values that may exceed safe integer limits in some languages.
         effective_at:
           type: string
           format: date-time
@@ -15346,9 +15350,13 @@ components:
             foo: bar
             modern: treasury
       required:
-      - amount
       - direction
       - ledger_account_id
+      oneOf:
+      - required:
+        - amount
+      - required:
+        - amount_string
     ledger_entry_update_request:
       type: object
       properties:
@@ -15473,6 +15481,10 @@ components:
           type: integer
           description: Value in specified currency's smallest unit. e.g. $10 would
             be represented as 1000. Can be any integer up to 36 digits.
+        amount_string:
+          type: string
+          description: The amount of the ledger entry as a string, preserving full
+            precision for values that may exceed safe integer limits in some languages.
         direction:
           type: string
           enum:
@@ -15536,9 +15548,13 @@ components:
             foo: bar
             modern: treasury
       required:
-      - amount
       - direction
       - ledger_account_id
+      oneOf:
+      - required:
+        - amount
+      - required:
+        - amount_string
     ledger_transaction:
       type: object
       properties:
