@@ -13078,10 +13078,11 @@ components:
           - CAD
           - USDC
           - USDG
+          - USDT
           - PYUSD
           example: USD
-          description: The currency of the internal account. Supports "USD" and "CAD"
-            for fiat, and "USDC", "USDG", and "PYUSD" for stablecoin accounts.
+          description: The currency of the internal account. Supports fiat and stablecoin
+            currencies.
         account_type:
           type: string
           enum:
