@@ -10947,10 +10947,8 @@ components:
       - UAH
       - UGX
       - USD
-      - USDB
       - USDC
       - USDG
-      - USDP
       - USDT
       - UYU
       - UZS
@@ -15084,10 +15082,16 @@ components:
       properties:
         credits:
           type: integer
+        credits_string:
+          type: string
         debits:
           type: integer
+        debits_string:
+          type: string
         amount:
           type: integer
+        amount_string:
+          type: string
         currency:
           type: string
           description: The currency of the ledger account.
@@ -15095,11 +15099,14 @@ components:
           type: integer
           description: The currency exponent of the ledger account.
       additionalProperties: false
-      minProperties: 5
+      minProperties: 8
       required:
       - credits
+      - credits_string
       - debits
+      - debits_string
       - amount
+      - amount_string
       - currency
       - currency_exponent
     ledger_balances:
