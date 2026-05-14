@@ -15360,7 +15360,7 @@ components:
       required:
       - direction
       - ledger_account_id
-      oneOf:
+      anyOf:
       - required:
         - amount
       - required:
@@ -15558,7 +15558,7 @@ components:
       required:
       - direction
       - ledger_account_id
-      oneOf:
+      anyOf:
       - required:
         - amount
       - required:
