@@ -17293,6 +17293,10 @@ components:
             - po_box
             - residential
           description: The types of this address.
+        primary:
+          type: boolean
+          nullable: true
+          description: Whether this address is the primary address for the legal entity.
         line1:
           type: string
           nullable: true
@@ -17316,7 +17320,7 @@ components:
           description: Country code conforms to [ISO 3166-1 alpha-2]
           nullable: true
       additionalProperties: false
-      minProperties: 13
+      minProperties: 14
       required:
       - id
       - object
@@ -17325,6 +17329,7 @@ components:
       - updated_at
       - discarded_at
       - address_types
+      - primary
       - line1
       - line2
       - locality
@@ -17346,6 +17351,10 @@ components:
             - po_box
             - residential
           description: The types of this address.
+        primary:
+          type: boolean
+          nullable: true
+          description: Whether this address is the primary address for the legal entity.
         line1:
           type: string
           nullable: true
