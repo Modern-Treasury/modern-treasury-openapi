@@ -20812,7 +20812,12 @@ components:
           - gb_fps
           - interac
           - manual
+          - neft
+          - nz_becs
+          - rtp
           - sepa
+          - signet
+          - stablecoin
           - wire
           - zengin
           description: 'The type of return. Can be one of: `ach`, `ach_noc`, `au_becs`,
