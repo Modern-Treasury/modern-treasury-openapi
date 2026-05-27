@@ -13011,8 +13011,16 @@ components:
           type: string
           nullable: true
           description: An optional user-defined 180 character unique identifier.
+        debitable:
+          type: boolean
+          nullable: true
+          description: Whether this account can receive ACH debits. Only applicable
+            to accounts created under a Modern Treasury PSP connection, or `null`
+            for Bring Your Own Bank accounts. Defaults to `false`. Configurable on
+            create only. Please reach out to support@moderntreasury.com or your customer
+            success manager to enable this capability for your connection.
       additionalProperties: false
-      minProperties: 24
+      minProperties: 25
       required:
       - id
       - object
@@ -13038,6 +13046,7 @@ components:
       - ledger_account_id
       - contra_ledger_account_id
       - external_id
+      - debitable
     internal_account_create_request:
       type: object
       properties:
@@ -13143,6 +13152,14 @@ components:
           type: string
           nullable: true
           description: An optional user-defined 180 character unique identifier.
+        debitable:
+          type: boolean
+          nullable: true
+          description: Whether this account can receive ACH debits. Only applicable
+            to accounts created under a Modern Treasury PSP connection, or `null`
+            for Bring Your Own Bank accounts. Defaults to `false`. Configurable on
+            create only. Please reach out to support@moderntreasury.com or your customer
+            success manager to enable this capability for your connection.
       required:
       - connection_id
       - name
