@@ -9702,6 +9702,13 @@ components:
                   id:
                     type: string
                     format: uuid
+            - allOf:
+              - "$ref": "#/components/schemas/ledger_account_update_request"
+              - type: object
+                properties:
+                  id:
+                    type: string
+                    format: uuid
       required:
       - action_type
       - resource_type
