@@ -9202,8 +9202,9 @@ components:
           - polygon_address
           - sg_number
           - solana_address
-          description: One of `iban`, `clabe`, or `other`. Use `other` if the bank
-            account number is in a generic format.
+          - wallet_address
+          description: One of `iban`, `clabe`, `wallet_address`, or `other`. Use `other`
+            if the bank account number is in a generic format.
         account_number_safe:
           type: string
           description: The last 4 digits of the account_number.
@@ -9242,8 +9243,9 @@ components:
           - polygon_address
           - sg_number
           - solana_address
-          description: One of `iban`, `clabe`, or `other`. Use `other` if the bank
-            account number is in a generic format.
+          - wallet_address
+          description: One of `iban`, `clabe`, `wallet_address`, or `other`. Use `other`
+            if the bank account number is in a generic format.
       required:
       - account_number
     address:
@@ -10584,6 +10586,7 @@ components:
                       - polygon_address
                       - sg_number
                       - solana_address
+                      - wallet_address
                   required:
                   - account_number
               routing_details:
@@ -12007,6 +12010,7 @@ components:
                 - polygon_address
                 - sg_number
                 - solana_address
+                - wallet_address
             required:
             - account_number
         routing_details:
@@ -12810,6 +12814,7 @@ components:
           - polygon_address
           - sg_number
           - solana_address
+          - wallet_address
           description: The type of the originating account number for the incoming
             payment detail.
           nullable: true
@@ -13018,9 +13023,9 @@ components:
           nullable: true
           description: Whether this account can receive ACH debits. Only applicable
             to accounts created under a Modern Treasury PSP connection, or `null`
-            for Bring Your Own Bank accounts. Defaults to `false`. Configurable on
-            create only. Please reach out to support@moderntreasury.com or your customer
-            success manager to enable this capability for your connection.
+            for Bring Your Own Bank accounts. Defaults to `false`. Configurable only
+            on creation. Please reach out to your customer success manager to enable
+            this capability for your connection.
       additionalProperties: false
       minProperties: 25
       required:
@@ -13159,9 +13164,9 @@ components:
           nullable: true
           description: Whether this account can receive ACH debits. Only applicable
             to accounts created under a Modern Treasury PSP connection, or `null`
-            for Bring Your Own Bank accounts. Defaults to `false`. Configurable on
-            create only. Please reach out to support@moderntreasury.com or your customer
-            success manager to enable this capability for your connection.
+            for Bring Your Own Bank accounts. Defaults to `false`. Configurable only
+            on creation. Please reach out to your customer success manager to enable
+            this capability for your connection.
       required:
       - connection_id
       - name
@@ -19103,6 +19108,7 @@ components:
                     - polygon_address
                     - sg_number
                     - solana_address
+                    - wallet_address
                 required:
                 - account_number
             routing_details:
@@ -19603,6 +19609,7 @@ components:
                     - polygon_address
                     - sg_number
                     - solana_address
+                    - wallet_address
                 required:
                 - account_number
             routing_details:
@@ -20133,6 +20140,7 @@ components:
                     - polygon_address
                     - sg_number
                     - solana_address
+                    - wallet_address
                 required:
                 - account_number
             routing_details:
