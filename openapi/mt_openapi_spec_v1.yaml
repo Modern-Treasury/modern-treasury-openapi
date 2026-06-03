@@ -3152,24 +3152,17 @@ paths:
                     - dk_nets
                     - eft
                     - gb_fps
-                    - hu_ics
-                    - interac
                     - masav
                     - mx_ccen
                     - neft
                     - nics
                     - nz_becs
                     - pl_elixir
-                    - provxchange
-                    - ro_sent
                     - rtp
                     - se_bankgirot
-                    - sen
                     - sepa
                     - sg_giro
                     - sic
-                    - signet
-                    - sknbi
                     - stablecoin
                     - wire
                     - zengin
@@ -4782,30 +4775,22 @@ paths:
           - dk_nets
           - eft
           - gb_fps
-          - hu_ics
-          - interac
           - masav
           - mx_ccen
           - neft
           - nics
           - nz_becs
           - pl_elixir
-          - provxchange
-          - ro_sent
           - rtp
           - se_bankgirot
-          - sen
           - sepa
           - sg_giro
           - sic
-          - signet
-          - sknbi
           - stablecoin
           - wire
           - zengin
         required: false
-        description: 'One of: ach, au_becs, bacs, book, check, eft, interac, provxchange,
-          rtp,sen, sepa, signet, wire'
+        description: 'One of: ach, au_becs, bacs, book, check, eft, rtp, sepa, wire'
       - name: counterparty_id
         in: query
         schema:
@@ -5690,18 +5675,15 @@ paths:
           - book
           - check
           - eft
-          - interac
           - neft
           - nz_becs
           - rtp
           - sepa
-          - signet
           - stablecoin
           - wire
           - zengin
         required: false
-        description: 'One of: `ach`, `book`, `check`, `eft`, `interac`, `rtp`, `sepa`,
-          `signet`, or `wire`.'
+        description: 'One of: `ach`, `book`, `check`, `eft`, `rtp`, `sepa`, or `wire`.'
       - name: as_of_date_start
         in: query
         schema:
@@ -5876,24 +5858,17 @@ paths:
           - dk_nets
           - eft
           - gb_fps
-          - hu_ics
-          - interac
           - masav
           - mx_ccen
           - neft
           - nics
           - nz_becs
           - pl_elixir
-          - provxchange
-          - ro_sent
           - rtp
           - se_bankgirot
-          - sen
           - sepa
           - sg_giro
           - sic
-          - signet
-          - sknbi
           - stablecoin
           - wire
           - zengin
@@ -6878,24 +6853,17 @@ paths:
           - dk_nets
           - eft
           - gb_fps
-          - hu_ics
-          - interac
           - masav
           - mx_ccen
           - neft
           - nics
           - nz_becs
           - pl_elixir
-          - provxchange
-          - ro_sent
           - rtp
           - se_bankgirot
-          - sen
           - sepa
           - sg_giro
           - sic
-          - signet
-          - sknbi
           - stablecoin
           - wire
           - zengin
@@ -8310,8 +8278,6 @@ paths:
           - dk_interbank_clearing_code
           - gb_sort_code
           - hk_interbank_clearing_code
-          - hu_interbank_clearing_code
-          - id_sknbi_code
           - il_bank_code
           - in_ifsc
           - jp_zengin_code
@@ -8980,24 +8946,17 @@ components:
           - dk_nets
           - eft
           - gb_fps
-          - hu_ics
-          - interac
           - masav
           - mx_ccen
           - neft
           - nics
           - nz_becs
           - pl_elixir
-          - provxchange
-          - ro_sent
           - rtp
           - se_bankgirot
-          - sen
           - sepa
           - sg_giro
           - sic
-          - signet
-          - sknbi
           - stablecoin
           - wire
           - zengin
@@ -9476,8 +9435,8 @@ components:
           nullable: true
           description: The type of `vendor_code` being reported. Can be one of `bai2`,
             `bankprov`, `bnk_dev`, `cleartouch`, `currencycloud`, `cross_river`, `dc_bank`,
-            `dwolla`, `evolve`, `goldman_sachs`, `iso20022`, `jpmc`, `mx`, `signet`,
-            `silvergate`, `swift`, or `us_bank`.
+            `dwolla`, `evolve`, `goldman_sachs`, `iso20022`, `jpmc`, `mx`, `silvergate`,
+            `swift`, or `us_bank`.
         as_of_date:
           type: string
           nullable: true
@@ -9539,8 +9498,8 @@ components:
           nullable: true
           description: The type of `vendor_code` being reported. Can be one of `bai2`,
             `bankprov`, `bnk_dev`, `cleartouch`, `currencycloud`, `cross_river`, `dc_bank`,
-            `dwolla`, `evolve`, `goldman_sachs`, `iso20022`, `jpmc`, `mx`, `signet`,
-            `silvergate`, `swift`, or `us_bank`.
+            `dwolla`, `evolve`, `goldman_sachs`, `iso20022`, `jpmc`, `mx`, `silvergate`,
+            `swift`, or `us_bank`.
       additionalProperties: false
       minProperties: 4
       required:
@@ -10477,9 +10436,7 @@ components:
             - seBankgiroClearingCode
             - nzNationalClearingCode
             - hkInterbankClearingCode
-            - huInterbankClearingCode
             - dkInterbankClearingCode
-            - idSknbiCode
             - zaNationalClearingCode
           description: The list of fields you want on the form. This field is optional
             and if it is not set, will default to [\"nameOnAccount\", \"accountType\",
@@ -10608,8 +10565,6 @@ components:
                       - dk_interbank_clearing_code
                       - gb_sort_code
                       - hk_interbank_clearing_code
-                      - hu_interbank_clearing_code
-                      - id_sknbi_code
                       - il_bank_code
                       - in_ifsc
                       - jp_zengin_code
@@ -10635,24 +10590,17 @@ components:
                       - dk_nets
                       - eft
                       - gb_fps
-                      - hu_ics
-                      - interac
                       - masav
                       - mx_ccen
                       - neft
                       - nics
                       - nz_becs
                       - pl_elixir
-                      - provxchange
-                      - ro_sent
                       - rtp
                       - se_bankgirot
-                      - sen
                       - sepa
                       - sg_giro
                       - sic
-                      - signet
-                      - sknbi
                       - stablecoin
                       - wire
                       - zengin
@@ -11287,30 +11235,22 @@ components:
           - dk_nets
           - eft
           - gb_fps
-          - hu_ics
-          - interac
           - masav
           - mx_ccen
           - neft
           - nics
           - nz_becs
           - pl_elixir
-          - provxchange
-          - ro_sent
           - rtp
           - se_bankgirot
-          - sen
           - sepa
           - sg_giro
           - sic
-          - signet
-          - sknbi
           - stablecoin
           - wire
           - zengin
           nullable: true
-          description: 'One of: ach, au_becs, bacs, book, check, eft, interac, provxchange,
-            rtp, sen, sepa, signet, wire.'
+          description: 'One of: ach, au_becs, bacs, book, check, eft, rtp, sepa, wire.'
         currency:
           "$ref": "#/components/schemas/currency"
           nullable: true
@@ -11513,30 +11453,22 @@ components:
           - dk_nets
           - eft
           - gb_fps
-          - hu_ics
-          - interac
           - masav
           - mx_ccen
           - neft
           - nics
           - nz_becs
           - pl_elixir
-          - provxchange
-          - ro_sent
           - rtp
           - se_bankgirot
-          - sen
           - sepa
           - sg_giro
           - sic
-          - signet
-          - sknbi
           - stablecoin
           - wire
           - zengin
           nullable: true
-          description: 'One of: ach, au_becs, bacs, book, check, eft, interac, provxchange,
-            rtp, sen, sepa, signet, wire.'
+          description: 'One of: ach, au_becs, bacs, book, check, eft, rtp, sepa, wire.'
         currency:
           "$ref": "#/components/schemas/currency"
           nullable: true
@@ -11688,30 +11620,22 @@ components:
           - dk_nets
           - eft
           - gb_fps
-          - hu_ics
-          - interac
           - masav
           - mx_ccen
           - neft
           - nics
           - nz_becs
           - pl_elixir
-          - provxchange
-          - ro_sent
           - rtp
           - se_bankgirot
-          - sen
           - sepa
           - sg_giro
           - sic
-          - signet
-          - sknbi
           - stablecoin
           - wire
           - zengin
           nullable: true
-          description: 'One of: ach, au_becs, bacs, book, check, eft, interac, provxchange,
-            rtp, sen, sepa, signet, wire.'
+          description: 'One of: ach, au_becs, bacs, book, check, eft, rtp, sepa, wire.'
         currency:
           "$ref": "#/components/schemas/currency"
           nullable: true
@@ -12032,8 +11956,6 @@ components:
                 - dk_interbank_clearing_code
                 - gb_sort_code
                 - hk_interbank_clearing_code
-                - hu_interbank_clearing_code
-                - id_sknbi_code
                 - il_bank_code
                 - in_ifsc
                 - jp_zengin_code
@@ -12059,24 +11981,17 @@ components:
                 - dk_nets
                 - eft
                 - gb_fps
-                - hu_ics
-                - interac
                 - masav
                 - mx_ccen
                 - neft
                 - nics
                 - nz_becs
                 - pl_elixir
-                - provxchange
-                - ro_sent
                 - rtp
                 - se_bankgirot
-                - sen
                 - sepa
                 - sg_giro
                 - sic
-                - signet
-                - sknbi
                 - stablecoin
                 - wire
                 - zengin
@@ -12208,24 +12123,17 @@ components:
           - dk_nets
           - eft
           - gb_fps
-          - hu_ics
-          - interac
           - masav
           - mx_ccen
           - neft
           - nics
           - nz_becs
           - pl_elixir
-          - provxchange
-          - ro_sent
           - rtp
           - se_bankgirot
-          - sen
           - sepa
           - sg_giro
           - sic
-          - signet
-          - sknbi
           - stablecoin
           - wire
           - zengin
@@ -12282,24 +12190,17 @@ components:
           - dk_nets
           - eft
           - gb_fps
-          - hu_ics
-          - interac
           - masav
           - mx_ccen
           - neft
           - nics
           - nz_becs
           - pl_elixir
-          - provxchange
-          - ro_sent
           - rtp
           - se_bankgirot
-          - sen
           - sepa
           - sg_giro
           - sic
-          - signet
-          - sknbi
           - stablecoin
           - wire
           - zengin
@@ -12831,17 +12732,14 @@ components:
           - book
           - check
           - eft
-          - interac
           - neft
           - nz_becs
           - rtp
           - sepa
-          - signet
           - stablecoin
           - wire
           - zengin
-          description: 'One of: `ach`, `book`, `check`, `eft`, `interac`, `rtp`, `sepa`,
-            `signet`, or `wire`.'
+          description: 'One of: `ach`, `book`, `check`, `eft`, `rtp`, `sepa`, or `wire`.'
         data:
           type: object
           description: The raw data from the payment pre-notification file that we
@@ -12903,8 +12801,6 @@ components:
           - dk_interbank_clearing_code
           - gb_sort_code
           - hk_interbank_clearing_code
-          - hu_interbank_clearing_code
-          - id_sknbi_code
           - il_bank_code
           - in_ifsc
           - jp_zengin_code
@@ -13805,30 +13701,23 @@ components:
           - dk_nets
           - eft
           - gb_fps
-          - hu_ics
-          - interac
           - masav
           - mx_ccen
           - neft
           - nics
           - nz_becs
           - pl_elixir
-          - provxchange
-          - ro_sent
           - rtp
           - se_bankgirot
-          - sen
           - sepa
           - sg_giro
           - sic
-          - signet
-          - sknbi
           - stablecoin
           - wire
           - zengin
-          description: One of `ach`, `se_bankgirot`, `eft`, `wire`, `check`, `sen`,
-            `book`, `rtp`, `sepa`, `bacs`, `au_becs`, `interac`, `neft`, `nics`, `nz_national_clearing_code`,
-            `sic`, `signet`, `provexchange`, `zengin`.
+          description: One of `ach`, `se_bankgirot`, `eft`, `wire`, `check`, `book`,
+            `rtp`, `sepa`, `bacs`, `au_becs`, `neft`, `nics`, `nz_national_clearing_code`,
+            `sic`, `zengin`.
         payment_method:
           type: string
           enum:
@@ -14048,30 +13937,23 @@ components:
           - dk_nets
           - eft
           - gb_fps
-          - hu_ics
-          - interac
           - masav
           - mx_ccen
           - neft
           - nics
           - nz_becs
           - pl_elixir
-          - provxchange
-          - ro_sent
           - rtp
           - se_bankgirot
-          - sen
           - sepa
           - sg_giro
           - sic
-          - signet
-          - sknbi
           - stablecoin
           - wire
           - zengin
-          description: One of `ach`, `se_bankgirot`, `eft`, `wire`, `check`, `sen`,
-            `book`, `rtp`, `sepa`, `bacs`, `au_becs`, `interac`, `neft`, `nics`, `nz_national_clearing_code`,
-            `sic`, `signet`, `provexchange`, `zengin`.
+          description: One of `ach`, `se_bankgirot`, `eft`, `wire`, `check`, `book`,
+            `rtp`, `sepa`, `bacs`, `au_becs`, `neft`, `nics`, `nz_national_clearing_code`,
+            `sic`, `zengin`.
         payment_method:
           type: string
           enum:
@@ -18415,30 +18297,23 @@ components:
           - dk_nets
           - eft
           - gb_fps
-          - hu_ics
-          - interac
           - masav
           - mx_ccen
           - neft
           - nics
           - nz_becs
           - pl_elixir
-          - provxchange
-          - ro_sent
           - rtp
           - se_bankgirot
-          - sen
           - sepa
           - sg_giro
           - sic
-          - signet
-          - sknbi
           - stablecoin
           - wire
           - zengin
-          description: One of `ach`, `se_bankgirot`, `eft`, `wire`, `check`, `sen`,
-            `book`, `rtp`, `sepa`, `bacs`, `au_becs`, `interac`, `neft`, `nics`, `nz_national_clearing_code`,
-            `sic`, `signet`, `provexchange`, `zengin`.
+          description: One of `ach`, `se_bankgirot`, `eft`, `wire`, `check`, `book`,
+            `rtp`, `sepa`, `bacs`, `au_becs`, `neft`, `nics`, `nz_national_clearing_code`,
+            `sic`, `zengin`.
         subtype:
           type: string
           enum:
@@ -18459,7 +18334,6 @@ components:
           - dk_nets
           - eft
           - ethereum
-          - hu_ics
           - masav
           - mx_ccen
           - neft
@@ -18467,12 +18341,10 @@ components:
           - nz_becs
           - pl_elixir
           - polygon
-          - ro_sent
           - se_bankgirot
           - sepa
           - sg_giro
           - sic
-          - sknbi
           - solana
           - zengin
           nullable: true
@@ -18932,30 +18804,23 @@ components:
           - dk_nets
           - eft
           - gb_fps
-          - hu_ics
-          - interac
           - masav
           - mx_ccen
           - neft
           - nics
           - nz_becs
           - pl_elixir
-          - provxchange
-          - ro_sent
           - rtp
           - se_bankgirot
-          - sen
           - sepa
           - sg_giro
           - sic
-          - signet
-          - sknbi
           - stablecoin
           - wire
           - zengin
-          description: One of `ach`, `se_bankgirot`, `eft`, `wire`, `check`, `sen`,
-            `book`, `rtp`, `sepa`, `bacs`, `au_becs`, `interac`, `neft`, `nics`, `nz_national_clearing_code`,
-            `sic`, `signet`, `provexchange`, `zengin`.
+          description: One of `ach`, `se_bankgirot`, `eft`, `wire`, `check`, `book`,
+            `rtp`, `sepa`, `bacs`, `au_becs`, `neft`, `nics`, `nz_national_clearing_code`,
+            `sic`, `zengin`.
         subtype:
           type: string
           enum:
@@ -18976,7 +18841,6 @@ components:
           - dk_nets
           - eft
           - ethereum
-          - hu_ics
           - masav
           - mx_ccen
           - neft
@@ -18984,12 +18848,10 @@ components:
           - nz_becs
           - pl_elixir
           - polygon
-          - ro_sent
           - se_bankgirot
           - sepa
           - sg_giro
           - sic
-          - sknbi
           - solana
           - zengin
           nullable: true
@@ -19262,8 +19124,6 @@ components:
                     - dk_interbank_clearing_code
                     - gb_sort_code
                     - hk_interbank_clearing_code
-                    - hu_interbank_clearing_code
-                    - id_sknbi_code
                     - il_bank_code
                     - in_ifsc
                     - jp_zengin_code
@@ -19289,24 +19149,17 @@ components:
                     - dk_nets
                     - eft
                     - gb_fps
-                    - hu_ics
-                    - interac
                     - masav
                     - mx_ccen
                     - neft
                     - nics
                     - nz_becs
                     - pl_elixir
-                    - provxchange
-                    - ro_sent
                     - rtp
                     - se_bankgirot
-                    - sen
                     - sepa
                     - sg_giro
                     - sic
-                    - signet
-                    - sknbi
                     - stablecoin
                     - wire
                     - zengin
@@ -19433,30 +19286,23 @@ components:
           - dk_nets
           - eft
           - gb_fps
-          - hu_ics
-          - interac
           - masav
           - mx_ccen
           - neft
           - nics
           - nz_becs
           - pl_elixir
-          - provxchange
-          - ro_sent
           - rtp
           - se_bankgirot
-          - sen
           - sepa
           - sg_giro
           - sic
-          - signet
-          - sknbi
           - stablecoin
           - wire
           - zengin
-          description: One of `ach`, `se_bankgirot`, `eft`, `wire`, `check`, `sen`,
-            `book`, `rtp`, `sepa`, `bacs`, `au_becs`, `interac`, `neft`, `nics`, `nz_national_clearing_code`,
-            `sic`, `signet`, `provexchange`, `zengin`.
+          description: One of `ach`, `se_bankgirot`, `eft`, `wire`, `check`, `book`,
+            `rtp`, `sepa`, `bacs`, `au_becs`, `neft`, `nics`, `nz_national_clearing_code`,
+            `sic`, `zengin`.
         subtype:
           type: string
           enum:
@@ -19477,7 +19323,6 @@ components:
           - dk_nets
           - eft
           - ethereum
-          - hu_ics
           - masav
           - mx_ccen
           - neft
@@ -19485,12 +19330,10 @@ components:
           - nz_becs
           - pl_elixir
           - polygon
-          - ro_sent
           - se_bankgirot
           - sepa
           - sg_giro
           - sic
-          - sknbi
           - solana
           - zengin
           nullable: true
@@ -19763,8 +19606,6 @@ components:
                     - dk_interbank_clearing_code
                     - gb_sort_code
                     - hk_interbank_clearing_code
-                    - hu_interbank_clearing_code
-                    - id_sknbi_code
                     - il_bank_code
                     - in_ifsc
                     - jp_zengin_code
@@ -19790,24 +19631,17 @@ components:
                     - dk_nets
                     - eft
                     - gb_fps
-                    - hu_ics
-                    - interac
                     - masav
                     - mx_ccen
                     - neft
                     - nics
                     - nz_becs
                     - pl_elixir
-                    - provxchange
-                    - ro_sent
                     - rtp
                     - se_bankgirot
-                    - sen
                     - sepa
                     - sg_giro
                     - sic
-                    - signet
-                    - sknbi
                     - stablecoin
                     - wire
                     - zengin
@@ -19927,30 +19761,23 @@ components:
           - dk_nets
           - eft
           - gb_fps
-          - hu_ics
-          - interac
           - masav
           - mx_ccen
           - neft
           - nics
           - nz_becs
           - pl_elixir
-          - provxchange
-          - ro_sent
           - rtp
           - se_bankgirot
-          - sen
           - sepa
           - sg_giro
           - sic
-          - signet
-          - sknbi
           - stablecoin
           - wire
           - zengin
-          description: One of `ach`, `se_bankgirot`, `eft`, `wire`, `check`, `sen`,
-            `book`, `rtp`, `sepa`, `bacs`, `au_becs`, `interac`, `neft`, `nics`, `nz_national_clearing_code`,
-            `sic`, `signet`, `provexchange`, `zengin`.
+          description: One of `ach`, `se_bankgirot`, `eft`, `wire`, `check`, `book`,
+            `rtp`, `sepa`, `bacs`, `au_becs`, `neft`, `nics`, `nz_national_clearing_code`,
+            `sic`, `zengin`.
         subtype:
           type: string
           enum:
@@ -19971,7 +19798,6 @@ components:
           - dk_nets
           - eft
           - ethereum
-          - hu_ics
           - masav
           - mx_ccen
           - neft
@@ -19979,12 +19805,10 @@ components:
           - nz_becs
           - pl_elixir
           - polygon
-          - ro_sent
           - se_bankgirot
           - sepa
           - sg_giro
           - sic
-          - sknbi
           - solana
           - zengin
           nullable: true
@@ -20294,8 +20118,6 @@ components:
                     - dk_interbank_clearing_code
                     - gb_sort_code
                     - hk_interbank_clearing_code
-                    - hu_interbank_clearing_code
-                    - id_sknbi_code
                     - il_bank_code
                     - in_ifsc
                     - jp_zengin_code
@@ -20321,24 +20143,17 @@ components:
                     - dk_nets
                     - eft
                     - gb_fps
-                    - hu_ics
-                    - interac
                     - masav
                     - mx_ccen
                     - neft
                     - nics
                     - nz_becs
                     - pl_elixir
-                    - provxchange
-                    - ro_sent
                     - rtp
                     - se_bankgirot
-                    - sen
                     - sepa
                     - sg_giro
                     - sic
-                    - signet
-                    - sknbi
                     - stablecoin
                     - wire
                     - zengin
@@ -20966,18 +20781,16 @@ components:
           - cross_border
           - eft
           - gb_fps
-          - interac
           - manual
           - neft
           - nz_becs
           - rtp
           - sepa
-          - signet
           - stablecoin
           - wire
           - zengin
           description: 'The type of return. Can be one of: `ach`, `ach_noc`, `au_becs`,
-            `bacs`, `eft`, `interac`, `manual`, `paper_item`, `wire`.'
+            `bacs`, `eft`, `manual`, `paper_item`, `wire`.'
         amount:
           type: integer
           description: Value in specified currency's smallest unit. e.g. $10 would
@@ -21386,8 +21199,6 @@ components:
           - dk_interbank_clearing_code
           - gb_sort_code
           - hk_interbank_clearing_code
-          - hu_interbank_clearing_code
-          - id_sknbi_code
           - il_bank_code
           - in_ifsc
           - jp_zengin_code
@@ -21415,24 +21226,17 @@ components:
           - dk_nets
           - eft
           - gb_fps
-          - hu_ics
-          - interac
           - masav
           - mx_ccen
           - neft
           - nics
           - nz_becs
           - pl_elixir
-          - provxchange
-          - ro_sent
           - rtp
           - se_bankgirot
-          - sen
           - sepa
           - sg_giro
           - sic
-          - signet
-          - sknbi
           - stablecoin
           - wire
           - zengin
@@ -21476,8 +21280,6 @@ components:
           - dk_interbank_clearing_code
           - gb_sort_code
           - hk_interbank_clearing_code
-          - hu_interbank_clearing_code
-          - id_sknbi_code
           - il_bank_code
           - in_ifsc
           - jp_zengin_code
@@ -21505,24 +21307,17 @@ components:
           - dk_nets
           - eft
           - gb_fps
-          - hu_ics
-          - interac
           - masav
           - mx_ccen
           - neft
           - nics
           - nz_becs
           - pl_elixir
-          - provxchange
-          - ro_sent
           - rtp
           - se_bankgirot
-          - sen
           - sepa
           - sg_giro
           - sic
-          - signet
-          - sknbi
           - stablecoin
           - wire
           - zengin
@@ -21569,28 +21364,21 @@ components:
             - dk_nets
             - eft
             - gb_fps
-            - hu_ics
-            - interac
             - masav
             - mx_ccen
             - neft
             - nics
             - nz_becs
             - pl_elixir
-            - provxchange
-            - ro_sent
             - rtp
             - se_bankgirot
-            - sen
             - sepa
             - sg_giro
             - sic
-            - signet
-            - sknbi
             - stablecoin
             - wire
             - zengin
-          maxItems: 32
+          maxItems: 25
           example:
           - ach
           - au_becs
@@ -21603,24 +21391,17 @@ components:
           - dk_nets
           - eft
           - gb_fps
-          - hu_ics
-          - interac
           - masav
           - mx_ccen
           - neft
           - nics
           - nz_becs
           - pl_elixir
-          - provxchange
-          - ro_sent
           - rtp
           - se_bankgirot
-          - sen
           - sepa
           - sg_giro
           - sic
-          - signet
-          - sknbi
           - stablecoin
           - wire
           - zengin
@@ -21653,12 +21434,10 @@ components:
           - book
           - check
           - eft
-          - interac
           - neft
           - nz_becs
           - rtp
           - sepa
-          - signet
           - stablecoin
           - wire
           - zengin
@@ -21785,7 +21564,6 @@ components:
           - paxos
           - paypal
           - pnc
-          - signet
           - silvergate
           - swift
           - us_bank
@@ -21794,8 +21572,8 @@ components:
           nullable: true
           description: The type of `vendor_code` being reported. Can be one of `bai2`,
             `bankprov`, `bnk_dev`, `cleartouch`, `currencycloud`, `cross_river`, `dc_bank`,
-            `dwolla`, `evolve`, `goldman_sachs`, `iso20022`, `jpmc`, `mx`, `signet`,
-            `silvergate`, `swift`, `us_bank`, or others.
+            `dwolla`, `evolve`, `goldman_sachs`, `iso20022`, `jpmc`, `mx`, `silvergate`,
+            `swift`, `us_bank`, or others.
         vendor_id:
           type: string
           nullable: true
@@ -21870,30 +21648,23 @@ components:
           - dk_nets
           - eft
           - gb_fps
-          - hu_ics
-          - interac
           - masav
           - mx_ccen
           - neft
           - nics
           - nz_becs
           - pl_elixir
-          - provxchange
-          - ro_sent
           - rtp
           - se_bankgirot
-          - sen
           - sepa
           - sg_giro
           - sic
-          - signet
-          - sknbi
           - stablecoin
           - wire
           - zengin
           - other
           description: The type of the transaction. Examples could be `card, `ach`,
-            `wire`, `check`, `rtp`, `book`, or `sen`.
+            `wire`, `check`, `rtp`, or `book`.
         foreign_exchange_rate:
           "$ref": "#/components/schemas/foreign_exchange_rate"
           nullable: true
@@ -21967,8 +21738,8 @@ components:
           type: string
           description: The type of `vendor_code` being reported. Can be one of `bai2`,
             `bankprov`, `bnk_dev`, `cleartouch`, `currencycloud`, `cross_river`, `dc_bank`,
-            `dwolla`, `evolve`, `goldman_sachs`, `iso20022`, `jpmc`, `mx`, `signet`,
-            `silvergate`, `swift`, `us_bank`, or others.
+            `dwolla`, `evolve`, `goldman_sachs`, `iso20022`, `jpmc`, `mx`, `silvergate`,
+            `swift`, `us_bank`, or others.
           nullable: true
         vendor_customer_id:
           type: string
@@ -22012,30 +21783,23 @@ components:
           - dk_nets
           - eft
           - gb_fps
-          - hu_ics
-          - interac
           - masav
           - mx_ccen
           - neft
           - nics
           - nz_becs
           - pl_elixir
-          - provxchange
-          - ro_sent
           - rtp
           - se_bankgirot
-          - sen
           - sepa
           - sg_giro
           - sic
-          - signet
-          - sknbi
           - stablecoin
           - wire
           - zengin
           - other
           description: The type of the transaction. Examples could be `card, `ach`,
-            `wire`, `check`, `rtp`, `book`, or `sen`.
+            `wire`, `check`, `rtp`, or `book`.
           nullable: true
       required:
       - amount
@@ -22371,29 +22135,21 @@ components:
           - dk_nets
           - eft
           - gb_fps
-          - hu_ics
-          - interac
           - masav
           - mx_ccen
           - neft
           - nics
           - nz_becs
           - pl_elixir
-          - provxchange
-          - ro_sent
           - rtp
           - se_bankgirot
-          - sen
           - sepa
           - sg_giro
           - sic
-          - signet
-          - sknbi
           - stablecoin
           - wire
           - zengin
-          description: One of ach, au_becs, bacs, book, check, eft, interac, provxchange,
-            rtp, sen, sepa, signet wire
+          description: One of ach, au_becs, bacs, book, check, eft, rtp, sepa, wire
         currency:
           "$ref": "#/components/schemas/currency"
           description: Must conform to ISO 4217. Defaults to the currency of the internal
