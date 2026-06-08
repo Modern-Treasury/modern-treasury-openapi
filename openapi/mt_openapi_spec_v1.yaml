@@ -12450,6 +12450,7 @@ components:
           - mx_curp
           - mx_ine
           - mx_rfc
+          - national_id
           - nl_bsn
           - nl_btw
           - nl_rsin
@@ -12616,6 +12617,7 @@ components:
           - mx_curp
           - mx_ine
           - mx_rfc
+          - national_id
           - nl_bsn
           - nl_btw
           - nl_rsin
@@ -20362,9 +20364,6 @@ components:
           - pnc_transaction_reference_number
           - rbc_wire_reference_id
           - rtp_instruction_id
-          - signet_api_reference_id
-          - signet_confirmation_id
-          - signet_request_id
           - silvergate_payment_id
           - svb_end_to_end_id
           - svb_payment_id
@@ -20501,9 +20500,6 @@ components:
           - pnc_transaction_reference_number
           - rbc_wire_reference_id
           - rtp_instruction_id
-          - signet_api_reference_id
-          - signet_confirmation_id
-          - signet_request_id
           - silvergate_payment_id
           - svb_end_to_end_id
           - svb_payment_id
