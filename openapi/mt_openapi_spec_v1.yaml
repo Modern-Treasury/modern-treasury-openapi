@@ -20336,7 +20336,6 @@ components:
           - goldman_sachs_payment_request_id
           - goldman_sachs_request_id
           - goldman_sachs_unique_payment_id
-          - interac_message_id
           - jpmc_ccn
           - jpmc_clearing_system_reference
           - jpmc_customer_reference_id
@@ -20472,7 +20471,6 @@ components:
           - goldman_sachs_payment_request_id
           - goldman_sachs_request_id
           - goldman_sachs_unique_payment_id
-          - interac_message_id
           - jpmc_ccn
           - jpmc_clearing_system_reference
           - jpmc_customer_reference_id
