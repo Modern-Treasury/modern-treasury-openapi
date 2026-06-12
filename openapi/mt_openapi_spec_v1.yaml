@@ -7820,10 +7820,22 @@ paths:
       responses:
         '202':
           description: process started
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/legal_entity"
         '422':
           description: unprocessable entity
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/error_message"
         '405':
           description: not allowed in production
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/error_message"
       requestBody:
         content:
           application/json:
