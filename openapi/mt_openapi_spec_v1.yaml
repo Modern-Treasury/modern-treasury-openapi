@@ -13096,6 +13096,7 @@ components:
           description: The nickname of the account.
         party_name:
           type: string
+          nullable: true
           description: The legal name of the entity which owns the account.
         party_address:
           type: object
@@ -13200,7 +13201,6 @@ components:
       required:
       - connection_id
       - name
-      - party_name
       - currency
     internal_account_update_request:
       type: object
