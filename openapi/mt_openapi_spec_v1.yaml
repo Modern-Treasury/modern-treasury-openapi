@@ -13142,9 +13142,9 @@ components:
           - USD
           - CAD
           - USDC
-          - USDG
           - USDT
           - PYUSD
+          - USDG
           example: USD
           description: The currency of the internal account. Supports fiat and stablecoin
             currencies.
