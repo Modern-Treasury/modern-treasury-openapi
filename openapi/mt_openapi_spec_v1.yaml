@@ -2791,6 +2791,12 @@ paths:
             application/json:
               schema:
                 "$ref": "#/components/schemas/error_message"
+        '409':
+          description: conflict
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/error_message"
       requestBody:
         content:
           application/json:
@@ -11005,8 +11011,7 @@ components:
           nullable: true
         document_details:
           type: array
-          items:
-            "$ref": "#/components/schemas/document_detail"
+          items: {}
         file:
           type: object
           properties:
@@ -11075,43 +11080,6 @@ components:
           format: binary
       required:
       - file
-    document_detail:
-      type: object
-      properties:
-        id:
-          type: string
-          format: uuid
-        object:
-          type: string
-        live_mode:
-          type: boolean
-          description: This field will be true if this object exists in the live environment
-            or false if it exists in the test environment.
-        created_at:
-          type: string
-          format: date-time
-        updated_at:
-          type: string
-          format: date-time
-        discarded_at:
-          type: string
-          format: date-time
-          nullable: true
-        document_identifier_type:
-          type: string
-        document_identifier:
-          type: string
-      additionalProperties: false
-      minProperties: 8
-      required:
-      - id
-      - object
-      - live_mode
-      - created_at
-      - updated_at
-      - discarded_at
-      - document_identifier_type
-      - document_identifier
     error_message:
       type: object
       properties:
@@ -12433,6 +12401,7 @@ components:
           - gb_nino
           - gb_utr
           - gb_vat
+          - generic_international
           - gr_vat
           - hn_id
           - hn_rtn
@@ -12600,6 +12569,7 @@ components:
           - gb_nino
           - gb_utr
           - gb_vat
+          - generic_international
           - gr_vat
           - hn_id
           - hn_rtn
