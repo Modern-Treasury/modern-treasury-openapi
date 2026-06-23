@@ -2791,6 +2791,12 @@ paths:
             application/json:
               schema:
                 "$ref": "#/components/schemas/error_message"
+        '409':
+          description: conflict
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/error_message"
       requestBody:
         content:
           application/json:
@@ -5417,7 +5423,7 @@ paths:
           format: uuid
           nullable: true
         required: false
-        description: 'Translation missing: en.openapi.descriptions.payment_order.query_params.target_id'
+        description: Only return holds for a specific target ID.
       - name: target_type
         in: query
         schema:
@@ -5426,7 +5432,7 @@ paths:
           - payment_order
           nullable: true
         required: false
-        description: 'Translation missing: en.openapi.descriptions.payment_order.query_params.target_type'
+        description: Only return holds for a specific target type.
       - name: status
         in: query
         schema:
@@ -5436,7 +5442,7 @@ paths:
           - resolved
           nullable: true
         required: false
-        description: 'Translation missing: en.openapi.descriptions.payment_order.query_params.status'
+        description: Only return holds for a specific status.
       - "$ref": "#/components/parameters/metadata_query"
       responses:
         '200':
@@ -9420,6 +9426,10 @@ components:
         amount:
           type: integer
           description: The balance amount.
+        amount_string:
+          type: string
+          description: The amount of the balance as a string, preserving full precision
+            for values that may exceed safe integer limits in some languages.
         currency:
           "$ref": "#/components/schemas/currency"
           description: The currency of the balance.
@@ -9465,7 +9475,7 @@ components:
           format: date
           description: The date on which the balance becomes available.
       additionalProperties: false
-      minProperties: 13
+      minProperties: 14
       required:
       - id
       - object
@@ -9473,6 +9483,7 @@ components:
       - created_at
       - updated_at
       - amount
+      - amount_string
       - currency
       - balance_type
       - vendor_code
@@ -9486,6 +9497,10 @@ components:
         amount:
           type: integer
           description: The balance amount.
+        amount_string:
+          type: string
+          description: The amount of the balance as a string, preserving full precision
+            for values that may exceed safe integer limits in some languages.
         balance_type:
           type: string
           enum:
@@ -9515,10 +9530,14 @@ components:
       additionalProperties: false
       minProperties: 4
       required:
-      - amount
       - balance_type
       - vendor_code
       - vendor_code_type
+      anyOf:
+      - required:
+        - amount
+      - required:
+        - amount_string
     bulk_request:
       type: object
       properties:
@@ -11005,8 +11024,7 @@ components:
           nullable: true
         document_details:
           type: array
-          items:
-            "$ref": "#/components/schemas/document_detail"
+          items: {}
         file:
           type: object
           properties:
@@ -11075,43 +11093,6 @@ components:
           format: binary
       required:
       - file
-    document_detail:
-      type: object
-      properties:
-        id:
-          type: string
-          format: uuid
-        object:
-          type: string
-        live_mode:
-          type: boolean
-          description: This field will be true if this object exists in the live environment
-            or false if it exists in the test environment.
-        created_at:
-          type: string
-          format: date-time
-        updated_at:
-          type: string
-          format: date-time
-        discarded_at:
-          type: string
-          format: date-time
-          nullable: true
-        document_identifier_type:
-          type: string
-        document_identifier:
-          type: string
-      additionalProperties: false
-      minProperties: 8
-      required:
-      - id
-      - object
-      - live_mode
-      - created_at
-      - updated_at
-      - discarded_at
-      - document_identifier_type
-      - document_identifier
     error_message:
       type: object
       properties:
@@ -12433,6 +12414,7 @@ components:
           - gb_nino
           - gb_utr
           - gb_vat
+          - generic_international
           - gr_vat
           - hn_id
           - hn_rtn
@@ -12600,6 +12582,7 @@ components:
           - gb_nino
           - gb_utr
           - gb_vat
+          - generic_international
           - gr_vat
           - hn_id
           - hn_rtn
@@ -13508,17 +13491,17 @@ components:
           type: string
           nullable: true
           format: date-time
-          description: 'Translation missing: en.openapi.descriptions.invoice.schema.issued_at'
+          description: The time at which the invoice was issued.
         paid_at:
           type: string
           nullable: true
           format: date-time
-          description: 'Translation missing: en.openapi.descriptions.invoice.schema.paid_at'
+          description: The time at which the invoice was paid.
         voided_at:
           type: string
           nullable: true
           format: date-time
-          description: 'Translation missing: en.openapi.descriptions.invoice.schema.voided_at'
+          description: The time at which the invoice was voided.
       additionalProperties: false
       minProperties: 41
       required:
