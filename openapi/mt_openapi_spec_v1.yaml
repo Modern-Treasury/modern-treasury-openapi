@@ -13093,7 +13093,8 @@ components:
         connection_id:
           type: string
           description: The identifier of the financial institution the account belongs
-            to.
+            to. If not provided, defaults to the default connection, or the sole connection
+            if only one exists.
         name:
           type: string
           description: The nickname of the account.
@@ -13202,7 +13203,6 @@ components:
             on creation. Please reach out to your customer success manager to enable
             this capability for your connection.
       required:
-      - connection_id
       - name
       - currency
     internal_account_update_request:
