@@ -2878,6 +2878,76 @@ paths:
           application/json:
             schema:
               "$ref": "#/components/schemas/legal_entity_update_request"
+  "/api/legal_entity_associations":
+    post:
+      summary: create legal_entity_association
+      tags:
+      - LegalEntityAssociation
+      operationId: createLegalEntityAssociation
+      description: Add an associated legal entity to a business legal entity.
+      security:
+      - basic_auth: []
+      parameters:
+      - name: Idempotency-Key
+        in: header
+        required: false
+        description: This key should be something unique, preferably something like
+          an UUID.
+        schema:
+          type: string
+      responses:
+        '201':
+          description: successful
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/legal_entity_association"
+        '422':
+          description: unsuccessful
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/error_message"
+        '404':
+          description: not found
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/error_message"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              "$ref": "#/components/schemas/legal_entity_association_create_request"
+  "/api/legal_entity_associations/{id}":
+    parameters:
+    - name: id
+      in: path
+      description: The id of an existing legal entity association.
+      required: true
+      schema:
+        type: string
+    delete:
+      summary: delete legal_entity_association
+      tags:
+      - LegalEntityAssociation
+      operationId: deleteLegalEntityAssociation
+      description: Remove an associated legal entity from a business legal entity.
+      security:
+      - basic_auth: []
+      responses:
+        '200':
+          description: successful
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/legal_entity_association"
+        '404':
+          description: not found
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/error_message"
   "/api/journal_entries":
     get:
       summary: list journal_entries
@@ -13202,6 +13272,16 @@ components:
             for Bring Your Own Bank accounts. Defaults to `false`. Configurable only
             on creation. Please reach out to your customer success manager to enable
             this capability for your connection.
+        requested_account_number_types:
+          type: array
+          description: An array of account number types requested for provisioning.
+          items:
+            type: string
+            enum:
+            - ethereum_address
+            - solana_address
+            - polygon_address
+            - base_address
       required:
       - name
       - currency
@@ -17562,6 +17642,39 @@ components:
       - title
       - ownership_percentage
       - child_legal_entity
+    legal_entity_association_create_request:
+      type: object
+      properties:
+        parent_legal_entity_id:
+          type: string
+          description: The ID of the parent legal entity. This must be a business
+            legal entity.
+        relationship_types:
+          type: array
+          items:
+            type: string
+            enum:
+            - authorized_signer
+            - beneficial_owner
+            - control_person
+            description: A list of relationship types for how the child entity relates
+              to parent entity.
+        title:
+          type: string
+          nullable: true
+          description: The job title of the child entity at the parent entity.
+        ownership_percentage:
+          type: integer
+          nullable: true
+          description: The child entity's ownership percentage iff they are a beneficial
+            owner.
+        child_legal_entity_id:
+          type: string
+          description: The ID of the child legal entity.
+      required:
+      - parent_legal_entity_id
+      - child_legal_entity_id
+      - relationship_types
     legal_entity_association_inline_create_request:
       type: object
       properties:
