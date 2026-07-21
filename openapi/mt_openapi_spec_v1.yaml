@@ -2768,6 +2768,8 @@ paths:
       tags:
       - LegalEntity
       operationId: createLegalEntity
+      description: Create a legal entity. All country fields use ISO 3166-1 alpha-2
+        (e.g. US).
       security:
       - basic_auth: []
       parameters:
@@ -9322,11 +9324,13 @@ components:
         locality:
           type: string
           nullable: true
-          description: Locality or City.
+          description: Locality or City. Use the full city name rather than an abbreviation
+            (e.g. San Francisco).
         region:
           type: string
           nullable: true
-          description: Region or State.
+          description: Region or State. This field is free-form; for US states, we
+            recommend a two-letter code (e.g. CA). Full state names are also accepted.
         postal_code:
           type: string
           description: The postal code of the address.
@@ -9362,11 +9366,13 @@ components:
         locality:
           type: string
           nullable: true
-          description: Locality or City.
+          description: Locality or City. Use the full city name rather than an abbreviation
+            (e.g. San Francisco).
         region:
           type: string
           nullable: true
-          description: Region or State.
+          description: Region or State. This field is free-form; for US states, we
+            recommend a two-letter code (e.g. CA). Full state names are also accepted.
         postal_code:
           type: string
           description: The postal code of the address.
@@ -10094,6 +10100,9 @@ components:
                 properties:
                   phone_number:
                     type: string
+                    description: 'A phone number in E.164 format. This format is strictly
+                      validated: include a leading + and country code, followed by
+                      digits only (no spaces or dashes), e.g. +12025551234.'
                 description: A list of phone numbers in E.164 format.
             email:
               type: string
@@ -10118,12 +10127,16 @@ components:
             country_of_incorporation:
               type: string
               nullable: true
+              example: US
               description: The country where the business is incorporated, as an ISO
                 3166-1 alpha-2 country code (e.g. US).
             operating_jurisdictions:
               type: array
               items:
                 type: string
+              example:
+              - US
+              - CA
               description: A list of countries where the business operates, as ISO
                 3166-1 alpha-2 country codes (e.g. ["US", "CA"]).
             primary_social_media_sites:
@@ -13182,10 +13195,13 @@ components:
               type: string
             locality:
               type: string
-              description: Locality or City.
+              description: Locality or City. Use the full city name rather than an
+                abbreviation (e.g. San Francisco).
             region:
               type: string
-              description: Region or State.
+              description: Region or State. This field is free-form; for US states,
+                we recommend a two-letter code (e.g. CA). Full state names are also
+                accepted.
             postal_code:
               type: string
               description: The postal code of the address.
@@ -13361,10 +13377,13 @@ components:
               type: string
             locality:
               type: string
-              description: Locality or City.
+              description: Locality or City. Use the full city name rather than an
+                abbreviation (e.g. San Francisco).
             region:
               type: string
-              description: Region or State.
+              description: Region or State. This field is free-form; for US states,
+                we recommend a two-letter code (e.g. CA). Full state names are also
+                accepted.
             postal_code:
               type: string
               description: The postal code of the address.
@@ -13389,10 +13408,13 @@ components:
               type: string
             locality:
               type: string
-              description: Locality or City.
+              description: Locality or City. Use the full city name rather than an
+                abbreviation (e.g. San Francisco).
             region:
               type: string
-              description: Region or State.
+              description: Region or State. This field is free-form; for US states,
+                we recommend a two-letter code (e.g. CA). Full state names are also
+                accepted.
             postal_code:
               type: string
               description: The postal code of the address.
@@ -13432,10 +13454,13 @@ components:
               type: string
             locality:
               type: string
-              description: Locality or City.
+              description: Locality or City. Use the full city name rather than an
+                abbreviation (e.g. San Francisco).
             region:
               type: string
-              description: Region or State.
+              description: Region or State. This field is free-form; for US states,
+                we recommend a two-letter code (e.g. CA). Full state names are also
+                accepted.
             postal_code:
               type: string
               description: The postal code of the address.
@@ -13667,10 +13692,13 @@ components:
               type: string
             locality:
               type: string
-              description: Locality or City.
+              description: Locality or City. Use the full city name rather than an
+                abbreviation (e.g. San Francisco).
             region:
               type: string
-              description: Region or State.
+              description: Region or State. This field is free-form; for US states,
+                we recommend a two-letter code (e.g. CA). Full state names are also
+                accepted.
             postal_code:
               type: string
               description: The postal code of the address.
@@ -13695,10 +13723,13 @@ components:
               type: string
             locality:
               type: string
-              description: Locality or City.
+              description: Locality or City. Use the full city name rather than an
+                abbreviation (e.g. San Francisco).
             region:
               type: string
-              description: Region or State.
+              description: Region or State. This field is free-form; for US states,
+                we recommend a two-letter code (e.g. CA). Full state names are also
+                accepted.
             postal_code:
               type: string
               description: The postal code of the address.
@@ -13738,10 +13769,13 @@ components:
               type: string
             locality:
               type: string
-              description: Locality or City.
+              description: Locality or City. Use the full city name rather than an
+                abbreviation (e.g. San Francisco).
             region:
               type: string
-              description: Region or State.
+              description: Region or State. This field is free-form; for US states,
+                we recommend a two-letter code (e.g. CA). Full state names are also
+                accepted.
             postal_code:
               type: string
               description: The postal code of the address.
@@ -13903,10 +13937,13 @@ components:
               type: string
             locality:
               type: string
-              description: Locality or City.
+              description: Locality or City. Use the full city name rather than an
+                abbreviation (e.g. San Francisco).
             region:
               type: string
-              description: Region or State.
+              description: Region or State. This field is free-form; for US states,
+                we recommend a two-letter code (e.g. CA). Full state names are also
+                accepted.
             postal_code:
               type: string
               description: The postal code of the address.
@@ -13931,10 +13968,13 @@ components:
               type: string
             locality:
               type: string
-              description: Locality or City.
+              description: Locality or City. Use the full city name rather than an
+                abbreviation (e.g. San Francisco).
             region:
               type: string
-              description: Region or State.
+              description: Region or State. This field is free-form; for US states,
+                we recommend a two-letter code (e.g. CA). Full state names are also
+                accepted.
             postal_code:
               type: string
               description: The postal code of the address.
@@ -13974,10 +14014,13 @@ components:
               type: string
             locality:
               type: string
-              description: Locality or City.
+              description: Locality or City. Use the full city name rather than an
+                abbreviation (e.g. San Francisco).
             region:
               type: string
-              description: Region or State.
+              description: Region or State. This field is free-form; for US states,
+                we recommend a two-letter code (e.g. CA). Full state names are also
+                accepted.
             postal_code:
               type: string
               description: The postal code of the address.
@@ -16278,6 +16321,9 @@ components:
             properties:
               phone_number:
                 type: string
+                description: 'A phone number in E.164 format. This format is strictly
+                  validated: include a leading + and country code, followed by digits
+                  only (no spaces or dashes), e.g. +12025551234.'
             description: A list of phone numbers in E.164 format.
         email:
           type: string
@@ -16302,12 +16348,16 @@ components:
         country_of_incorporation:
           type: string
           nullable: true
+          example: US
           description: The country where the business is incorporated, as an ISO 3166-1
             alpha-2 country code (e.g. US).
         operating_jurisdictions:
           type: array
           items:
             type: string
+          example:
+          - US
+          - CA
           description: A list of countries where the business operates, as ISO 3166-1
             alpha-2 country codes (e.g. ["US", "CA"]).
         primary_social_media_sites:
@@ -16546,6 +16596,9 @@ components:
             properties:
               phone_number:
                 type: string
+                description: 'A phone number in E.164 format. This format is strictly
+                  validated: include a leading + and country code, followed by digits
+                  only (no spaces or dashes), e.g. +12025551234.'
             description: A list of phone numbers in E.164 format.
         email:
           type: string
@@ -16570,12 +16623,16 @@ components:
         country_of_incorporation:
           type: string
           nullable: true
+          example: US
           description: The country where the business is incorporated, as an ISO 3166-1
             alpha-2 country code (e.g. US).
         operating_jurisdictions:
           type: array
           items:
             type: string
+          example:
+          - US
+          - CA
           description: A list of countries where the business operates, as ISO 3166-1
             alpha-2 country codes (e.g. ["US", "CA"]).
         primary_social_media_sites:
@@ -16825,6 +16882,9 @@ components:
             properties:
               phone_number:
                 type: string
+                description: 'A phone number in E.164 format. This format is strictly
+                  validated: include a leading + and country code, followed by digits
+                  only (no spaces or dashes), e.g. +12025551234.'
             description: A list of phone numbers in E.164 format.
         email:
           type: string
@@ -16849,12 +16909,16 @@ components:
         country_of_incorporation:
           type: string
           nullable: true
+          example: US
           description: The country where the business is incorporated, as an ISO 3166-1
             alpha-2 country code (e.g. US).
         operating_jurisdictions:
           type: array
           items:
             type: string
+          example:
+          - US
+          - CA
           description: A list of countries where the business operates, as ISO 3166-1
             alpha-2 country codes (e.g. ["US", "CA"]).
         primary_social_media_sites:
@@ -17092,6 +17156,9 @@ components:
             properties:
               phone_number:
                 type: string
+                description: 'A phone number in E.164 format. This format is strictly
+                  validated: include a leading + and country code, followed by digits
+                  only (no spaces or dashes), e.g. +12025551234.'
             description: A list of phone numbers in E.164 format.
         email:
           type: string
@@ -17116,12 +17183,16 @@ components:
         country_of_incorporation:
           type: string
           nullable: true
+          example: US
           description: The country where the business is incorporated, as an ISO 3166-1
             alpha-2 country code (e.g. US).
         operating_jurisdictions:
           type: array
           items:
             type: string
+          example:
+          - US
+          - CA
           description: A list of countries where the business operates, as ISO 3166-1
             alpha-2 country codes (e.g. ["US", "CA"]).
         primary_social_media_sites:
@@ -17336,6 +17407,9 @@ components:
             properties:
               phone_number:
                 type: string
+                description: 'A phone number in E.164 format. This format is strictly
+                  validated: include a leading + and country code, followed by digits
+                  only (no spaces or dashes), e.g. +12025551234.'
             description: A list of phone numbers in E.164 format.
         email:
           type: string
@@ -17360,12 +17434,16 @@ components:
         country_of_incorporation:
           type: string
           nullable: true
+          example: US
           description: The country where the business is incorporated, as an ISO 3166-1
             alpha-2 country code (e.g. US).
         operating_jurisdictions:
           type: array
           items:
             type: string
+          example:
+          - US
+          - CA
           description: A list of countries where the business operates, as ISO 3166-1
             alpha-2 country codes (e.g. ["US", "CA"]).
         primary_social_media_sites:
@@ -17501,11 +17579,13 @@ components:
         locality:
           type: string
           nullable: true
-          description: Locality or City.
+          description: Locality or City. Use the full city name rather than an abbreviation
+            (e.g. San Francisco).
         region:
           type: string
           nullable: true
-          description: Region or State.
+          description: Region or State. This field is free-form; for US states, we
+            recommend a two-letter code (e.g. CA). Full state names are also accepted.
         postal_code:
           type: string
           description: The postal code of the address.
@@ -17561,11 +17641,13 @@ components:
         locality:
           type: string
           nullable: true
-          description: Locality or City.
+          description: Locality or City. Use the full city name rather than an abbreviation
+            (e.g. San Francisco).
         region:
           type: string
           nullable: true
-          description: Region or State.
+          description: Region or State. This field is free-form; for US states, we
+            recommend a two-letter code (e.g. CA). Full state names are also accepted.
         postal_code:
           type: string
           description: The postal code of the address.
@@ -17934,7 +18016,8 @@ components:
         employer_state:
           type: string
           nullable: true
-          description: The state in which the employer is located.
+          description: The state in which the employer is located. This field is free-form
+            text; for US states, we recommend a two-letter abbreviation (e.g. CA).
         employer_country:
           type: string
           nullable: true
@@ -19441,10 +19524,13 @@ components:
               type: string
             locality:
               type: string
-              description: Locality or City.
+              description: Locality or City. Use the full city name rather than an
+                abbreviation (e.g. San Francisco).
             region:
               type: string
-              description: Region or State.
+              description: Region or State. This field is free-form; for US states,
+                we recommend a two-letter code (e.g. CA). Full state names are also
+                accepted.
             postal_code:
               type: string
               description: The postal code of the address.
@@ -19925,10 +20011,13 @@ components:
               type: string
             locality:
               type: string
-              description: Locality or City.
+              description: Locality or City. Use the full city name rather than an
+                abbreviation (e.g. San Francisco).
             region:
               type: string
-              description: Region or State.
+              description: Region or State. This field is free-form; for US states,
+                we recommend a two-letter code (e.g. CA). Full state names are also
+                accepted.
             postal_code:
               type: string
               description: The postal code of the address.
