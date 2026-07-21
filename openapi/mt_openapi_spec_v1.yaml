@@ -10118,14 +10118,14 @@ components:
             country_of_incorporation:
               type: string
               nullable: true
-              description: The country code where the business is incorporated in
-                the ISO 3166-1 alpha-2 or alpha-3 formats.
+              description: The country where the business is incorporated, as an ISO
+                3166-1 alpha-2 country code (e.g. US).
             operating_jurisdictions:
               type: array
               items:
                 type: string
-              description: A list of countries where the business operates (ISO 3166-1
-                alpha-2 or alpha-3 codes).
+              description: A list of countries where the business operates, as ISO
+                3166-1 alpha-2 country codes (e.g. ["US", "CA"]).
             primary_social_media_sites:
               type: array
               items:
@@ -16302,14 +16302,14 @@ components:
         country_of_incorporation:
           type: string
           nullable: true
-          description: The country code where the business is incorporated in the
-            ISO 3166-1 alpha-2 or alpha-3 formats.
+          description: The country where the business is incorporated, as an ISO 3166-1
+            alpha-2 country code (e.g. US).
         operating_jurisdictions:
           type: array
           items:
             type: string
-          description: A list of countries where the business operates (ISO 3166-1
-            alpha-2 or alpha-3 codes).
+          description: A list of countries where the business operates, as ISO 3166-1
+            alpha-2 country codes (e.g. ["US", "CA"]).
         primary_social_media_sites:
           type: array
           items:
@@ -16570,14 +16570,14 @@ components:
         country_of_incorporation:
           type: string
           nullable: true
-          description: The country code where the business is incorporated in the
-            ISO 3166-1 alpha-2 or alpha-3 formats.
+          description: The country where the business is incorporated, as an ISO 3166-1
+            alpha-2 country code (e.g. US).
         operating_jurisdictions:
           type: array
           items:
             type: string
-          description: A list of countries where the business operates (ISO 3166-1
-            alpha-2 or alpha-3 codes).
+          description: A list of countries where the business operates, as ISO 3166-1
+            alpha-2 country codes (e.g. ["US", "CA"]).
         primary_social_media_sites:
           type: array
           items:
@@ -16849,14 +16849,14 @@ components:
         country_of_incorporation:
           type: string
           nullable: true
-          description: The country code where the business is incorporated in the
-            ISO 3166-1 alpha-2 or alpha-3 formats.
+          description: The country where the business is incorporated, as an ISO 3166-1
+            alpha-2 country code (e.g. US).
         operating_jurisdictions:
           type: array
           items:
             type: string
-          description: A list of countries where the business operates (ISO 3166-1
-            alpha-2 or alpha-3 codes).
+          description: A list of countries where the business operates, as ISO 3166-1
+            alpha-2 country codes (e.g. ["US", "CA"]).
         primary_social_media_sites:
           type: array
           items:
@@ -17116,14 +17116,14 @@ components:
         country_of_incorporation:
           type: string
           nullable: true
-          description: The country code where the business is incorporated in the
-            ISO 3166-1 alpha-2 or alpha-3 formats.
+          description: The country where the business is incorporated, as an ISO 3166-1
+            alpha-2 country code (e.g. US).
         operating_jurisdictions:
           type: array
           items:
             type: string
-          description: A list of countries where the business operates (ISO 3166-1
-            alpha-2 or alpha-3 codes).
+          description: A list of countries where the business operates, as ISO 3166-1
+            alpha-2 country codes (e.g. ["US", "CA"]).
         primary_social_media_sites:
           type: array
           items:
@@ -17360,14 +17360,14 @@ components:
         country_of_incorporation:
           type: string
           nullable: true
-          description: The country code where the business is incorporated in the
-            ISO 3166-1 alpha-2 or alpha-3 formats.
+          description: The country where the business is incorporated, as an ISO 3166-1
+            alpha-2 country code (e.g. US).
         operating_jurisdictions:
           type: array
           items:
             type: string
-          description: A list of countries where the business operates (ISO 3166-1
-            alpha-2 or alpha-3 codes).
+          description: A list of countries where the business operates, as ISO 3166-1
+            alpha-2 country codes (e.g. ["US", "CA"]).
         primary_social_media_sites:
           type: array
           items:
