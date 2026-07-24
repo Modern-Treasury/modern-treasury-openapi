@@ -4278,10 +4278,11 @@ paths:
           - legal_entity
           - organization
           - payment_order
+          - return
           - transaction
         description: The type of the associated object. Currently can be one of `payment_order`,
-          `transaction`, `expected_payment`, `counterparty`, `organization`, `case`,
-          `internal_account`, `decision`, or `external_account`.
+          `transaction`, `expected_payment`, `return`, `legal_entity`, `counterparty`,
+          `organization`, `case`, `internal_account`, `decision`, or `external_account`.
         required: false
       - name: after_cursor
         in: query
@@ -4394,10 +4395,11 @@ paths:
           - legal_entities
           - organizations
           - payment_orders
+          - returns
           - transactions
         description: The type of the associated object. Currently can be one of `payment_order`,
-          `transaction`, `expected_payment`, `counterparty`, `organization`, `case`,
-          `internal_account`, `decision`, or `external_account`.
+          `transaction`, `expected_payment`, `return`, `legal_entity`, `counterparty`,
+          `organization`, `case`, `internal_account`, `decision`, or `external_account`.
         required: true
       - name: document_type
         in: query
@@ -4469,10 +4471,11 @@ paths:
           - legal_entities
           - organizations
           - payment_orders
+          - returns
           - transactions
         description: The type of the associated object. Currently can be one of `payment_order`,
-          `transaction`, `expected_payment`, `counterparty`, `organization`, `case`,
-          `internal_account`, `decision`, or `external_account`.
+          `transaction`, `expected_payment`, `return`, `legal_entity`, `counterparty`,
+          `organization`, `case`, `internal_account`, `decision`, or `external_account`.
         required: true
       - name: Idempotency-Key
         in: header
@@ -4529,10 +4532,11 @@ paths:
         - legal_entities
         - organizations
         - payment_orders
+        - returns
         - transactions
       description: The type of the associated object. Currently can be one of `payment_order`,
-        `transaction`, `expected_payment`, `counterparty`, `organization`, `case`,
-        `internal_account`, `decision`, or `external_account`.
+        `transaction`, `expected_payment`, `return`, `legal_entity`, `counterparty`,
+        `organization`, `case`, `internal_account`, `decision`, or `external_account`.
       required: true
     - name: id
       in: path
@@ -4616,10 +4620,11 @@ paths:
         - legal_entities
         - organizations
         - payment_orders
+        - returns
         - transactions
       description: The type of the associated object. Currently can be one of `payment_order`,
-        `transaction`, `expected_payment`, `counterparty`, `organization`, `case`,
-        `internal_account`, `decision`, or `external_account`.
+        `transaction`, `expected_payment`, `return`, `legal_entity`, `counterparty`,
+        `organization`, `case`, `internal_account`, `decision`, or `external_account`.
       required: true
     - name: id
       in: path
@@ -11113,10 +11118,12 @@ components:
           - legal_entity
           - organization
           - payment_order
+          - return
           - transaction
           description: The type of the associated object. Currently can be one of
-            `payment_order`, `transaction`, `expected_payment`, `counterparty`, `organization`,
-            `case`, `internal_account`, `decision`, or `external_account`.
+            `payment_order`, `transaction`, `expected_payment`, `return`, `legal_entity`,
+            `counterparty`, `organization`, `case`, `internal_account`, `decision`,
+            or `external_account`.
           nullable: true
         file:
           type: object
@@ -11164,6 +11171,7 @@ components:
           - legal_entity
           - organization
           - payment_order
+          - return
           - transaction
         document_type:
           type: string
@@ -19543,6 +19551,7 @@ components:
               description: Country code conforms to [ISO 3166-1 alpha-2]
         vendor_attributes:
           type: object
+          additionalProperties: true
           description: Additional vendor specific fields for this payment. Data must
             be represented as key-value pairs.
         documents:
@@ -20030,6 +20039,7 @@ components:
               description: Country code conforms to [ISO 3166-1 alpha-2]
         vendor_attributes:
           type: object
+          additionalProperties: true
           description: Additional vendor specific fields for this payment. Data must
             be represented as key-value pairs.
       required:
