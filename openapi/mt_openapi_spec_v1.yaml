@@ -19543,6 +19543,7 @@ components:
               description: Country code conforms to [ISO 3166-1 alpha-2]
         vendor_attributes:
           type: object
+          additionalProperties: true
           description: Additional vendor specific fields for this payment. Data must
             be represented as key-value pairs.
         documents:
@@ -20030,6 +20031,7 @@ components:
               description: Country code conforms to [ISO 3166-1 alpha-2]
         vendor_attributes:
           type: object
+          additionalProperties: true
           description: Additional vendor specific fields for this payment. Data must
             be represented as key-value pairs.
       required:
