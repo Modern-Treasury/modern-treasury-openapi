@@ -18779,6 +18779,38 @@ components:
             receiver's bank statement. This field can only be used for ACH payments
             currently. For ACH, only the first 16 characters of this string will be
             used. Any additional characters will be truncated.
+        originating_party_address:
+          type: object
+          nullable: true
+          description: If present, this address will override the default originating
+            party address used on the payment order. This works across all payment
+            types.
+          properties:
+            line1:
+              type: string
+              nullable: true
+            line2:
+              type: string
+              nullable: true
+            locality:
+              type: string
+              nullable: true
+              description: Locality or City. Use the full city name rather than an
+                abbreviation (e.g. San Francisco).
+            region:
+              type: string
+              nullable: true
+              description: Region or State. This field is free-form; for US states,
+                we recommend a two-letter code (e.g. CA). Full state names are also
+                accepted.
+            postal_code:
+              type: string
+              nullable: true
+              description: The postal code of the address.
+            country:
+              type: string
+              nullable: true
+              description: Country code conforms to [ISO 3166-1 alpha-2]
         ultimate_originating_party_name:
           type: string
           nullable: true
@@ -19024,7 +19056,7 @@ components:
           description: The ID of the batch in which the payment order is included.
             Only populated after the payment order begins processing.
       additionalProperties: false
-      minProperties: 52
+      minProperties: 53
       required:
       - id
       - object
@@ -19054,6 +19086,7 @@ components:
       - foreign_exchange_contract
       - nsf_protected
       - originating_party_name
+      - originating_party_address
       - ultimate_originating_party_name
       - ultimate_originating_party_identifier
       - ultimate_receiving_party_name
@@ -19290,6 +19323,38 @@ components:
             receiver's bank statement. This field can only be used for ACH payments
             currently. For ACH, only the first 16 characters of this string will be
             used. Any additional characters will be truncated.
+        originating_party_address:
+          type: object
+          nullable: true
+          description: If present, this address will override the default originating
+            party address used on the payment order. This works across all payment
+            types.
+          properties:
+            line1:
+              type: string
+              nullable: true
+            line2:
+              type: string
+              nullable: true
+            locality:
+              type: string
+              nullable: true
+              description: Locality or City. Use the full city name rather than an
+                abbreviation (e.g. San Francisco).
+            region:
+              type: string
+              nullable: true
+              description: Region or State. This field is free-form; for US states,
+                we recommend a two-letter code (e.g. CA). Full state names are also
+                accepted.
+            postal_code:
+              type: string
+              nullable: true
+              description: The postal code of the address.
+            country:
+              type: string
+              nullable: true
+              description: Country code conforms to [ISO 3166-1 alpha-2]
         ultimate_originating_party_name:
           type: string
           nullable: true
@@ -19778,6 +19843,38 @@ components:
             receiver's bank statement. This field can only be used for ACH payments
             currently. For ACH, only the first 16 characters of this string will be
             used. Any additional characters will be truncated.
+        originating_party_address:
+          type: object
+          nullable: true
+          description: If present, this address will override the default originating
+            party address used on the payment order. This works across all payment
+            types.
+          properties:
+            line1:
+              type: string
+              nullable: true
+            line2:
+              type: string
+              nullable: true
+            locality:
+              type: string
+              nullable: true
+              description: Locality or City. Use the full city name rather than an
+                abbreviation (e.g. San Francisco).
+            region:
+              type: string
+              nullable: true
+              description: Region or State. This field is free-form; for US states,
+                we recommend a two-letter code (e.g. CA). Full state names are also
+                accepted.
+            postal_code:
+              type: string
+              nullable: true
+              description: The postal code of the address.
+            country:
+              type: string
+              nullable: true
+              description: Country code conforms to [ISO 3166-1 alpha-2]
         ultimate_originating_party_name:
           type: string
           nullable: true
@@ -20259,6 +20356,38 @@ components:
             receiver's bank statement. This field can only be used for ACH payments
             currently. For ACH, only the first 16 characters of this string will be
             used. Any additional characters will be truncated.
+        originating_party_address:
+          type: object
+          nullable: true
+          description: If present, this address will override the default originating
+            party address used on the payment order. This works across all payment
+            types.
+          properties:
+            line1:
+              type: string
+              nullable: true
+            line2:
+              type: string
+              nullable: true
+            locality:
+              type: string
+              nullable: true
+              description: Locality or City. Use the full city name rather than an
+                abbreviation (e.g. San Francisco).
+            region:
+              type: string
+              nullable: true
+              description: Region or State. This field is free-form; for US states,
+                we recommend a two-letter code (e.g. CA). Full state names are also
+                accepted.
+            postal_code:
+              type: string
+              nullable: true
+              description: The postal code of the address.
+            country:
+              type: string
+              nullable: true
+              description: Country code conforms to [ISO 3166-1 alpha-2]
         ultimate_originating_party_name:
           type: string
           nullable: true
