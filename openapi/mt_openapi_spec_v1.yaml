@@ -7188,6 +7188,8 @@ paths:
           - payment_order
           - return
           - reversal
+          - incoming_payment_detail
+          - transaction
         required: false
         description: One of the referenceable types. This must be accompanied by the
           id of the referenceable or will return an error.
@@ -20751,6 +20753,8 @@ components:
           - payment_order
           - reversal
           - return
+          - incoming_payment_detail
+          - transaction
           description: One of the referenceable types. This must be accompanied by
             the id of the referenceable or will return an error.
         reference_number:
