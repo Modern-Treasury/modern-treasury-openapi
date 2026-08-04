@@ -13273,6 +13273,12 @@ components:
           type: string
           nullable: true
           description: An optional user-defined 180 character unique identifier.
+        status:
+          type: string
+          enum:
+          - pending_closure
+          description: Requests closure of the internal account. The resulting status
+            may be `closed` for vendors that close synchronously.
     invoice:
       type: object
       properties:
