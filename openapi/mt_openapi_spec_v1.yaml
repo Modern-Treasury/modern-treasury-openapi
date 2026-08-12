@@ -3643,7 +3643,6 @@ paths:
           - expected_payment
           - transaction
           - transaction_line_item
-          - entity_link
         required: false
         description: One of payment_order, expected_payment, or ledger_transaction.
       - name: action_type
@@ -9584,7 +9583,6 @@ components:
           - expected_payment
           - transaction
           - transaction_line_item
-          - entity_link
           description: One of payment_order, expected_payment, or ledger_transaction.
         status:
           type: string
@@ -9648,7 +9646,6 @@ components:
           - expected_payment
           - transaction
           - transaction_line_item
-          - entity_link
           description: One of payment_order, expected_payment, or ledger_transaction.
         metadata:
           type: object
