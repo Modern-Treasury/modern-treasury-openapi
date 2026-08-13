@@ -3832,7 +3832,6 @@ paths:
           - ledger_transaction
           - expected_payment
           - transaction
-          - entity_link
           - transaction_line_item
           - bulk_error
         required: false
@@ -9768,7 +9767,6 @@ components:
           - ledger_transaction
           - expected_payment
           - transaction
-          - entity_link
           - transaction_line_item
           - bulk_error
           description: The type of the result entity object. For a successful bulk
