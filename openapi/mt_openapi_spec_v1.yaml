@@ -10382,6 +10382,10 @@ components:
                 description: If the external account links to a ledger account in
                   Modern Treasury, the id of the ledger account will be populated
                   here.
+              card_id:
+                type: string
+                format: uuid
+                nullable: true
               verification_status:
                 type: string
                 enum:
@@ -10396,7 +10400,7 @@ components:
                 - plaid
                 nullable: true
             additionalProperties: false
-            minProperties: 19
+            minProperties: 20
           description: The accounts for this counterparty.
         email:
           type: string
@@ -11843,6 +11847,10 @@ components:
           nullable: true
           description: If the external account links to a ledger account in Modern
             Treasury, the id of the ledger account will be populated here.
+        card_id:
+          type: string
+          format: uuid
+          nullable: true
         verification_status:
           type: string
           enum:
@@ -11857,7 +11865,7 @@ components:
           - plaid
           nullable: true
       additionalProperties: false
-      minProperties: 20
+      minProperties: 21
       required:
       - id
       - object
@@ -11877,6 +11885,7 @@ components:
       - party_name
       - contact_details
       - ledger_account_id
+      - card_id
       - verification_status
       - verification_source
     external_account_complete_verification_request:
@@ -18857,6 +18866,10 @@ components:
                 description: If the external account links to a ledger account in
                   Modern Treasury, the id of the ledger account will be populated
                   here.
+              card_id:
+                type: string
+                format: uuid
+                nullable: true
               verification_status:
                 type: string
                 enum:
@@ -18871,7 +18884,7 @@ components:
                 - plaid
                 nullable: true
             additionalProperties: false
-            minProperties: 19
+            minProperties: 20
           - "$ref": "#/components/schemas/internal_account"
           description: The receiving account. Can be an `external_account` or `internal_account`.
           nullable: true
@@ -20653,7 +20666,6 @@ components:
           - cross_river_transaction_id
           - currencycloud_conversion_id
           - currencycloud_payment_id
-          - dc_bank_transaction_id
           - eft_trace_number
           - evolve_core_batch
           - evolve_core_file_key
@@ -20793,7 +20805,6 @@ components:
           - cross_river_transaction_id
           - currencycloud_conversion_id
           - currencycloud_payment_id
-          - dc_bank_transaction_id
           - eft_trace_number
           - evolve_core_batch
           - evolve_core_file_key
