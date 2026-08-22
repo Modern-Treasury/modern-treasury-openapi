@@ -2464,6 +2464,73 @@ paths:
             application/json:
               schema:
                 "$ref": "#/components/schemas/error_message"
+  "/api/cases":
+    get:
+      summary: list cases
+      tags:
+      - Case
+      operationId: listCases
+      description: Get a list of cases.
+      security:
+      - basic_auth: []
+      parameters:
+      - name: after_cursor
+        in: query
+        schema:
+          type: string
+          nullable: true
+        required: false
+      - name: per_page
+        in: query
+        required: false
+        schema:
+          type: integer
+      - name: status
+        in: query
+        schema:
+          type: string
+          enum:
+          - open
+          - resolved
+        description: The status of the case.
+        required: false
+      - name: subject_id
+        in: query
+        schema:
+          type: string
+          format: uuid
+        description: The ID of the object the case is about.
+        required: false
+      - name: subject_type
+        in: query
+        schema:
+          type: string
+          enum:
+          - legal_entity
+        description: The type of the object the case is about.
+        required: false
+      responses:
+        '200':
+          description: successful
+          headers:
+            X-After-Cursor:
+              schema:
+                type: string
+                nullable: true
+              required: false
+              description: The cursor for the next page. Including this in a call
+                as `after_cursor` will return the next page.
+            X-Per-Page:
+              schema:
+                type: integer
+                nullable: true
+              description: The current `per_page`.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  "$ref": "#/components/schemas/case"
   "/api/cases/{id}":
     parameters:
     - name: id
@@ -19158,6 +19225,11 @@ components:
           - internal_account
           - virtual_account
           nullable: true
+        originating_account_type:
+          type: string
+          enum:
+          - internal_account
+          - virtual_account
         counterparty_id:
           type: string
           format: uuid
@@ -19213,7 +19285,7 @@ components:
           description: The ID of the batch in which the payment order is included.
             Only populated after the payment order begins processing.
       additionalProperties: false
-      minProperties: 53
+      minProperties: 54
       required:
       - id
       - object
@@ -19258,6 +19330,7 @@ components:
       - ultimate_originating_account
       - ultimate_originating_account_id
       - ultimate_originating_account_type
+      - originating_account_type
       - counterparty_id
       - transaction_ids
       - ledger_transaction_id
