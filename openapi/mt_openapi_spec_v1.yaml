@@ -10082,6 +10082,7 @@ components:
           - onboarding_business_registry_verification_failure
           - onboarding_database_failure
           - onboarding_proof_of_address_failure
+          - onboarding_ssn_check_failure
           - onboarding_tin_check_failure
           description: The category of the requested action.
         field:
