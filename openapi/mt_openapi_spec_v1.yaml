@@ -8505,6 +8505,54 @@ paths:
               schema:
                 "$ref": "#/components/schemas/error_message"
   "/api/virtual_account_settings":
+    get:
+      summary: list virtual_account_settings
+      tags:
+      - VirtualAccountSetting
+      operationId: listVirtualAccountSettings
+      security:
+      - basic_auth: []
+      description: List virtual account settings.
+      parameters:
+      - name: after_cursor
+        in: query
+        schema:
+          type: string
+          nullable: true
+        required: false
+      - name: per_page
+        in: query
+        required: false
+        schema:
+          type: integer
+      - name: external_id
+        in: query
+        schema:
+          type: string
+        required: false
+        description: A user-defined identifier for the virtual account setting.
+      responses:
+        '200':
+          description: successful
+          headers:
+            X-After-Cursor:
+              schema:
+                type: string
+                nullable: true
+              required: false
+              description: The cursor for the next page. Including this in a call
+                as `after_cursor` will return the next page.
+            X-Per-Page:
+              schema:
+                type: integer
+                nullable: true
+              description: The current `per_page`.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  "$ref": "#/components/schemas/virtual_account_setting"
     post:
       summary: create virtual_account_setting
       tags:
