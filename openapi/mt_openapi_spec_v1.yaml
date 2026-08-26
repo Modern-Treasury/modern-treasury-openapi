@@ -8504,6 +8504,46 @@ paths:
             application/json:
               schema:
                 "$ref": "#/components/schemas/error_message"
+  "/api/virtual_account_settings":
+    post:
+      summary: create virtual_account_setting
+      tags:
+      - VirtualAccountSetting
+      operationId: createVirtualAccountSetting
+      security:
+      - basic_auth: []
+      description: Create a virtual account setting.
+      parameters: []
+      responses:
+        '201':
+          description: successful
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/virtual_account_setting"
+        '401':
+          description: unauthorized
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/error_message"
+        '422':
+          description: unsuccessful
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/error_message"
+        '409':
+          description: conflict
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/error_message"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              "$ref": "#/components/schemas/virtual_account_setting_create_request"
   "/api/virtual_accounts":
     get:
       summary: list virtual_accounts
@@ -18997,10 +19037,9 @@ components:
           type: string
           nullable: true
           description: If present, this will replace your default company name on
-            receiver's bank statement. For ACH, only the first 16 characters of this
-            string will be used. This must be a name the account holder legally operates
-            under, such as a DBA. Do not use it to originate on behalf of another
-            person or business, including an end customer.
+            receiver's bank statement. This field can only be used for ACH payments
+            currently. For ACH, only the first 16 characters of this string will be
+            used. Any additional characters will be truncated.
         originating_party_address:
           type: object
           nullable: true
@@ -19552,10 +19591,9 @@ components:
           type: string
           nullable: true
           description: If present, this will replace your default company name on
-            receiver's bank statement. For ACH, only the first 16 characters of this
-            string will be used. This must be a name the account holder legally operates
-            under, such as a DBA. Do not use it to originate on behalf of another
-            person or business, including an end customer.
+            receiver's bank statement. This field can only be used for ACH payments
+            currently. For ACH, only the first 16 characters of this string will be
+            used. Any additional characters will be truncated.
         originating_party_address:
           type: object
           nullable: true
@@ -20073,10 +20111,9 @@ components:
           type: string
           nullable: true
           description: If present, this will replace your default company name on
-            receiver's bank statement. For ACH, only the first 16 characters of this
-            string will be used. This must be a name the account holder legally operates
-            under, such as a DBA. Do not use it to originate on behalf of another
-            person or business, including an end customer.
+            receiver's bank statement. This field can only be used for ACH payments
+            currently. For ACH, only the first 16 characters of this string will be
+            used. Any additional characters will be truncated.
         originating_party_address:
           type: object
           nullable: true
@@ -20587,10 +20624,9 @@ components:
           type: string
           nullable: true
           description: If present, this will replace your default company name on
-            receiver's bank statement. For ACH, only the first 16 characters of this
-            string will be used. This must be a name the account holder legally operates
-            under, such as a DBA. Do not use it to originate on behalf of another
-            person or business, including an end customer.
+            receiver's bank statement. This field can only be used for ACH payments
+            currently. For ACH, only the first 16 characters of this string will be
+            used. Any additional characters will be truncated.
         originating_party_address:
           type: object
           nullable: true
@@ -22776,6 +22812,75 @@ components:
           type: object
           additionalProperties:
             type: string
+    virtual_account_setting:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        object:
+          type: string
+        live_mode:
+          type: boolean
+          description: This field will be true if this object exists in the live environment
+            or false if it exists in the test environment.
+        created_at:
+          type: string
+          format: date-time
+        updated_at:
+          type: string
+          format: date-time
+        external_id:
+          type: string
+          nullable: true
+          description: A user-defined identifier for the virtual account setting.
+      additionalProperties: false
+      minProperties: 6
+      required:
+      - id
+      - object
+      - live_mode
+      - created_at
+      - updated_at
+      - external_id
+    virtual_account_setting_create_request:
+      type: object
+      properties:
+        internal_account_id:
+          type: string
+          format: uuid
+          description: The ID of the internal account for the virtual account setting.
+        allocation_type:
+          type: string
+          description: The method used to allocate virtual account numbers.
+        allocation_identifier:
+          type: string
+          nullable: true
+          description: The prefix, suffix, or bank-assigned identifier for the virtual
+            account numbers.
+        allocation_length:
+          type: integer
+          nullable: true
+          description: The total length of generated virtual account numbers.
+        generated_allocation_identifier_length:
+          type: integer
+          nullable: true
+          description: The length of a generated virtual account setting prefix.
+        allocation_range_start:
+          type: string
+          nullable: true
+          description: The inclusive start of the virtual account number range.
+        allocation_range_end:
+          type: string
+          nullable: true
+          description: The inclusive end of the virtual account number range.
+        external_id:
+          type: string
+          nullable: true
+          description: A user-defined identifier for the virtual account setting.
+      required:
+      - internal_account_id
+      - allocation_type
     reconciliation_rule_variable:
       type: object
       properties:
