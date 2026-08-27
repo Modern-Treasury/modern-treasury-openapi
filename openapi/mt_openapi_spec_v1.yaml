@@ -9793,7 +9793,7 @@ components:
             `evolve`, `goldman_sachs`, `iso20022`, `jpmc`, `mx`, `silvergate`, `swift`,
             or `us_bank`.
       additionalProperties: false
-      minProperties: 4
+      minProperties: 3
       required:
       - balance_type
       - vendor_code
