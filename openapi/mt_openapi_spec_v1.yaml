@@ -10392,6 +10392,13 @@ components:
               - trust
               nullable: true
               description: The business's legal structure.
+            business_designation:
+              type: string
+              enum:
+              - exempt_financial_institution
+              - non_operating_business
+              nullable: true
+              description: Legal designation associated with the business.
             phone_numbers:
               type: array
               items:
@@ -16635,6 +16642,13 @@ components:
           - trust
           nullable: true
           description: The business's legal structure.
+        business_designation:
+          type: string
+          enum:
+          - exempt_financial_institution
+          - non_operating_business
+          nullable: true
+          description: Legal designation associated with the business.
         phone_numbers:
           type: array
           items:
@@ -16780,7 +16794,7 @@ components:
             "$ref": "#/components/schemas/legal_entity_association"
           nullable: true
       additionalProperties: false
-      minProperties: 48
+      minProperties: 49
       required:
       - id
       - object
@@ -16804,6 +16818,7 @@ components:
       - business_name
       - doing_business_as_names
       - legal_structure
+      - business_designation
       - phone_numbers
       - email
       - website
@@ -16910,6 +16925,13 @@ components:
           - trust
           nullable: true
           description: The business's legal structure.
+        business_designation:
+          type: string
+          enum:
+          - exempt_financial_institution
+          - non_operating_business
+          nullable: true
+          description: Legal designation associated with the business.
         phone_numbers:
           type: array
           items:
@@ -17086,7 +17108,7 @@ components:
             one is available. Pass in a value of null to prevent the connection from
             being associated with the legal entity.
       additionalProperties: false
-      minProperties: 42
+      minProperties: 43
     legal_entity:
       type: object
       properties:
@@ -17196,6 +17218,13 @@ components:
           - trust
           nullable: true
           description: The business's legal structure.
+        business_designation:
+          type: string
+          enum:
+          - exempt_financial_institution
+          - non_operating_business
+          nullable: true
+          description: Legal designation associated with the business.
         phone_numbers:
           type: array
           items:
@@ -17341,7 +17370,7 @@ components:
             "$ref": "#/components/schemas/legal_entity_association"
           nullable: true
       additionalProperties: false
-      minProperties: 47
+      minProperties: 48
       required:
       - id
       - object
@@ -17365,6 +17394,7 @@ components:
       - business_name
       - doing_business_as_names
       - legal_structure
+      - business_designation
       - phone_numbers
       - email
       - website
@@ -17470,6 +17500,13 @@ components:
           - trust
           nullable: true
           description: The business's legal structure.
+        business_designation:
+          type: string
+          enum:
+          - exempt_financial_institution
+          - non_operating_business
+          nullable: true
+          description: Legal designation associated with the business.
         phone_numbers:
           type: array
           items:
@@ -17721,6 +17758,13 @@ components:
           - trust
           nullable: true
           description: The business's legal structure.
+        business_designation:
+          type: string
+          enum:
+          - exempt_financial_institution
+          - non_operating_business
+          nullable: true
+          description: Legal designation associated with the business.
         phone_numbers:
           type: array
           items:
