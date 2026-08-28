@@ -22807,6 +22807,11 @@ components:
           format: uuid
           description: The ID of the internal account that this virtual account is
             associated with.
+        virtual_account_setting_id:
+          type: string
+          format: uuid
+          description: The ID of the virtual account setting used to allocate this
+            virtual account.
         account_details:
           type: array
           items:
