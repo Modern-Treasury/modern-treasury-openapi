@@ -18115,12 +18115,14 @@ components:
           nullable: true
           description: The child entity's ownership percentage iff they are a beneficial
             owner.
+        child_legal_entity:
+          "$ref": "#/components/schemas/child_legal_entity_create"
+          description: The child legal entity.
         child_legal_entity_id:
           type: string
           description: The ID of the child legal entity.
       required:
       - parent_legal_entity_id
-      - child_legal_entity_id
       - relationship_types
     legal_entity_association_inline_create_request:
       type: object
