@@ -2787,6 +2787,70 @@ paths:
                 type: array
                 items:
                   "$ref": "#/components/schemas/connection"
+  "/api/identifications":
+    post:
+      summary: create identification
+      tags:
+      - Identification
+      operationId: createIdentification
+      description: Create an Identification for a Legal Entity.
+      security:
+      - basic_auth: []
+      parameters:
+      - name: Idempotency-Key
+        in: header
+        required: false
+        description: This key should be something unique, preferably something like
+          an UUID.
+        schema:
+          type: string
+      responses:
+        '201':
+          description: successful
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/identification"
+        '422':
+          description: unsuccessful
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/error_message"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              "$ref": "#/components/schemas/standalone_identification_create_request"
+  "/api/identifications/{id}":
+    parameters:
+    - name: id
+      in: path
+      description: The id of an existing identification.
+      required: true
+      schema:
+        type: string
+    get:
+      summary: get identification
+      tags:
+      - Identification
+      operationId: getIdentification
+      description: Get an existing Identification.
+      security:
+      - basic_auth: []
+      responses:
+        '200':
+          description: successful
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/identification"
+        '404':
+          description: not found
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/error_message"
   "/api/legal_entities":
     get:
       summary: list legal_entities
@@ -13072,6 +13136,165 @@ components:
           nullable: true
           description: The region in which the identifcation was issued.
       required:
+      - id_number
+      - id_type
+    standalone_identification_create_request:
+      type: object
+      properties:
+        legal_entity_id:
+          type: string
+          description: The ID of the Legal Entity the identification belongs to.
+        id_number:
+          type: string
+          description: The ID number of identification document.
+        documents:
+          type: array
+          description: A list of documents to attach to the identification.
+          items:
+            type: object
+            properties:
+              document_type:
+                type: string
+                enum:
+                - articles_of_incorporation
+                - certificate_of_good_standing
+                - ein_letter
+                - generic
+                - identification_back
+                - identification_front
+                - proof_of_address
+                description: A category given to the document, can be `null`.
+              file_data:
+                type: string
+                description: Base64-encoded file content for the document.
+              filename:
+                type: string
+                description: The original filename of the document.
+            required:
+            - document_type
+            - file_data
+        id_type:
+          type: string
+          enum:
+          - ar_cuil
+          - ar_cuit
+          - at_atin
+          - at_vat
+          - au_abn
+          - au_tfn
+          - be_ent
+          - be_nrn
+          - br_cnpj
+          - br_cpf
+          - ca_bn
+          - ca_sin
+          - ch_ahv
+          - ch_uid
+          - cl_run
+          - cl_rut
+          - co_cedulas
+          - co_nit
+          - cy_tin
+          - cz_ico
+          - cz_rc
+          - de_stid
+          - de_stnr
+          - de_vat
+          - dk_cpr
+          - dk_cvr
+          - drivers_license
+          - ee_ik
+          - ee_rk
+          - es_nie
+          - es_nif
+          - fi_hetu
+          - fi_ytj
+          - fr_nif
+          - fr_siren
+          - fr_vat
+          - gb_nino
+          - gb_utr
+          - gb_vat
+          - generic_international
+          - gr_vat
+          - hk_brn
+          - hk_hkid
+          - hn_id
+          - hn_rtn
+          - hr_oib
+          - hu_adj
+          - hu_anum
+          - ie_pps
+          - ie_trn
+          - in_lei
+          - is_knt
+          - it_cf
+          - it_piva
+          - jp_hb
+          - jp_mn
+          - kr_brn
+          - kr_crn
+          - kr_rrn
+          - li_peid
+          - lt_ak
+          - lt_jak
+          - lu_mtc
+          - lu_vat
+          - lv_pk
+          - lv_rn
+          - mt_tin
+          - mt_vat
+          - mx_curp
+          - mx_ine
+          - mx_rfc
+          - national_id
+          - nl_bsn
+          - nl_btw
+          - nl_rsin
+          - no_fdn
+          - no_mva
+          - no_orgnr
+          - nz_ird
+          - passport
+          - pl_nip
+          - pl_pesel
+          - pt_nif
+          - ro_cnp
+          - ro_cui
+          - sa_tin
+          - sa_vat
+          - se_orgnr
+          - se_pnmr
+          - sg_fin
+          - sg_nric
+          - sg_uen
+          - si_dav
+          - si_tin
+          - sk_ico
+          - sk_rc
+          - us_ein
+          - us_itin
+          - us_ssn
+          - uy_rut
+          - vn_tin
+          description: The type of ID number.
+        expiration_date:
+          type: string
+          format: date
+          nullable: true
+          description: The date when the Identification is no longer considered valid
+            by the issuing authority.
+        issuing_country:
+          type: string
+          nullable: true
+          description: The ISO 3166-1 alpha-2 country code of the country that issued
+            the identification
+        issuing_region:
+          type: string
+          nullable: true
+          description: The region in which the identifcation was issued.
+      required:
+      - legal_entity_id
       - id_number
       - id_type
     incoming_payment_detail_update_request:
