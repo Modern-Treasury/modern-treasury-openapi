@@ -13168,6 +13168,9 @@ components:
     identification_update_request:
       type: object
       properties:
+        id_number:
+          type: string
+          description: The ID number of identification document.
         id_type:
           type: string
           enum:
