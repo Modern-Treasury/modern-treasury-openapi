@@ -9532,8 +9532,9 @@ components:
           - polygon_address
           - sg_number
           - solana_address
-          description: One of `iban`, `clabe`, or `other`. Use `other` if the bank
-            account number is in a generic format.
+          description: The type of the account number. For wallet addresses, use the
+            chain-specific type (e.g. `ethereum_address`). Use `other` if the account
+            number is in a generic format.
         account_number_safe:
           type: string
           description: The last 4 digits of the account_number.
@@ -9572,8 +9573,9 @@ components:
           - polygon_address
           - sg_number
           - solana_address
-          description: One of `iban`, `clabe`, or `other`. Use `other` if the bank
-            account number is in a generic format.
+          description: The type of the account number. For wallet addresses, use the
+            chain-specific type (e.g. `ethereum_address`). Use `other` if the account
+            number is in a generic format.
       required:
       - account_number
     address:
