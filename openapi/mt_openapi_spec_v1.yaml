@@ -8716,6 +8716,12 @@ paths:
           type: string
           format: uuid
         required: false
+      - name: external_id
+        in: query
+        schema:
+          type: string
+        required: false
+        description: Only return virtual accounts with this external ID.
       - "$ref": "#/components/parameters/metadata_query"
       responses:
         '200':
@@ -8769,6 +8775,12 @@ paths:
                 "$ref": "#/components/schemas/error_message"
         '422':
           description: unsuccessful
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/error_message"
+        '409':
+          description: conflict
           content:
             application/json:
               schema:
@@ -23140,6 +23152,10 @@ components:
           type: string
           description: An optional free-form description for internal use.
           nullable: true
+        external_id:
+          type: string
+          nullable: true
+          description: A user-defined identifier for the virtual account.
         counterparty_id:
           type: string
           format: uuid
@@ -23193,7 +23209,7 @@ components:
             foo: bar
             modern: treasury
       additionalProperties: false
-      minProperties: 16
+      minProperties: 17
       required:
       - id
       - object
@@ -23203,6 +23219,7 @@ components:
       - discarded_at
       - name
       - description
+      - external_id
       - counterparty_id
       - internal_account_id
       - account_details
@@ -23220,6 +23237,10 @@ components:
         description:
           type: string
           description: An optional description for internal use.
+        external_id:
+          type: string
+          nullable: true
+          description: A user-defined identifier for the virtual account.
         counterparty_id:
           type: string
           format: uuid
