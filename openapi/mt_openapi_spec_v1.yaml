@@ -10552,7 +10552,7 @@ components:
               type: array
               items:
                 type: string
-              description: A list of primary social media URLs for the business.
+              description: A list of the entity's primary social media URLs.
             listed_exchange:
               type: string
               nullable: true
@@ -17090,7 +17090,7 @@ components:
           type: array
           items:
             type: string
-          description: A list of primary social media URLs for the business.
+          description: A list of the entity's primary social media URLs.
         listed_exchange:
           type: string
           nullable: true
@@ -17374,7 +17374,7 @@ components:
           type: array
           items:
             type: string
-          description: A list of primary social media URLs for the business.
+          description: A list of the entity's primary social media URLs.
         listed_exchange:
           type: string
           nullable: true
@@ -17667,7 +17667,7 @@ components:
           type: array
           items:
             type: string
-          description: A list of primary social media URLs for the business.
+          description: A list of the entity's primary social media URLs.
         listed_exchange:
           type: string
           nullable: true
@@ -17949,7 +17949,7 @@ components:
           type: array
           items:
             type: string
-          description: A list of primary social media URLs for the business.
+          description: A list of the entity's primary social media URLs.
         listed_exchange:
           type: string
           nullable: true
@@ -18207,7 +18207,7 @@ components:
           type: array
           items:
             type: string
-          description: A list of primary social media URLs for the business.
+          description: A list of the entity's primary social media URLs.
         listed_exchange:
           type: string
           nullable: true
