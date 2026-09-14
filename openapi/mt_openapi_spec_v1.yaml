@@ -4457,18 +4457,16 @@ paths:
           - connection
           - counterparty
           - expected_payment
-          - external_account
           - identification
           - incoming_payment_detail
           - internal_account
           - legal_entity
-          - organization
           - payment_order
           - return
           - transaction
-        description: The type of the associated object. Currently can be one of `payment_order`,
-          `transaction`, `expected_payment`, `return`, `legal_entity`, `counterparty`,
-          `organization`, `case`, `internal_account`, `decision`, or `external_account`.
+        description: The type of the associated object. Currently can be one of `connection`,
+          `counterparty`, `expected_payment`, `identification`, `incoming_payment_detail`,
+          `internal_account`, `legal_entity`, `payment_order`, `return`, or `transaction`.
         required: false
       - name: after_cursor
         in: query
@@ -4574,18 +4572,16 @@ paths:
           - connections
           - counterparties
           - expected_payments
-          - external_accounts
           - identifications
           - incoming_payment_details
           - internal_accounts
           - legal_entities
-          - organizations
           - payment_orders
           - returns
           - transactions
-        description: The type of the associated object. Currently can be one of `payment_order`,
-          `transaction`, `expected_payment`, `return`, `legal_entity`, `counterparty`,
-          `organization`, `case`, `internal_account`, `decision`, or `external_account`.
+        description: The type of the associated object. Currently can be one of `connection`,
+          `counterparty`, `expected_payment`, `identification`, `incoming_payment_detail`,
+          `internal_account`, `legal_entity`, `payment_order`, `return`, or `transaction`.
         required: true
       - name: document_type
         in: query
@@ -4650,18 +4646,16 @@ paths:
           - connections
           - counterparties
           - expected_payments
-          - external_accounts
           - identifications
           - incoming_payment_details
           - internal_accounts
           - legal_entities
-          - organizations
           - payment_orders
           - returns
           - transactions
-        description: The type of the associated object. Currently can be one of `payment_order`,
-          `transaction`, `expected_payment`, `return`, `legal_entity`, `counterparty`,
-          `organization`, `case`, `internal_account`, `decision`, or `external_account`.
+        description: The type of the associated object. Currently can be one of `connection`,
+          `counterparty`, `expected_payment`, `identification`, `incoming_payment_detail`,
+          `internal_account`, `legal_entity`, `payment_order`, `return`, or `transaction`.
         required: true
       - name: Idempotency-Key
         in: header
@@ -4711,18 +4705,16 @@ paths:
         - connections
         - counterparties
         - expected_payments
-        - external_accounts
         - identifications
         - incoming_payment_details
         - internal_accounts
         - legal_entities
-        - organizations
         - payment_orders
         - returns
         - transactions
-      description: The type of the associated object. Currently can be one of `payment_order`,
-        `transaction`, `expected_payment`, `return`, `legal_entity`, `counterparty`,
-        `organization`, `case`, `internal_account`, `decision`, or `external_account`.
+      description: The type of the associated object. Currently can be one of `connection`,
+        `counterparty`, `expected_payment`, `identification`, `incoming_payment_detail`,
+        `internal_account`, `legal_entity`, `payment_order`, `return`, or `transaction`.
       required: true
     - name: id
       in: path
@@ -4799,18 +4791,16 @@ paths:
         - connections
         - counterparties
         - expected_payments
-        - external_accounts
         - identifications
         - incoming_payment_details
         - internal_accounts
         - legal_entities
-        - organizations
         - payment_orders
         - returns
         - transactions
-      description: The type of the associated object. Currently can be one of `payment_order`,
-        `transaction`, `expected_payment`, `return`, `legal_entity`, `counterparty`,
-        `organization`, `case`, `internal_account`, `decision`, or `external_account`.
+      description: The type of the associated object. Currently can be one of `connection`,
+        `counterparty`, `expected_payment`, `identification`, `incoming_payment_detail`,
+        `internal_account`, `legal_entity`, `payment_order`, `return`, or `transaction`.
       required: true
     - name: id
       in: path
@@ -11518,19 +11508,16 @@ components:
           - connection
           - counterparty
           - expected_payment
-          - external_account
           - identification
           - incoming_payment_detail
           - internal_account
           - legal_entity
-          - organization
           - payment_order
           - return
           - transaction
           description: The type of the associated object. Currently can be one of
-            `payment_order`, `transaction`, `expected_payment`, `return`, `legal_entity`,
-            `counterparty`, `organization`, `case`, `internal_account`, `decision`,
-            or `external_account`.
+            `connection`, `counterparty`, `expected_payment`, `identification`, `incoming_payment_detail`,
+            `internal_account`, `legal_entity`, `payment_order`, `return`, or `transaction`.
           nullable: true
         file:
           type: object
@@ -11571,12 +11558,10 @@ components:
           - connection
           - counterparty
           - expected_payment
-          - external_account
           - identification
           - incoming_payment_detail
           - internal_account
           - legal_entity
-          - organization
           - payment_order
           - return
           - transaction
