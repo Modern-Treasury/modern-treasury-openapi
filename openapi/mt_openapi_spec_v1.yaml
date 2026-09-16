@@ -9520,6 +9520,7 @@ components:
         account_number_type:
           type: string
           enum:
+          - arbitrum_address
           - au_number
           - base_address
           - card_token
@@ -9561,6 +9562,7 @@ components:
         account_number_type:
           type: string
           enum:
+          - arbitrum_address
           - au_number
           - base_address
           - card_token
@@ -11059,6 +11061,7 @@ components:
                     account_number_type:
                       type: string
                       enum:
+                      - arbitrum_address
                       - au_number
                       - base_address
                       - card_token
@@ -12409,6 +12412,7 @@ components:
               account_number_type:
                 type: string
                 enum:
+                - arbitrum_address
                 - au_number
                 - base_address
                 - card_token
@@ -13609,6 +13613,7 @@ components:
         originating_account_number_type:
           type: string
           enum:
+          - arbitrum_address
           - au_number
           - base_address
           - card_token
@@ -13986,6 +13991,7 @@ components:
           items:
             type: string
             enum:
+            - arbitrum_address
             - base_address
             - ethereum_address
             - polygon_address
@@ -19348,6 +19354,7 @@ components:
           - PPD
           - TEL
           - WEB
+          - arbitrum
           - au_becs
           - bacs
           - base
@@ -19900,6 +19907,7 @@ components:
           - PPD
           - TEL
           - WEB
+          - arbitrum
           - au_becs
           - bacs
           - base
@@ -20188,6 +20196,7 @@ components:
                   account_number_type:
                     type: string
                     enum:
+                    - arbitrum_address
                     - au_number
                     - base_address
                     - card_token
@@ -20419,6 +20428,7 @@ components:
           - PPD
           - TEL
           - WEB
+          - arbitrum
           - au_becs
           - bacs
           - base
@@ -20707,6 +20717,7 @@ components:
                   account_number_type:
                     type: string
                     enum:
+                    - arbitrum_address
                     - au_number
                     - base_address
                     - card_token
@@ -20931,6 +20942,7 @@ components:
           - PPD
           - TEL
           - WEB
+          - arbitrum
           - au_becs
           - bacs
           - base
@@ -21256,6 +21268,7 @@ components:
                   account_number_type:
                     type: string
                     enum:
+                    - arbitrum_address
                     - au_number
                     - base_address
                     - card_token
