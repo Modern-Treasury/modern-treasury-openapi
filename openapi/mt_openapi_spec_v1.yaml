@@ -17839,7 +17839,6 @@ components:
       - line1
       - locality
       - region
-      - postal_code
       - country
     legal_entity_association:
       type: object
