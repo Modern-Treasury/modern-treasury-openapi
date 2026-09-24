@@ -12356,7 +12356,7 @@ components:
             Treasury, or null if it is unreconciled.
         reconciliation_rule_variables:
           type: array
-          nullable: true
+          nullable: false
           items:
             "$ref": "#/components/schemas/reconciliation_rule_variable"
           description: An array of reconciliation rule variables for this payment.
@@ -12580,7 +12580,7 @@ components:
           description: The reconciliation groups you have for this payment.
         reconciliation_rule_variables:
           type: array
-          nullable: true
+          nullable: false
           items:
             "$ref": "#/components/schemas/reconciliation_rule_variable"
           description: An array of reconciliation rule variables for this payment.
@@ -12730,7 +12730,7 @@ components:
           description: The reconciliation groups you have for this payment.
         reconciliation_rule_variables:
           type: array
-          nullable: true
+          nullable: false
           items:
             "$ref": "#/components/schemas/reconciliation_rule_variable"
           description: An array of reconciliation rule variables for this payment.
