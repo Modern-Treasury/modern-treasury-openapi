@@ -3815,6 +3815,7 @@ paths:
               type: string
           type: object
         style: deepObject
+        explode: true
         required: false
         description: For example, if you want the balances as of a particular time
           (ISO8601), the encoded query string would be `balances%5Beffective_at%5D=2000-12-31T12:00:00Z`.
@@ -3964,6 +3965,7 @@ paths:
               type: string
           type: object
         style: deepObject
+        explode: true
         required: false
         description: For example, if you want the balances as of a particular time
           (ISO8601), the encoded query string would be `balances%5Beffective_at%5D=2000-12-31T12:00:00Z`.
@@ -4233,6 +4235,7 @@ paths:
             type: string
           type: object
         style: deepObject
+        explode: true
         required: false
         description: Use `gt` (>), `gte` (>=), `lt` (<), `lte` (<=), or `eq` (=) to
           filter by the created at timestamp. For example, for all times after Jan
@@ -4273,6 +4276,7 @@ paths:
             type: string
           type: object
         style: deepObject
+        explode: true
         required: false
         description: Use `gt` (>), `gte` (>=), `lt` (<), `lte` (<=), or `eq` (=) to
           filter by the updated at timestamp. For example, for all times after Jan
@@ -4586,6 +4590,7 @@ paths:
               type: integer
           type: object
         style: deepObject
+        explode: true
         required: false
         description: Use `gt` (>), `gte` (>=), `lt` (<), `lte` (<=), `eq` (=), or
           `not_eq` (!=) to filter by balance amount.
@@ -4608,6 +4613,7 @@ paths:
               type: string
           type: object
         style: deepObject
+        explode: true
         required: false
         description: Use `balances[effective_at_lower_bound]` and `balances[effective_at_upper_bound]`
           to get the balances change between the two timestamps. The lower bound is
@@ -4622,6 +4628,7 @@ paths:
             type: string
           type: object
         style: deepObject
+        explode: true
         required: false
         description: Use `gt` (>), `gte` (>=), `lt` (<), `lte` (<=), or `eq` (=) to
           filter by the created at timestamp. For example, for all times after Jan
@@ -4674,6 +4681,7 @@ paths:
               type: integer
           type: object
         style: deepObject
+        explode: true
         required: false
         description: Use `gt` (>), `gte` (>=), `lt` (<), `lte` (<=), `eq` (=), or
           `not_eq` (!=) to filter by balance amount.
@@ -4701,6 +4709,7 @@ paths:
               type: integer
           type: object
         style: deepObject
+        explode: true
         required: false
         description: Use `gt` (>), `gte` (>=), `lt` (<), `lte` (<=), `eq` (=), or
           `not_eq` (!=) to filter by balance amount.
@@ -4712,6 +4721,7 @@ paths:
             type: string
           type: object
         style: deepObject
+        explode: true
         required: false
         description: Use `gt` (>), `gte` (>=), `lt` (<), `lte` (<=), or `eq` (=) to
           filter by the updated at timestamp. For example, for all times after Jan
@@ -4838,6 +4848,7 @@ paths:
               type: string
           type: object
         style: deepObject
+        explode: true
         required: false
         description: Use `balances[effective_at_lower_bound]` and `balances[effective_at_upper_bound]`
           to get the balances change between the two timestamps. The lower bound is
@@ -4968,6 +4979,7 @@ paths:
               type: integer
           type: object
         style: deepObject
+        explode: true
         required: false
         description: Use `gt` (>), `gte` (>=), `lt` (<), `lte` (<=), or `eq` (=) to
           filter by amount.
@@ -4997,6 +5009,7 @@ paths:
             type: string
           type: object
         style: deepObject
+        explode: true
         required: false
         description: Use `gt` (>), `gte` (>=), `lt` (<), `lte` (<=), or `eq` (=) to
           filter by the transaction's effective time. Format ISO8601
@@ -5008,6 +5021,7 @@ paths:
             type: string
           type: object
         style: deepObject
+        explode: true
         required: false
         description: Use `gt` (>), `gte` (>=), `lt` (<), `lte` (<=), or `eq` (=) to
           filter by the transaction's effective date. Format YYYY-MM-DD
@@ -5032,6 +5046,7 @@ paths:
             type: integer
           type: object
         style: deepObject
+        explode: true
         required: false
         description: Use `gt` (>), `gte` (>=), `lt` (<), `lte` (<=), or `eq` (=) to
           filter by the lock_version of a ledger account. For example, for all entries
@@ -5079,6 +5094,7 @@ paths:
               type: string
           type: object
         style: deepObject
+        explode: true
         required: false
         description: Order by `created_at` or `effective_at` in `asc` or `desc` order.
           For example, to order by `effective_at asc`, use `order_by%5Beffective_at%5D=asc`.
@@ -5124,6 +5140,7 @@ paths:
             - archived
             type: string
           type: array
+        explode: true
         required: false
         description: Get all ledger entries that match the status specified. One of
           `pending`, `posted`, or `archived`. For multiple statuses, use `status[]=pending&status[]=posted`.
@@ -5135,6 +5152,7 @@ paths:
             type: string
           type: object
         style: deepObject
+        explode: true
         required: false
         description: Use `gt` (>), `gte` (>=), `lt` (<), `lte` (<=), or `eq` (=) to
           filter by the posted at timestamp. For example, for all times after Jan
@@ -5258,6 +5276,7 @@ paths:
             type: string
           type: object
         style: deepObject
+        explode: true
         required: false
         description: Use `gt` (>), `gte` (>=), `lt` (<), `lte` (<=), or `eq` (=) to
           filter by the created_at timestamp. For example, for all dates after Jan
@@ -5290,6 +5309,7 @@ paths:
             type: integer
           type: object
         style: deepObject
+        explode: true
         required: false
         description: Use `gt` (>), `gte` (>=), `lt` (<), `lte` (<=), or `eq` (=) to
           filter by the version. For example, for all versions after 2, use version%5Bgt%5D=2.
@@ -5353,6 +5373,7 @@ paths:
               type: integer
           type: object
         style: deepObject
+        explode: true
         required: false
         description: Use `gt` (>), `gte` (>=), `lt` (<), `lte` (<=), or `eq` (=) to
           filter by amount.
@@ -5364,6 +5385,7 @@ paths:
             type: string
           type: object
         style: deepObject
+        explode: true
         required: false
         description: Use "gt" (>), "gte" (>=), "lt" (<), "lte" (<=), or "eq" (=) to
           filter by effective at. For example, for all transactions after Jan 1 2000,
@@ -5376,6 +5398,7 @@ paths:
             type: string
           type: object
         style: deepObject
+        explode: true
         required: false
         description: Use `gt` (>), `gte` (>=), `lt` (<), `lte` (<=), or `eq` (=) to
           filter by effective date. For example, for all dates after Jan 1 2000, use
@@ -5443,6 +5466,7 @@ paths:
               type: string
           type: object
         style: deepObject
+        explode: true
         required: false
         description: Order by `created_at` or `effective_at` in `asc` or `desc` order.
           For example, to order by `effective_at asc`, use `order_by%5Beffective_at%5D=asc`.
@@ -5466,6 +5490,7 @@ paths:
             type: string
           type: object
         style: deepObject
+        explode: true
         required: false
         description: Use `gt` (>), `gte` (>=), `lt` (<), `lte` (<=), or `eq` (=) to
           filter by the posted at timestamp. For example, for all times after Jan
@@ -5501,6 +5526,7 @@ paths:
             type: string
           type: object
         style: deepObject
+        explode: true
         required: false
         description: Use `gt` (>), `gte` (>=), `lt` (<), `lte` (<=), or `eq` (=) to
           filter by the posted at timestamp. For example, for all times after Jan
@@ -5803,6 +5829,7 @@ paths:
             type: string
           type: object
         style: deepObject
+        explode: true
         required: false
         description: Use `gt` (>), `gte` (>=), `lt` (<), `lte` (<=), or `eq` (=) to
           filter by the created_at timestamp. For example, for all dates after Jan
@@ -5819,6 +5846,7 @@ paths:
             type: integer
           type: object
         style: deepObject
+        explode: true
         required: false
         description: Use `gt` (>), `gte` (>=), `lt` (<), `lte` (<=), or `eq` (=) to
           filter by the version. For example, for all versions after 2, use version%5Bgt%5D=2.
@@ -5886,6 +5914,7 @@ paths:
             type: string
           type: object
         style: deepObject
+        explode: true
         required: false
         description: Use `gt` (>), `gte` (>=), `lt` (<), `lte` (<=), or `eq` (=) to
           filter by the posted at timestamp. For example, for all times after Jan
@@ -6900,14 +6929,6 @@ paths:
       security:
       - basic_auth: []
       parameters:
-      - name: Content-Type
-        in: header
-        schema:
-          enum:
-          - application/json
-          - multipart/form-data
-          type: string
-        required: false
       - name: Idempotency-Key
         in: header
         schema:
@@ -7599,6 +7620,7 @@ paths:
             type: string
           type: object
         style: deepObject
+        explode: true
         required: false
       - name: per_page
         in: query
@@ -8350,10 +8372,7 @@ paths:
       - name: accounts_type
         in: path
         schema:
-          enum:
-          - external_accounts
-          - internal_accounts
-          type: string
+          "$ref": "#/components/schemas/accounts_type"
         required: true
       - name: after_cursor
         in: query
@@ -8462,10 +8481,7 @@ paths:
       - name: accounts_type
         in: path
         schema:
-          enum:
-          - external_accounts
-          - internal_accounts
-          type: string
+          "$ref": "#/components/schemas/accounts_type"
         required: true
       - name: id
         in: path
@@ -8541,10 +8557,7 @@ paths:
       - name: accounts_type
         in: path
         schema:
-          enum:
-          - external_accounts
-          - internal_accounts
-          type: string
+          "$ref": "#/components/schemas/accounts_type"
         required: true
       - name: after_cursor
         in: query
@@ -8653,10 +8666,7 @@ paths:
       - name: accounts_type
         in: path
         schema:
-          enum:
-          - external_accounts
-          - internal_accounts
-          type: string
+          "$ref": "#/components/schemas/accounts_type"
         required: true
       - name: id
         in: path
@@ -9115,7 +9125,6 @@ paths:
               schema:
                 "$ref": "#/components/schemas/error_message"
 servers:
-- url: http://localhost:3000
 - url: https://app.moderntreasury.com
 components:
   parameters:
@@ -9491,6 +9500,11 @@ components:
             project. Note that these will only be accessible if your accounting system
             has been connected.
       deprecated: true
+    accounts_type:
+      type: string
+      enum:
+      - external_accounts
+      - internal_accounts
     address:
       type: object
       nullable: true
@@ -9759,12 +9773,8 @@ components:
       - balance_type
       - vendor_code
       - vendor_code_type
-      anyOf:
-      - required:
-        - amount
-      - required:
-        - amount_string
       minProperties: 3
+      description: At least one of "amount" or "amount_string" is required.
     balance_report:
       type: object
       properties:
@@ -10440,6 +10450,7 @@ components:
           items:
             "$ref": "#/components/schemas/third_party_verification"
           description: A list of third-party verifications run by external vendors.
+          title: Third Party Verfications
         ticker_symbol:
           type: string
           nullable: true
@@ -10757,6 +10768,7 @@ components:
           items:
             "$ref": "#/components/schemas/third_party_verification"
           description: A list of third-party verifications run by external vendors.
+          title: Third Party Verfications
         ticker_symbol:
           type: string
           nullable: true
@@ -11128,6 +11140,7 @@ components:
               items:
                 "$ref": "#/components/schemas/third_party_verification"
               description: A list of third-party verifications run by external vendors.
+              title: Third Party Verfications
             ticker_symbol:
               type: string
               nullable: true
@@ -11218,22 +11231,7 @@ components:
                 items:
                   "$ref": "#/components/schemas/account_detail"
               account_type:
-                type: string
-                enum:
-                - base_wallet
-                - cash
-                - checking
-                - crypto_wallet
-                - ethereum_wallet
-                - general_ledger
-                - loan
-                - non_resident
-                - other
-                - overdraft
-                - polygon_wallet
-                - savings
-                - solana_wallet
-                description: Can be `checking`, `savings` or `other`.
+                "$ref": "#/components/schemas/external_account_type"
               card_id:
                 type: string
                 format: uuid
@@ -11526,22 +11524,7 @@ components:
                   required:
                   - account_number
               account_type:
-                type: string
-                enum:
-                - base_wallet
-                - cash
-                - checking
-                - crypto_wallet
-                - ethereum_wallet
-                - general_ledger
-                - loan
-                - non_resident
-                - other
-                - overdraft
-                - polygon_wallet
-                - savings
-                - solana_wallet
-                description: Can be `checking`, `savings` or `other`.
+                "$ref": "#/components/schemas/external_account_type"
               contact_details:
                 type: array
                 items:
@@ -12100,6 +12083,7 @@ components:
           format: date-time
         data:
           type: object
+          additionalProperties: true
           description: The body of the event.
         entity_id:
           type: string
@@ -12307,35 +12291,7 @@ components:
           description: The ID of the Transaction Line Item this expected payment has
             been matched to.
         type:
-          type: string
-          nullable: true
-          enum:
-          - ach
-          - au_becs
-          - bacs
-          - book
-          - card
-          - chats
-          - check
-          - cross_border
-          - dk_nets
-          - eft
-          - gb_fps
-          - masav
-          - mx_ccen
-          - neft
-          - nics
-          - nz_becs
-          - pl_elixir
-          - rtp
-          - se_bankgirot
-          - sepa
-          - sg_giro
-          - sic
-          - stablecoin
-          - wire
-          - zengin
-          description: 'One of: ach, au_becs, bacs, book, check, eft, rtp, sepa, wire.'
+          "$ref": "#/components/schemas/expected_payment_type"
         updated_at:
           type: string
           format: date-time
@@ -12511,35 +12467,37 @@ components:
             For wire payments, this will be the OBI field on the wire. For check payments,
             this will be the memo field.
         type:
-          type: string
-          nullable: true
-          enum:
-          - ach
-          - au_becs
-          - bacs
-          - book
-          - card
-          - chats
-          - check
-          - cross_border
-          - dk_nets
-          - eft
-          - gb_fps
-          - masav
-          - mx_ccen
-          - neft
-          - nics
-          - nz_becs
-          - pl_elixir
-          - rtp
-          - se_bankgirot
-          - sepa
-          - sg_giro
-          - sic
-          - stablecoin
-          - wire
-          - zengin
-          description: 'One of: ach, au_becs, bacs, book, check, eft, rtp, sepa, wire.'
+          "$ref": "#/components/schemas/expected_payment_type"
+    expected_payment_type:
+      type: string
+      nullable: true
+      enum:
+      - ach
+      - au_becs
+      - bacs
+      - book
+      - card
+      - chats
+      - check
+      - cross_border
+      - dk_nets
+      - eft
+      - gb_fps
+      - masav
+      - mx_ccen
+      - neft
+      - nics
+      - nz_becs
+      - pl_elixir
+      - rtp
+      - se_bankgirot
+      - sepa
+      - sg_giro
+      - sic
+      - stablecoin
+      - wire
+      - zengin
+      description: 'One of: ach, au_becs, bacs, book, check, eft, rtp, sepa, wire.'
     expected_payment_update_request:
       type: object
       properties:
@@ -12668,35 +12626,7 @@ components:
           description: The Expected Payment's status can be updated from partially_reconciled
             to reconciled.
         type:
-          type: string
-          nullable: true
-          enum:
-          - ach
-          - au_becs
-          - bacs
-          - book
-          - card
-          - chats
-          - check
-          - cross_border
-          - dk_nets
-          - eft
-          - gb_fps
-          - masav
-          - mx_ccen
-          - neft
-          - nics
-          - nz_becs
-          - pl_elixir
-          - rtp
-          - se_bankgirot
-          - sepa
-          - sg_giro
-          - sic
-          - stablecoin
-          - wire
-          - zengin
-          description: 'One of: ach, au_becs, bacs, book, check, eft, rtp, sepa, wire.'
+          "$ref": "#/components/schemas/expected_payment_type"
     external_account:
       type: object
       properties:
@@ -12705,22 +12635,7 @@ components:
           items:
             "$ref": "#/components/schemas/account_detail"
         account_type:
-          type: string
-          enum:
-          - base_wallet
-          - cash
-          - checking
-          - crypto_wallet
-          - ethereum_wallet
-          - general_ledger
-          - loan
-          - non_resident
-          - other
-          - overdraft
-          - polygon_wallet
-          - savings
-          - solana_wallet
-          description: Can be `checking`, `savings` or `other`.
+          "$ref": "#/components/schemas/external_account_type"
         card_id:
           type: string
           format: uuid
@@ -12873,22 +12788,7 @@ components:
             required:
             - account_number
         account_type:
-          type: string
-          enum:
-          - base_wallet
-          - cash
-          - checking
-          - crypto_wallet
-          - ethereum_wallet
-          - general_ledger
-          - loan
-          - non_resident
-          - other
-          - overdraft
-          - polygon_wallet
-          - savings
-          - solana_wallet
-          description: Can be `checking`, `savings` or `other`.
+          "$ref": "#/components/schemas/external_account_type"
         contact_details:
           type: array
           items:
@@ -13005,26 +12905,28 @@ components:
             - routing_number_type
       required:
       - counterparty_id
+    external_account_type:
+      type: string
+      enum:
+      - base_wallet
+      - cash
+      - checking
+      - crypto_wallet
+      - ethereum_wallet
+      - general_ledger
+      - loan
+      - non_resident
+      - other
+      - overdraft
+      - polygon_wallet
+      - savings
+      - solana_wallet
+      description: Can be `checking`, `savings` or `other`.
     external_account_update_request:
       type: object
       properties:
         account_type:
-          type: string
-          enum:
-          - base_wallet
-          - cash
-          - checking
-          - crypto_wallet
-          - ethereum_wallet
-          - general_ledger
-          - loan
-          - non_resident
-          - other
-          - overdraft
-          - polygon_wallet
-          - savings
-          - solana_wallet
-          description: Can be `checking`, `savings` or `other`.
+          "$ref": "#/components/schemas/external_account_type"
         counterparty_id:
           type: string
           format: uuid
@@ -13984,6 +13886,7 @@ components:
           description: The currency of the incoming payment detail.
         data:
           type: object
+          additionalProperties: true
           description: The raw data from the payment pre-notification file that we
             get from the bank.
         direction:
@@ -15133,36 +15036,7 @@ components:
             initiated payment order's direction will be credit. One of `manual`, `ui`,
             or `automatic`.
         payment_type:
-          type: string
-          enum:
-          - ach
-          - au_becs
-          - bacs
-          - book
-          - card
-          - chats
-          - check
-          - cross_border
-          - dk_nets
-          - eft
-          - gb_fps
-          - masav
-          - mx_ccen
-          - neft
-          - nics
-          - nz_becs
-          - pl_elixir
-          - rtp
-          - se_bankgirot
-          - sepa
-          - sg_giro
-          - sic
-          - stablecoin
-          - wire
-          - zengin
-          description: One of `ach`, `se_bankgirot`, `eft`, `wire`, `check`, `book`,
-            `rtp`, `sepa`, `bacs`, `au_becs`, `neft`, `nics`, `nz_national_clearing_code`,
-            `sic`, `zengin`.
+          "$ref": "#/components/schemas/payment_order_type"
         receiving_account_id:
           type: string
           format: uuid
@@ -15524,36 +15398,7 @@ components:
             initiated payment order's direction will be credit. One of `manual`, `ui`,
             or `automatic`.
         payment_type:
-          type: string
-          enum:
-          - ach
-          - au_becs
-          - bacs
-          - book
-          - card
-          - chats
-          - check
-          - cross_border
-          - dk_nets
-          - eft
-          - gb_fps
-          - masav
-          - mx_ccen
-          - neft
-          - nics
-          - nz_becs
-          - pl_elixir
-          - rtp
-          - se_bankgirot
-          - sepa
-          - sg_giro
-          - sic
-          - stablecoin
-          - wire
-          - zengin
-          description: One of `ach`, `se_bankgirot`, `eft`, `wire`, `check`, `book`,
-            `rtp`, `sepa`, `bacs`, `au_becs`, `neft`, `nics`, `nz_national_clearing_code`,
-            `sic`, `zengin`.
+          "$ref": "#/components/schemas/payment_order_type"
         receiving_account_id:
           type: string
           format: uuid
@@ -16739,11 +16584,7 @@ components:
       required:
       - direction
       - ledger_account_id
-      anyOf:
-      - required:
-        - amount
-      - required:
-        - amount_string
+      description: At least one of "amount" or "amount_string" is required.
     ledger_entry_of_transaction_version:
       type: object
       properties:
@@ -16924,11 +16765,7 @@ components:
       required:
       - direction
       - ledger_account_id
-      anyOf:
-      - required:
-        - amount
-      - required:
-        - amount_string
+      description: At least one of "amount" or "amount_string" is required.
     ledger_entry_update_request:
       type: object
       properties:
@@ -17689,6 +17526,7 @@ components:
           items:
             "$ref": "#/components/schemas/third_party_verification"
           description: A list of third-party verifications run by external vendors.
+          title: Third Party Verfications
         ticker_symbol:
           type: string
           nullable: true
@@ -17883,7 +17721,6 @@ components:
       required:
       - line1
       - locality
-      - region
       - country
     legal_entity_association:
       type: object
@@ -18318,6 +18155,7 @@ components:
           items:
             "$ref": "#/components/schemas/third_party_verification"
           description: A list of third-party verifications run by external vendors.
+          title: Third Party Verfications
         ticker_symbol:
           type: string
           nullable: true
@@ -18608,6 +18446,7 @@ components:
           items:
             "$ref": "#/components/schemas/third_party_verification"
           description: A list of third-party verifications run by external vendors.
+          title: Third Party Verfications
         ticker_symbol:
           type: string
           nullable: true
@@ -19431,22 +19270,7 @@ components:
                 items:
                   "$ref": "#/components/schemas/account_detail"
               account_type:
-                type: string
-                enum:
-                - base_wallet
-                - cash
-                - checking
-                - crypto_wallet
-                - ethereum_wallet
-                - general_ledger
-                - loan
-                - non_resident
-                - other
-                - overdraft
-                - polygon_wallet
-                - savings
-                - solana_wallet
-                description: Can be `checking`, `savings` or `other`.
+                "$ref": "#/components/schemas/external_account_type"
               card_id:
                 type: string
                 format: uuid
@@ -19594,47 +19418,7 @@ components:
           - stopped
           description: The current status of the payment order.
         subtype:
-          type: string
-          nullable: true
-          enum:
-          - 0C
-          - 0N
-          - 0S
-          - CCD
-          - CIE
-          - CTX
-          - IAT
-          - PPD
-          - TEL
-          - WEB
-          - arbitrum
-          - au_becs
-          - bacs
-          - base
-          - chats
-          - digital
-          - dk_nets
-          - eft
-          - ethereum
-          - masav
-          - mx_ccen
-          - neft
-          - nics
-          - nz_becs
-          - pl_elixir
-          - polygon
-          - print
-          - se_bankgirot
-          - sepa
-          - sg_giro
-          - sic
-          - solana
-          - zengin
-          description: An additional layer of classification for the type of payment
-            order you are doing. This field is only used for `ach` payment orders
-            currently. For `ach`  payment orders, the `subtype`  represents the SEC
-            code. We currently support `CCD`, `PPD`, `IAT`, `CTX`, `WEB`, `CIE`, and
-            `TEL`.
+          "$ref": "#/components/schemas/payment_order_subtype"
         transaction_ids:
           type: array
           items:
@@ -19645,36 +19429,7 @@ components:
             a payment order initially results in a Return, but gets redrafted and
             is later successfully completed, it can have many transactions.
         type:
-          type: string
-          enum:
-          - ach
-          - au_becs
-          - bacs
-          - book
-          - card
-          - chats
-          - check
-          - cross_border
-          - dk_nets
-          - eft
-          - gb_fps
-          - masav
-          - mx_ccen
-          - neft
-          - nics
-          - nz_becs
-          - pl_elixir
-          - rtp
-          - se_bankgirot
-          - sepa
-          - sg_giro
-          - sic
-          - stablecoin
-          - wire
-          - zengin
-          description: One of `ach`, `se_bankgirot`, `eft`, `wire`, `check`, `book`,
-            `rtp`, `sepa`, `bacs`, `au_becs`, `neft`, `nics`, `nz_national_clearing_code`,
-            `sic`, `zengin`.
+          "$ref": "#/components/schemas/payment_order_type"
         ultimate_originating_account:
           type: object
           nullable: true
@@ -20006,22 +19761,7 @@ components:
                 required:
                 - account_number
             account_type:
-              type: string
-              enum:
-              - base_wallet
-              - cash
-              - checking
-              - crypto_wallet
-              - ethereum_wallet
-              - general_ledger
-              - loan
-              - non_resident
-              - other
-              - overdraft
-              - polygon_wallet
-              - savings
-              - solana_wallet
-              description: Can be `checking`, `savings` or `other`.
+              "$ref": "#/components/schemas/external_account_type"
             contact_details:
               type: array
               items:
@@ -20170,83 +19910,14 @@ components:
             so you can use the characters for other useful information. For `eft`
             the maximum length is 15 characters.
         subtype:
-          type: string
-          nullable: true
-          enum:
-          - 0C
-          - 0N
-          - 0S
-          - CCD
-          - CIE
-          - CTX
-          - IAT
-          - PPD
-          - TEL
-          - WEB
-          - arbitrum
-          - au_becs
-          - bacs
-          - base
-          - chats
-          - digital
-          - dk_nets
-          - eft
-          - ethereum
-          - masav
-          - mx_ccen
-          - neft
-          - nics
-          - nz_becs
-          - pl_elixir
-          - polygon
-          - print
-          - se_bankgirot
-          - sepa
-          - sg_giro
-          - sic
-          - solana
-          - zengin
-          description: An additional layer of classification for the type of payment
-            order you are doing. This field is only used for `ach` payment orders
-            currently. For `ach`  payment orders, the `subtype`  represents the SEC
-            code. We currently support `CCD`, `PPD`, `IAT`, `CTX`, `WEB`, `CIE`, and
-            `TEL`.
+          "$ref": "#/components/schemas/payment_order_subtype"
         transaction_monitoring_enabled:
           type: boolean
           deprecated: true
           description: A flag that determines whether a payment order should go through
             transaction monitoring.
         type:
-          type: string
-          enum:
-          - ach
-          - au_becs
-          - bacs
-          - book
-          - card
-          - chats
-          - check
-          - cross_border
-          - dk_nets
-          - eft
-          - gb_fps
-          - masav
-          - mx_ccen
-          - neft
-          - nics
-          - nz_becs
-          - pl_elixir
-          - rtp
-          - se_bankgirot
-          - sepa
-          - sg_giro
-          - sic
-          - stablecoin
-          - wire
-          - zengin
-          description: One of `ach`, `se_bankgirot`, `eft`, `wire`, `check`, `book`,
-            `rtp`, `sepa`, `bacs`, `au_becs`, `neft`, `nics`, `nz_national_clearing_code`,
-            `sic`, `zengin`.
+          "$ref": "#/components/schemas/payment_order_type"
         ultimate_originating_account_id:
           type: string
           format: uuid
@@ -20535,22 +20206,7 @@ components:
                 required:
                 - account_number
             account_type:
-              type: string
-              enum:
-              - base_wallet
-              - cash
-              - checking
-              - crypto_wallet
-              - ethereum_wallet
-              - general_ledger
-              - loan
-              - non_resident
-              - other
-              - overdraft
-              - polygon_wallet
-              - savings
-              - solana_wallet
-              description: Can be `checking`, `savings` or `other`.
+              "$ref": "#/components/schemas/external_account_type"
             contact_details:
               type: array
               items:
@@ -20699,83 +20355,14 @@ components:
             so you can use the characters for other useful information. For `eft`
             the maximum length is 15 characters.
         subtype:
-          type: string
-          nullable: true
-          enum:
-          - 0C
-          - 0N
-          - 0S
-          - CCD
-          - CIE
-          - CTX
-          - IAT
-          - PPD
-          - TEL
-          - WEB
-          - arbitrum
-          - au_becs
-          - bacs
-          - base
-          - chats
-          - digital
-          - dk_nets
-          - eft
-          - ethereum
-          - masav
-          - mx_ccen
-          - neft
-          - nics
-          - nz_becs
-          - pl_elixir
-          - polygon
-          - print
-          - se_bankgirot
-          - sepa
-          - sg_giro
-          - sic
-          - solana
-          - zengin
-          description: An additional layer of classification for the type of payment
-            order you are doing. This field is only used for `ach` payment orders
-            currently. For `ach`  payment orders, the `subtype`  represents the SEC
-            code. We currently support `CCD`, `PPD`, `IAT`, `CTX`, `WEB`, `CIE`, and
-            `TEL`.
+          "$ref": "#/components/schemas/payment_order_subtype"
         transaction_monitoring_enabled:
           type: boolean
           deprecated: true
           description: A flag that determines whether a payment order should go through
             transaction monitoring.
         type:
-          type: string
-          enum:
-          - ach
-          - au_becs
-          - bacs
-          - book
-          - card
-          - chats
-          - check
-          - cross_border
-          - dk_nets
-          - eft
-          - gb_fps
-          - masav
-          - mx_ccen
-          - neft
-          - nics
-          - nz_becs
-          - pl_elixir
-          - rtp
-          - se_bankgirot
-          - sepa
-          - sg_giro
-          - sic
-          - stablecoin
-          - wire
-          - zengin
-          description: One of `ach`, `se_bankgirot`, `eft`, `wire`, `check`, `book`,
-            `rtp`, `sepa`, `bacs`, `au_becs`, `neft`, `nics`, `nz_national_clearing_code`,
-            `sic`, `zengin`.
+          "$ref": "#/components/schemas/payment_order_type"
         ultimate_originating_account_id:
           type: string
           format: uuid
@@ -20831,6 +20418,78 @@ components:
       - amount
       - direction
       - originating_account_id
+    payment_order_subtype:
+      type: string
+      nullable: true
+      enum:
+      - 0C
+      - 0N
+      - 0S
+      - CCD
+      - CIE
+      - CTX
+      - IAT
+      - PPD
+      - TEL
+      - WEB
+      - arbitrum
+      - au_becs
+      - bacs
+      - base
+      - chats
+      - digital
+      - dk_nets
+      - eft
+      - ethereum
+      - masav
+      - mx_ccen
+      - neft
+      - nics
+      - nz_becs
+      - pl_elixir
+      - polygon
+      - print
+      - se_bankgirot
+      - sepa
+      - sg_giro
+      - sic
+      - solana
+      - zengin
+      description: An additional layer of classification for the type of payment order
+        you are doing. This field is only used for `ach` payment orders currently.
+        For `ach`  payment orders, the `subtype`  represents the SEC code. We currently
+        support `CCD`, `PPD`, `IAT`, `CTX`, `WEB`, `CIE`, and `TEL`.
+    payment_order_type:
+      type: string
+      enum:
+      - ach
+      - au_becs
+      - bacs
+      - book
+      - card
+      - chats
+      - check
+      - cross_border
+      - dk_nets
+      - eft
+      - gb_fps
+      - masav
+      - mx_ccen
+      - neft
+      - nics
+      - nz_becs
+      - pl_elixir
+      - rtp
+      - se_bankgirot
+      - sepa
+      - sg_giro
+      - sic
+      - stablecoin
+      - wire
+      - zengin
+      description: One of `ach`, `se_bankgirot`, `eft`, `wire`, `check`, `book`, `rtp`,
+        `sepa`, `bacs`, `au_becs`, `neft`, `nics`, `nz_national_clearing_code`, `sic`,
+        `zengin`.
     payment_order_update_request:
       type: object
       properties:
@@ -21050,22 +20709,7 @@ components:
                 required:
                 - account_number
             account_type:
-              type: string
-              enum:
-              - base_wallet
-              - cash
-              - checking
-              - crypto_wallet
-              - ethereum_wallet
-              - general_ledger
-              - loan
-              - non_resident
-              - other
-              - overdraft
-              - polygon_wallet
-              - savings
-              - solana_wallet
-              description: Can be `checking`, `savings` or `other`.
+              "$ref": "#/components/schemas/external_account_type"
             contact_details:
               type: array
               items:
@@ -21233,78 +20877,9 @@ components:
             payment order, use `approved`. To undo approval on a denied or approved
             payment order, use `needs_approval`.
         subtype:
-          type: string
-          nullable: true
-          enum:
-          - 0C
-          - 0N
-          - 0S
-          - CCD
-          - CIE
-          - CTX
-          - IAT
-          - PPD
-          - TEL
-          - WEB
-          - arbitrum
-          - au_becs
-          - bacs
-          - base
-          - chats
-          - digital
-          - dk_nets
-          - eft
-          - ethereum
-          - masav
-          - mx_ccen
-          - neft
-          - nics
-          - nz_becs
-          - pl_elixir
-          - polygon
-          - print
-          - se_bankgirot
-          - sepa
-          - sg_giro
-          - sic
-          - solana
-          - zengin
-          description: An additional layer of classification for the type of payment
-            order you are doing. This field is only used for `ach` payment orders
-            currently. For `ach`  payment orders, the `subtype`  represents the SEC
-            code. We currently support `CCD`, `PPD`, `IAT`, `CTX`, `WEB`, `CIE`, and
-            `TEL`.
+          "$ref": "#/components/schemas/payment_order_subtype"
         type:
-          type: string
-          enum:
-          - ach
-          - au_becs
-          - bacs
-          - book
-          - card
-          - chats
-          - check
-          - cross_border
-          - dk_nets
-          - eft
-          - gb_fps
-          - masav
-          - mx_ccen
-          - neft
-          - nics
-          - nz_becs
-          - pl_elixir
-          - rtp
-          - se_bankgirot
-          - sepa
-          - sg_giro
-          - sic
-          - stablecoin
-          - wire
-          - zengin
-          description: One of `ach`, `se_bankgirot`, `eft`, `wire`, `check`, `book`,
-            `rtp`, `sepa`, `bacs`, `au_becs`, `neft`, `nics`, `nz_national_clearing_code`,
-            `sic`, `zengin`.
+          "$ref": "#/components/schemas/payment_order_type"
         ultimate_originating_party_identifier:
           type: string
           nullable: true
@@ -22564,6 +22139,7 @@ components:
             `swift` with routing numbers '123456789' and 'GRINUST0XXX' respectively.
         sanctions:
           type: object
+          additionalProperties: true
           description: An object containing key-value pairs, each with a sanctions
             list as the key and a boolean value representing whether the bank is on
             that particular sanctions list. Currently, this includes eu_con, uk_hmt,
@@ -23195,11 +22771,7 @@ components:
       - vendor_code_type
       - as_of_date
       - internal_account_id
-      anyOf:
-      - required:
-        - amount
-      - required:
-        - amount_string
+      description: At least one of "amount" or "amount_string" is required.
     transaction_line_item:
       type: object
       properties:
