@@ -13046,6 +13046,7 @@ components:
           enum:
           - arbitrum_address
           - au_number
+          - avalanche_address
           - base_address
           - card_token
           - clabe
@@ -13104,6 +13105,7 @@ components:
           enum:
           - arbitrum_address
           - au_number
+          - avalanche_address
           - base_address
           - card_token
           - clabe
@@ -15168,6 +15170,7 @@ components:
                       enum:
                       - arbitrum_address
                       - au_number
+                      - avalanche_address
                       - base_address
                       - card_token
                       - clabe
@@ -16438,6 +16441,7 @@ components:
                 enum:
                 - arbitrum_address
                 - au_number
+                - avalanche_address
                 - base_address
                 - card_token
                 - clabe
@@ -17802,6 +17806,7 @@ components:
           enum:
           - arbitrum_address
           - au_number
+          - avalanche_address
           - base_address
           - card_token
           - clabe
@@ -18330,6 +18335,7 @@ components:
             type: string
             enum:
             - arbitrum_address
+            - avalanche_address
             - base_address
             - ethereum_address
             - polygon_address
@@ -23640,6 +23646,7 @@ components:
                     enum:
                     - arbitrum_address
                     - au_number
+                    - avalanche_address
                     - base_address
                     - card_token
                     - clabe
@@ -24085,6 +24092,7 @@ components:
                     enum:
                     - arbitrum_address
                     - au_number
+                    - avalanche_address
                     - base_address
                     - card_token
                     - clabe
@@ -24329,6 +24337,7 @@ components:
       - WEB
       - arbitrum
       - au_becs
+      - avalanche
       - bacs
       - base
       - chats
@@ -24588,6 +24597,7 @@ components:
                     enum:
                     - arbitrum_address
                     - au_number
+                    - avalanche_address
                     - base_address
                     - card_token
                     - clabe
@@ -24912,7 +24922,6 @@ components:
           - western_alliance_payment_id
           - western_alliance_transaction_id
           - western_alliance_wire_confirmation_number
-          - wise_transfer_id
           description: The type of the reference number. Referring to the vendor payment
             id.
         updated_at:
@@ -25037,7 +25046,6 @@ components:
           - western_alliance_payment_id
           - western_alliance_transaction_id
           - western_alliance_wire_confirmation_number
-          - wise_transfer_id
           description: The type of reference number.
         referenceable_id:
           type: string
