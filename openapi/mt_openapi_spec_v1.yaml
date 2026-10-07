@@ -8484,6 +8484,7 @@ paths:
         schema:
           enum:
           - pending
+          - draft
           - active
           - suspended
           - denied
@@ -14064,9 +14065,10 @@ components:
           enum:
           - active
           - denied
+          - draft
           - pending
           - suspended
-          description: The activation status of the legal entity. One of pending,
+          description: The activation status of the legal entity. One of draft, pending,
             active, suspended, or denied.
         suffix:
           type: string
@@ -21373,9 +21375,10 @@ components:
           enum:
           - active
           - denied
+          - draft
           - pending
           - suspended
-          description: The activation status of the legal entity. One of pending,
+          description: The activation status of the legal entity. One of draft, pending,
             active, suspended, or denied.
         suffix:
           type: string
@@ -22012,6 +22015,12 @@ components:
           nullable: true
           description: The UUID of the parent legal entity in the service provider
             tree.
+        status:
+          type: string
+          enum:
+          - draft
+          description: Set to draft to create the legal entity as a draft. Omit to
+            create it as pending. Inline child legal entities take the parent's status.
         suffix:
           type: string
           nullable: true
@@ -22309,6 +22318,13 @@ components:
           nullable: true
           description: The UUID of the parent legal entity in the service provider
             tree.
+        status:
+          type: string
+          enum:
+          - pending
+          description: Set to pending to submit a draft legal entity for processing.
+            Only valid while the legal entity is draft, and must be the only attribute
+            in the request. Draft child legal entities are submitted with it.
         suffix:
           type: string
           nullable: true
