@@ -3879,6 +3879,9 @@ paths:
       tags:
       - InternalAccount
       operationId: requestInternalAccountClosure
+      description: 'This endpoint has been deprecated. Request closure with PATCH
+        /api/internal_accounts/{id} and status: "pending_closure".'
+      deprecated: true
       security:
       - basic_auth: []
       responses:
@@ -19400,7 +19403,6 @@ components:
           type: string
           nullable: true
           enum:
-          - counterparty
           - external_account
           - internal_account
           - virtual_account
@@ -19750,7 +19752,6 @@ components:
         ledgerable_type:
           type: string
           enum:
-          - counterparty
           - external_account
           - internal_account
           - virtual_account
