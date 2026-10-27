@@ -98,6 +98,7 @@ paths:
       tags:
       - AccountCollectionFlow
       operationId: createAccountCollectionFlow
+      deprecated: true
       security:
       - basic_auth: []
       parameters:
@@ -1690,6 +1691,259 @@ paths:
                 "$ref": "#/components/schemas/error_message"
         '404':
           description: not found
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/error_message"
+        '429':
+          description: too many requests
+  "/api/embeddable_flows":
+    get:
+      summary: list embeddable_flows
+      tags:
+      - EmbeddableFlow
+      operationId: listEmbeddableFlows
+      security:
+      - basic_auth: []
+      parameters:
+      - name: after_cursor
+        in: query
+        schema:
+          nullable: true
+          type: string
+        required: false
+      - name: per_page
+        in: query
+        schema:
+          type: integer
+        required: false
+      - name: status
+        in: query
+        schema:
+          type: string
+        required: false
+      - name: template
+        in: query
+        schema:
+          enum:
+          - legal_entity_onboarding
+          - account_collection
+          - payment
+          type: string
+        required: false
+      responses:
+        '200':
+          description: successful
+          headers:
+            X-After-Cursor:
+              schema:
+                nullable: true
+                type: string
+              required: false
+              description: The cursor for the next page. Including this in a call
+                as `after_cursor` will return the next page.
+            X-Per-Page:
+              schema:
+                nullable: true
+                type: integer
+              description: The current `per_page`.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  "$ref": "#/components/schemas/embeddable_flow"
+        '400':
+          description: bad request
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/error_message"
+        '401':
+          description: unsuccessful
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/error_message"
+        '403':
+          description: forbidden
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/error_message"
+        '429':
+          description: too many requests
+    post:
+      summary: create embeddable_flow
+      tags:
+      - EmbeddableFlow
+      operationId: createEmbeddableFlow
+      security:
+      - basic_auth: []
+      parameters:
+      - name: Idempotency-Key
+        in: header
+        schema:
+          type: string
+        required: false
+        description: This key should be something unique, preferably something like
+          an UUID.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              "$ref": "#/components/schemas/embeddable_flow_create_request"
+      responses:
+        '201':
+          description: successful
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/embeddable_flow"
+        '400':
+          description: bad request
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/error_message"
+        '401':
+          description: unsuccessful
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/error_message"
+        '403':
+          description: forbidden
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/error_message"
+        '415':
+          description: unsuccessful
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/error_message"
+        '422':
+          description: unsuccessful
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/error_message"
+        '429':
+          description: too many requests
+  "/api/embeddable_flows/{id}":
+    parameters:
+    - name: id
+      in: path
+      schema:
+        format: uuid
+        type: string
+      required: true
+      description: id
+    get:
+      summary: get embeddable_flow
+      tags:
+      - EmbeddableFlow
+      operationId: getEmbeddableFlow
+      security:
+      - basic_auth: []
+      parameters:
+      - name: Idempotency-Key
+        in: header
+        schema:
+          type: string
+        required: false
+        description: This key should be something unique, preferably something like
+          an UUID.
+      responses:
+        '200':
+          description: successful
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/embeddable_flow"
+        '401':
+          description: unsuccessful
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/error_message"
+        '403':
+          description: forbidden
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/error_message"
+        '404':
+          description: not found
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/error_message"
+        '429':
+          description: too many requests
+    patch:
+      summary: update embeddable_flow
+      tags:
+      - EmbeddableFlow
+      operationId: updateEmbeddableFlow
+      security:
+      - basic_auth: []
+      parameters:
+      - name: Idempotency-Key
+        in: header
+        schema:
+          type: string
+        required: false
+        description: This key should be something unique, preferably something like
+          an UUID.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              "$ref": "#/components/schemas/embeddable_flow_update_request"
+      responses:
+        '200':
+          description: successful
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/embeddable_flow"
+        '400':
+          description: bad request
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/error_message"
+        '401':
+          description: unsuccessful
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/error_message"
+        '403':
+          description: forbidden
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/error_message"
+        '404':
+          description: not found
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/error_message"
+        '415':
+          description: unsuccessful
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/error_message"
+        '422':
+          description: unsuccessful
           content:
             application/json:
               schema:
@@ -3366,12 +3620,14 @@ paths:
         schema:
           enum:
           - completed
+          - failed
+          - held
           - pending
           - returned
           type: string
         required: false
         description: The current status of the incoming payment order. One of `pending`,
-          `completed`, or `returned`.
+          `completed`, `returned`, `failed`, or `held`.
       - name: subtype
         in: query
         schema:
@@ -9226,6 +9482,7 @@ paths:
       tags:
       - PaymentFlow
       operationId: createPaymentFlow
+      deprecated: true
       security:
       - basic_auth: []
       parameters:
@@ -10437,7 +10694,9 @@ paths:
               "$ref": "#/components/schemas/incoming_payment_detail_create_request"
       responses:
         '202':
-          description: successful
+          description: For lockbox check simulations, the incoming payment detail
+            is created asynchronously, so the response echoes the request without
+            an `id`.
           content:
             application/json:
               schema:
@@ -11236,6 +11495,7 @@ paths:
           - se_bankgiro_clearing_code
           - sg_interbank_clearing_code
           - swift
+          - vasp
           - za_national_clearing_code
           type: string
         required: true
@@ -13319,8 +13579,12 @@ components:
           enum:
           - closing_available
           - closing_ledger
+          - closing_pending_inflows
+          - closing_pending_outflows
           - current_available
           - current_ledger
+          - current_pending_inflows
+          - current_pending_outflows
           - opening_available
           - opening_available_next_business_day
           - opening_ledger
@@ -13328,8 +13592,9 @@ components:
           - previously_closed_book
           description: The specific type of balance reported. One of `opening_ledger`,
             `closing_ledger`, `current_ledger`, `opening_available`, `opening_available_next_business_day`,
-            `closing_available`, `current_available`, 'previously_closed_book', or
-            `other`.
+            `closing_available`, `closing_pending_inflows`, `closing_pending_outflows`,
+            `current_available`, 'previously_closed_book', `current_pending_inflows`,
+            `current_pending_outflows`, or `other`.
         created_at:
           type: string
           format: date-time
@@ -13395,8 +13660,12 @@ components:
           enum:
           - closing_available
           - closing_ledger
+          - closing_pending_inflows
+          - closing_pending_outflows
           - current_available
           - current_ledger
+          - current_pending_inflows
+          - current_pending_outflows
           - opening_available
           - opening_available_next_business_day
           - opening_ledger
@@ -13404,8 +13673,9 @@ components:
           - previously_closed_book
           description: The specific type of balance reported. One of `opening_ledger`,
             `closing_ledger`, `current_ledger`, `opening_available`, `opening_available_next_business_day`,
-            `closing_available`, `current_available`, 'previously_closed_book', or
-            `other`.
+            `closing_available`, `closing_pending_inflows`, `closing_pending_outflows`,
+            `current_available`, 'previously_closed_book', `current_pending_inflows`,
+            `current_pending_outflows`, or `other`.
         vendor_code:
           type: string
           description: The code used by the bank when reporting this specific balance.
@@ -15301,6 +15571,7 @@ components:
                       - se_bankgiro_clearing_code
                       - sg_interbank_clearing_code
                       - swift
+                      - vasp
                       - za_national_clearing_code
                   required:
                   - routing_number
@@ -15513,6 +15784,7 @@ components:
       - NZD
       - OMR
       - OP
+      - OUSD
       - PAB
       - PEN
       - PGK
@@ -15717,6 +15989,195 @@ components:
           format: binary
       required:
       - file
+    embeddable_flow:
+      type: object
+      properties:
+        client_token:
+          type: string
+        created_at:
+          type: string
+          format: date-time
+        expires_at:
+          type: string
+          format: date-time
+        id:
+          type: string
+          format: uuid
+        live_mode:
+          type: boolean
+          description: This field will be true if this object exists in the live environment
+            or false if it exists in the test environment.
+        object:
+          type: string
+        options:
+          oneOf:
+          - type: object
+            properties:
+              legal_entity_id:
+                type: string
+                format: uuid
+              type:
+                type: string
+                enum:
+                - individual
+            additionalProperties: false
+            required:
+            - type
+            - legal_entity_id
+          - type: object
+            properties:
+              counterparty_id:
+                type: string
+                format: uuid
+                nullable: true
+              external_account_id:
+                type: string
+                format: uuid
+                nullable: true
+              payment_types:
+                type: array
+                items:
+                  type: string
+              receiving_countries:
+                type: array
+                items:
+                  type: string
+            additionalProperties: false
+            required:
+            - counterparty_id
+            - payment_types
+            - receiving_countries
+            - external_account_id
+          - type: object
+            properties:
+              amount:
+                type: integer
+              counterparty_id:
+                type: string
+                format: uuid
+                nullable: true
+              currency:
+                type: string
+              direction:
+                type: string
+                enum:
+                - credit
+                - debit
+              due_date:
+                type: string
+                format: date
+                nullable: true
+              effective_date_selection_enabled:
+                type: boolean
+              existing_external_accounts_filter:
+                type: string
+                nullable: true
+                enum:
+                - verified
+              external_account_collection:
+                type: string
+                enum:
+                - enabled
+                - disabled
+              originating_account_id:
+                type: string
+                format: uuid
+              payment_order_id:
+                type: string
+                format: uuid
+                nullable: true
+              receiving_account_id:
+                type: string
+                format: uuid
+                nullable: true
+              selected_effective_date:
+                type: string
+                format: date
+                nullable: true
+            additionalProperties: false
+            required:
+            - amount
+            - currency
+            - direction
+            - counterparty_id
+            - originating_account_id
+            - receiving_account_id
+            - payment_order_id
+            - due_date
+            - effective_date_selection_enabled
+            - selected_effective_date
+            - external_account_collection
+            - existing_external_accounts_filter
+        status:
+          type: string
+          enum:
+          - cancelled
+          - completed
+          - expired
+          - pending
+          description: The current status of the underlying flow.
+        template:
+          type: string
+          enum:
+          - legal_entity_onboarding
+          - account_collection
+          - payment
+        updated_at:
+          type: string
+          format: date-time
+      additionalProperties: false
+      required:
+      - id
+      - object
+      - live_mode
+      - template
+      - client_token
+      - status
+      - expires_at
+      - created_at
+      - updated_at
+      - options
+      minProperties: 10
+      maxProperties: 10
+    embeddable_flow_create_request:
+      type: object
+      properties:
+        options:
+          oneOf:
+          - "$ref": "#/components/schemas/account_collection_flow_create_request"
+          - "$ref": "#/components/schemas/payment_flow_create_request"
+          - type: object
+            properties:
+              type:
+                type: string
+                enum:
+                - individual
+            additionalProperties: false
+            required:
+            - type
+          description: The parameters for the selected template's flow.
+        template:
+          type: string
+          enum:
+          - legal_entity_onboarding
+          - account_collection
+          - payment
+      additionalProperties: false
+      required:
+      - template
+      - options
+    embeddable_flow_update_request:
+      type: object
+      properties:
+        status:
+          type: string
+          enum:
+          - cancelled
+          description: The updated status of the flow. Can only be used to mark the
+            flow as `cancelled`.
+      additionalProperties: false
+      required:
+      - status
     error_message:
       type: object
       properties:
@@ -16574,6 +17035,7 @@ components:
                 - se_bankgiro_clearing_code
                 - sg_interbank_clearing_code
                 - swift
+                - vasp
                 - za_national_clearing_code
             required:
             - routing_number
@@ -16583,19 +17045,16 @@ components:
     external_account_type:
       type: string
       enum:
-      - base_wallet
       - cash
       - checking
-      - crypto_wallet
-      - ethereum_wallet
       - general_ledger
+      - hosted_wallet
       - loan
       - non_resident
       - other
       - overdraft
-      - polygon_wallet
       - savings
-      - solana_wallet
+      - self_hosted_wallet
       description: Can be `checking`, `savings` or `other`.
     external_account_update_request:
       type: object
@@ -17765,6 +18224,10 @@ components:
           - credit
           - debit
           description: One of `credit` or `debit`.
+        failure_reason:
+          type: string
+          nullable: true
+          description: The reason the incoming payment detail failed, or `null`.
         id:
           type: string
           format: uuid
@@ -17872,6 +18335,7 @@ components:
           - se_bankgiro_clearing_code
           - sg_interbank_clearing_code
           - swift
+          - vasp
           - za_national_clearing_code
           description: The type of the originating routing number for the incoming
             payment detail.
@@ -17896,10 +18360,12 @@ components:
           type: string
           enum:
           - completed
+          - failed
+          - held
           - pending
           - returned
           description: The current status of the incoming payment order. One of `pending`,
-            `completed`, or `returned`.
+            `completed`, `returned`, `failed`, or `held`.
         subtype:
           type: string
           nullable: true
@@ -17973,6 +18439,7 @@ components:
       - currency
       - direction
       - status
+      - failure_reason
       - metadata
       - as_of_date
       - vendor_id
@@ -17982,7 +18449,7 @@ components:
       - originating_account_number_type
       - subtype
       - reconciliation_status
-      minProperties: 26
+      minProperties: 27
     incoming_payment_detail_create_request:
       type: object
       properties:
@@ -18004,8 +18471,10 @@ components:
         data:
           type: object
           nullable: true
-          description: An object passed through to the simulated IPD that could reflect
-            what a vendor would pass.
+          description: 'An object passed through to the simulated IPD that could reflect
+            what a vendor would pass. For `type: check` with `subtype: lockbox` (sandbox
+            Modern Treasury payment accounts only), `data` must include `payor_name`,
+            otherwise the request returns 422.'
         description:
           type: string
           nullable: true
@@ -18023,8 +18492,9 @@ components:
         subtype:
           type: string
           nullable: true
-          description: An additional layer of classification for the type of incoming
-            payment detail, e.g. `ethereum` for a `stablecoin` type.
+          description: 'An additional layer of classification for the type of incoming
+            payment detail, e.g. `ethereum` for a `stablecoin` type. For `type: check`,
+            `subtype: lockbox` simulates a lockbox check deposit.'
         type:
           type: string
           enum:
@@ -18048,6 +18518,8 @@ components:
           nullable: true
           description: An optional parameter to associate the incoming payment detail
             to a virtual account.
+      required:
+      - type
     incoming_payment_detail_update_request:
       type: object
       properties:
@@ -18075,20 +18547,24 @@ components:
           type: string
           nullable: true
           enum:
-          - base_wallet
           - cash
           - checking
-          - crypto_wallet
-          - ethereum_wallet
           - general_ledger
           - loan
           - non_resident
           - other
           - overdraft
-          - polygon_wallet
           - savings
-          - solana_wallet
           description: Can be checking, savings or other.
+        allowed_ach_debit_company_ids:
+          type: array
+          nullable: true
+          items:
+            type: string
+          description: The ACH Company IDs allowed to debit this account. `null` allows
+            every company. An empty array allows none. Debits from any other company
+            are returned with code R10. Only applicable to debitable accounts under
+            a Modern Treasury PSP connection.
         connection:
           "$ref": "#/components/schemas/connection"
           description: Specifies which financial institution the accounts belong to.
@@ -18173,7 +18649,8 @@ components:
           enum:
           - business
           - individual
-          description: Either individual or business.
+          description: Either individual or business. Inherits from associated LegalEntity
+            legal_entity_type, if one exists.
         routing_details:
           type: array
           items:
@@ -18190,6 +18667,11 @@ components:
           - pending_closure
           - suspended
           description: The internal account status.
+        title:
+          type: string
+          description: The account title at the financial institution. Defaults to
+            the party name unless a custom title was set on creation. Custom titles
+            are only applicable to accounts created under supported connections.
         updated_at:
           type: string
           format: date-time
@@ -18225,7 +18707,9 @@ components:
       - contra_ledger_account_id
       - external_id
       - debitable
-      minProperties: 25
+      - allowed_ach_debit_company_ids
+      - title
+      minProperties: 26
     internal_account_create_request:
       type: object
       properties:
@@ -18238,22 +18722,28 @@ components:
         account_type:
           type: string
           enum:
-          - base_wallet
           - cash
           - checking
-          - crypto_wallet
-          - ethereum_wallet
           - general_ledger
           - loan
           - non_resident
           - other
           - overdraft
-          - polygon_wallet
           - savings
-          - solana_wallet
           description: The account type, used to provision the appropriate account
             at the financial institution.
           example: checking
+        allowed_ach_debit_company_ids:
+          type: array
+          nullable: true
+          items:
+            type: string
+            maxLength: 10
+            minLength: 1
+          description: The ACH Company IDs allowed to debit this account. `null` allows
+            every company. An empty array allows none. Debits from any other company
+            are returned with code R10. Only applicable to debitable accounts under
+            a Modern Treasury PSP connection.
         connection_id:
           type: string
           description: The identifier of the financial institution the account belongs
@@ -18334,6 +18824,14 @@ components:
           type: string
           nullable: true
           description: The legal name of the entity which owns the account.
+        party_type:
+          type: string
+          nullable: true
+          enum:
+          - individual
+          - business
+          description: Either individual or business. Inherits from associated LegalEntity
+            legal_entity_type, if one exists.
         requested_account_number_types:
           type: array
           items:
@@ -18346,6 +18844,14 @@ components:
             - polygon_address
             - solana_address
           description: An array of account number types requested for provisioning.
+        title:
+          type: string
+          nullable: true
+          description: The account title at the financial institution, used in place
+            of the party name. Defaults to the party name if not set. Only applicable
+            to accounts created under supported connections. Please reach out to your
+            customer success manager to enable this capability for your program.
+          maxLength: 255
         vendor_attributes:
           type: object
           additionalProperties:
@@ -18393,6 +18899,14 @@ components:
             Updating this value does not guarantee that the new address matches the
             address on record with the account's bank; you are responsible for verifying
             that the address is accurate.
+        party_type:
+          type: string
+          nullable: true
+          enum:
+          - individual
+          - business
+          description: Either individual or business. Inherits from associated LegalEntity
+            legal_entity_type, if one exists.
         status:
           type: string
           enum:
@@ -23787,6 +24301,7 @@ components:
                     - se_bankgiro_clearing_code
                     - sg_interbank_clearing_code
                     - swift
+                    - vasp
                     - za_national_clearing_code
                 required:
                 - routing_number
@@ -24233,6 +24748,7 @@ components:
                     - se_bankgiro_clearing_code
                     - sg_interbank_clearing_code
                     - swift
+                    - vasp
                     - za_national_clearing_code
                 required:
                 - routing_number
@@ -24739,6 +25255,7 @@ components:
                     - se_bankgiro_clearing_code
                     - sg_interbank_clearing_code
                     - swift
+                    - vasp
                     - za_national_clearing_code
                 required:
                 - routing_number
@@ -25950,6 +26467,7 @@ components:
           - se_bankgiro_clearing_code
           - sg_interbank_clearing_code
           - swift
+          - vasp
           - za_national_clearing_code
           description: The type of routing number. See https://docs.moderntreasury.com/platform/reference/routing-detail-object
             for more details.
@@ -26029,6 +26547,7 @@ components:
           - se_bankgiro_clearing_code
           - sg_interbank_clearing_code
           - swift
+          - vasp
           - za_national_clearing_code
           description: The type of routing number. See https://docs.moderntreasury.com/platform/reference/routing-detail-object
             for more details.
@@ -26058,6 +26577,7 @@ components:
           - nz_national_clearing_code
           - se_bankgiro_clearing_code
           - swift
+          - vasp
           - za_national_clearing_code
           description: The type of routing number. See https://docs.moderntreasury.com/platform/reference/routing-detail-object
             for more details. In sandbox mode we currently only support `aba` and
@@ -26422,6 +26942,7 @@ components:
           - socure
           - sumsub
           - veriff
+          - smarty
           description: The vendor that performed the verification, e.g. `persona`.
         vendor_verification_id:
           type: string
@@ -26612,6 +27133,7 @@ components:
           - jpmc
           - modern_treasury
           - mx
+          - one_money
           - paxos
           - paypal
           - pnc
@@ -26965,6 +27487,12 @@ components:
           description: The name of the virtual account.
         object:
           type: string
+        party_address:
+          type: object
+          nullable: true
+          allOf:
+          - "$ref": "#/components/schemas/address"
+          description: The address of the owner of the virtual account, or null.
         routing_details:
           type: array
           items:
@@ -26985,6 +27513,7 @@ components:
       - name
       - description
       - external_id
+      - party_address
       - counterparty_id
       - internal_account_id
       - account_details
@@ -26993,7 +27522,7 @@ components:
       - credit_ledger_account_id
       - ledger_account_id
       - metadata
-      minProperties: 17
+      minProperties: 18
     virtual_account_create_request:
       type: object
       properties:
@@ -27049,6 +27578,10 @@ components:
         name:
           type: string
           description: The name of the virtual account.
+        party_address:
+          "$ref": "#/components/schemas/address_request"
+          description: The address of the owner of the virtual account. When absent,
+            the internal account's party address is used.
         routing_details:
           type: array
           items:
@@ -27148,6 +27681,11 @@ components:
         name:
           type: string
           nullable: true
+        party_address:
+          "$ref": "#/components/schemas/address_request"
+          description: The address of the owner of the virtual account. Omit to leave
+            it unchanged; pass all fields blank to clear it, after which the internal
+            account's party address is used.
   securitySchemes:
     basic_auth:
       scheme: basic
