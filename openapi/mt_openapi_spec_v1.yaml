@@ -9171,6 +9171,7 @@ paths:
         in: query
         schema:
           enum:
+          - void
           - stop
           - issue
           type: string
@@ -18550,11 +18551,13 @@ components:
           - cash
           - checking
           - general_ledger
+          - hosted_wallet
           - loan
           - non_resident
           - other
           - overdraft
           - savings
+          - self_hosted_wallet
           description: Can be checking, savings or other.
         allowed_ach_debit_company_ids:
           type: array
@@ -18868,6 +18871,17 @@ components:
     internal_account_update_request:
       type: object
       properties:
+        allowed_ach_debit_company_ids:
+          type: array
+          nullable: true
+          items:
+            type: string
+            maxLength: 10
+            minLength: 1
+          description: The ACH Company IDs allowed to debit this account. `null` allows
+            every company. An empty array allows none. Debits from any other company
+            are returned with code R10. Only applicable to debitable accounts under
+            a Modern Treasury PSP connection.
         contra_ledger_account_id:
           type: string
           description: The Contra Ledger Account associated to this account.
@@ -24460,7 +24474,7 @@ components:
         documents:
           type: array
           items:
-            "$ref": "#/components/schemas/document_create_request"
+            "$ref": "#/components/schemas/payment_order_document_create_request"
           description: An array of documents to be attached to the payment order.
             Note that if you attach documents, the request's content type must be
             `multipart/form-data`.
@@ -24854,6 +24868,33 @@ components:
       - amount
       - direction
       - originating_account_id
+    payment_order_document_create_request:
+      type: object
+      properties:
+        document_type:
+          type: string
+          description: A category given to the document, can be `null`.
+        documentable_id:
+          type: string
+          description: The unique identifier for the associated object.
+        documentable_type:
+          type: string
+          enum:
+          - connection
+          - counterparty
+          - expected_payment
+          - identification
+          - incoming_payment_detail
+          - internal_account
+          - legal_entity
+          - payment_order
+          - return
+          - transaction
+        file:
+          type: string
+          format: binary
+      required:
+      - file
     payment_order_subtype:
       type: string
       nullable: true
