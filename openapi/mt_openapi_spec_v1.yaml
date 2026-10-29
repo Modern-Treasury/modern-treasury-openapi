@@ -17078,7 +17078,10 @@ components:
           description: A nickname for the external account. This is only for internal
             usage and won't affect any payments
         party_address:
-          "$ref": "#/components/schemas/address_request"
+          type: object
+          nullable: true
+          allOf:
+          - "$ref": "#/components/schemas/address_request"
         party_name:
           type: string
           description: If this value isn't provided, it will be inherited from the
@@ -18908,7 +18911,10 @@ components:
           type: string
           description: The parent internal account for this account.
         party_address:
-          "$ref": "#/components/schemas/address_request"
+          type: object
+          nullable: true
+          allOf:
+          - "$ref": "#/components/schemas/address_request"
           description: The address associated with the owner of the internal account.
             Updating this value does not guarantee that the new address matches the
             address on record with the account's bank; you are responsible for verifying
@@ -24037,6 +24043,13 @@ components:
           description: 'Date transactions are to be posted to the participants'' account.
             Defaults to the current business day or the next business day if the current
             day is a bank holiday or weekend. Format: yyyy-mm-dd.'
+        end_to_end_id:
+          type: string
+          nullable: true
+          description: A unique identifier passed through to the receiving bank. Only
+            supported for `ach` (maximum 15 characters) and `wire` (maximum 35 characters).
+            If not provided, Modern Treasury generates one. Some banks may truncate
+            this value or use their own identifier instead.
         expires_at:
           type: string
           format: date-time
@@ -24484,6 +24497,13 @@ components:
           description: 'Date transactions are to be posted to the participants'' account.
             Defaults to the current business day or the next business day if the current
             day is a bank holiday or weekend. Format: yyyy-mm-dd.'
+        end_to_end_id:
+          type: string
+          nullable: true
+          description: A unique identifier passed through to the receiving bank. Only
+            supported for `ach` (maximum 15 characters) and `wire` (maximum 35 characters).
+            If not provided, Modern Treasury generates one. Some banks may truncate
+            this value or use their own identifier instead.
         expires_at:
           type: string
           format: date-time
@@ -25031,6 +25051,13 @@ components:
           description: 'Date transactions are to be posted to the participants'' account.
             Defaults to the current business day or the next business day if the current
             day is a bank holiday or weekend. Format: yyyy-mm-dd.'
+        end_to_end_id:
+          type: string
+          nullable: true
+          description: A unique identifier passed through to the receiving bank. Only
+            supported for `ach` (maximum 15 characters) and `wire` (maximum 35 characters).
+            If not provided, Modern Treasury generates one. Some banks may truncate
+            this value or use their own identifier instead.
         expires_at:
           type: string
           format: date-time
@@ -27723,10 +27750,13 @@ components:
           type: string
           nullable: true
         party_address:
-          "$ref": "#/components/schemas/address_request"
+          type: object
+          nullable: true
+          allOf:
+          - "$ref": "#/components/schemas/address_request"
           description: The address of the owner of the virtual account. Omit to leave
-            it unchanged; pass all fields blank to clear it, after which the internal
-            account's party address is used.
+            it unchanged; pass `null` to clear it, after which the internal account's
+            party address is used.
   securitySchemes:
     basic_auth:
       scheme: basic
