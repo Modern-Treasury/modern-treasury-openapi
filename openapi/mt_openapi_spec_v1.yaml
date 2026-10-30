@@ -10671,6 +10671,79 @@ paths:
                 "$ref": "#/components/schemas/error_message"
         '429':
           description: too many requests
+  "/api/simulations/cases/{id}/resolve":
+    parameters:
+    - name: id
+      in: path
+      schema:
+        type: string
+      required: true
+      description: Case ID
+    patch:
+      summary: resolve case simulation
+      tags:
+      - Case
+      operationId: resolveCaseSimulation
+      description: Resolve a simulated compliance case (sandbox only)
+      security:
+      - basic_auth: []
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              "$ref": "#/components/schemas/case_resolve_request"
+      responses:
+        '202':
+          description: process started
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/case"
+        '400':
+          description: bad request
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/error_message"
+        '401':
+          description: unsuccessful
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/error_message"
+        '403':
+          description: forbidden
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/error_message"
+        '404':
+          description: not found
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/error_message"
+        '405':
+          description: not allowed in production
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/error_message"
+        '415':
+          description: unsuccessful
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/error_message"
+        '422':
+          description: unprocessable entity
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/error_message"
+        '429':
+          description: too many requests
   "/api/simulations/incoming_payment_details/create_async":
     post:
       summary: create async incoming payment detail
@@ -14122,6 +14195,17 @@ components:
       - requested_actions
       - resolved_actions
       minProperties: 10
+    case_resolve_request:
+      type: object
+      properties:
+        category:
+          type: string
+          enum:
+          - onboarding.proof_of_address_failure
+          - onboarding.business_registry_verification_failure
+          - onboarding.tin_check_failure
+          - onboarding.ssn_check_failure
+          - onboarding.database_failure
     child_legal_entity:
       type: object
       properties:
