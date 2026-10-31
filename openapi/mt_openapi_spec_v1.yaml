@@ -11184,11 +11184,6 @@ paths:
           type: boolean
         required: false
         description: Either `true` or `false`.
-      - name: transactable_type
-        in: query
-        schema:
-          type: string
-        required: false
       - name: vendor_id
         in: query
         schema:
@@ -15499,17 +15494,6 @@ components:
     counterparty_create_request:
       type: object
       properties:
-        accounting:
-          type: object
-          properties:
-            type:
-              type: string
-              enum:
-              - customer
-              - vendor
-              description: An optional type to auto-sync the counterparty to your
-                ledger. Either `customer` or `vendor`.
-          deprecated: true
         accounts:
           type: array
           items:
@@ -15667,14 +15651,6 @@ components:
           type: string
           nullable: true
           description: An optional user-defined 180 character unique identifier.
-        ledger_type:
-          type: string
-          enum:
-          - customer
-          - vendor
-          deprecated: true
-          description: An optional type to auto-sync the counterparty to your ledger.
-            Either `customer` or `vendor`.
         legal_entity:
           "$ref": "#/components/schemas/legal_entity_create_request"
         legal_entity_id:
